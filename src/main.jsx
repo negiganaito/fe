@@ -2,6 +2,8 @@ import "./App.css";
 
 import stylex from "@stylexjs/stylex";
 
+import StyleXSheet from "@stylexjs/stylex/lib/StyleXSheet";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
@@ -29,6 +31,7 @@ const s = stylex.create({
       default: "row",
       [MEDIA_MOBILE]: "column",
     },
+    color: "var(--fds-blue-60)",
   },
   body: {
     fontSize: "1rem",
@@ -60,6 +63,8 @@ const rootRoute = new RootRoute({
 });
 
 function RootComponent() {
+  console.log({ tokens });
+
   return (
     <>
       <div>
