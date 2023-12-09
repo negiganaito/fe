@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const webpack = require('webpack');
 const path = require('path');
 const env = require('./scripts/env');
@@ -63,12 +64,21 @@ const options = {
         ],
         exclude: /node_modules/,
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
     extensions: fileExtensions
       .map((extension) => '.' + extension)
       .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
+
+    alias: {
+      // eslint-disable-next-line no-undef
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   plugins: [
     new Dotenv(),
@@ -76,6 +86,7 @@ const options = {
     new webpack.ProgressPlugin(),
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new HtmlWebpackPlugin({
+      // eslint-disable-next-line no-undef
       template: path.join(__dirname, 'public', 'index.html'),
       filename: 'index.html',
       chunks: ['index'],
@@ -97,6 +108,7 @@ const options = {
         // default: 'commonJS'
         type: 'commonJS',
         // The absolute path to the root directory of your project
+        // eslint-disable-next-line no-undef
         rootDir: __dirname,
       },
     }),
