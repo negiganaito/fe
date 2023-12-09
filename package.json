@@ -37,7 +37,6 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-react": "^7.33.2",
     "html-webpack-plugin": "^5.5.0",
-    "node-sass": "^8.0.0",
     "postcss-loader": "7.3.3",
     "prettier": "^2.8.3",
     "react-hot-loader": "^4.13.1",
