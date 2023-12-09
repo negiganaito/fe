@@ -2,8 +2,6 @@ import "./App.css";
 
 import stylex from "@stylexjs/stylex";
 
-import StyleXSheet from "@stylexjs/stylex/lib/StyleXSheet";
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
@@ -63,8 +61,6 @@ const rootRoute = new RootRoute({
 });
 
 function RootComponent() {
-  console.log({ tokens });
-
   return (
     <>
       <div>

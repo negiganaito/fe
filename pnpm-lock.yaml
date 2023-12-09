@@ -25,6 +25,9 @@ dependencies:
     version: github.com/tienlx97/react-dom-experimental/6a8da0c57b0b60c1d5ba47a5a0358c65a3fdcd69(react@0.0.0-experimental-aec521a96-20231114)
 
 devDependencies:
+  '@stylexjs/babel-plugin':
+    specifier: 0.3.0
+    version: 0.3.0(@babel/core@7.23.5)(@babel/traverse@7.23.5)(@babel/types@7.23.5)
   '@stylexjs/eslint-plugin':
     specifier: ^0.3.0
     version: 0.3.0
