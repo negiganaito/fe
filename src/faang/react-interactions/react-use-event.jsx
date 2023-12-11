@@ -7,7 +7,7 @@ import { unstable_createEventHandle } from 'react-dom';
 /**
  *
  * @param {string} event
- * @param {import("./react-use-event").EventOption} option
+ * @param {import("./types").EventOption} option
  * @returns {UseEventHandle}
  */
 export function ReactUseEvent(event, option) {

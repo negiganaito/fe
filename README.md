@@ -37,6 +37,15 @@
         - BaseButton
           - BaseButtonPopoverContext
           - Pressable
+            - WebPressable
+              - UserAgent
+              - WebPressability
+                - ReactContextMenuEvent
+                - ReactFocusEvent
+                - ReactHoverEvent
+                - ReactPressEvent
+              - WebPressableGroupContext
+              - passiveEventListenerUtil
           - PressableText
           - useFeedPressEventHandler
         - BaseFocusRing
