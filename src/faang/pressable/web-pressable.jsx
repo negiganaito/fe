@@ -11,6 +11,8 @@ import { passiveEventListenerUtil } from '@/faang/react-interactions/passive-eve
 
 import { WebPressableGroupContext } from '@/faang/context/web-pressable-group-context';
 
+import { WebPressability } from '@/faang/react-interactions/web-pressability';
+
 import { Link } from '@tanstack/react-router';
 
 // Assuming there is a function c("UserAgent").isBrowser() that checks the user agent
@@ -347,7 +349,7 @@ function responseRoleType(type) {
   }
 }
 
-const WebPressableReact = (props) => {
+export const WebPressable = (props) => {
   var targetRef = useRef(null);
 
   //
@@ -447,7 +449,7 @@ const WebPressableReact = (props) => {
 
   const _className = typeof xstyle === 'function' ? xstyle(_props) : xstyle;
 
-  usePressability(targetRef, {
+  WebPressability.usePressability(targetRef, {
     disabled: _disabled,
     onBlur,
     onContextMenu,

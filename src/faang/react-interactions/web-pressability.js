@@ -1,6 +1,9 @@
+import { ReactContextMenuEvent } from './react-context-menu-event';
+import { ReactFocusEvent } from './react-focus-event';
 import { ReactHoverEvent } from './react-hover-event';
+import { ReactPressEvent } from './react-press-event';
 
-export function usePressability(targetRef, options) {
+function usePressability(targetRef, options) {
   const {
     disabled,
     onBlur,
@@ -49,3 +52,7 @@ export function usePressability(targetRef, options) {
     preventDefault: preventContextMenu || false,
   });
 }
+
+export const WebPressability = {
+  usePressability,
+};

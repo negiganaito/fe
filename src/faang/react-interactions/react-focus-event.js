@@ -163,7 +163,7 @@ function useFocusLifecycles() {
 /**
  *
  * @param {{ current: null | Node }} focusTargetRef
- * @param {import("./react-focus-event").UseFocusOptions} param
+ * @param {import("./types").UseFocusOptions} param
  */
 function useFocus(
   focusTargetRef,
@@ -369,7 +369,7 @@ function useFocus(
 /**
  * @template T
  * @param {{ current: null | T } | ((focusWithinTarget: null | T) => void)} focusWithinTargetRef
- * @param {import("./react-focus-event").UseFocusWithinOptions} param1
+ * @param {import("./types").UseFocusWithinOptions} param1
  * @returns {(focusWithinTarget: null | T) => void}
  */
 function useFocusWithin(

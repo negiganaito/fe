@@ -1,3 +1,5 @@
+import { recoverableViolation } from '@/faang/error/recoverable-violation';
+
 /**
  * Merges multiple refs into a single callback ref.
  *
@@ -17,11 +19,11 @@ export function mergeRefs(...refs) {
         ref.current = node;
       }
 
-      // c('recoverableViolation')(
-      //   'mergeRefs cannot handle Refs of type boolean, number or string, received ref ' +
-      //     String(b),
-      //   'comet_ui'
-      // );
+      recoverableViolation(
+        'mergeRefs cannot handle Refs of type boolean, number or string, received ref ' +
+          String(ref),
+        'comet_ui'
+      );
     });
   };
 }
