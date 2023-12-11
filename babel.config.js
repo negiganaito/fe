@@ -1,12 +1,11 @@
 // babel.config.js
-
-const styleXPlugin = require('@stylexjs/babel-plugin');
-const reactHotReload = require('react-hot-loader/babel');
+import styleXPlugin from '@stylexjs/babel-plugin';
 
 const config = {
   presets: ['@babel/preset-react'],
   plugins: [
-    [reactHotReload],
+    ['react-hot-loader/babel'],
+    ['relay'],
     [
       styleXPlugin,
       {
@@ -20,6 +19,7 @@ const config = {
           // default: 'commonJS'
           type: 'commonJS',
           // The absolute path to the root directory of your project
+          // eslint-disable-next-line no-undef
           rootDir: __dirname,
         },
       },
@@ -27,4 +27,4 @@ const config = {
   ],
 };
 
-module.exports = config;
+export default config;

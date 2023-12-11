@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
     "upgrade": "npx npm-check-updates &&  npx npm-check-updates -u",
-    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss}'"
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss}'",
+    "relay": "relay-compiler"
   },
   "dependencies": {
     "@stylexjs/stylex": "0.3.0",
@@ -16,7 +17,8 @@
     "fbjs": "^3.0.5",
     "invariant": "^2.2.4",
     "react": "git://github.com/tienlx97/react-experimental.git#www",
-    "react-dom": "git://github.com/tienlx97/react-dom-experimental.git#www"
+    "react-dom": "git://github.com/tienlx97/react-dom-experimental.git#www",
+    "react-relay": "^16.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -28,6 +30,7 @@
     "@types/react-dom": "^18.2.15",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^9.1.2",
+    "babel-plugin-relay": "^16.0.0",
     "babel-preset-react-app": "^10.0.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
@@ -36,10 +39,12 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-react": "^7.33.2",
+    "graphql": "^16.8.1",
     "html-webpack-plugin": "^5.5.0",
     "postcss-loader": "7.3.3",
     "prettier": "^2.8.3",
     "react-hot-loader": "^4.13.1",
+    "relay-compiler": "^16.0.0",
     "sass-loader": "^13.2.0",
     "source-map-loader": "^4.0.1",
     "style-loader": "^3.3.1",
