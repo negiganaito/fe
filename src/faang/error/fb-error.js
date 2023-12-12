@@ -266,15 +266,15 @@ class A {
     return this.metadata;
   }
 
-  addGlobalMetadata(a, b, c) {
+  static addGlobalMetadata(a, b, c) {
     z.push([a, b, c]);
   }
 
-  getGlobalMetadata() {
+  static getGlobalMetadata() {
     return z;
   }
 
-  unsetGlobalMetadata(a, b) {
+  static unsetGlobalMetadata(a, b) {
     z = z.filter(function (c) {
       return !(Array.isArray(c) && c[0] === a && c[1] === b);
     });
