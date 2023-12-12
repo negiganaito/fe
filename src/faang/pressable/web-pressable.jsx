@@ -350,7 +350,7 @@ function responseRoleType(type) {
 }
 
 export const WebPressable = (props) => {
-  var targetRef = useRef(null);
+  const targetRef = useRef(null);
 
   //
   const [focusChangeState, setFocusChangeState] = useState(false);
@@ -608,14 +608,14 @@ export const WebPressable = (props) => {
         : undefined,
       children: _children,
       className: joinClasses(
-        stylex(
+        stylex.props(
           styles.root,
           _props.disabled && styles.disabled,
           (!_props.focusVisible || suppressFocusRing === true) &&
             styles.focusNotVisible,
           _className,
           webPressableGroupContextValue && styles.rootInGroup
-        ),
+        ).className,
         _className_DEPRECATED
 
         // classes.root,

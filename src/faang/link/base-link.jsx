@@ -1,16 +1,22 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-'use client';
 
 /* eslint-disable camelcase */
-import React, { forwardRef, useMemo, useRef } from 'react';
+import React, { forwardRef, useMemo, useRef, useContext } from 'react';
+
+import { jsxs, jsx } from 'react/jsx-runtime';
 
 import { Pressable } from '@/faang/pressable/pressable';
 import { PressableText } from '@/faang/pressable/pressable-text';
 
 import { mergeRefs } from '@/faang/hooks/merge-refs';
+import { BaseLinkNestedPressableContext } from '@/faang/context/base-link-nested-pressable-context';
+import { BaseNestedPressableHack_DO_NOT_USE } from '@/faang/pressable/base-nested-pressable-hack_DO_NOT_USE';
 
-const BaseLink = forwardRef(
+// NOTE some potential bug
+
+export const BaseLink = forwardRef(
   (
     {
       href,
@@ -83,6 +89,10 @@ const BaseLink = forwardRef(
       'aria-selected': ariaSelected,
     } = props;
 
+    const baseLinkNestedPressableValue = useContext(
+      BaseLinkNestedPressableContext
+    );
+
     const ref = useMemo(
       () => mergeRefs(externalRef, internalRef),
       [externalRef, internalRef]
@@ -151,6 +161,8 @@ const BaseLink = forwardRef(
       xstyle,
     };
 
+    let _child;
+
     if (display === 'block') {
       const nestedAccessibilityRole =
         _role === 'button' ||
@@ -164,14 +176,16 @@ const BaseLink = forwardRef(
           ? _role
           : 'link';
 
-      return (
+      _child = (
         <Pressable
           {...allProps}
           accessibilityRole={nestedAccessibilityRole}
           suppressFocusRing={suppressFocusRing}
           tabbable={focusable}
         >
-          {children}
+          <BaseLinkNestedPressableContext.Provider value={true}>
+            {children}
+          </BaseLinkNestedPressableContext.Provider>
         </Pressable>
       );
     } else {
@@ -185,7 +199,7 @@ const BaseLink = forwardRef(
           ? _role
           : 'link';
 
-      return (
+      _child = (
         <PressableText
           {...allProps}
           accessibilityRole={nestedAccessibilityRole}
@@ -193,11 +207,36 @@ const BaseLink = forwardRef(
           focusable={focusable}
           suppressFocusRing={suppressFocusRing}
         >
-          {children}
+          <BaseLinkNestedPressableContext.Provider value={true}>
+            {children}
+          </BaseLinkNestedPressableContext.Provider>
         </PressableText>
       );
     }
+
+    return jsxs(React.Fragment, {
+      children: [
+        // routeTarget === 'content' && jsx(m, {}),
+        baseLinkNestedPressableValue
+          ? jsx(BaseNestedPressableHack_DO_NOT_USE, {
+              children: _child,
+            })
+          : _child,
+      ],
+    });
   }
 );
 
-export default BaseLink;
+// function m() {
+//   var a = c('useCurrentRoute')();
+//   const b = c('useCometErrorProject')();
+//   return (
+//     a != null &&
+//     a.isCometRootContainer !== !0 &&
+//     jsx(c('RecoverableViolationWithComponentStack.react'), {
+//       errorMessage:
+//         'A link with target=content was rendered in a non-tab-container',
+//       projectName: (a = b) != null ? a : 'comet_infra',
+//     })
+//   );
+// }

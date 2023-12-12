@@ -307,7 +307,7 @@ export function PressableText(props) {
         : undefined,
       children: _children,
       className: joinClasses(
-        stylex(
+        stylex.props(
           styles.root,
           selectable === false && styles.notSelectable,
           _props.disabled && styles.disabled,
@@ -317,7 +317,7 @@ export function PressableText(props) {
             styles.linkFocusRingXStyle,
           _className,
           pressableGroupContextValue && styles.rootInGroup
-        ),
+        ).className,
         _className_DEPRECATED
       ),
 
