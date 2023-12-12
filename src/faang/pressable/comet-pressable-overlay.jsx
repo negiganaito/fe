@@ -4,6 +4,7 @@ import * as stylex from '@stylexjs/stylex';
 import React, { useState } from 'react';
 import { BaseFocusRing } from '../focus/base-focus-ring';
 import { CometVisualCompletionAttributes } from '../common/comet-visual-completion-attributes';
+import { CometCompositeItemFocusIndicator } from './comet-composite-item-focus-indicator';
 
 const styles = stylex.create({
   circle: {
@@ -130,7 +131,7 @@ export const CometPressableOverlay = (props) => {
     >
       {/* TODO */}
       {/* CometCompositeItemFocusIndicator */}
-      {showGridSignifiers ? <></> : null}
+      {showGridSignifiers ? <CometCompositeItemFocusIndicator /> : null}
     </div>
   );
 };

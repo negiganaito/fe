@@ -33,6 +33,7 @@
     "babel-plugin-relay": "^16.0.0",
     "babel-preset-react-app": "^10.0.1",
     "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.53.0",

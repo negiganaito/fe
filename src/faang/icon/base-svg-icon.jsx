@@ -2,25 +2,10 @@ import * as stylex from '@stylexjs/stylex';
 import { jsx } from 'react/jsx-runtime';
 
 const styles = stylex.create({
-  root: {
-    color: 'var(--color,revert)',
-  },
+  color: (color) => ({
+    color: color ?? 'initial',
+  }),
 });
-
-const colorStyles = {
-  /**
-   *
-   * @param {string?} color
-   */
-  color: (color) => {
-    return [
-      styles.root,
-      {
-        '--color': color ?? 'initial',
-      },
-    ];
-  },
-};
 
 /**
  *
@@ -37,7 +22,7 @@ export function BaseSVGIcon({ alt, xstyle, color, icon, size = 8 }) {
         width: size,
       },
       {
-        ...stylex.props([color != null && colorStyles.color(color), xstyle]),
+        ...stylex.props([color != null && styles.color(color), xstyle]),
       }
     )
   );

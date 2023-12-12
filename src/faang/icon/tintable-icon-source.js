@@ -4,7 +4,7 @@ export class TintableIconSource extends IconSource {
   /**
    *
    * @param {string} domain
-   * @param {import("@/faang/base-image/types").SpritedImage)} src
+   * @param {import("../base-image/types").SpritedImage} src
    * @param {number} size
    */
   constructor(domain, src, size) {

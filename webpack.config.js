@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const StylexPlugin = require('@stylexjs/webpack-plugin');
 
@@ -78,9 +79,13 @@ const options = {
     alias: {
       // eslint-disable-next-line no-undef
       '@': path.resolve(__dirname, './src'),
+      '~': path.resolve(__dirname, './public'),
     },
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{ from: './src/faang/assets', to: 'faang/assets' }],
+    }),
     new Dotenv(),
     new CleanWebpackPlugin({ verbose: false }),
     new webpack.ProgressPlugin(),

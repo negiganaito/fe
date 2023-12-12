@@ -2,7 +2,7 @@ export class IconSource {
   /**
    *
    * @param {string} $$typeof
-   * @param {import("@/faang/base-image/types").SpritedImage} src
+   * @param {import("../base-image/types").SpritedImage} src
    * @param {number} size
    */
   constructor($$typeof, src, size) {
