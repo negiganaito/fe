@@ -26,6 +26,7 @@ export const HomePage = ({ xstyle = [styles.size, styles.underline] }) => {
   return (
     <h1 {...props}>
       <fbt desc="Unknown gender">Unknown</fbt>
+      <fbt desc="1">2</fbt>
     </h1>
   );
 };

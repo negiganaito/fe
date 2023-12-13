@@ -4,6 +4,8 @@ import { router } from './route';
 import './styles/app.css';
 import { RouterProvider } from '@tanstack/react-router';
 
+import '../i18n/fbtInit';
+
 const rootElement = document.getElementById('root');
 
 if (!rootElement.innerHTML) {

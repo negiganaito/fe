@@ -1,0 +1,25 @@
+{
+  "fb-locale": "vi_VN",
+  "translations": {
+    "bf9bf2f7d22fa776eaf7838a6dc2da9f": {
+      "tokens": [],
+      "types": [],
+      "translations": [
+        {
+          "translation": "Không biết",
+          "variations": []
+        }
+      ]
+    },
+    "6b4c017b2231918a3e569a5b3ab7fea9": {
+      "tokens": [],
+      "types": [],
+      "translations": [
+        {
+          "translation": "Số 2",
+          "variations": []
+        }
+      ]
+    }
+  }
+}

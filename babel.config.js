@@ -2,8 +2,6 @@
 
 // eslint-disable-next-line no-undef
 const styleXPlugin = require('@stylexjs/babel-plugin');
-// eslint-disable-next-line no-undef
-const path = require('path');
 
 const config = {
   presets: ['@babel/preset-react'],
@@ -28,17 +26,8 @@ const config = {
         },
       },
     ],
-    [
-      'babel-plugin-fbt',
-      {
-        // fbtCommonPath: './common_strings.json',
-        // We can also provide the fbt enum manifest directly as a JS variable
-        // fbtEnumManifest: require('./.enum_manifest.json'),
-        // eslint-disable-next-line no-undef
-        fbtEnumPath: path.join(__dirname, '.enum_manifest.json'),
-      },
-    ],
-    ['babel-plugin-fbt-runtime'],
+    'babel-plugin-fbt',
+    'babel-plugin-fbt-runtime',
   ],
 };
 

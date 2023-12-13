@@ -10,14 +10,10 @@
     "upgrade": "npx npm-check-updates &&  npx npm-check-updates -u",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss}'",
     "relay": "relay-compiler",
-    "all": "node run_all.js",
-    "postinstall": "pnpm all",
-    "clean-fbts": "rm .enum_manifest.json .src_manifest.json .source_strings.json src/translatedFbts.json .test_*.json 2&> /dev/null || exit 0",
-    "collect-fbts": "fbt-collect --fbt-common-path ./common_strings.json --pretty --manifest < .src_manifest.json > .source_strings.json",
-    "manifest": "fbt-manifest --src src",
-    "translate-fbts-single-file": "fbt-translate --jenkins --stdin < translation_input.json > src/translatedFbts.json",
-    "translate-fbts": "fbt-translate --translations translations/*.json --jenkins > src/translatedFbts.json",
-    "watch:fbts": "yarn watch 'yarn clean-fbts && yarn all' ./src/example ../packages/babel-plugin-fbt/dist/ --ignoreDotFiles  --wait=1"
+    "manifest": "fbt-manifest --src src/ --enum-manifest i18n/fbt/.enum_manifest.json --src-manifest i18n/fbt/.src_manifest.json",
+    "collect-fbts": "fbt-collect --hash-module fb-tiger-hash --react-native-mode --manifest < i18n/fbt/.src_manifest.json > i18n/fbt/source_strings.json",
+    "translate-fbts": "fbt-translate --jenkins --source-strings i18n/fbt/source_strings.json --translations i18n/fbt/translationScriptInput/*.json > i18n/fbt/translatedFbts.json",
+    "generate-fbt": "node i18n/scripts/generate-localizables-executor.js"
   },
   "dependencies": {
     "@stylexjs/stylex": "0.3.0",
@@ -29,7 +25,9 @@
     "babel-plugin-fbt": "1.0.0",
     "babel-plugin-fbt-runtime": "1.0.0",
     "fbt": "1.0.0",
-    "fbt-generate-translations": "0.0.4"
+    "fbt-generate-translations": "0.0.4",
+    "fb-tiger-hash": "1.0.0",
+    "invariant": "2.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -63,6 +61,7 @@
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.6",
     "webpack": "^5.75.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^4.11.1",
+    "yargs": "17.7.2"
   }
 }
