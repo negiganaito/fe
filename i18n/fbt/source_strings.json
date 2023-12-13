@@ -1,1 +1,29 @@
-{"phrases":[{"hashToLeaf":{"bf9bf2f7d22fa776eaf7838a6dc2da9f":{"text":"Unknown","desc":"Unknown gender"}},"filepath":"src/app/layout.jsx","line_beg":28,"col_beg":6,"line_end":28,"col_end":46,"project":"","jsfbt":{"t":{"desc":"Unknown gender","text":"Unknown"},"m":[]}},{"hashToLeaf":{"6b4c017b2231918a3e569a5b3ab7fea9":{"text":"2","desc":"1"}},"filepath":"src/app/layout.jsx","line_beg":29,"col_beg":6,"line_end":29,"col_end":27,"project":"","jsfbt":{"t":{"desc":"1","text":"2"},"m":[]}}],"childParentMappings":{}}
+{
+  "phrases": [
+    {
+      "hashToLeaf": {
+        "419de2c9e9994cb1de1d4e1b03c8ae41": { "text": "Số 1", "desc": "1" }
+      },
+      "filepath": "src/app/layout.jsx",
+      "line_beg": 28,
+      "col_beg": 6,
+      "line_end": 28,
+      "col_end": 30,
+      "project": "",
+      "jsfbt": { "t": { "desc": "1", "text": "Số 1" }, "m": [] }
+    },
+    {
+      "hashToLeaf": {
+        "e194eb3148237fbb176d11dc570f836a": { "text": "Số 2", "desc": "2" }
+      },
+      "filepath": "src/app/layout.jsx",
+      "line_beg": 29,
+      "col_beg": 6,
+      "line_end": 29,
+      "col_end": 30,
+      "project": "",
+      "jsfbt": { "t": { "desc": "2", "text": "Số 2" }, "m": [] }
+    }
+  ],
+  "childParentMappings": {}
+}

@@ -1,22 +1,22 @@
 {
   "fb-locale": "vi_VN",
   "translations": {
-    "bf9bf2f7d22fa776eaf7838a6dc2da9f": {
+    "419de2c9e9994cb1de1d4e1b03c8ae41": {
       "tokens": [],
       "types": [],
       "translations": [
         {
-          "translation": "Không biết",
+          "translation": "Đây là số 1",
           "variations": []
         }
       ]
     },
-    "6b4c017b2231918a3e569a5b3ab7fea9": {
+    "e194eb3148237fbb176d11dc570f836a": {
       "tokens": [],
       "types": [],
       "translations": [
         {
-          "translation": "Số 2",
+          "translation": "Đây là số 2",
           "variations": []
         }
       ]

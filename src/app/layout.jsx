@@ -23,10 +23,17 @@ const styles = stylex.create({
 export const HomePage = ({ xstyle = [styles.size, styles.underline] }) => {
   const props = Object.assign({}, { ...stylex.props(styles.root, xstyle) });
 
+  const a = fbt('Số 2', '2');
+
+  console.log({ a });
+
   return (
-    <h1 {...props}>
-      <fbt desc="Unknown gender">Unknown</fbt>
-      <fbt desc="1">2</fbt>
-    </h1>
+    <div {...props}>
+      <p>{a}</p>
+      <p>
+        <fbt desc="1">Số 1</fbt>
+      </p>
+      <fbt desc="2">Số 2</fbt>
+    </div>
   );
 };
