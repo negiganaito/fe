@@ -9,19 +9,31 @@
     "lint:fix": "eslint --fix --ext .js,.jsx .",
     "upgrade": "npx npm-check-updates &&  npx npm-check-updates -u",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss}'",
-    "relay": "relay-compiler"
+    "relay": "relay-compiler",
+    "all": "node run_all.js",
+    "postinstall": "pnpm all",
+    "clean-fbts": "rm .enum_manifest.json .src_manifest.json .source_strings.json src/translatedFbts.json .test_*.json 2&> /dev/null || exit 0",
+    "collect-fbts": "fbt-collect --fbt-common-path ./common_strings.json --pretty --manifest < .src_manifest.json > .source_strings.json",
+    "manifest": "fbt-manifest --src src",
+    "translate-fbts-single-file": "fbt-translate --jenkins --stdin < translation_input.json > src/translatedFbts.json",
+    "translate-fbts": "fbt-translate --translations translations/*.json --jenkins > src/translatedFbts.json",
+    "watch:fbts": "yarn watch 'yarn clean-fbts && yarn all' ./src/example ../packages/babel-plugin-fbt/dist/ --ignoreDotFiles  --wait=1"
   },
   "dependencies": {
     "@stylexjs/stylex": "0.3.0",
     "@tanstack/react-router": "0.0.1-beta.234",
     "fbjs": "^3.0.5",
-    "invariant": "^2.2.4",
     "react": "git://github.com/tienlx97/react-experimental.git#www",
     "react-dom": "git://github.com/tienlx97/react-dom-experimental.git#www",
-    "react-relay": "^16.0.0"
+    "react-relay": "^16.0.0",
+    "babel-plugin-fbt": "1.0.0",
+    "babel-plugin-fbt-runtime": "1.0.0",
+    "fbt": "1.0.0",
+    "fbt-generate-translations": "0.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@babel/node": "7.22.19",
     "@babel/preset-react": "^7.18.6",
     "@stylexjs/babel-plugin": "0.3.0",
     "@stylexjs/eslint-plugin": "^0.3.0",

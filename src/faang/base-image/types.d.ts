@@ -20,3 +20,14 @@ export type BaseImage_DEPRECATEDProps = {
   width?: string;
   style?: CSSProperties;
 };
+
+export type BaseImageProps = React.JSX.IntrinsicElements['img'] & {
+  alt?: boolean;
+  elementtiming?: any;
+  objectFit?: 'none' | 'contain' | 'cover' | 'fill';
+  onLoad?: any;
+  referrerPolicy?: any;
+  sizes?: any;
+  testid?: string;
+  xstyle?: any;
+};

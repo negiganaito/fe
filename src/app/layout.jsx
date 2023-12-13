@@ -1,5 +1,8 @@
 import React from 'react';
 
+// eslint-disable-next-line no-unused-vars
+import { fbt } from 'fbt';
+
 import * as stylex from '@stylexjs/stylex';
 
 const styles = stylex.create({
@@ -20,5 +23,9 @@ const styles = stylex.create({
 export const HomePage = ({ xstyle = [styles.size, styles.underline] }) => {
   const props = Object.assign({}, { ...stylex.props(styles.root, xstyle) });
 
-  return <h1 {...props}>Home</h1>;
+  return (
+    <h1 {...props}>
+      <fbt desc="Unknown gender">Unknown</fbt>
+    </h1>
+  );
 };
