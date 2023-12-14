@@ -847,3 +847,9 @@ export function getRingColor(color) {
       };
   }
 }
+
+export const CometProgressRingUtils = {
+  getCubicBezierPercentageFunc,
+  getRingGifUrl,
+  getRingColor,
+};

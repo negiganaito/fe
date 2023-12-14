@@ -53,4 +53,22 @@ export const ICONS = {
     p: '-13px -1095px',
     sz: 'auto',
   },
+  498146: {
+    sprited: 2,
+    spi: '/faang/assets/icon-list/XvqMI3OqoSa.png',
+    _spi: '/faang/assets/icon-list/XvqMI3OqoSa.png',
+    w: 20,
+    h: 20,
+    p: '0 -297px',
+    sz: 'auto',
+  },
+  502062: {
+    sprited: 2,
+    spi: '/faang/assets/icon-list/XvqMI3OqoSa.png',
+    _spi: '/faang/assets/icon-list/XvqMI3OqoSa.png',
+    w: 20,
+    h: 20,
+    p: '0 -276px',
+    sz: 'auto',
+  },
 };

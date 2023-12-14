@@ -1,4 +1,7 @@
 import { jsx } from 'react';
+
+import { fbt } from 'fbt';
+
 import { CometIcon, fbicon } from '@/faang/icon';
 import { ICONS } from '@/faang/_/icon';
 
@@ -11,16 +14,16 @@ export const CometFormInputPasswordStateIcon = (props) => {
 
   return isVisible
     ? jsx(CometIcon, {
-        'aria-label': '',
+        'aria-label': fbt.c('Hide password'),
         color: 'primary',
         icon: fbicon._(ICONS[491228], 20),
         testid: undefined,
       })
     : jsx(CometIcon, {
-        'aria-label': `h._('Show password')`,
+        'aria-label': fbt.c('Show password'),
         color: 'primary',
         icon: fbicon._(ICONS('491223'), 20),
-        testid: void 0,
+        testid: undefined,
       });
 };
 

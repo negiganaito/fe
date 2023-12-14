@@ -10,8 +10,9 @@
     "upgrade": "npx npm-check-updates &&  npx npm-check-updates -u",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss}'",
     "relay": "relay-compiler",
+    "clean-fbts": "rm i18n/fbt/.enum_manifest.json i18n/fbt/.src_manifest.json i18n/fbt/source_strings.json i18n/fbt/translatedFbts.json 2&> /dev/null || exit 0",
     "manifest": "fbt-manifest --src src/ --enum-manifest i18n/fbt/.enum_manifest.json --src-manifest i18n/fbt/.src_manifest.json",
-    "collect-fbts": "fbt-collect --hash-module fb-tiger-hash --react-native-mode --manifest < i18n/fbt/.src_manifest.json > i18n/fbt/source_strings.json",
+    "collect-fbts": "fbt-collect --fbt-common-path i18n/fbt/common_strings.json --hash-module fb-tiger-hash --react-native-mode --manifest < i18n/fbt/.src_manifest.json > i18n/fbt/source_strings.json",
     "translate-fbts": "fbt-translate --jenkins --source-strings i18n/fbt/source_strings.json --translations i18n/fbt/translationScriptInput/*.json > i18n/fbt/translatedFbts.json",
     "generate-fbt": "node i18n/scripts/generate-localizables-executor.js"
   },
@@ -27,7 +28,8 @@
     "fbt": "1.0.0",
     "fbt-generate-translations": "0.0.4",
     "fb-tiger-hash": "1.0.0",
-    "invariant": "2.2.4"
+    "invariant": "2.2.4",
+    "jsresource": "0.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",

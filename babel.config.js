@@ -3,6 +3,9 @@
 // eslint-disable-next-line no-undef
 const styleXPlugin = require('@stylexjs/babel-plugin');
 
+// eslint-disable-next-line no-undef
+const path = require('path');
+
 const config = {
   presets: ['@babel/preset-react'],
   plugins: [
@@ -26,7 +29,13 @@ const config = {
         },
       },
     ],
-    'babel-plugin-fbt',
+    [
+      'babel-plugin-fbt',
+      {
+        // eslint-disable-next-line no-undef
+        fbtCommonPath: path.join(__dirname, 'i18n/fbt/common_strings.json'),
+      },
+    ],
     'babel-plugin-fbt-runtime',
   ],
 };
