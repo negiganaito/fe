@@ -11,6 +11,8 @@ import { CometTextTypography } from '@/faang/tetra-text';
 import { CometTextContext } from '@/faang/context';
 import { useMergeRefs } from '@/faang/hooks';
 
+import {} from '@/faang/trace';
+
 const CometToolTip = lazy(() => import('./MarkdownPreview.js'));
 
 const e = {
@@ -168,4 +170,14 @@ const cometLineClamp = (props, externalRef) => {
   //     {childrenClone}
   //   </span>,
   // )
+
+  return w
+    ? jsx(CometPlaceholder, {
+        fallback,
+        children: jsx(CometTooltip, {
+          tooltip: truncationTooltip,
+          children: LineComp,
+        }),
+      })
+    : LineComp;
 };
