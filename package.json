@@ -19,17 +19,17 @@
   "dependencies": {
     "@stylexjs/stylex": "0.3.0",
     "@tanstack/react-router": "0.0.1-beta.234",
-    "fbjs": "^3.0.5",
-    "react": "git://github.com/tienlx97/react-experimental.git#www",
-    "react-dom": "git://github.com/tienlx97/react-dom-experimental.git#www",
-    "react-relay": "^16.0.0",
     "babel-plugin-fbt": "1.0.0",
     "babel-plugin-fbt-runtime": "1.0.0",
+    "fb-tiger-hash": "1.0.0",
+    "fbjs": "^3.0.5",
     "fbt": "1.0.0",
     "fbt-generate-translations": "0.0.4",
-    "fb-tiger-hash": "1.0.0",
     "invariant": "2.2.4",
-    "jsresource": "0.0.8"
+    "jsresource": "0.0.8",
+    "react": "git://github.com/tienlx97/react-experimental.git#www",
+    "react-dom": "git://github.com/tienlx97/react-dom-experimental.git#www",
+    "react-relay": "^16.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -52,6 +52,7 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "graphql": "^16.8.1",
     "html-webpack-plugin": "^5.5.0",
     "postcss-loader": "7.3.3",

@@ -1,100 +1,133 @@
-import { useCallback, useLayoutEffect, useRef } from 'react';
-// @ts-ignore
+import React, { useCallback, useLayoutEffect, useRef } from 'react';
+
 import { jsx, jsxs } from 'react/jsx-runtime';
 
-import { CometSuspenseHUD } from './comet-suspense-hud';
 import { useStable } from '@/faang/hooks';
 import executionEnvironment from 'fbjs/lib/ExecutionEnvironment';
+import { CometSuspenseHUD } from './comet-suspense-hud';
+
+import { CometSSRHydrationMarkerUtils } from './cometssr-hydration-marker-utils';
 
 import { HeroPlaceholder } from './hero-placeholder';
 
-function p(a) {
-  var b = a.cb,
-    c = useRef(!1);
-  useLayoutEffect(function () {
-    c.current || (b(), (c.current = !0));
+function useLayoutEffectCallback(props) {
+  const { cb } = props;
+
+  const hasCallbackBeenCalled = useRef(false);
+  useLayoutEffect(() => {
+    if (!hasCallbackBeenCalled.current) {
+      cb();
+      hasCallbackBeenCalled.current = true;
+    }
   });
   return null;
 }
 
+// eslint-disable-next-line no-unused-vars
 const _1863055 = false;
 
-export function useCometPlaceholderImpl(b) {
-  let e = b.children,
-    f = b.fallback,
-    g = b.name,
-    i = b.unstable_avoidThisFallback,
-    l = b.unstable_onSuspense,
-    q = useStable(function () {
-      return CometSuspenseHUD && executionEnvironment.canUseDOM
-        ? window.document.createElement('div')
-        : null;
-    }),
-    r = useRef(0),
-    s = useRef(null),
-    t = useRef(!1);
-  b = e;
-  e = f;
+export function useCometPlaceholderImpl(props) {
+  const {
+    children,
+    fallback,
+    name,
+    unstable_avoidThisFallback,
+    unstable_onSuspense,
+  } = props;
+
+  // let e = b.children,
+  //   f = b.fallback,
+  //   g = b.name,
+  //   i = b.unstable_avoidThisFallback,
+  //   l = b.unstable_onSuspense;
+
+  const element = useStable(() => {
+    return CometSuspenseHUD && executionEnvironment.canUseDOM
+      ? window.document.createElement('div')
+      : null;
+  });
+
+  const fallbackCounter = useRef(0);
+  const currentContent = useRef(null);
+  const isPlaceholderActive = useRef(false);
+
+  let _children = children;
+  let _fallback = fallback;
+
+  // b = e;
+  // e = f;
+
   // d('CometSSRHydrationMarkerUtils').addMarkersToChildren != null &&
   //   d('CometSSRHydrationMarkerUtils').addMarkersToFallback != null &&
   //   ((b = d('CometSSRHydrationMarkerUtils').addMarkersToChildren(b)),
   //   (e = d('CometSSRHydrationMarkerUtils').addMarkersToFallback(e)))
-  f = useCallback(
-    (a) => {
-      q != null && (q.textContent = a);
-      s.current = a;
-      l && l(a);
+
+  if (
+    CometSSRHydrationMarkerUtils.addMarkersToChildren != null &&
+    CometSSRHydrationMarkerUtils.addMarkersToFallback != null
+  ) {
+    _children = CometSSRHydrationMarkerUtils.addMarkersToChildren(_children);
+    _fallback = CometSSRHydrationMarkerUtils.addMarkersToFallback(_fallback);
+  }
+
+  const onSuspense = useCallback(
+    (content) => {
+      if (element != null) {
+        element.textContent = content;
+      }
+      currentContent.current = content;
+      unstable_onSuspense && unstable_onSuspense(content);
     },
-    [q, l]
+    [element, unstable_onSuspense]
   );
-  let u = null;
-  q != null &&
-    CometSuspenseHUD != null &&
-    (u = jsx(CometSuspenseHUD, {
-      desc: q,
-    }));
-  let v = useCallback(
-    function () {
-      r.current += 1;
-      // _1863055 &&
-      //   t.current &&
-      //   r.current <= o &&
-      //   n.onReady(function (a) {
-      //     a.log(function () {
-      //       return {
-      //         event: 'unexpected_suspense',
-      //         is_backup_placeholder: i === !0,
-      //         placeholder_name: g,
-      //         promise_name: s.current,
-      //         suspense_count: String(r.current),
-      //       }
-      //     })
-      //   })
-    },
-    [g, i]
-  );
-  const cb = useCallback(() => {
-    t.current = !0;
+
+  let CometSuspenseHUDComponent = null;
+
+  if (element != null && CometSuspenseHUD != null) {
+    CometSuspenseHUDComponent = jsx(CometSuspenseHUD, {
+      desc: element,
+    });
+  }
+
+  let fallbackCallback = useCallback(() => {
+    fallbackCounter.current += 1;
+    // _1863055 &&
+    //   t.current &&
+    //   r.current <= o &&
+    //   n.onReady(function (a) {
+    //     a.log(function () {
+    //       return {
+    //         event: 'unexpected_suspense',
+    //         is_backup_placeholder: i === !0,
+    //         placeholder_name: g,
+    //         promise_name: s.current,
+    //         suspense_count: String(r.current),
+    //       }
+    //     })
+    //   })
+  }, [name, unstable_avoidThisFallback]);
+  const placeholderCallback = useCallback(() => {
+    isPlaceholderActive.current = true;
   }, []);
 
   return jsxs(HeroPlaceholder, {
     fallback: jsxs(React.Fragment, {
       children: [
-        e,
-        jsx(p, {
-          cb: v,
+        _fallback,
+        jsx(useLayoutEffectCallback, {
+          cb: fallbackCallback,
         }),
-        u,
+        CometSuspenseHUDComponent,
       ],
     }),
-    name: g,
-    unstable_avoidThisFallback: i,
-    unstable_onSuspense: f,
+    name,
+    unstable_avoidThisFallback,
+    unstable_onSuspense: onSuspense,
     children: [
-      jsx(p, {
-        cb: cb,
+      jsx(useLayoutEffectCallback, {
+        cb: placeholderCallback,
       }),
-      b,
+      _children,
     ],
   });
 }
