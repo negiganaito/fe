@@ -1,7 +1,11 @@
-// TODO
-// const g = window.HTMLElement
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 
-export function xplatToDOMRef(target) {
+function _xplatToDOMRef(target) {
   return function (node) {
     node =
       window.HTMLElement && node instanceof window.HTMLElement ? node : null;
@@ -13,7 +17,7 @@ export function xplatToDOMRef(target) {
 // TODO
 // const h = window.HTMLInputElement
 
-export function xplatToInputRef(target) {
+function xplatToInputRef(target) {
   return function (node) {
     node =
       window.HTMLInputElement && node instanceof window.HTMLInputElement
@@ -23,4 +27,10 @@ export function xplatToInputRef(target) {
       ? target(node)
       : target != null && typeof target === 'object' && (target.current = node);
   };
+}
+
+
+export const xplatToDOMRef = {
+  xplatToDOMRef: _xplatToDOMRef,
+  xplatToInputRef
 }

@@ -20,3 +20,4 @@ export { CometTextContext } from './comet-text-context';
 export { CometTextLangContext } from './comet-text-lang-context';
 export { HiddenSubtreeContext } from './hidden-subtree-context'
 export { LayoutAnimationBoundaryContext } from './layout-animation-boundary-context'
+export { CometTextContext } from "./comet-text-context"

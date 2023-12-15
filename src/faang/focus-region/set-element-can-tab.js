@@ -53,6 +53,8 @@ function b(a) {
     return b.canTab
 }
 
-export const setElementCanTab = a;
-export const canElementTab = b
 
+export const setElementCanTab = {
+  canElementTab: b,
+  setElementCanTab: a
+}

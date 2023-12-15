@@ -36,11 +36,10 @@ import {
 import { BasePortal } from '@/faang/dialog'
 import {
   FocusRegion,
-  headerFirstTabbableSecondScopeQuery,
-  tabbableScopeQuery,
+  focusScopeQueries,
 } from '@/faang/focus-region'
 import { CometTextContext, mergeRefs, useLayoutAnimationEvents, useResizeObserver } from '@/faang/hooks'
-import calculateBaseContextualLayerPosition from '@/faang/utils/calculate-base-contextual-layer-position'
+import { calculateBaseContextualLayerPosition } from '@/faang/utils'
 import { LayoutAnimationEventType } from '@/faang/utils/common/layout-animation-events'
 import { isElementFixedOrSticky } from '@/faang/utils/is-element-fixed-or-sticky'
 
@@ -420,9 +419,9 @@ const BaseContextualLayer = forwardRef(
       <BasePortal
         target={baseContextualLayerAnchorRootValue.current}
         children={jsx(customContainer, {
-          children: jsx(FocusRegion, {
+          children: jsx(FocusRegion.FocusRegion, {
             autoFocusQuery:
-              !$ && containFocus ? headerFirstTabbableSecondScopeQuery : null,
+              !$ && containFocus ? focusScopeQueries.headerFirstTabbableSecondScopeQuery : null,
             autoRestoreFocus: !$,
             children: jsx(BaseContextualLayerAnchorRoot, {
               children: jsx(BaseContextualLayerContextSizeContext.Provider, {
@@ -457,9 +456,9 @@ const BaseContextualLayer = forwardRef(
                 value: baseContextualLayerContextSizeValue,
               }),
             }),
-            containFocusQuery: !$ && containFocus ? tabbableScopeQuery : null,
+            containFocusQuery: !$ && containFocus ? focusScopeQueries.tabbableScopeQuery : null,
             onEscapeFocusRegion: onEscapeFocusRegion,
-            recoverFocusQuery: $ ? null : headerFirstTabbableSecondScopeQuery,
+            recoverFocusQuery: $ ? null : focusScopeQueries.headerFirstTabbableSecondScopeQuery,
           }),
           hidden: hidden || H || a,
           presencePayload: presencePayload,

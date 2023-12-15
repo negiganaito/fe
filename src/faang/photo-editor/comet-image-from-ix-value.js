@@ -1,17 +1,22 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+import { RecoverableViolationWithComponentStack } from '@negiganaito/error';
+import { stylex } from '@stylexjs/stylex';
 import { forwardRef } from 'react';
-
 // @ts-ignore
 import { jsx } from 'react/jsx-runtime';
 
 import {
   BaseImage,
-  coerceImageishURL,
   coerceImageishSprited,
+  coerceImageishURL,
   CometSSRBackgroundImageUtils,
 } from '@/faang/base-image';
-import { xplatToDOMRef } from '@/faang/utils/xplat-to-dom-ref';
-import { RecoverableViolationWithComponentStack } from '@negiganaito/error';
-import { stylex } from '@stylexjs/stylex';
+import { xplatToDOMRef } from '@/faang/utils';
 
 // type CometImageFromIXValueProps = {
 //   alt?: string
@@ -67,7 +72,7 @@ export const CometImageFromIXValue = forwardRef((props, ref) => {
       draggable: false,
       height: objectFit === 'cover' ? '100%' : height,
       objectFit,
-      ref: xplatToDOMRef(ref),
+      ref: xplatToDOMRef.xplatToDOMRef(ref),
       src: uri,
       testid: undefined,
       width: objectFit === 'cover' ? '100%' : width,
