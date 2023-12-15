@@ -1,5 +1,10 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import * as stylex from '@stylexjs/stylex';
-
 import UserAgent from 'fbjs/lib/UserAgent';
 
 const fontFamilyStyles = stylex.create({
@@ -304,11 +309,11 @@ function getPlatformTypography() {
     !UserAgent.isBrowser('Firefox < 55')) ||
     UserAgent.isPlatform('iOS >= 9')
     ? {
-        fontFamily: fontFamilyStyles.apple,
-        offsets: UserAgent.isEngine('Gecko')
-          ? offsetsForAlternativeTextStyles
-          : offsetsForTextStyles,
-      }
+      fontFamily: fontFamilyStyles.apple,
+      offsets: UserAgent.isEngine('Gecko')
+        ? offsetsForAlternativeTextStyles
+        : offsetsForTextStyles,
+    }
     : null;
 }
 

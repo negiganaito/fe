@@ -1,16 +1,20 @@
-
-import React, { lazy, useCallback, useContext, useRef, useState } from 'react';
-
-import { jsx, jsxs } from 'react/jsx-runtime';
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 
 import * as stylex from '@stylexjs/stylex';
+import React, { forwardRef, lazy, useCallback, useContext, useRef, useState } from 'react';
+import { jsx, jsxs } from 'react/jsx-runtime';
 
-import { cssUserAgentSupports } from '@/faang/utils';
-import { CometTextTypography } from '@/faang/tetra-text';
+import { CometPlaceholder } from '@/faang/comet-placeholder/comet-placeholder';
 import { CometTextContext } from '@/faang/context';
 import { useMergeRefs } from '@/faang/hooks';
+import { CometTextTypography } from '@/faang/tetra-text';
+import { cssUserAgentSupports } from '@/faang/utils';
 
-import { } from '@/faang/trace';
 
 const CometToolTip = lazy(() => import('./MarkdownPreview.js'));
 
@@ -48,19 +52,20 @@ const styles = stylex.create({
   },
 
   supportLineHeight: {
-    right: 0,
     overflowX: 'hidden',
     overflowY: 'hidden',
     position: 'absolute',
+    right: 0,
   },
 });
 
-const cometLineClamp = (props, externalRef) => {
+const _CometLineClamp = (props, externalRef) => {
   const {
     id,
     children,
     lines = 1,
     useAutomaticTextDirection = false,
+    // eslint-disable-next-line no-unused-vars
     testid,
     className,
     truncationTooltip,
@@ -100,9 +105,9 @@ const cometLineClamp = (props, externalRef) => {
           childrenClone,
           jsx('span', {
             'aria-hidden': true,
+            children: '\u2026',
             className: stylex(styles.supportLineHeight),
             style: calculateSize,
-            children: '\u2026',
           }),
         ],
       });
@@ -146,14 +151,14 @@ const cometLineClamp = (props, externalRef) => {
   const ref = useMergeRefs(externalRef, y);
 
   const LineComp = jsx('span', {
+    children: childrenClone,
     className: stylex(styles.root, lines === 1 && styles.oneLine, className),
     'data-testid': undefined,
     dir: useAutomaticTextDirection ? 'auto' : undefined,
-    onMouseEnter: truncationTooltip ? onMouseEneterWithTooltip : undefined,
     id,
-    style: internalStyle,
+    onMouseEnter: truncationTooltip ? onMouseEneterWithTooltip : undefined,
     ref,
-    children: childrenClone,
+    style: internalStyle,
   }, translationKeyComp);
   // (
   //   <span
@@ -175,11 +180,14 @@ const cometLineClamp = (props, externalRef) => {
 
   return w
     ? jsx(CometPlaceholder, {
-      fallback,
-      children: jsx(CometTooltip, {
-        tooltip: truncationTooltip,
+      children: jsx(CometToolTip, {
         children: LineComp,
+        tooltip: truncationTooltip,
       }),
+      fallback,
     })
     : LineComp;
 };
+
+
+export const CometLineClamp = forwardRef(_CometLineClamp)

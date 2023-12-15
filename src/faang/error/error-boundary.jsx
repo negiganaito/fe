@@ -1,13 +1,15 @@
-/* eslint-disable react/prop-types */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import React, { PureComponent } from 'react';
 
-import { getErrorSafe } from './get-error-safe';
-
-import { getReactElementDisplayName } from './get-react-element-display-name';
-
-import { ErrorSerializer } from './error-serializer';
-
 import { ErrorPubSub } from './error-pub-sub';
+import { ErrorSerializer } from './error-serializer';
+import { getErrorSafe } from './get-error-safe';
+import { getReactElementDisplayName } from './get-react-element-display-name';
 
 function getReactDisplayName(children) {
   const _children =

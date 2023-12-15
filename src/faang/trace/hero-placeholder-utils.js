@@ -1,4 +1,9 @@
-// import { PromiseAnnotate } from '@/faang/utils/promise-annotate';
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 
 // var h = 0;
 
@@ -51,6 +56,6 @@ const createThenableDescription = (promises) => {
 };
 
 export const HeroPlaceholderUtils = {
-  getSimpleUUID,
   createThenableDescription,
+  getSimpleUUID,
 };

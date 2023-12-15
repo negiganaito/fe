@@ -1,11 +1,16 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import {
+  unstable_Scope,
   useInsertionEffect,
   useMemo,
   useRef,
   useState,
-  unstable_Scope,
 } from 'react';
-
 import { jsx } from 'react/jsx-runtime';
 
 import { ReactFocusEvent } from '@/faang/react-interactions/react-focus-event';
@@ -40,27 +45,27 @@ export function FocusWithinHandlerStrictMode({
   const focusWithinStrictMode = ReactFocusEvent.useFocusWithinStrictMode(
     useMemo(() => {
       return {
-        onFocusWithin: (e) => {
-          if (onFocusWithin && !isFocus) {
-            onFocusWithin(e);
-          }
-        },
         onBlurWithin: (e) => {
           if (onBlurWithin && isFocus) {
             onBlurWithin(e);
           }
         },
+        onFocusWithin: (e) => {
+          if (onFocusWithin && !isFocus) {
+            onFocusWithin(e);
+          }
+        },
         onFocusWithinChange: onFocusChange
           ? (e) => {
-              setFocus(e);
-              onFocusChange(e);
-            }
+            setFocus(e);
+            onFocusChange(e);
+          }
           : setFocus,
         onFocusWithinVisibleChange: onFocusVisibleChange
           ? (e) => {
-              setFocusVisible(e);
-              onFocusVisibleChange(e);
-            }
+            setFocusVisible(e);
+            onFocusVisibleChange(e);
+          }
           : setFocusVisible,
       };
     }, [
@@ -80,10 +85,10 @@ export function FocusWithinHandlerStrictMode({
   }, [ref, focusWithinStrictMode]);
 
   return jsx(unstable_Scope, {
-    ref,
     children:
       typeof children === 'function'
         ? children(isFocus, isFocusVisible)
         : children,
+    ref,
   });
 }

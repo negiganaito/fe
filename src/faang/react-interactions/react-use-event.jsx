@@ -1,8 +1,13 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { useLayoutEffect } from 'react';
+import { unstable_createEventHandle } from 'react-dom';
 
 import { useUnsafeRef_DEPRECATED } from '@/faang/hooks/use-unsafe-ref_DEPRECATED';
-
-import { unstable_createEventHandle } from 'react-dom';
 
 /**
  *
@@ -21,10 +26,20 @@ export function ReactUseEvent(event, option) {
   }
 
   if (handleRef.current === null) {
-    var setEventHandle = unstable_createEventHandle(event, option);
-    var clears = new Map();
+    let setEventHandle = unstable_createEventHandle(event, option);
+    let clears = new Map();
 
     useEventHandle = {
+
+      clear: () => {
+        // var a = Array.from(clears.values())
+        // for (var b = 0; b < a.length; b++) a[b]()
+        // clears.clear()
+        clears.forEach((c) => {
+          c();
+        });
+        clears.clear();
+      },
       /**
        *
        * @param {EventTarget} target
@@ -38,20 +53,11 @@ export function ReactUseEvent(event, option) {
         }
 
         if (callback === null) {
-          clears['delete'](target);
+          clears.delete(target);
           return;
         }
         clear = setEventHandle(target, callback);
         clears.set(target, clear);
-      },
-      clear: () => {
-        // var a = Array.from(clears.values())
-        // for (var b = 0; b < a.length; b++) a[b]()
-        // clears.clear()
-        clears.forEach((c) => {
-          c();
-        });
-        clears.clear();
       },
     };
 

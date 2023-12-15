@@ -1,7 +1,8 @@
 /**
- * Checks if the current platform is macOS.
- *
- * @type {boolean}
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
  */
 const isMac =
   typeof window !== 'undefined' && window.navigator != null
@@ -37,7 +38,7 @@ function isRelatedTargetWithin(focusWithinTarget, relatedTarget) {
 }
 
 export const ReactEventHelpers = {
-  isMac,
   hasPointerEvents,
+  isMac,
   isRelatedTargetWithin,
 };

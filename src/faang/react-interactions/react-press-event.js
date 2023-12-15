@@ -1,8 +1,14 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { useEffect, useRef } from 'react';
-import { ReactUseEvent } from './react-use-event';
-import { ReactEventHelpers } from './react-event-helpers';
 
+import { ReactEventHelpers } from './react-event-helpers';
 import { ReactEventHookPropagation } from './react-event-hook-propagation';
+import { ReactUseEvent } from './react-use-event';
 
 const eventOptions = {
   passive: !0,
@@ -26,21 +32,21 @@ function createExtendedEventObject(
     pageX: originalEvent.pageX,
     pageY: originalEvent.pageY,
     pointerType: pointerType,
+    preventDefault: () => {
+      this.defaultPrevented = true;
+      originalEvent.preventDefault();
+    },
     screenX: originalEvent.screenX,
     screenY: originalEvent.screenY,
     shiftKey: originalEvent.shiftKey,
+    stopPropagation: () => {
+      originalEvent.stopPropagation();
+    },
     target: target,
     timeStamp: originalEvent.timeStamp,
     type: type,
     x: originalEvent.clientX,
     y: originalEvent.clientY,
-    preventDefault: () => {
-      this.defaultPrevented = true;
-      originalEvent.preventDefault();
-    },
-    stopPropagation: () => {
-      originalEvent.stopPropagation();
-    },
   };
 }
 
@@ -64,13 +70,13 @@ const usePress = (target, options) => {
   const focusoutHandler = ReactUseEvent('focusout', eventOptions);
 
   const pressRef = useRef({
-    isPressed: false,
-    isPressActive: false,
-    pointerId: null,
-    bounds: null,
-    pointerType: '',
-    buttons: 0,
     activationEvent: null,
+    bounds: null,
+    buttons: 0,
+    isPressActive: false,
+    isPressed: false,
+    pointerId: null,
+    pointerType: '',
   });
 
   useEffect(() => {

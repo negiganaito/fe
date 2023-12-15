@@ -5,6 +5,22 @@
  * See the LICENSE file in the root directory for details.
  */
 import * as stylex from '@stylexjs/stylex';
+import React, { forwardRef, useContext, useMemo } from 'react';
+
+import { CometTextContext, CometTextLangContext } from '@/faang/context';
+
+import { BaseHeading } from './base-heading';
+import { BaseTextContextProvider, useBaseTextContext } from './base-text-context';
+import { CometDensityModeContext } from './comet-density-mode-context';
+import { CometLineClamp } from './comet-line-clamp';
+import { CometTextTypography } from './comet-text-typography';
+
+
+const e = {
+  useTranslationKeyForTextParent: function () { },
+};
+
+const { useTranslationKeyForTextParent } = e;
 
 
 const styles = stylex.create({
@@ -198,3 +214,146 @@ const offsetValueStyles = stylex.create({
   2: { paddingBottom: '2px' },
   3: { paddingBottom: '3px' },
 });
+
+const hyphensStyles = stylex.create({
+  auto: {
+    hyphens: 'auto'
+  },
+  manual: {
+    hyphens: 'manual'
+  }
+})
+
+const BUTTON_TYPE = {
+  disabled: 'disabledButton',
+  highlight: 'primaryDeemphasizedButton',
+  secondary: 'secondaryButton',
+  white: 'primaryButton',
+}
+
+
+function getTypoColor(color, type) {
+  if (type) {
+    // Check if the type is present in BUTTON_TYPE, otherwise use the provided color
+    return (type = BUTTON_TYPE[color]) !== null ? type : color
+  } else {
+    // If no type provided, use the given color directly
+    return color
+  }
+}
+
+/**
+ * @type React.ForwardRefRenderFunction<React.FunctionComponent, import("./types").TetraTextProps>
+ */
+export const TetraText = forwardRef((props, ref) => {
+  const {
+    align = 'auto',
+    children,
+    color,
+    dir = 'auto',
+    hyphens = 'none',
+    id,
+    isPrimaryHeading = false,
+    isSemanticHeading = false,
+    numberOfLines,
+    preserveNewLines = false,
+    suppressHydrationWarning,
+    type,
+    truncationTooltip
+  } = props
+
+  // eslint-disable-next-line no-unused-vars
+  const [densityMode, _] = useContext(CometDensityModeContext)
+
+  const textLang = useContext(CometTextLangContext)
+  const {
+    fontFamily,
+    fontSize,
+    defaultColor = 'primary',
+    fontWeight = 'normal',
+    offsets = [0, 0]
+  } = CometTextTypography[type]
+
+  const offsetsValue = offsets.length === 3 ? offsets[2] : 0
+
+  const key = useTranslationKeyForTextParent()
+
+  const typoColor = getTypoColor(
+    color ?? defaultColor,
+    type === 'button1' || type === 'button2',
+  )
+
+  const CometTextContextValue = useMemo(() => {
+    return { color: typoColor, type }
+  }, [typoColor, type])
+
+  const baseTextContextValue = useBaseTextContext()
+
+  const nested =
+    (baseTextContextValue == null
+      ? undefined
+      : baseTextContextValue.nested) === true
+
+  const textChild = (
+    <BaseTextContextProvider nested={true}>
+      <CometTextContext.Provider value={CometTextContextValue}>
+        <span
+          key={key}
+          className={stylex(
+            styles.base,
+            fontFamily,
+            !nested && styles.block,
+            // @ts-ignore
+            !nested && nestedBeforeOffsetStyles[offsets[0]],
+            !nested && styles.block,
+            !nested &&
+            nestedAfterOffsetStyles[
+            numberOfLines !== undefined
+              ? offsets[1] + offsetsValue
+              : offsets[1]
+            ],
+            densityMode ? densityModeFontStyles[fontSize] : defaultFontSizeStyles[fontSize],
+            fontWeightStyles[fontWeight],
+            buttonColorStyles[typoColor],
+            align !== 'auto' && alignStyles[align],
+            hyphens !== 'none' && hyphensStyles[hyphens],
+            preserveNewLines && styles.preserveNewLines,
+          )}
+          lang={textLang}
+          dir={nested ? undefined : dir}
+          id={id}
+          ref={ref}
+          suppressHydrationWarning={suppressHydrationWarning}
+          data-testid={undefined}
+        >
+          {numberOfLines ? (
+            <CometLineClamp
+              lines={numberOfLines}
+              truncationTooltip={truncationTooltip}
+              xstyle={offsetsValue !== 0 && offsetValueStyles[offsetsValue]}
+            >
+              {children}
+            </CometLineClamp>
+          ) : (
+            children
+          )}
+        </span>
+      </CometTextContext.Provider>
+    </BaseTextContextProvider>
+  )
+
+
+  return isSemanticHeading ? (
+    <BaseHeading
+      isPrimaryHeading={isPrimaryHeading}
+      xstyle={styles.heading}
+    >
+      {textChild}
+    </BaseHeading>
+  ) : (
+    textChild
+  )
+})
+
+
+TetraText.displayName = 'TetraText'

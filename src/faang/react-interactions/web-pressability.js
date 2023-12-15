@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { ReactContextMenuEvent } from './react-context-menu-event';
 import { ReactFocusEvent } from './react-focus-event';
 import { ReactHoverEvent } from './react-hover-event';

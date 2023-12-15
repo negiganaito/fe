@@ -1,4 +1,10 @@
-import { useRef, useState, useMemo, unstable_Scope } from 'react';
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+import { unstable_Scope, useMemo, useRef, useState } from 'react';
 import { jsx } from 'react/jsx-runtime';
 
 import { ReactFocusEvent } from '@/faang/react-interactions/react-focus-event';
@@ -39,29 +45,29 @@ export function FocusWithinHandlerNonStrictMode_DEPRECATED({
     ref,
     useMemo(() => {
       return {
-        onFocusWithin: (e) => {
-          if (onFocusWithin && !isFocus) {
-            onFocusWithin(e);
-          }
-          // onFocusWithin && !isFocus && onFocusWithin(e)
-        },
         onBlurWithin: (e) => {
           if (onBlurWithin && isFocus) {
             onBlurWithin(e);
           }
           // onBlurWithin && isFocus && onBlurWithin(e)
         },
+        onFocusWithin: (e) => {
+          if (onFocusWithin && !isFocus) {
+            onFocusWithin(e);
+          }
+          // onFocusWithin && !isFocus && onFocusWithin(e)
+        },
         onFocusWithinChange: onFocusChange
           ? (e) => {
-              setFocus(e);
-              onFocusChange(e);
-            }
+            setFocus(e);
+            onFocusChange(e);
+          }
           : setFocus,
         onFocusWithinVisibleChange: onFocusVisibleChange
           ? (e) => {
-              setFocusVisible(e);
-              onFocusVisibleChange(e);
-            }
+            setFocusVisible(e);
+            onFocusVisibleChange(e);
+          }
           : setFocusVisible,
       };
     }, [
@@ -74,10 +80,10 @@ export function FocusWithinHandlerNonStrictMode_DEPRECATED({
   );
 
   return jsx(unstable_Scope, {
-    ref: focusWithinStrictModeRef,
     children:
       typeof children === 'function'
         ? children(isFocus, isFocusVisible)
         : children,
+    ref: focusWithinStrictModeRef,
   });
 }

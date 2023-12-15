@@ -1,13 +1,17 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+import executionEnvironment from 'fbjs/lib/ExecutionEnvironment';
 import React, { useCallback, useLayoutEffect, useRef } from 'react';
-
 import { jsx, jsxs } from 'react/jsx-runtime';
 
 import { useStable } from '@/faang/hooks';
-import executionEnvironment from 'fbjs/lib/ExecutionEnvironment';
+
 import { CometSuspenseHUD } from './comet-suspense-hud';
-
 import { CometSSRHydrationMarkerUtils } from './cometssr-hydration-marker-utils';
-
 import { HeroPlaceholder } from './hero-placeholder';
 
 function useLayoutEffectCallback(props) {
@@ -111,6 +115,12 @@ export function useCometPlaceholderImpl(props) {
   }, []);
 
   return jsxs(HeroPlaceholder, {
+    children: [
+      jsx(useLayoutEffectCallback, {
+        cb: placeholderCallback,
+      }),
+      _children,
+    ],
     fallback: jsxs(React.Fragment, {
       children: [
         _fallback,
@@ -123,11 +133,5 @@ export function useCometPlaceholderImpl(props) {
     name,
     unstable_avoidThisFallback,
     unstable_onSuspense: onSuspense,
-    children: [
-      jsx(useLayoutEffectCallback, {
-        cb: placeholderCallback,
-      }),
-      _children,
-    ],
   });
 }

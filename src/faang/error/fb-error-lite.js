@@ -1,8 +1,14 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 const TaalOpcodes = {
+  FORCED_KEY: 4,
+  PREVIOUS_DIR: 3,
   PREVIOUS_FILE: 1,
   PREVIOUS_FRAME: 2,
-  PREVIOUS_DIR: 3,
-  FORCED_KEY: 4,
 };
 
 function err(message) {
@@ -35,6 +41,6 @@ function err(message) {
 }
 
 export const fbErrorLite = {
-  err,
   TAALOpcode: TaalOpcodes,
+  err,
 };

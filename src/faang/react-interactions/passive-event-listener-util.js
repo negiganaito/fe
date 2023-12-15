@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 let isPassiveSupported = false;
 
 try {
@@ -21,11 +27,11 @@ const makeEventOptions = function (options) {
   return isPassiveSupported
     ? options
     : typeof options === 'boolean'
-    ? options
-    : options.capture || false;
+      ? options
+      : options.capture || false;
 };
 
 export const passiveEventListenerUtil = {
-  makeEventOptions,
   isPassiveEventListenerSupported: isPassiveSupported,
+  makeEventOptions,
 };

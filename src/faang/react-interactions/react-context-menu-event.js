@@ -1,4 +1,11 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { useEffect } from 'react';
+
 import { ReactEventHookPropagation } from './react-event-hook-propagation';
 import { ReactUseEvent } from './react-use-event';
 

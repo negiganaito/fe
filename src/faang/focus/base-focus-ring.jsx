@@ -1,16 +1,22 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import * as stylex from '@stylexjs/stylex';
-
 import { jsx } from 'react/jsx-runtime';
 
 import { FocusWithinHandler } from './focus-within-handler';
 
 const defaultStyles = stylex.create({
   focused: {
-    boxShadow: 'var(--focus-ring-shadow-default)',
-    outline: 'none',
+    // eslint-disable-next-line @stylexjs/valid-styles
     '@media (forced-colors: active)': {
       outline: 'var(--focus-ring-outline-forced-colors)',
     },
+    boxShadow: 'var(--focus-ring-shadow-default)',
+    outline: 'none',
   },
   focusedInset: {
     boxShadow: 'var(--focus-ring-shadow-inset)',
@@ -52,7 +58,6 @@ export const BaseFocusRing = ({
   const focusRingPositionStyles = styles[focusRingPosition];
 
   return jsx(FocusWithinHandler, {
-    testOnly,
     /**
      *
      * @param {boolean} isFocus
@@ -83,6 +88,8 @@ export const BaseFocusRing = ({
         _focus ? focusRingPositionStyles : defaultStyles.unfocused
       );
     },
+
+    testOnly,
   });
 };
 

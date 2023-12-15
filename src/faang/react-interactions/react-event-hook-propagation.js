@@ -1,9 +1,8 @@
 /**
- * Checks if the propagation for a specific event hook has been stopped.
- *
- * @param {Object} event - The event object.
- * @param {string} eventName - The name of the event.
- * @returns {boolean} - True if propagation is stopped, false otherwise.
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
  */
 function hasEventHookPropagationStopped(event, eventName) {
   // Check if _stopEventHookPropagation is defined and propagation for the event is stopped.

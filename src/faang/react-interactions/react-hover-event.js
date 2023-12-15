@@ -1,11 +1,17 @@
-import { useEffect, useRef } from 'react';
-
-import { ReactEventHelpers } from './react-event-helpers';
-import { ReactUseEvent } from './react-use-event';
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import {
   hasEventHookPropagationStopped,
   stopEventHookPropagation,
 } from '@negiganaito/utils/common/react-event-hook-propagation';
+import { useEffect, useRef } from 'react';
+
+import { ReactEventHelpers } from './react-event-helpers';
+import { ReactUseEvent } from './react-use-event';
 
 const hoverOptions = {
   passive: true,
@@ -74,12 +80,12 @@ const useHover = (target, options) => {
         hoverTouchRefCurrent.isHovered &&
           !isAncestorOrSelfWithHover(targetElement, param.relatedTarget) &&
           ((hoverTouchRefCurrent.isHovered = false),
-          onHoverEnd &&
+            onHoverEnd &&
             onHoverEnd(
               createCustomEventObject('hoverend', param, targetElement)
             ),
-          onHoverChange && onHoverChange(false),
-          cleanup(param));
+            onHoverChange && onHoverChange(false),
+            cleanup(param));
       };
 
       const handleMouseMove = function (param) {
@@ -142,11 +148,11 @@ const useHover = (target, options) => {
 
         ReactEventHelpers.hasPointerEvents
           ? pointeroverHandler.setListener(targetElement, (event) => {
-              event.pointerType !== 'touch' && handleMouseOver(event);
-            })
+            event.pointerType !== 'touch' && handleMouseOver(event);
+          })
           : (mouseoverHandler.setListener(targetElement, (event) => {
-              hoverTouchRefCurrent.isTouched || handleMouseOver(event);
-            }),
+            hoverTouchRefCurrent.isTouched || handleMouseOver(event);
+          }),
             touchstartHandler.setListener(targetElement, () => {
               hoverTouchRefCurrent.isTouched = true;
             }),

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { recoverableViolation } from '@/faang/error/recoverable-violation';
 
 /**
@@ -21,7 +27,7 @@ export function mergeRefs(...refs) {
 
       recoverableViolation(
         'mergeRefs cannot handle Refs of type boolean, number or string, received ref ' +
-          String(ref),
+        String(ref),
         'comet_ui'
       );
     });

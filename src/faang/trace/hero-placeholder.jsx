@@ -1,19 +1,25 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import {
+  Fragment,
+  Suspense,
   useCallback,
   useContext,
   useLayoutEffect,
   useRef,
-  Suspense,
-  Fragment,
 } from 'react';
+import { jsx, jsxs } from 'react/jsx-runtime';
 
-import { jsxs, jsx } from 'react/jsx-runtime';
+import { useStable } from '@/faang/hooks/use-stable';
 
+import { HeroFallbackTracker } from './hero-fallback-tracker';
 import { HeroInteractionContext } from './hero-interaction-context';
 import { HeroInteractionIDContext } from './hero-interaction-id-context';
-import { useStable } from '@/faang/hooks/use-stable';
 import { HeroPlaceholderUtils } from './hero-placeholder-utils';
-import { HeroFallbackTracker } from './hero-fallback-tracker';
 
 // function n(a) {
 //   var b = a.cb,
@@ -32,8 +38,10 @@ import { HeroFallbackTracker } from './hero-fallback-tracker';
  * @returns {null} - Returns null.
  */
 function performLayoutEffectOnce({ cb }) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const hasBeenCalled = useRef(false);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useLayoutEffect(() => {
     if (!hasBeenCalled.current) {
       cb();
@@ -137,6 +145,12 @@ export const HeroPlaceholder = (props) => {
   };
 
   return jsxs(Suspense, {
+    children: [
+      jsx(performLayoutEffectOnce, {
+        cb: t,
+      }),
+      childrenClone,
+    ],
     fallback: jsxs(Fragment, {
       children: [
         fallback,
@@ -150,12 +164,6 @@ export const HeroPlaceholder = (props) => {
     }),
     suspenseCallback,
     unstable_avoidThisFallback,
-    children: [
-      jsx(performLayoutEffectOnce, {
-        cb: t,
-      }),
-      childrenClone,
-    ],
   });
 };
 
