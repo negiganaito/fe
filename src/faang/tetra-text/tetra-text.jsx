@@ -1,7 +1,21 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import * as stylex from '@stylexjs/stylex';
 
 
 const styles = stylex.create({
+  //
+  apple: {
+    MozOsxFontSmoothing: 'grayscale',
+    WebkitFontSmoothing: 'antialiased',
+    fontFamily: 'var(--font-family-apple)',
+  },
+
+
   base: {
     maxWidth: '100%',
     minWidth: 0,
@@ -9,9 +23,8 @@ const styles = stylex.create({
     wordWrap: 'break-word',
   },
 
-  block: {
-    display: 'block',
 
+  block: {
     '::after': {
       content: '""',
       display: 'block',
@@ -23,7 +36,14 @@ const styles = stylex.create({
       display: 'block',
       height: 0,
     },
+
+    display: 'block',
   },
+
+
+  default: { fontFamily: 'var(--font-family-default)', },
+
+
 
   heading: {
     maxWidth: '100%',
@@ -31,16 +51,6 @@ const styles = stylex.create({
   },
 
   preserveNewLines: { whiteSpace: 'pre-line', },
-
-  //
-
-  apple: {
-    MozOsxFontSmoothing: 'grayscale',
-    WebkitFontSmoothing: 'antialiased',
-    fontFamily: 'var(--font-family-apple)',
-  },
-
-  default: { fontFamily: 'var(--font-family-default)', },
 
   segoe: { fontFamily: 'var(--font-family-segoe)', },
 });
@@ -159,6 +169,7 @@ const fontWeightStyles = stylex.create({
 
 const nestedBeforeOffsetStyles = stylex.create({
   1: { '::before': { marginTop: '-1px', }, },
+  10: { '::before': { marginTop: '-10px', }, },
   2: { '::before': { marginTop: '-2px', }, },
   3: { '::before': { marginTop: '-3px', }, },
   4: { '::before': { marginTop: '-4px', }, },
@@ -167,11 +178,11 @@ const nestedBeforeOffsetStyles = stylex.create({
   7: { '::before': { marginTop: '-7px', }, },
   8: { '::before': { marginTop: '-8px', }, },
   9: { '::before': { marginTop: '-9px', }, },
-  10: { '::before': { marginTop: '-10px', }, },
 });
 
 const nestedAfterOffsetStyles = stylex.create({
   1: { '::after': { marginBottom: '-1px', }, },
+  10: { '::after': { marginBottom: '-10px', }, },
   2: { '::after': { marginBottom: '-2px', }, },
   3: { '::after': { marginBottom: '-3px', }, },
   4: { '::after': { marginBottom: '-4px', }, },
@@ -180,7 +191,6 @@ const nestedAfterOffsetStyles = stylex.create({
   7: { '::after': { marginBottom: '-7px', }, },
   8: { '::after': { marginBottom: '-8px', }, },
   9: { '::after': { marginBottom: '-9px', }, },
-  10: { '::after': { marginBottom: '-10px', }, },
 });
 
 const offsetValueStyles = stylex.create({

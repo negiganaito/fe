@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 
 import React, { lazy, useCallback, useContext, useRef, useState } from 'react';
 
@@ -11,12 +10,12 @@ import { CometTextTypography } from '@/faang/tetra-text';
 import { CometTextContext } from '@/faang/context';
 import { useMergeRefs } from '@/faang/hooks';
 
-import {} from '@/faang/trace';
+import { } from '@/faang/trace';
 
 const CometToolTip = lazy(() => import('./MarkdownPreview.js'));
 
 const e = {
-  useTranslationKeyForTextParent: function () {},
+  useTranslationKeyForTextParent: function () { },
 };
 
 const { useTranslationKeyForTextParent } = e;
@@ -130,7 +129,7 @@ const cometLineClamp = (props, externalRef) => {
     }
     x(
       curr.offsetWidth < curr.scrollWidth ||
-        curr.offsetHeight < curr.scrollHeight
+      curr.offsetHeight < curr.scrollHeight
     );
   };
 
@@ -155,7 +154,7 @@ const cometLineClamp = (props, externalRef) => {
     style: internalStyle,
     ref,
     children: childrenClone,
-  },translationKeyComp);
+  }, translationKeyComp);
   // (
   //   <span
   //     className={mergeClasses(
@@ -176,11 +175,11 @@ const cometLineClamp = (props, externalRef) => {
 
   return w
     ? jsx(CometPlaceholder, {
-        fallback,
-        children: jsx(CometTooltip, {
-          tooltip: truncationTooltip,
-          children: LineComp,
-        }),
-      })
+      fallback,
+      children: jsx(CometTooltip, {
+        tooltip: truncationTooltip,
+        children: LineComp,
+      }),
+    })
     : LineComp;
 };

@@ -1,4 +1,12 @@
-// babel.config.js
+/**
+ * Copyright (c) ChiThanh Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+'use strict'
 
 // eslint-disable-next-line no-undef
 const styleXPlugin = require('@stylexjs/babel-plugin');
@@ -7,7 +15,6 @@ const styleXPlugin = require('@stylexjs/babel-plugin');
 const path = require('path');
 
 const config = {
-  presets: ['@babel/preset-react'],
   plugins: [
     ['react-hot-loader/babel'],
     ['relay'],
@@ -20,12 +27,16 @@ const config = {
         test: false,
         // Required for CSS variable support
         unstable_moduleResolution: {
-          // type: 'commonJS' | 'haste'
-          // default: 'commonJS'
-          type: 'commonJS',
+
+
           // The absolute path to the root directory of your project
           // eslint-disable-next-line no-undef
           rootDir: __dirname,
+
+
+          // type: 'commonJS' | 'haste'
+          // default: 'commonJS'
+          type: 'commonJS',
         },
       },
     ],
@@ -38,6 +49,7 @@ const config = {
     ],
     'babel-plugin-fbt-runtime',
   ],
+  presets: ['@babel/preset-react'],
 };
 
 // eslint-disable-next-line no-undef

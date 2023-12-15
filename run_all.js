@@ -1,11 +1,3 @@
-/* eslint-disable no-undef */
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * @flow strict
- * @format
- * @oncall i18n_fbt_js
- */
 
 const { execSync } = require('child_process');
 const fs = require('fs');

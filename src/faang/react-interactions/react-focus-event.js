@@ -1,30 +1,37 @@
-import { ReactEventHelpers } from './react-event-helpers';
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+
+
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from 'react';
+import { unstable_createEventHandle } from 'react-dom';
 
 import { useUnsafeRef_DEPRECATED } from '@/faang/hooks/use-unsafe-ref_DEPRECATED';
 
+import { ReactEventHelpers } from './react-event-helpers';
 import { ReactEventHookPropagation } from './react-event-hook-propagation';
 import { ReactUseEvent } from './react-use-event';
-import {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useCallback,
-  useMemo,
-} from 'react';
-
-import { unstable_createEventHandle } from 'react-dom';
 
 const globalFocusVisibleEvents = ReactEventHelpers.hasPointerEvents
   ? ['keydown', 'pointermove', 'pointerdown', 'pointerup']
   : [
-      'keydown',
-      'mousedown',
-      'mousemove',
-      'mouseup',
-      'touchmove',
-      'touchstart',
-      'touchend',
-    ];
+    'keydown',
+    'mousedown',
+    'mousemove',
+    'mouseup',
+    'touchmove',
+    'touchstart',
+    'touchend',
+  ];
 
 const eventOption = {
   passive: true,
@@ -155,8 +162,14 @@ function useFocusLifecycles() {
     //   trackGlobalFocusVisible()
     // }
 
-    hasTrackedGlobalFocusVisible ||
-      ((hasTrackedGlobalFocusVisible = true), trackGlobalFocusVisible());
+
+    if (!hasTrackedGlobalFocusVisible) {
+      hasTrackedGlobalFocusVisible = true
+      trackGlobalFocusVisible()
+    }
+
+    // hasTrackedGlobalFocusVisible ||
+    //   ((hasTrackedGlobalFocusVisible = true), trackGlobalFocusVisible());
   }, []);
 }
 
@@ -170,8 +183,8 @@ function useFocus(
   { disabled, onBlur, onFocus, onFocusChange, onFocusVisibleChange }
 ) {
   const stateRef = useRef({
-    isFocused: false,
     isFocusVisible: false,
+    isFocused: false,
   });
 
   const focusHandle = ReactUseEvent('focusin', eventOption);
@@ -386,8 +399,8 @@ function useFocusWithin(
 ) {
   // Setup controlled state for this useFocus hook
   const stateRef = useRef({
-    isFocused: false,
     isFocusVisible: false,
+    isFocused: false,
   });
 
   const focusHandle = ReactUseEvent('focusin', eventOption);
@@ -418,7 +431,7 @@ function useFocusWithin(
         // Handle focus visible
         setFocusVisibleListeners(
           focusVisibleHandles,
-          // $FlowFixMe[incompatible-call] focusWithinTarget is not null here
+          //  focusWithinTarget is not null here
           focusWithinTarget,
           (isFocusVisible) => {
             if (state.isFocused && state.isFocusVisible !== isFocusVisible) {
@@ -430,7 +443,7 @@ function useFocusWithin(
           }
         );
         // Handle focus
-        // $FlowFixMe[incompatible-call] focusWithinTarget is not null here
+        //  focusWithinTarget is not null here
         focusHandle.setListener(
           focusWithinTarget,
           /**
@@ -539,7 +552,7 @@ function useFocusWithin(
 
         // Handle before blur. This is a special
         // React provided event.
-        // $FlowFixMe[incompatible-call] focusWithinTarget is not null here
+        //  focusWithinTarget is not null here
         beforeBlurHandle.setListener(
           focusWithinTarget,
 
@@ -659,22 +672,22 @@ function useDOMEventListener(domEventName, eventOption) {
     const map = new Map();
 
     unsafeRefCurrent = {
+      clear: function () {
+        let a = Array.from(map.values());
+        for (let b = 0; b < a.length; b++) a[b]();
+        map.clear();
+      },
       setListener: (key, cb) => {
-        var c = map.get(key);
+        let c = map.get(key);
         c !== undefined && c();
         if (cb === null) {
-          map['delete'](key);
+          map.delete(key);
           return;
         }
         c = eventHandler(key, function () {
           cb.apply(undefined, arguments);
         });
         map.set(key, c);
-      },
-      clear: function () {
-        var a = Array.from(map.values());
-        for (var b = 0; b < a.length; b++) a[b]();
-        map.clear();
       },
     };
     unsafeRef.current = unsafeRefCurrent;
@@ -707,8 +720,8 @@ function useFocusWithinStrictMode({
   onFocusWithinVisibleChange,
 }) {
   const focusRef = useRef({
-    isFocused: false,
     isFocusVisible: false,
+    isFocused: false,
   });
   const focusHandle = useDOMEventListener('focusin', eventOption);
   const blurHandle = useDOMEventListener('focusout', eventOption);
@@ -721,11 +734,11 @@ function useFocusWithinStrictMode({
       const focusRefCurrent = focusRef.current;
       props !== null && focusRefCurrent !== null
         ? (setFocusVisibleListeners(handlerArr, props, (param) => {
-            focusRefCurrent.isFocused &&
-              focusRefCurrent.isFocusVisible !== param &&
-              ((focusRefCurrent.isFocusVisible = param),
+          focusRefCurrent.isFocused &&
+            focusRefCurrent.isFocusVisible !== param &&
+            ((focusRefCurrent.isFocusVisible = param),
               onFocusWithinVisibleChange && onFocusWithinVisibleChange(param));
-          }),
+        }),
           focusHandle.setListener(props, (param) => {
             if (!gkx5403 && disabled === true) {
               return;
@@ -739,20 +752,20 @@ function useFocusWithinStrictMode({
               return;
             focusRefCurrent.isFocused ||
               ((focusRefCurrent.isFocused = true),
-              (focusRefCurrent.isFocusVisible = isGlobalFocusVisible),
-              onFocusWithinChange && onFocusWithinChange(true),
-              focusRefCurrent.isFocusVisible &&
+                (focusRefCurrent.isFocusVisible = isGlobalFocusVisible),
+                onFocusWithinChange && onFocusWithinChange(true),
+                focusRefCurrent.isFocusVisible &&
                 onFocusWithinVisibleChange &&
                 onFocusWithinVisibleChange(true));
             !focusRefCurrent.isFocusVisible &&
               isGlobalFocusVisible &&
               ((focusRefCurrent.isFocusVisible = isGlobalFocusVisible),
-              onFocusWithinVisibleChange && onFocusWithinVisibleChange(true));
+                onFocusWithinVisibleChange && onFocusWithinVisibleChange(true));
             onFocusWithin && onFocusWithin(param);
           }),
           blurHandle.setListener(props, (param) => {
             if (!gkx5403 && disabled === true) return;
-            var relatedTarget = param.nativeEvent.relatedTarget;
+            let relatedTarget = param.nativeEvent.relatedTarget;
             if (
               ReactEventHookPropagation.hasEventHookPropagationStopped(
                 param,
@@ -761,29 +774,29 @@ function useFocusWithinStrictMode({
             )
               return;
             focusRefCurrent.isFocused &&
-            !ReactEventHelpers.isRelatedTargetWithin(props, relatedTarget)
+              !ReactEventHelpers.isRelatedTargetWithin(props, relatedTarget)
               ? ((focusRefCurrent.isFocused = false),
                 onFocusWithinChange && onFocusWithinChange(false),
                 focusRefCurrent.isFocusVisible &&
-                  onFocusWithinVisibleChange &&
-                  onFocusWithinVisibleChange(false),
+                onFocusWithinVisibleChange &&
+                onFocusWithinVisibleChange(false),
                 onBlurWithin && onBlurWithin(param))
               : ReactEventHookPropagation.stopEventHookPropagation(
-                  param,
-                  'useFocusWithin'
-                );
+                param,
+                'useFocusWithin'
+              );
           }),
           beforeblurHandle.setListener(props, (param) => {
             if (!gkx5403 && disabled === true) return;
             onBeforeBlurWithin &&
               (onBeforeBlurWithin(param),
-              afterblurHandle.setListener(document, (e) => {
-                onAfterBlurWithin && onAfterBlurWithin(e),
-                  afterblurHandle.setListener(document, null);
-              }));
+                afterblurHandle.setListener(document, (e) => {
+                  onAfterBlurWithin && onAfterBlurWithin(e),
+                    afterblurHandle.setListener(document, null);
+                }));
           }))
         : props === null &&
-          (focusHandle.clear(), blurHandle.clear(), beforeblurHandle.clear());
+        (focusHandle.clear(), blurHandle.clear(), beforeblurHandle.clear());
     },
     [
       afterblurHandle,
@@ -805,7 +818,7 @@ function useFocusWithinStrictMode({
 }
 
 export const ReactFocusEvent = {
-  useFocusWithinStrictMode,
-  useFocusWithin,
   useFocus,
+  useFocusWithin,
+  useFocusWithinStrictMode,
 };
