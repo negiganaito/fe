@@ -1,13 +1,22 @@
-/* eslint-disable no-self-assign */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+
+
+/* eslint-disable no-var */
+
 /* eslint-disable no-redeclare */
 import { performanceAbsoluteNow } from '@/faang/utils/performance-absolute-now';
 
-let i = 50,
-  j = new Map();
+let i = 50;
+let j = new Map();
 function a(a, b, d) {
   a = a;
   b = (b = b) != null ? b : '';
-  var e = j.get(a);
+  let e = j.get(a);
   e || j.set(a, (e = new Map()));
   a = e.get(b);
   a || e.set(b, (a = new Map()));
@@ -18,14 +27,14 @@ function a(a, b, d) {
 function k(a, b, c) {
   var d = j.get(a);
   if (!d) return [];
-  var e = [];
+  let e = [];
   for (
     var d = d,
-      g = Array.isArray(d),
-      h = 0,
-      d = g
-        ? d
-        : d[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+    g = Array.isArray(d),
+    h = 0,
+    d = g
+      ? d
+      : d[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
     ;
 
   ) {
@@ -39,15 +48,15 @@ function k(a, b, c) {
       i = h.value;
     }
     i = i;
-    var k = i[0];
+    let k = i[0];
     i = i[1];
     for (
       var i = i,
-        l = Array.isArray(i),
-        m = 0,
-        i = l
-          ? i
-          : i[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+      l = Array.isArray(i),
+      m = 0,
+      i = l
+        ? i
+        : i[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
       ;
 
     ) {
@@ -61,17 +70,17 @@ function k(a, b, c) {
         n = m.value;
       }
       n = n;
-      var o = n[0];
+      let o = n[0];
       n = n[1];
       for (
         var n = n[1],
-          p = Array.isArray(n),
-          q = 0,
-          n = p
-            ? n
-            : n[
-                typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'
-              ]();
+        p = Array.isArray(n),
+        q = 0,
+        n = p
+          ? n
+          : n[
+            typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'
+          ]();
         ;
 
       ) {
@@ -90,8 +99,8 @@ function k(a, b, c) {
           e.push({
             module: a,
             ref: k || null,
-            type: o,
             time: r,
+            type: o,
           });
       }
     }
@@ -101,14 +110,14 @@ function k(a, b, c) {
   });
 }
 function b(a, b) {
-  var c = new Map();
+  let c = new Map();
   for (
     var d = j.keys(),
-      e = Array.isArray(d),
-      f = 0,
-      d = e
-        ? d
-        : d[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+    e = Array.isArray(d),
+    f = 0,
+    d = e
+      ? d
+      : d[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
     ;
 
   ) {
@@ -122,14 +131,14 @@ function b(a, b) {
       g = f.value;
     }
     g = g;
-    var h = k(g, a, b);
+    let h = k(g, a, b);
     h.length && c.set(g, h);
   }
   return c;
 }
 
 export const JSResourceEvents = {
-  notify: a,
-  getEvents: k,
   getAllModuleEvents: b,
+  getEvents: k,
+  notify: a,
 };

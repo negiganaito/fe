@@ -9,6 +9,7 @@ import { jsx } from 'react/jsx-runtime'
 
 import { BaseThemeDisplayModeContext } from '@/faang/context'
 
+import { stylexCompat } from '../utils'
 import { useCurrentDisplayMode } from './use-current-display-mode'
 
 const THEME_CLASSES = {
@@ -44,6 +45,9 @@ export function useCometTheme(val) {
     }
   }, [mode])
 
-  // @ts-ignore
-  return [wrapper, THEME_CLASSES[mode]]
+  const styles = stylexCompat.makeNamespace({
+    theme: THEME_CLASSES[mode]
+  })
+
+  return [wrapper, styles]
 }

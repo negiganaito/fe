@@ -10,7 +10,9 @@ export { useCometTheme } from './use-comet-theme'
 export { useCurrentDisplayMode } from './use-current-display-mode';
 export { useDelayedState } from './use-delayed-state'
 export { useFadeEffect } from './use-fade-effect'
+export { useLayoutAnimationEvents } from './use-layout-animation-events'
 export { useMergeRefs } from './use-merge-refs';
+export { useResizeObserver } from './use-resize-observer'
 export { useStable } from './use-stable';
 export { useTooltipDelayedContent } from './use-tooltip-delayed-content'
 export { useUnsafeRef_DEPRECATED } from './use-unsafe-ref_DEPRECATED'

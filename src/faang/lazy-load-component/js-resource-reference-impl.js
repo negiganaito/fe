@@ -1,13 +1,23 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+/* eslint-disable no-var */
+
+
 import { PromiseAnnotate } from '@/faang/utils';
-import { JSResourceEvents } from './js-resource-events';
+
 import { ifRequireable } from './if-requireable';
 import { ifRequired } from './if-required';
+import { JSResourceEvents } from './js-resource-events';
 
 let j = function (a) {
-    return a;
-  },
-  k = [],
-  l = null;
+  return a;
+};
+let k = [];
+let l = null;
 function m(a) {
   l ? a(l) : k.push(a);
 }
@@ -17,7 +27,7 @@ export const JSResourceReferenceImpl = (function () {
   a.setBootloader = function (a) {
     l = a;
     for (a = 0; a < k.length; a++) {
-      var b = k[a];
+      let b = k[a];
       b(l);
     }
     k = [];
@@ -25,19 +35,19 @@ export const JSResourceReferenceImpl = (function () {
   function a(a) {
     this.$1 = a;
   }
-  var e = a.prototype;
+  let e = a.prototype;
   e.getModuleId = function () {
-    var a = this.$1;
+    let a = this.$1;
     return a;
   };
   e.getModuleIdAsRef = function () {
     return this.$1;
   };
   e.load = function () {
-    var a = this,
-      c = this.$2;
+    let a = this;
+    let c = this.$2;
     JSResourceEvents.notify(this.$1, c, 'LOADED');
-    var e = new Promise(function (b) {
+    let e = new Promise(function (b) {
       m(function (e) {
         return e.loadModules(
           [a.getModuleIdAsRef()],
@@ -52,18 +62,19 @@ export const JSResourceReferenceImpl = (function () {
     return e;
   };
   e.preload = function () {
-    var a,
-      b = this,
-      c = (a = this.$2) != null ? a : n;
+    let a;
+    let b = this;
+    let c = (a = this.$2) != null ? a : n;
     m(function (a) {
       return a.loadModules(
         [b.getModuleIdAsRef()],
-        function () {},
+        function () { },
         'preload: ' + c
       );
     });
   };
   e.equals = function (a) {
+    // eslint-disable-next-line eqeqeq
     return this === a || this.$1 == a.$1;
   };
   e.getModuleIfRequireable = function () {
@@ -86,16 +97,16 @@ export const JSResourceReferenceImpl = (function () {
     return this;
   };
   a.loadAll = function (a, b) {
-    var c = {},
-      e = !1;
+    let c = {};
+    let e = !1;
     for (
       var f = a,
-        g = Array.isArray(f),
-        h = 0,
-        // eslint-disable-next-line no-redeclare
-        f = g
-          ? f
-          : f[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+      g = Array.isArray(f),
+      h = 0,
+      // eslint-disable-next-line no-redeclare
+      f = g
+        ? f
+        : f[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
       ;
 
     ) {
@@ -110,7 +121,7 @@ export const JSResourceReferenceImpl = (function () {
       }
       // eslint-disable-next-line no-self-assign
       i = i;
-      var j = i.$2;
+      let j = i.$2;
       j && ((e = !0), (c[j] = !0));
       JSResourceEvents.notify(i.$1, j, 'LOADED');
     }

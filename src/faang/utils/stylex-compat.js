@@ -4,8 +4,12 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { JSResource } from './js-resource';
+function makeNamespace(styles) {
+  styles.$$css = true
+  return styles
+}
 
-export function JSResourceForInteraction(a) {
-  return JSResource.call(null, a);
+
+export const stylexCompat = {
+  makeNamespace
 }

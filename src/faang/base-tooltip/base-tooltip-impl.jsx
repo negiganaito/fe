@@ -8,6 +8,7 @@ import * as stylex from '@stylexjs/stylex';
 import React, { useLayoutEffect, useRef } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
+import { BaseContextualLayer } from '@/faang/base-contextual-layer';
 import { CometPlaceholder } from '@/faang/comet-placeholder';
 import { useFadeEffect, useTooltipDelayedContent } from '@/faang/hooks'
 import { CometHeroInteractionContextPassthrough } from '@/faang/trace';
@@ -84,7 +85,7 @@ export function BaseTooltipImpl({
 
 
   return !tooltip || !isTransitioning ? null : jsx(CometHeroInteractionContextPassthrough, {
-    children: jsx('BaseContextualLayer', Object.assign({}, {
+    children: jsx(BaseContextualLayer, Object.assign({}, {
       align: 'middle'
     }, rest, {
       children: jsx(themeWrapper, {

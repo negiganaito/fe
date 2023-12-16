@@ -10,9 +10,12 @@ export { cssUserAgentSupports } from './css-useragent-supports';
 export { env } from './Env';
 export { getLoadingStateAriaProps } from './get-loading-state-aria-props';
 export { invariant } from './invariant';
+export { isElementFixedOrSticky } from './is-element-fixed-or-sticky'
 export { ix } from './ix';
 export { memoizeWithArgs } from './memoize-with-args';
 export { PromiseAnnotate } from './promise-annotate';
 export { sprintf } from './sprintf';
+export { stylexCompat } from './stylex-compat'
 export { testID } from './test-id';
+export { uniqueID } from './unique-id'
 export { xplatToInputRef } from './xplat-to-dom-ref';

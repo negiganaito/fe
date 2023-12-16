@@ -4,9 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-'use client'
 
 import * as stylex from '@stylexjs/stylex';
+import Locale from 'fbjs/lib/Locale'
 import React, {
   forwardRef,
   useCallback,
@@ -21,6 +21,7 @@ import React, {
 } from 'react'
 import { jsx } from 'react/jsx-runtime'
 
+import { LayoutAnimationEvent } from '@/faang/common'
 import {
   BaseContextualLayerAnchorRootContext,
   BaseContextualLayerAvailableHeightContext,
@@ -39,12 +40,10 @@ import {
   focusScopeQueries,
 } from '@/faang/focus-region'
 import { CometTextContext, mergeRefs, useLayoutAnimationEvents, useResizeObserver } from '@/faang/hooks'
-import { calculateBaseContextualLayerPosition } from '@/faang/utils'
-import { LayoutAnimationEventType } from '@/faang/utils/common/layout-animation-events'
-import { isElementFixedOrSticky } from '@/faang/utils/is-element-fixed-or-sticky'
+import { BaseContextualLayerAnchorRoot } from '@/faang/modal'
+import { calculateBaseContextualLayerPosition, isElementFixedOrSticky } from '@/faang/utils'
 
-import { BaseContextualLayerAnchorRoot } from './base-contextual-layer-anchor-root'
-import BaseContextualLayerDefaultContainer from './base-contextual-layer-default-container'
+import { BaseContextualLayerDefaultContainer } from './base-contextual-layer-default-container'
 
 // type BaseContextualLayerProps = {
 //   align?
@@ -75,11 +74,11 @@ const styles = stylex.create({
   },
 })
 
-const w = false // d('Locale').isRTL()
+const w = Locale.isRTL()
 
 const u = 8
 
-const BaseContextualLayer = forwardRef(
+export const BaseContextualLayer = forwardRef(
   (
     {
       align = 'start',
@@ -285,15 +284,15 @@ const BaseContextualLayer = forwardRef(
 
     const W = useCallback(
       function (a) {
-        a === LayoutAnimationEventType.Start && O(!0),
-          a === LayoutAnimationEventType.Stop && (O(!1), V())
+        a === LayoutAnimationEvent.LayoutAnimationEventType.Start && O(!0),
+          a === LayoutAnimationEvent.LayoutAnimationEventType.Stop && (O(!1), V())
       },
       [V, O],
     )
 
     useLayoutEffect(
       function () {
-        N != null && N.getIsAnimating() && W(LayoutAnimationEventType.Start)
+        N != null && N.getIsAnimating() && W(LayoutAnimationEvent.LayoutAnimationEventType.Start)
       },
       [N, W],
     )
@@ -565,4 +564,3 @@ function v(a, b) {
     }
 }
 
-export default BaseContextualLayer

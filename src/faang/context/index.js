@@ -12,6 +12,7 @@ export { BaseContextualLayerContextSizeContext } from './base-contextual-layer-c
 export { BaseContextualLayerLayerAdjustmentContext } from './base-contextual-layer-layer-adjustment-context'
 export { BaseContextualLayerOrientationContext } from './base-contextual-layer-orientation-context'
 export { BaseLinkNestedPressableContext } from './base-link-nested-pressable-context'
+export { BasePortalTargetContext } from './base-portal-target-context'
 export { BaseScrollableAreaContext } from './base-scrollable-area-context'
 export { BaseThemeConfigContext } from './base-theme-config-context';
 export { BaseThemeDisplayModeContext } from './base-theme-display-mode-context';
@@ -20,4 +21,3 @@ export { CometTextContext } from './comet-text-context';
 export { CometTextLangContext } from './comet-text-lang-context';
 export { HiddenSubtreeContext } from './hidden-subtree-context'
 export { LayoutAnimationBoundaryContext } from './layout-animation-boundary-context'
-export { CometTextContext } from "./comet-text-context"

@@ -1,5 +1,10 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { forwardRef } from 'react';
-
 import { jsx } from 'react/jsx-runtime';
 
 import { BootloaderResource } from './bootloader-resource';
@@ -21,7 +26,8 @@ export function lazyLoadComponent(a) {
   }
   function e(c, e) {
     e === void 0 && (e = void 0);
-    var f = BootloaderResource.read(a);
+    let f = BootloaderResource.read(a);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useHeroBootloadedComponent(a);
     return jsx(
       f,

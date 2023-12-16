@@ -1,4 +1,11 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import ExecutionEnvironment from 'fbjs/lib/ExecutionEnvironment';
+
 import { suspendOrThrowIfUsedInSSR } from './suspend-or-throw-if-used-in-ssr';
 
 const j = {};
@@ -17,7 +24,7 @@ function read(b) {
     const d = b.getModuleId();
     if (!j[d]) {
       b = j[d] = b.load();
-      b['finally'](function () {
+      b.finally(function () {
         delete j[d];
       });
     }
