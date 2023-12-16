@@ -1,3 +1,12 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import * as stylex from '@stylexjs/stylex';
 import { forwardRef, useContext, useMemo } from 'react';
 import { jsx } from 'react/jsx-runtime';
@@ -37,13 +46,13 @@ const baseHeading = ({ children, xstyle, isPrimaryHeading = false, testid, ...re
   return jsx(
     HeadingComponent,
     Object.assign({}, rest, {
+      children,
       className: stylex(styles.root, xstyle),
       'data-testid': undefined,
       dir: isNested
         ? undefined
         : 'auto',
       ref,
-      children,
     }),
   );
 };

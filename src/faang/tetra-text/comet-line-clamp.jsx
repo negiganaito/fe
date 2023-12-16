@@ -16,7 +16,7 @@ import { CometTextTypography } from '@/faang/tetra-text';
 import { cssUserAgentSupports } from '@/faang/utils';
 
 
-const CometToolTip = lazy(() => import('./MarkdownPreview.js'));
+const CometToolTip = lazy(() => import('@/faang/base-tooltip').then(r => r.CometTooltip));
 
 const e = {
   useTranslationKeyForTextParent: function () { },
@@ -73,7 +73,7 @@ const _CometLineClamp = (props, externalRef) => {
 
   const cometTextContextValue = useContext(CometTextContext);
 
-  const [w, x] = useState(false);
+  const [isOverflowing, setOverflowing] = useState(false);
 
   const translationKeyComp = useTranslationKeyForTextParent()
 
@@ -132,7 +132,7 @@ const _CometLineClamp = (props, externalRef) => {
     if (curr == null || lines < 1) {
       return;
     }
-    x(
+    setOverflowing(
       curr.offsetWidth < curr.scrollWidth ||
       curr.offsetHeight < curr.scrollHeight
     );
@@ -178,7 +178,7 @@ const _CometLineClamp = (props, externalRef) => {
   //   </span>,
   // )
 
-  return w
+  return isOverflowing
     ? jsx(CometPlaceholder, {
       children: jsx(CometToolTip, {
         children: LineComp,
