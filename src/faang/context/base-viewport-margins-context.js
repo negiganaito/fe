@@ -6,19 +6,24 @@
  */
 import { createContext } from 'react'
 
-// type BaseButtonPopoverContextProps = {
-//   top: number
-//   right: number
-//   bottom: number
-//   left: number
-// }
+/**
+ * @typedef {Object} BaseButtonPopoverContextProps
+ * @property {number} top - The top position of the button popover.
+ * @property {number} right - The right position of the button popover.
+ * @property {number} bottom - The bottom position of the button popover.
+ * @property {number} left - The left position of the button popover.
+ */
 
+/**
+ * @type {BaseButtonPopoverContextProps} 
+ */
 const initial = {
   bottom: 0,
   left: 0,
   right: 0,
   top: 0,
 }
-
-export const BaseViewportMarginsContext =
-  createContext(initial)
+/**
+* @type {import("react").Context<BaseButtonPopoverContextProps>}
+*/
+export const BaseViewportMarginsContext = createContext(initial)

@@ -6,17 +6,22 @@
  */
 import { createContext } from 'react'
 
-// type HiddenSubtreeContextProps = {
-//   backgrounded: boolean
-//   hidden: boolean
-//   hiddenOrBackgrounded: boolean
-//   hiddenOrBackgrounded_FIXME: boolean
-// }
+/**
+ * @typedef {Object} HiddenSubtreeContextProps
+ * @property {boolean} backgrounded - Indicates if the subtree is backgrounded.
+ * @property {boolean} hidden - Indicates if the subtree is hidden.
+ * @property {boolean} hiddenOrBackgrounded - Indicates if the subtree is hidden or backgrounded.
+ * @property {boolean} hiddenOrBackgrounded_FIXME - Indicates if the subtree is hidden or backgrounded (FIXME).
+ */
 
+
+/**
+* @type {import("react").Context<HiddenSubtreeContextProps>}
+*/
 export const HiddenSubtreeContext = createContext({
-  backgrounded: !1,
-  hidden: !1,
-  hiddenOrBackgrounded: !1,
+  backgrounded: false,
+  hidden: false,
+  hiddenOrBackgrounded: false,
   // eslint-disable-next-line camelcase
-  hiddenOrBackgrounded_FIXME: !1,
+  hiddenOrBackgrounded_FIXME: false,
 })

@@ -6,12 +6,17 @@
  */
 import { createContext } from 'react';
 
-// type CometCompositeStructureContextProps = {
-//   horizontal: boolean
-//   vertical: boolean
-//   role?: string
-// }
+/**
+ * @typedef {Object} CometCompositeStructureContextProps
+ * @property {boolean} horizontal - Indicates if the composite structure is horizontal.
+ * @property {boolean} vertical - Indicates if the composite structure is vertical.
+ * @property {string|undefined} role - The role of the composite structure (optional).
+ */
 
+
+/**
+* @type {import("react").Context<CometCompositeStructureContextProps>}
+*/
 export const CometCompositeStructureContext = createContext({
   horizontal: false,
   vertical: false,

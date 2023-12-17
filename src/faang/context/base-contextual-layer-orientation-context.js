@@ -6,18 +6,22 @@
  */
 import { createContext } from 'react'
 
-// type BaseContextualLayerOrientationContextProps = {
-//   align: 'end' | 'middle' | 'start' | 'stretch'
-//   position: 'above' | 'below' | 'end' | 'start'
-// }
+/**
+ * @typedef {Object} BaseContextualLayerOrientationContextProps
+ * @property {'end' | 'middle' | 'start' | 'stretch'} align - The alignment of the contextual layer.
+ * @property {'above' | 'below' | 'end' | 'start'} position - The position of the contextual layer.
+ */
 
-// const initial: BaseContextualLayerOrientationContextProps = {
-//   align: 'start',
-//   position: 'below',
-// }
+/**
+ * @type {BaseContextualLayerOrientationContextProps} InitialContextualLayerOrientation - Initial values for contextual layer orientation.
+ */
+const initial = {
+  align: 'start',
+  position: 'below',
+};
 
-export const BaseContextualLayerOrientationContext =
-  createContext({
-    align: 'start',
-    position: 'below'
-  })
+
+/**
+* @type {import("react").Context<BaseContextualLayerOrientationContextProps>}
+*/
+export const BaseContextualLayerOrientationContext = createContext(initial)

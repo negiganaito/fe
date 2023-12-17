@@ -6,10 +6,18 @@
  */
 import { createContext } from 'react'
 
-// type BaseContextualLayerAvailableHeightContextProps = number
+
+/**
+ * @typedef BaseRowContextProps
+ * @property {number} columns
+ * @property {string} wrap
+ */
 
 
 /**
- * @type {import("react").Context<number>}
+ * @type {import("react").Context<BaseRowContextProps>}
  */
-export const BaseContextualLayerAvailableHeightContext = createContext(undefined)
+export const BaseRowContext = createContext({
+  columns: 1,
+  wrap: 'none',
+})

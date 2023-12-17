@@ -6,16 +6,21 @@
  */
 import { createContext } from 'react'
 
-// type ActiveFocusRegion = {
-//   lastFocused?: any
-//   scope?: any
-//   restorationFocusRegionItem?: any
-//   triggeredFocusRegionItems?: any
-// }
+/**
+ * @typedef {Object} ActiveFocusRegion
+ * @property {*} lastFocused - The last focused item in the active focus region.
+ * @property {*} scope - The scope of the active focus region.
+ * @property {*} restorationFocusRegionItem - The item for restoration in the active focus region.
+ * @property {*} triggeredFocusRegionItems - Items triggered within the active focus region.
+ */
 
-// type ActiveFocusRegionUtilsContextProps = {
-//   getActiveFocusRegion: () => any
-//   setActiveFocusRegion: (region: ActiveFocusRegion) => void
-// }
+/**
+ * @typedef {Object} ActiveFocusRegionUtilsContextProps
+ * @property {function(): *} getActiveFocusRegion - A function to retrieve the active focus region.
+ * @property {function(ActiveFocusRegion): void} setActiveFocusRegion - A function to set the active focus region.
+ */
 
+/**
+ * @type {import("react").Context<ActiveFocusRegionUtilsContextProps | undefined>}
+ */
 export const ActiveFocusRegionUtilsContext = createContext(undefined)

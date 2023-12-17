@@ -57,7 +57,7 @@ const styles = stylex.create({
   },
 
 
-  default: { fontFamily: 'var(--font-family-default)', },
+  default: { fontFamily: 'var(--font-family-default)' },
 
 
 
@@ -330,7 +330,7 @@ export const TetraText = forwardRef((props, ref) => {
             <CometLineClamp
               lines={numberOfLines}
               truncationTooltip={truncationTooltip}
-              xstyle={offsetsValue !== 0 && offsetValueStyles[offsetsValue]}
+              xstyle={offsetsValue !== true && offsetValueStyles[offsetsValue]}
             >
               {children}
             </CometLineClamp>

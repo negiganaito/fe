@@ -1,4 +1,9 @@
-/* eslint-disable no-undef */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 const webpack = require('webpack');
 const path = require('path');
 const env = require('./scripts/env');
@@ -24,13 +29,12 @@ const fileExtensions = [
 ];
 
 const options = {
-  mode: process.env.NODE_ENV || 'development',
+  cache: true,
   entry: path.join(__dirname, 'src', 'index.js'),
-  output: {
-    filename: 'app.bundle.js',
-    path: path.resolve(__dirname, 'build'),
-    clean: true,
+  infrastructureLogging: {
+    level: 'info',
   },
+  mode: process.env.NODE_ENV || 'development',
   module: {
     rules: [
       {
@@ -54,6 +58,7 @@ const options = {
         ],
       },
       {
+        exclude: /node_modules/,
         test: /\.(js|jsx)$/,
         use: [
           {
@@ -63,7 +68,6 @@ const options = {
             loader: 'babel-loader',
           },
         ],
-        exclude: /node_modules/,
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -71,16 +75,10 @@ const options = {
       },
     ],
   },
-  resolve: {
-    extensions: fileExtensions
-      .map((extension) => '.' + extension)
-      .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
-
-    alias: {
-      // eslint-disable-next-line no-undef
-      '@': path.resolve(__dirname, './src'),
-      '~': path.resolve(__dirname, './public'),
-    },
+  output: {
+    clean: true,
+    filename: 'app.bundle.js',
+    path: path.resolve(__dirname, 'build'),
   },
   plugins: [
     new CopyWebpackPlugin({
@@ -91,36 +89,57 @@ const options = {
     new webpack.ProgressPlugin(),
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new HtmlWebpackPlugin({
+
+      cache: false,
+
+      chunks: ['index'],
+
+      filename: 'index.html',
       // eslint-disable-next-line no-undef
       template: path.join(__dirname, 'public', 'index.html'),
-      filename: 'index.html',
-      chunks: ['index'],
-      cache: false,
     }),
     // Ensure that the stylex plugin is used before Babel
     new StylexPlugin({
-      filename: 'styles.css',
+
+      // optional. default: 'x'
+      classNamePrefix: 'x',
+
+
       // get webpack mode and set value for dev
       dev: env.NODE_ENV === 'development',
+
+
+
+      filename: 'styles.css',
+
       // Use statically generated CSS files and not runtime injected CSS.
       // Even in development.
       runtimeInjection: false,
-      // optional. default: 'x'
-      classNamePrefix: 'x',
       // Required for CSS variable support
       unstable_moduleResolution: {
-        // type: 'commonJS' | 'haste'
-        // default: 'commonJS'
-        type: 'commonJS',
+
+
         // The absolute path to the root directory of your project
         // eslint-disable-next-line no-undef
         rootDir: __dirname,
+
+
+        // type: 'commonJS' | 'haste'
+        // default: 'commonJS'
+        type: 'commonJS',
       },
     }),
   ],
-  cache: true,
-  infrastructureLogging: {
-    level: 'info',
+  resolve: {
+    alias: {
+      // eslint-disable-next-line no-undef
+      '@': path.resolve(__dirname, './src'),
+      '~': path.resolve(__dirname, './public'),
+    },
+
+    extensions: fileExtensions
+      .map((extension) => '.' + extension)
+      .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
   },
 };
 

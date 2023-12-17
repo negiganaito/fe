@@ -41,6 +41,9 @@ dependencies:
   react-dom:
     specifier: git://github.com/tienlx97/react-dom-experimental.git#www
     version: github.com/tienlx97/react-dom-experimental/6a8da0c57b0b60c1d5ba47a5a0358c65a3fdcd69(react@0.0.0-experimental-aec521a96-20231114)
+  react-loadable:
+    specifier: ^5.5.0
+    version: 5.5.0(react@0.0.0-experimental-aec521a96-20231114)
   react-relay:
     specifier: ^16.0.0
     version: 16.0.0(react@0.0.0-experimental-aec521a96-20231114)
@@ -5810,7 +5813,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /proxy-addr@2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
@@ -5883,11 +5885,19 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: true
 
   /react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
     dev: true
+
+  /react-loadable@5.5.0(react@0.0.0-experimental-aec521a96-20231114):
+    resolution: {integrity: sha512-C8Aui0ZpMd4KokxRdVAm2bQtI03k2RMRNzOB+IipV3yxFTSVICv7WoUr5L9ALB5BmKO1iHgZtWM8EvYG83otdg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      prop-types: 15.8.1
+      react: github.com/tienlx97/react-experimental/acfc5aa360d39a1c90fc78dd65951b503360d397
+    dev: false
 
   /react-relay@16.0.0(react@0.0.0-experimental-aec521a96-20231114):
     resolution: {integrity: sha512-3Dje0NLJFwt6b3xqgbiCGlTnpxoZe1OTPsXIPtFdftgDWQzSfrwqkBYUKab6bV2HhCKWCzXWafb8wURLDAlNJQ==}

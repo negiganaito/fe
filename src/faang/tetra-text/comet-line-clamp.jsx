@@ -6,8 +6,9 @@
  */
 
 import * as stylex from '@stylexjs/stylex';
-import React, { forwardRef, lazy, useCallback, useContext, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useContext, useRef, useState } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
+import Loadable from 'react-loadable';
 
 import { CometPlaceholder } from '@/faang/comet-placeholder/comet-placeholder';
 import { CometTextContext } from '@/faang/context';
@@ -16,7 +17,13 @@ import { CometTextTypography } from '@/faang/tetra-text';
 import { cssUserAgentSupports } from '@/faang/utils';
 
 
-const CometToolTip = lazy(() => import('@/faang/base-tooltip').then(r => r.CometTooltip));
+// const CometToolTip = lazy(() => import('@/faang/base-tooltip').then(r => r.CometTooltip));
+
+const CometToolTip = Loadable({
+  loader: () => import('@/faang/base-tooltip').then(r => r.CometTooltip),
+  loading: () => null
+})
+
 
 const e = {
   useTranslationKeyForTextParent: function () { },
@@ -144,6 +151,7 @@ const _CometLineClamp = (props, externalRef) => {
         return;
       }
       // n.preload()
+      CometToolTip.preload()
     },
     [truncationTooltip]
   );
