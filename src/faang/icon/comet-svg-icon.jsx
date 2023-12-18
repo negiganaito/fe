@@ -1,12 +1,19 @@
-/* eslint-disable react/prop-types */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import stylex from '@stylexjs/stylex';
-import React, { useId, isValidElement, cloneElement } from 'react';
+import React, { cloneElement, isValidElement, useId } from 'react';
 import { jsx } from 'react/jsx-runtime';
+
 import { BaseSVGIcon } from './base-svg-icon';
 import { useCometIconColors } from './hooks';
 
 const styles = stylex.create({
   color: (color) => ({
+    // eslint-disable-next-line @stylexjs/valid-styles
     color: color ?? 'initial',
   }),
 
@@ -20,8 +27,9 @@ const styles = stylex.create({
     display: 'inline-block',
   },
   shadow: {
-    filter: 'drop-shadow(0 2px 8px var(--shadow-1))',
+    // eslint-disable-next-line @stylexjs/valid-styles
     WebkitFilter: 'drop-shadow(0 2px 8px var(--shadow-1))',
+    filter: 'drop-shadow(0 2px 8px var(--shadow-1))',
   },
 });
 
@@ -89,7 +97,7 @@ export const CometSvgIcon = (props) => {
         fill={fillValue ?? 'currentColor'}
         height={size}
         width={size}
-        suppressHydrationWarning
+        suppressHydrationWarning={true}
       >
         {clonedElements.length > 0 && <defs>{clonedElements}</defs>}
         {children}

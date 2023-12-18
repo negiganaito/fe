@@ -9,14 +9,13 @@ import { forwardRef } from 'react';
 // @ts-ignore
 import { jsx } from 'react/jsx-runtime';
 
-import {
-  BaseImage,
-  coerceImageishSprited,
-  coerceImageishURL,
-  CometSSRBackgroundImageUtils,
-} from '@/faang/base-image';
 import { RecoverableViolationWithComponentStack } from '@/faang/error';
 import { xplatToDOMRef } from '@/faang/utils';
+
+import { BaseImage } from './base-image';
+import { coerceImageishSprited } from './coerce-imageish-sprited';
+import { coerceImageishURL } from './coerce-imageish-URL';
+import { CometSSRBackgroundImageUtils } from './comet-ssr-background-image-utils';
 
 // type CometImageFromIXValueProps = {
 //   alt?: string

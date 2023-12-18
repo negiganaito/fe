@@ -1,13 +1,19 @@
-/* eslint-disable react/display-name */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 /* eslint-disable no-unused-vars */
+/* eslint-disable @stylexjs/valid-styles */
+
 import stylex from '@stylexjs/stylex';
-
 import { forwardRef } from 'react';
-
 import { jsx } from 'react/jsx-runtime';
 
-import { TintableIconSource } from './tintable-icon-source';
 import { BaseImage_DEPRECATED } from '@/faang/base-image/base-image_DEPRECATED';
+
+import { TintableIconSource } from './tintable-icon-source';
 
 const imageStyles = stylex.create({
   image: {
@@ -17,48 +23,48 @@ const imageStyles = stylex.create({
 
 const filterStyles = stylex.create({
   accent: {
-    filter: 'var(--filter-accent)',
     WebkitFilter: 'var(--filter-accent)',
+    filter: 'var(--filter-accent)',
   },
   blueLink: {
-    filter: 'var(--filter-blue-link-icon)',
     WebkitFilter: 'var(--filter-blue-link-icon)',
+    filter: 'var(--filter-blue-link-icon)',
   },
   disabled: {
-    filter: 'var(--filter-disabled-icon)',
     WebkitFilter: 'var(--filter-disabled-icon)',
+    filter: 'var(--filter-disabled-icon)',
   },
   negative: {
-    filter: 'var(--filter-negative)',
     WebkitFilter: 'var(--filter-negative)',
+    filter: 'var(--filter-negative)',
   },
   placeholder: {
-    filter: 'var(--filter-placeholder-icon)',
     WebkitFilter: 'var(--filter-placeholder-icon)',
+    filter: 'var(--filter-placeholder-icon)',
   },
   positive: {
-    filter: 'var(--filter-positive)',
     WebkitFilter: 'var(--filter-positive)',
+    filter: 'var(--filter-positive)',
   },
   primary: {
-    filter: 'var(--filter-primary-icon)',
     WebkitFilter: 'var(--filter-primary-icon)',
+    filter: 'var(--filter-primary-icon)',
   },
   primaryAccent: {
-    filter: 'var(--filter-primary-accent)',
     WebkitFilter: 'var(--filter-primary-accent)',
+    filter: 'var(--filter-primary-accent)',
   },
   secondary: {
-    filter: 'var(--filter-secondary-icon)',
     WebkitFilter: 'var(--filter-secondary-icon)',
+    filter: 'var(--filter-secondary-icon)',
   },
   warning: {
-    filter: 'var(--filter-warning-icon)',
     WebkitFilter: 'var(--filter-warning-icon)',
+    filter: 'var(--filter-warning-icon)',
   },
   white: {
-    filter: 'var(--filter-always-white)',
     WebkitFilter: 'var(--filter-always-white)',
+    filter: 'var(--filter-always-white)',
   },
 });
 

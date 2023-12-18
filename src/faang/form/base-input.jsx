@@ -1,20 +1,26 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import stylex from '@stylexjs/stylex';
-import { useContext, useMemo, forwardRef } from 'react';
-
 import Locale from 'fbjs/lib/Locale';
-import { CometContainerPressableContext } from '@/faang/pressable/comet-container-pressable-context';
-
+import { forwardRef, useContext, useMemo } from 'react';
 import { jsx } from 'react/jsx-runtime';
+
+import { CometContainerPressableContext } from '@/faang/pressable/comet-container-pressable-context';
 import { testID } from '@/faang/utils/test-id';
 
 const styles = stylex.create({
   root: {
-    WebkitTapHighlightColor: 'transparent',
-    boxSizing: 'border-box',
-    touchAction: 'manipulation',
+    // eslint-disable-next-line @stylexjs/valid-styles
     ':disabled': {
       cursor: 'not-allowed',
     },
+    WebkitTapHighlightColor: 'transparent',
+    boxSizing: 'border-box',
+    touchAction: 'manipulation',
   },
   zIndex: {
     zIndex: 1,
@@ -54,7 +60,7 @@ export const BaseInput = forwardRef((props, ref) => {
     {
       dir: isRTL ? 'rtl' : 'ltr',
     },
-    { ...rest },
+    rest,
     testID(testid),
     {
       // WARN
@@ -63,8 +69,6 @@ export const BaseInput = forwardRef((props, ref) => {
         xstyle,
         cometContainerPressableContextValue && styles.zIndex
       ),
-    },
-    {
       onChange: (event) => {
         if (!isCheckboxOrRadio) {
           if (onValueChange) {
@@ -83,7 +87,7 @@ export const BaseInput = forwardRef((props, ref) => {
           onClick(event);
         }
       },
-    }
+    },
   );
 
   // NOTE Use React with JSX-html tag in the future

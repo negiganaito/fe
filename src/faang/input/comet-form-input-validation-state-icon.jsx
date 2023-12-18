@@ -1,6 +1,13 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { jsx } from 'react/jsx-runtime';
-import { CometIcon, fbicon } from '@/faang/icon';
+
 import { ICONS } from '@/faang/_/icon';
+import { CometIcon, fbicon } from '@/faang/icon';
 import { CometProgressRingIndeterminate } from '@/faang/progress-ring';
 
 export const CometFormInputValidationStateIcon = {

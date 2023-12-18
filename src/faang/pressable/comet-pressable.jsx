@@ -1,7 +1,13 @@
-/* eslint-disable no-unused-vars */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
+import stylex from '@stylexjs/stylex';
 import React, {
   forwardRef,
   useCallback,
@@ -10,15 +16,14 @@ import React, {
   useState,
 } from 'react';
 
-import stylex from '@stylexjs/stylex';
-
-import { CometPressableOverlay } from './comet-pressable-overlay';
-import { CometContainerPressableContext } from '@/faang/pressable/comet-container-pressable-context';
 import { CometDangerouslySuppressInteractiveElementsContext } from '@/faang/context/comet-dangerously-suppress-interactive-elements-context';
+import { BaseFocusRing } from '@/faang/focus/base-focus-ring';
 import { useMergeRefs } from '@/faang/hooks/use-merge-refs';
 import { BaseLink } from '@/faang/link/base-link';
+import { CometContainerPressableContext } from '@/faang/pressable/comet-container-pressable-context';
 import { BaseButton } from '@/faang/tetra-button/base-button';
-import { BaseFocusRing } from '@/faang/focus/base-focus-ring';
+
+import { CometPressableOverlay } from './comet-pressable-overlay';
 
 //  n = c("gkx")("1721477") || c("gkx")("1459")
 const n = true;
@@ -41,25 +46,27 @@ const styles = stylex.create({
   },
 
   root: {
-    borderRadius: 'inherit',
-    display: 'inline-flex',
-    flexDirection: 'row',
-    userSelect: 'none',
-
+    // eslint-disable-next-line @stylexjs/valid-styles
     ':hover': {
       textDecorationLine: 'none',
     },
+    borderRadius: 'inherit',
+    display: 'inline-flex',
+    flexDirection: 'row',
+
+    userSelect: 'none',
   },
 
   // eslint-disable-next-line camelcase
   root_DEPRECATED: {
-    borderRadius: 'inherit',
-    position: 'relative',
-    userSelect: 'none',
-
+    // eslint-disable-next-line @stylexjs/valid-styles
     ':hover': {
       textDecorationLine: 'none',
     },
+    borderRadius: 'inherit',
+    position: 'relative',
+
+    userSelect: 'none',
   },
 
   zIndex: {
@@ -157,7 +164,7 @@ export const CometPressable = forwardRef(
         pressed={pressedState}
         pressedStyle={overlayPressedStyle}
         radius={overlayRadius}
-        showFocusRing
+        showFocusRing={true}
       />
     );
 
@@ -165,8 +172,8 @@ export const CometPressable = forwardRef(
       typeof children === 'function' ? (
         children({
           disabled,
-          focused: focusedState,
           focusVisible: focusVisibleState,
+          focused: focusedState,
           hovered: hoveredState,
           overlay,
           pressed: pressedState,
@@ -182,8 +189,8 @@ export const CometPressable = forwardRef(
       typeof xstyle === 'function'
         ? xstyle({
           disabled,
-          focused: focusedState,
           focusVisible: focusVisibleState,
+          focused: focusedState,
           hovered: hoveredState,
           pressed: pressedState,
         })
@@ -204,6 +211,7 @@ export const CometPressable = forwardRef(
       CometContainerPressableContext
     );
 
+    // eslint-disable-next-line no-unused-vars
     const cometDangerouslySuppressInteractiveElementsContextValue = useContext(
       CometDangerouslySuppressInteractiveElementsContext
     );
@@ -259,6 +267,7 @@ export const CometPressable = forwardRef(
       onPressStart: onPressIn,
     };
 
+    // eslint-disable-next-line no-unused-vars
     const ga = useRef(null);
     const internalRef = useRef(null);
 

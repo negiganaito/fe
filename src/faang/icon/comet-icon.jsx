@@ -1,24 +1,39 @@
-/* eslint-disable react/display-name */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import stylex from '@stylexjs/stylex';
-
-import { forwardRef, createElement } from 'react';
-
+import { createElement, forwardRef } from 'react';
 import { jsx } from 'react/jsx-runtime';
-import { FlightSerializableIcon } from './flight-serializable-icon';
-import { TintableIconSource } from './tintable-icon-source';
-import { CometTintedIcon } from './comet-tinted-icon';
-import { ImageIconSource } from './image-icon-source';
-import { BaseImage_DEPRECATED } from '@/faang/base-image/base-image_DEPRECATED';
-import { IconSource } from './icon-source';
 
-import { SVGICON } from './svg-icon';
-import { CometSvgIcon } from './comet-svg-icon';
+import { BaseImage_DEPRECATED } from '@/faang/base-image/base-image_DEPRECATED';
 import { CometPressable } from '@/faang/pressable/comet-pressable';
+
+import { CometSvgIcon } from './comet-svg-icon';
+import { CometTintedIcon } from './comet-tinted-icon';
+import { FlightSerializableIcon } from './flight-serializable-icon';
+import { IconSource } from './icon-source';
+import { ImageIconSource } from './image-icon-source';
+import { SVGICON } from './svg-icon';
+import { TintableIconSource } from './tintable-icon-source';
 
 const styles = stylex.create({
   button: {
-    appearance: 'none',
+    '::after': {
+      borderRadius: '50%',
+      bottom: '-8px',
+      content: "''",
+      left: '-8px',
+      position: 'absolute',
+      right: '-8px',
+      top: '-8px',
+      zIndex: 1,
+    },
+    // eslint-disable-next-line @stylexjs/valid-styles
     WebkitAppearance: 'none',
+    appearance: 'none',
     backgroundColor: 'transparent',
     borderStyle: 'solid',
     borderWidth: 0,
@@ -27,16 +42,6 @@ const styles = stylex.create({
     padding: '0',
     position: 'relative',
     verticalAlign: 'bottom',
-    ':after': {
-      borderRadius: '50%',
-      bottom: '-8px',
-      content: "''",
-      right: '-8px',
-      position: 'absolute',
-      left: '-8px',
-      top: '-8px',
-      zIndex: 1,
-    },
   },
   image: {
     verticalAlign: '-0.25em',
@@ -141,14 +146,15 @@ export const CometIcon = forwardRef((props, ref) => {
                 alt: _alt,
                 color: _color,
                 component: normalizeIcon.component ?? icon,
-                size,
                 'data-testid': void 0,
+                size,
               });
 
   return pressableComp
     ? jsx(
       CometPressable,
       Object.assign({}, rest, {
+        children: Img,
         disabled,
         focusable,
         hideHoverOverlay,
@@ -167,7 +173,6 @@ export const CometIcon = forwardRef((props, ref) => {
         xstyle: ({ pressed }) => {
           return [styles.button, pressed && styles.pressed];
         },
-        children: Img,
       })
     )
     : Img;

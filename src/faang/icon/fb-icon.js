@@ -1,21 +1,28 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+import { coerceImageishSprited } from '@/faang/base-image/coerce-imageish-sprited';
 import { unrecoverableViolation } from '@/faang/error/unrecoverable-violation';
 import { memoizeWithArgs } from '@/faang/utils/memoize-with-args';
+
 import { TintableIconSource } from './tintable-icon-source';
-import { coerceImageishSprited } from '@/faang/base-image/coerce-imageish-sprited';
 
 function filled(a, b) {
   throw unrecoverableViolation(
     'fbicon.filled' +
-      ('(' + JSON.stringify(a) + ', ' + b + '): ') +
-      'Unexpected fbicon.filled reference.',
+    ('(' + JSON.stringify(a) + ', ' + b + '): ') +
+    'Unexpected fbicon.filled reference.',
     'comet_ui'
   );
 }
 function outline(a, b) {
   throw unrecoverableViolation(
     'fbicon.outline' +
-      ('(' + JSON.stringify(a) + ', ' + b + '): ') +
-      'Unexpected fbicon.outline reference.',
+    ('(' + JSON.stringify(a) + ', ' + b + '): ') +
+    'Unexpected fbicon.outline reference.',
     'comet_ui'
   );
 }

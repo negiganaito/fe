@@ -14,7 +14,6 @@ const config = {
   htmlWhitespaceSensitivity: 'ignore',
   attributeGroups: ['$DEFAULT', '^data-'],
   plugins: ['prettier-plugin-tailwindcss'],
-
 };
 
 module.exports = config;

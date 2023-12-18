@@ -1,15 +1,17 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import stylex from '@stylexjs/stylex';
-import UserAgent from 'fbjs/lib/UserAgent';
 import joinClasses from 'fbjs/lib/joinClasses';
-
+import UserAgent from 'fbjs/lib/UserAgent';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-
 import { jsx } from 'react/jsx-runtime';
 
 import { WebPressableGroupContext } from '@/faang/context/web-pressable-group-context';
-
-import { useMergeRefs } from '@/faang/hooks/merge-refs';
-
+import { useMergeRefs } from '@/faang/hooks';
 import { passiveEventListenerUtil } from '@/faang/react-interactions/passive-event-listener-util';
 import { WebPressability } from '@/faang/react-interactions/web-pressability';
 
@@ -18,7 +20,11 @@ const styles = stylex.create({
     cursor: 'not-allowed',
   },
   focusNotVisible: {
-    outlineStyle: 'none',
+    outline: 'none',
+  },
+  linkFocusRingXStyle: {
+    // "var(--base-blue) auto 2px
+    outline: '2px auto var(--base-blue)',
   },
   notSelectable: {
     userSelect: 'none',
@@ -26,7 +32,7 @@ const styles = stylex.create({
   root: {
     WebkitTapHighlightColor: 'transparent',
     backgroundColor: 'transparent',
-    border: '0',
+    borderWidth: '0',
     boxSizing: 'border-box',
     cursor: 'pointer',
     display: 'inline',
@@ -34,16 +40,12 @@ const styles = stylex.create({
     margin: '0',
     padding: '0',
     textAlign: 'inherit',
-    textDecorationLine: 'none',
+    textDecoration: 'none',
     touchAction: 'manipulation',
   },
+
   rootInGroup: {
     touchAction: 'none',
-  },
-
-  linkFocusRingXStyle: {
-    // "var(--base-blue) auto 2px
-    outline: '2px auto var(--base-blue)',
   },
 });
 
@@ -120,13 +122,13 @@ export function PressableText(props) {
       _disabled === true ||
       (testOnly_state == null ? undefined : testOnly_state.disabled) === true ||
       false,
-    focused:
-      focused ||
-      (testOnly_state == null ? undefined : testOnly_state.focused) === true,
     focusVisible:
       (focusVisible && suppressFocusRing !== true) ||
       (testOnly_state == null ? undefined : testOnly_state.focusVisible) ===
       true,
+    focused:
+      focused ||
+      (testOnly_state == null ? undefined : testOnly_state.focused) === true,
     hovered:
       hoverr ||
       (testOnly_state == null ? undefined : testOnly_state.hovered) === true,
@@ -182,7 +184,7 @@ export function PressableText(props) {
   const onKeyDownCbFunc = useCallback(
     function (event) {
       if (shouldTriggerActionOnEvent(event)) {
-        var key = event.key;
+        let key = event.key;
 
         if (key === ' ' || key === 'Spacebar') {
           event.preventDefault();
@@ -215,7 +217,7 @@ export function PressableText(props) {
 
   vFuncHooks(bRef, pressableGroupContextValue, onClickCbFunc);
 
-  var tabIndexValue;
+  let tabIndexValue;
   const anchorTagOrButtonRole =
     ElementComponent === 'a' || accessibilityRole === 'button';
 
@@ -383,7 +385,7 @@ const specialElements = {
 };
 
 function determineTagBasedOnAccessibilityRoleAndLink(accessibilityRole, link) {
-  var tag = 'div';
+  let tag = 'div';
   if (
     ((link == null ? undefined : link.url) != null &&
       (link == null ? undefined : link.url) !== '#') ||
@@ -409,11 +411,11 @@ function useCombinedCallbacks(cb1, cb2) {
 }
 
 function handleClickEventAndPreventDefault(event, preventDefault) {
-  var altKey = event.altKey,
-    ctrlKey = event.ctrlKey,
-    currentTarget = event.currentTarget,
-    metaKey = event.metaKey,
-    shiftKey = event.shiftKey;
+  let altKey = event.altKey;
+  let ctrlKey = event.ctrlKey;
+  let currentTarget = event.currentTarget;
+  let metaKey = event.metaKey;
+  let shiftKey = event.shiftKey;
 
   const target = event.target;
 
@@ -443,8 +445,8 @@ function isElementOrAncestorLink(el) {
 }
 
 const shouldTriggerActionOnEvent = function (event) {
-  var target = event.target,
-    tagName = target.tagName;
+  let target = event.target;
+  let tagName = target.tagName;
   const isNeedTagName =
     target.isContentEditable ||
     (tagName === 'A' && target.href != null) ||
@@ -478,14 +480,14 @@ var vFuncHooks =
   function (ref, pressableGroupContextValue, cbFunc) {
     useEffect(
       function () {
-        var e,
-          f = ref.current,
-          g =
-            (e = window) == null
+        let e;
+        let f = ref.current;
+        let g =
+          (e = window) == null
+            ? undefined
+            : (e = e.document) == null
               ? undefined
-              : (e = e.document) == null
-                ? undefined
-                : e.body;
+              : e.body;
         if (
           g == null ||
           f == null ||
@@ -495,7 +497,7 @@ var vFuncHooks =
           return;
         pressableGroupContextValue &&
           pressableGroupContextValue.register(f, cbFunc);
-        var h = function (a) {
+        let h = function (a) {
           pressableGroupContextValue &&
             (a.preventDefault(), pressableGroupContextValue.onTouchStart());
           if (!isSafari) {
@@ -503,7 +505,7 @@ var vFuncHooks =
           }
           if (g == null) return;
           g.style.WebkitUserSelect = 'none';
-          var c = passiveEventListenerUtil.makeEventOptions({
+          let c = passiveEventListenerUtil.makeEventOptions({
             passive: true,
           });
           a = function a() {
@@ -511,10 +513,10 @@ var vFuncHooks =
             document.removeEventListener('touchend', a, c);
           };
           document.addEventListener('touchend', a, c);
-        },
-          i = passiveEventListenerUtil.makeEventOptions({
-            passive: !pressableGroupContextValue,
-          });
+        };
+        let i = passiveEventListenerUtil.makeEventOptions({
+          passive: !pressableGroupContextValue,
+        });
         f.addEventListener('touchstart', h, i);
         return function () {
           pressableGroupContextValue &&

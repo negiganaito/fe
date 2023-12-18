@@ -159,10 +159,8 @@ module.exports = {
     'jsx-quotes': [ERROR, 'prefer-double'],
 
 
-
-
-
     'keyword-spacing': [ERROR, { after: true, before: true }],
+
 
     // Enforced by Prettier
     // TODO: Prettier doesn't handle long strings or long comments. Not a big
@@ -170,19 +168,24 @@ module.exports = {
     // syntax error and it didn't seem worth investigating.
     'max-len': OFF,
 
+
+
+
+
     'no-bitwise': OFF,
 
     'no-console': ERROR,
 
-
     'no-debugger': ERROR,
+
 
     // Prevent function declarations after return statements
     'no-function-declare-after-return/no-function-declare-after-return': ERROR,
 
+
     'no-inner-declarations': [ERROR, 'functions'],
 
-    'no-multi-spaces': ERROR,
+    // 'no-multi-spaces': ERROR,
 
     'no-only-tests/no-only-tests': ERROR,
 
@@ -190,12 +193,13 @@ module.exports = {
 
     'no-restricted-syntax': [ERROR, 'WithStatement'],
 
+    // 'react/jsx-max-props-per-line': ['error', { maximum: 1, minimumLength: 120 }],
+
     'no-shadow': OFF, // ERROR
 
     'no-unused-expressions': OFF, // ERROR
 
     'no-unused-vars': [ERROR, { args: 'none' }],
-
 
     'no-use-before-define': OFF,
 
@@ -211,11 +215,25 @@ module.exports = {
 
 
 
+
+
+    // "linebreak-style": ["error", "unix"],
     quotes: [ERROR, 'single', { allowTemplateLiterals: true, avoidEscape: true }],
+
+
 
     // React & JSX
     // Our transforms set this automatically
     'react/jsx-boolean-value': [ERROR, 'always'],
+
+
+    'react/jsx-max-props-per-line': [
+      'error',
+      {
+        'maximum': 1,
+        'when': 'multiline'
+      }
+    ],
 
 
     'react/jsx-no-undef': ERROR,

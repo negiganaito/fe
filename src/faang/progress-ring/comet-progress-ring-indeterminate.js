@@ -8,8 +8,8 @@ import stylex from '@stylexjs/stylex';
 import { jsx } from 'react/jsx-runtime';
 
 import { BaseLoadingStateElement } from '@/faang/base-glimmer/base-loading-state-element';
+import { CometImageFromIXValue } from '@/faang/base-image';
 import { useCurrentDisplayMode } from '@/faang/hooks';
-import { CometImageFromIXValue } from '@/faang/photo-editor/comet-image-from-ix-value';
 
 import { CometProgressRingUtils } from './comet-progress-ring-utils';
 

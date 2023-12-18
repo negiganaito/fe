@@ -1,3 +1,15 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import React from 'react';
+
 export type SpritedImage = {
   h?: number;
   loggingID?: string;
@@ -31,3 +43,18 @@ export type BaseImageProps = React.JSX.IntrinsicElements['img'] & {
   testid?: string;
   xstyle?: any;
 };
+
+
+
+
+export type CometImageProps = React.JSX.IntrinsicElements['img'] & {
+  alt?: string
+  objectFit?: 'none' | 'contain' | 'cover' | 'fill'
+  onError?: any
+  onLoad?: any
+  sizes?: any
+  src?: any
+  srcSet?: any
+  testid?: string
+  xstyle?: any
+}
