@@ -7,6 +7,7 @@
 import React from 'react';
 
 import { TetraText } from '@/faang/tetra-text'
+import { TetraTextPairing } from '@/faang/tetra-text-pairing';
 
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {
@@ -21,7 +22,13 @@ export const HomePage = () => {
       padding: '24px',
       width: '440px'
     }}>
-      <TetraText align="center" type="headlineEmphasized2">Create a post in News Feed</TetraText>
+      {/* <TetraText align="center" type="headlineEmphasized2">Create a post in News Feed</TetraText> */}
+
+      <TetraTextPairing
+        headline="Feed"
+        level={2}
+        body={<TetraText color="secondary" type="body4">Discover posts from across your organization</TetraText>}
+      />
     </div>
   );
 };
