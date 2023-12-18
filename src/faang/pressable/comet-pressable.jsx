@@ -38,7 +38,7 @@ const styles = stylex.create({
   },
 
   hideOutline: {
-    outlineStyle: 'none',
+    outline: 'none',
   },
 
   linkBase: {

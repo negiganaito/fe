@@ -178,7 +178,7 @@ export const CometIcon = forwardRef((props, ref) => {
     : Img;
 });
 
-CometIcon.propTypes = 'CometIcon.react';
+CometIcon.displayName = 'CometIcon.react';
 
 function getColor(color) {
   switch (color) {

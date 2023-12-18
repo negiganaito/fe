@@ -102,8 +102,9 @@ const styles = stylex.create({
  * @type React.ForwardRefRenderFunction<React.FunctionComponent, import("./types").CometFormTextInputProps>
  */
 export const CometFormTextInput = forwardRef(
-  (
-    {
+  (props, ref) => {
+
+    const {
       autoFocus_PLEASE_USE_FOCUS_REGION_INSTEAD,
       auxContent,
       disabled = false,
@@ -128,11 +129,10 @@ export const CometFormTextInput = forwardRef(
       value,
       xstyle,
       autoComplete,
+      // eslint-disable-next-line no-unused-vars
       className,
       ...rest
-    },
-    ref,
-  ) => {
+    } = props
 
     const { topResultReason, topResultType } = useBaseInputValidators({
       validator,
@@ -146,8 +146,8 @@ export const CometFormTextInput = forwardRef(
     const isPasswordIcon = isPassword && Boolean(value)
 
     const PasswordIcon = isPasswordIcon ? (
-      <div className={styles.dummy1}>
-        <div className={styles.dummy2}>
+      <div className={stylex(styles.dummy1)}>
+        <div className={stylex(styles.dummy2)}>
           <CometPressable onPress={() => setPress(!isPress)} overlayDisabled={true}>
             <CometFormInputPasswordStateIcon isVisible={isPress} />
           </CometPressable>
@@ -166,7 +166,7 @@ export const CometFormTextInput = forwardRef(
           icon.height === 40 &&
           jsx('div', {
             children: jsx('CometImage', {
-              className: styles.imageIcon,
+              className: stylex(styles.imageIcon),
               height: parseInt(icon.height.toString(), 10),
               src: icon.src,
               width: parseInt(icon.width.toString(), 10),
@@ -179,12 +179,12 @@ export const CometFormTextInput = forwardRef(
               color: 'secondary',
               icon,
             }),
-            className: styles.icon,
+            className: stylex(styles.icon),
           })) ||
         (emojiSkittle &&
           jsx('div', {
             children: emojiSkittle,
-            className: styles.emoji,
+            className: stylex(styles.emoji),
           })),
       auxContent: PasswordIcon ?? auxContent,
       children: ({ focused, helperTextID, id }) => {

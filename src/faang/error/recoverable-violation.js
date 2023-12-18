@@ -22,7 +22,7 @@ export function recoverableViolation(
     logger = logger.blameToPreviousFrame();
   }
 
-  if (e.categoryKey) {
+  if (e && e.categoryKey) {
     logger = logger.addToCategoryKey(error);
   }
 

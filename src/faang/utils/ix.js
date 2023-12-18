@@ -1,6 +1,25 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { invariant } from './invariant';
 
-const entriesMap = {};
+const entriesMap = {
+  491223: {
+    'loggingID': '491223',
+    'spriteCssClass': 'sx_22a739',
+    'spriteMapCssClass': 'sp_oKdKOdjtJ90',
+    'sprited': 1
+  },
+  491228: {
+    'loggingID': '491228',
+    'spriteCssClass': 'sx_8a9c69',
+    'spriteMapCssClass': 'sp_oKdKOdjtJ90',
+    'sprited': 1
+  }
+};
 const usedPathsSet = new Set();
 
 export function ix(key) {

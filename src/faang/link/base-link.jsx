@@ -1,18 +1,21 @@
-/* eslint-disable no-unused-vars */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 
 /* eslint-disable camelcase */
-import React, { forwardRef, useMemo, useRef, useContext } from 'react';
+import React, { forwardRef, useContext, useMemo, useRef } from 'react';
+import { jsx, jsxs } from 'react/jsx-runtime';
 
-import { jsxs, jsx } from 'react/jsx-runtime';
-
+import { BaseLinkNestedPressableContext } from '@/faang/context/base-link-nested-pressable-context';
+import { mergeRefs } from '@/faang/hooks/merge-refs';
+import { BaseNestedPressableHack_DO_NOT_USE } from '@/faang/pressable/base-nested-pressable-hack_DO_NOT_USE';
 import { Pressable } from '@/faang/pressable/pressable';
 import { PressableText } from '@/faang/pressable/pressable-text';
-
-import { mergeRefs } from '@/faang/hooks/merge-refs';
-import { BaseLinkNestedPressableContext } from '@/faang/context/base-link-nested-pressable-context';
-import { BaseNestedPressableHack_DO_NOT_USE } from '@/faang/pressable/base-nested-pressable-hack_DO_NOT_USE';
 
 // NOTE some potential bug
 
@@ -153,8 +156,8 @@ export const BaseLink = forwardRef(
       testID: testid,
       testOnly_state: {
         disabled: false,
-        focused: false,
         focusVisible: false,
+        focused: false,
         hovered: false,
         pressed: testOnly_pressed,
       },
@@ -166,13 +169,13 @@ export const BaseLink = forwardRef(
     if (display === 'block') {
       const nestedAccessibilityRole =
         _role === 'button' ||
-        _role === 'menuitem' ||
-        _role === 'none' ||
-        _role === 'switch' ||
-        _role === 'checkbox' ||
-        _role === 'article' ||
-        _role === 'radio' ||
-        _role === 'tab'
+          _role === 'menuitem' ||
+          _role === 'none' ||
+          _role === 'switch' ||
+          _role === 'checkbox' ||
+          _role === 'article' ||
+          _role === 'radio' ||
+          _role === 'tab'
           ? _role
           : 'link';
 
@@ -191,11 +194,11 @@ export const BaseLink = forwardRef(
     } else {
       const nestedAccessibilityRole =
         _role === 'button' ||
-        _role === 'menuitem' ||
-        _role === 'menuitemradio' ||
-        _role === 'menuitemcheckbox' ||
-        _role === 'none' ||
-        _role === 'tab'
+          _role === 'menuitem' ||
+          _role === 'menuitemradio' ||
+          _role === 'menuitemcheckbox' ||
+          _role === 'none' ||
+          _role === 'tab'
           ? _role
           : 'link';
 
@@ -219,8 +222,8 @@ export const BaseLink = forwardRef(
         // routeTarget === 'content' && jsx(m, {}),
         baseLinkNestedPressableValue
           ? jsx(BaseNestedPressableHack_DO_NOT_USE, {
-              children: _child,
-            })
+            children: _child,
+          })
           : _child,
       ],
     });

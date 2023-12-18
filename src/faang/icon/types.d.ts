@@ -67,6 +67,7 @@ export type CometIconProps = {
   component?: ReactNode;
   inline?: boolean;
   shadow?: boolean;
+  icon?: any
 };
 
 export type CometTintedIconProps = {

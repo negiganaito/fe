@@ -1,19 +1,18 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import stylex from '@stylexjs/stylex';
-
-import { useCallback, useContext, useState, useEffect, useRef } from 'react';
-
+import { Link } from '@tanstack/react-router';
+import joinClasses from 'fbjs/lib/joinClasses';
+import UserAgent from 'fbjs/lib/UserAgent';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { jsx } from 'react/jsx-runtime';
 
-import UserAgent from 'fbjs/lib/UserAgent';
-import joinClasses from 'fbjs/lib/joinClasses';
-
-import { passiveEventListenerUtil } from '@/faang/react-interactions/passive-event-listener-util';
-
 import { WebPressableGroupContext } from '@/faang/context/web-pressable-group-context';
-
-import { WebPressability } from '@/faang/react-interactions/web-pressability';
-
-import { Link } from '@tanstack/react-router';
+import { passiveEventListenerUtil, WebPressability } from '@/faang/react-interactions';
 
 // Assuming there is a function c("UserAgent").isBrowser() that checks the user agent
 // It returns true if the user agent is "Safari" or "Mobile Safari", otherwise false
@@ -26,14 +25,17 @@ const styles = stylex.create({
   },
 
   focusNotVisible: {
-    outlineStyle: 'none',
+    outline: 'none',
   },
 
   root: {
     WebkitTapHighlightColor: 'transparent',
     alignItems: 'stretch',
     backgroundColor: 'transparent',
-    border: '0 solid var(--always-dark-overlay)',
+    borderColor: 'var(--always-dark-overlay)',
+    borderStyle: 'solid',
+    borderWidth: '0px',
+    // border: '0 solid var(--always-dark-overlay)',
     boxSizing: 'border-box',
     cursor: 'pointer',
     display: 'flex',
@@ -47,7 +49,7 @@ const styles = stylex.create({
     padding: '0',
     position: 'relative',
     textAlign: 'inherit',
-    textDecorationLine: 'none',
+    textDecoration: 'none',
     touchAction: 'manipulation',
     zIndex: 0,
   },
@@ -168,7 +170,7 @@ function shouldHandleClickEvent(event, preventDefault) {
   //   h = event.shiftKey
   // event = event.target
 
-  var i = target;
+  let i = target;
   // c('justknobx')._('450') &&
   i = isElementInDocument(target) ? target : currentTarget;
   event = hasValidAncestorAnchor(i);
@@ -311,7 +313,7 @@ const useTouchEventHandler = (
 
       // window.document.body.style.webkitUserSelect = 'none';
 
-      var eventOption = passiveEventListenerUtil.makeEventOptions({
+      let eventOption = passiveEventListenerUtil.makeEventOptions({
         passive: true,
       });
 
@@ -349,6 +351,11 @@ function responseRoleType(type) {
   }
 }
 
+/**
+ * 
+ * @param {import("./types").CometPressableProps} props 
+ * @returns 
+ */
 export const WebPressable = (props) => {
   const targetRef = useRef(null);
 
@@ -505,7 +512,7 @@ export const WebPressable = (props) => {
 
       typeof forwardedRef === 'function'
         ? forwardedRef(node)
-        : forwardedRef !== undefined && (forwardedRef.current = node);
+        : forwardedRef && (forwardedRef.current = node);
     },
     [forwardedRef]
   );
