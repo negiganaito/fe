@@ -1,4 +1,4 @@
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 
 import { useCallback, useContext, useState, useEffect, useRef } from 'react';
 
@@ -287,8 +287,8 @@ const useTouchEventHandler = (
         window == null
           ? undefined
           : window.document == null
-          ? undefined
-          : window.document.body;
+            ? undefined
+            : window.document.body;
 
       if (documentBody == null) {
         return;
@@ -409,7 +409,7 @@ export const WebPressable = (props) => {
   const _disabled =
     disabled === true ||
     (accessibilityState == null ? undefined : accessibilityState.disabled) ===
-      true;
+    true;
 
   const ariaHidden =
     accessibilityState == null ? undefined : accessibilityState.hidden;
@@ -425,7 +425,7 @@ export const WebPressable = (props) => {
     focusVisible:
       focusVisibleChangeState ||
       (testOnly_state == null ? undefined : testOnly_state.focusVisible) ===
-        true,
+      true,
     focused:
       focusChangeState ||
       (testOnly_state == null ? undefined : testOnly_state.focused) === true,
@@ -475,10 +475,10 @@ export const WebPressable = (props) => {
     (event) => {
       onPress && onPress(event),
         (onPress || link != null) &&
-          isAllowClickEventPropagation !== true &&
-          event.stopPropagation(),
+        isAllowClickEventPropagation !== true &&
+        event.stopPropagation(),
         shouldHandleClickEvent(event, preventDefault) &&
-          event.nativeEvent.preventDefault();
+        event.nativeEvent.preventDefault();
     },
     [link, onPress, preventDefault]
   );
@@ -612,7 +612,7 @@ export const WebPressable = (props) => {
           styles.root,
           _props.disabled && styles.disabled,
           (!_props.focusVisible || suppressFocusRing === true) &&
-            styles.focusNotVisible,
+          styles.focusNotVisible,
           _className,
           webPressableGroupContextValue && styles.rootInGroup
         ).className,

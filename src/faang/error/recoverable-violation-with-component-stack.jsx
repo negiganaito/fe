@@ -14,7 +14,7 @@ function ThrowErr(props) {
   throw err(errorMessage);
 }
 
-export const RecoverableViolationWithComponentStackReact = (props) => {
+export const RecoverableViolationWithComponentStack = (props) => {
   const { errorMessage, fallback, projectName } = props;
 
   return (
@@ -27,4 +27,4 @@ export const RecoverableViolationWithComponentStackReact = (props) => {
   );
 };
 
-RecoverableViolationWithComponentStackReact.displayName = `RecoverableViolationWithComponentStack.react`;
+RecoverableViolationWithComponentStack.displayName = `RecoverableViolationWithComponentStack.react`;

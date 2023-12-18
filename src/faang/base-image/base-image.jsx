@@ -8,7 +8,7 @@ import { RecoverableViolationWithComponentStack } from '@/faang/error/recoverabl
 // @ts-ignore
 import { jsx } from 'react/jsx-runtime';
 
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 
 import { mergeRefs } from '@/faang/hooks';
 
@@ -58,32 +58,32 @@ export const BaseImage = forwardRef(
 
     return src === ''
       ? jsx(RecoverableViolationWithComponentStack, {
-          errorMessage: 'Invalid src provided to image',
-          projectName: 'comet_ui',
-        })
+        errorMessage: 'Invalid src provided to image',
+        projectName: 'comet_ui',
+      })
       : jsx(
-          'img',
-          Object.assign({}, rest, {
-            alt,
-            'aria-labelledby': al,
-            // className:
-            //   objectFit === 'none' && className == null
-            //     ? void 0
-            //     : mergeClasses(
-            //         objectFit !== 'none' && classes[objectFit],
-            //         className
-            //       ),
+        'img',
+        Object.assign({}, rest, {
+          alt,
+          'aria-labelledby': al,
+          // className:
+          //   objectFit === 'none' && className == null
+          //     ? void 0
+          //     : mergeClasses(
+          //         objectFit !== 'none' && classes[objectFit],
+          //         className
+          //       ),
 
-            className: stylex(styles[objectFit], xstyle),
-            elementtiming,
-            onLoad,
-            ref: _ref,
-            referrerPolicy,
-            sizes,
-            src,
-            srcSet,
-          })
-        );
+          className: stylex(styles[objectFit], xstyle),
+          elementtiming,
+          onLoad,
+          ref: _ref,
+          referrerPolicy,
+          sizes,
+          src,
+          srcSet,
+        })
+      );
   }
 );
 

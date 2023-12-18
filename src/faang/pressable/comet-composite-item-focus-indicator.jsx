@@ -5,7 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime';
 import { CometCompositeStructureContext } from '@/faang/context/comet-composite-structure-context';
 import { CometIcon, fbicon } from '@/faang/icon';
 import { ICONS } from '@/faang/_/icon';
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 
 const styles = stylex.create({
   i1: {
@@ -76,49 +76,49 @@ export const CometCompositeItemFocusIndicator = () => {
   return context.hideArrowSignifiers
     ? null
     : jsxs(React.Fragment, {
-        children: [
-          context.horizontal === !0
-            ? jsxs(React.Fragment, {
-                children: [
-                  jsx('div', {
-                    className: styles.i1,
-                    children: jsx(CometIcon, {
-                      color: 'primary',
-                      icon: fbicon._(ICONS(1739808), 8),
-                    }),
-                  }),
-                  jsx('div', {
-                    className: styles.i2,
-                    children: jsx(CometIcon, {
-                      color: 'primary',
-                      icon: fbicon._(ICONS(897949), 8),
-                    }),
-                  }),
-                ],
-              })
-            : null,
-          context.vertical
-            ? jsxs(React.Fragment, {
-                children: [
-                  React.jsx('div', {
-                    className: styles.i3,
-                    children: React.jsx(CometIcon, {
-                      color: 'primary',
-                      icon: fbicon._(ICONS(702721), 8),
-                    }),
-                  }),
-                  jsx('div', {
-                    className: styles.i4,
-                    children: jsx(CometIcon, {
-                      color: 'primary',
-                      icon: fbicon._(ICONS(701592), 8),
-                    }),
-                  }),
-                ],
-              })
-            : null,
-        ],
-      });
+      children: [
+        context.horizontal === !0
+          ? jsxs(React.Fragment, {
+            children: [
+              jsx('div', {
+                className: styles.i1,
+                children: jsx(CometIcon, {
+                  color: 'primary',
+                  icon: fbicon._(ICONS(1739808), 8),
+                }),
+              }),
+              jsx('div', {
+                className: styles.i2,
+                children: jsx(CometIcon, {
+                  color: 'primary',
+                  icon: fbicon._(ICONS(897949), 8),
+                }),
+              }),
+            ],
+          })
+          : null,
+        context.vertical
+          ? jsxs(React.Fragment, {
+            children: [
+              React.jsx('div', {
+                className: styles.i3,
+                children: React.jsx(CometIcon, {
+                  color: 'primary',
+                  icon: fbicon._(ICONS(702721), 8),
+                }),
+              }),
+              jsx('div', {
+                className: styles.i4,
+                children: jsx(CometIcon, {
+                  color: 'primary',
+                  icon: fbicon._(ICONS(701592), 8),
+                }),
+              }),
+            ],
+          })
+          : null,
+      ],
+    });
 };
 
 CometCompositeItemFocusIndicator.displayName =

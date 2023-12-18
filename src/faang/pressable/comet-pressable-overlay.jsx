@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 
 import React, { useState } from 'react';
 import { BaseFocusRing } from '../focus/base-focus-ring';
@@ -105,7 +105,7 @@ export const CometPressableOverlay = (props) => {
       className={stylex(
         styles.overlay,
         (pressed || focusVisible || hovered || showGridSignifiers) &&
-          styles.overlayVisible,
+        styles.overlayVisible,
         state === 'pressed' && pressedStyle,
         state === 'focus' && focusVisibleStyle,
         state === 'hovered' && hoveredStyle,
@@ -120,12 +120,12 @@ export const CometPressableOverlay = (props) => {
       style={
         state !== null
           ? {
-              borderRadius: typeof radius === 'number' ? radius : undefined,
-              bottom,
-              left,
-              right,
-              top,
-            }
+            borderRadius: typeof radius === 'number' ? radius : undefined,
+            bottom,
+            left,
+            right,
+            top,
+          }
           : undefined
       }
     >

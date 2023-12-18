@@ -1,8 +1,14 @@
-/* eslint-disable react/prop-types */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+import stylex from '@stylexjs/stylex';
 import React, { createContext, forwardRef, useContext, useMemo } from 'react';
-import { getLoadingStateAriaProps } from './get-loading-state-aria-props';
-import * as stylex from '@stylexjs/stylex';
-import { mergeRefs } from '@negiganaito/hooks';
+
+import { mergeRefs } from '@/faang/hooks';
+import { getLoadingStateAriaProps } from '@/faang/utils';
 
 // type BaseLoadingStateElementProps = {
 //   children?: ReactNode

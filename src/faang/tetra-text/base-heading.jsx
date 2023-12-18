@@ -7,7 +7,7 @@
 
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import { forwardRef, useContext, useMemo } from 'react';
 import { jsx } from 'react/jsx-runtime';
 

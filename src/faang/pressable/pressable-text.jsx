@@ -1,4 +1,4 @@
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import UserAgent from 'fbjs/lib/UserAgent';
 import joinClasses from 'fbjs/lib/joinClasses';
 
@@ -108,7 +108,7 @@ export function PressableText(props) {
   const _disabled =
     disabled === true ||
     (accessibilityState == null ? undefined : accessibilityState.disabled) ===
-      true;
+    true;
 
   const ariaHidden =
     accessibilityState == null ? undefined : accessibilityState.hidden;
@@ -126,7 +126,7 @@ export function PressableText(props) {
     focusVisible:
       (focusVisible && suppressFocusRing !== true) ||
       (testOnly_state == null ? undefined : testOnly_state.focusVisible) ===
-        true,
+      true,
     hovered:
       hoverr ||
       (testOnly_state == null ? undefined : testOnly_state.hovered) === true,
@@ -174,7 +174,7 @@ export function PressableText(props) {
       onPress && onPress(event),
         (onPress || link != null) && event.stopPropagation(),
         handleClickEventAndPreventDefault(event, preventDefault) &&
-          event.nativeEvent.preventDefault();
+        event.nativeEvent.preventDefault();
     },
     [link, onPress, preventDefault]
   );
@@ -226,11 +226,11 @@ export function PressableText(props) {
       ? (tabIndexValue = -1)
       : (tabIndexValue = 0)
     : gkx5403
-    ? ariaHidden !== true &&
+      ? ariaHidden !== true &&
       focusable !== false &&
       accessibilityRole !== 'none' &&
       (tabIndexValue = 0)
-    : _disabled !== true &&
+      : _disabled !== true &&
       ariaHidden !== true &&
       focusable !== false &&
       accessibilityRole !== 'none' &&
@@ -313,8 +313,8 @@ export function PressableText(props) {
           _props.disabled && styles.disabled,
           !_props.focusVisible && styles.focusNotVisible,
           _props.focusVisible &&
-            anchorTagOrButtonRole &&
-            styles.linkFocusRingXStyle,
+          anchorTagOrButtonRole &&
+          styles.linkFocusRingXStyle,
           _className,
           pressableGroupContextValue && styles.rootInGroup
         ).className,
@@ -484,8 +484,8 @@ var vFuncHooks =
             (e = window) == null
               ? undefined
               : (e = e.document) == null
-              ? undefined
-              : e.body;
+                ? undefined
+                : e.body;
         if (
           g == null ||
           f == null ||
@@ -496,22 +496,22 @@ var vFuncHooks =
         pressableGroupContextValue &&
           pressableGroupContextValue.register(f, cbFunc);
         var h = function (a) {
-            pressableGroupContextValue &&
-              (a.preventDefault(), pressableGroupContextValue.onTouchStart());
-            if (!isSafari) {
-              return;
-            }
-            if (g == null) return;
-            g.style.WebkitUserSelect = 'none';
-            var c = passiveEventListenerUtil.makeEventOptions({
-              passive: true,
-            });
-            a = function a() {
-              g.style.WebkitUserSelect = null;
-              document.removeEventListener('touchend', a, c);
-            };
-            document.addEventListener('touchend', a, c);
-          },
+          pressableGroupContextValue &&
+            (a.preventDefault(), pressableGroupContextValue.onTouchStart());
+          if (!isSafari) {
+            return;
+          }
+          if (g == null) return;
+          g.style.WebkitUserSelect = 'none';
+          var c = passiveEventListenerUtil.makeEventOptions({
+            passive: true,
+          });
+          a = function a() {
+            g.style.WebkitUserSelect = null;
+            document.removeEventListener('touchend', a, c);
+          };
+          document.addEventListener('touchend', a, c);
+        },
           i = passiveEventListenerUtil.makeEventOptions({
             passive: !pressableGroupContextValue,
           });

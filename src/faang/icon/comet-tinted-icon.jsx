@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable no-unused-vars */
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 
 import { forwardRef } from 'react';
 

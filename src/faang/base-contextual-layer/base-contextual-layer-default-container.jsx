@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import { forwardRef } from 'react'
 import { jsx } from 'react/jsx-runtime'
 

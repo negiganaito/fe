@@ -1,4 +1,10 @@
-'use strict';
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
+
 
 // import type { FbtRuntimeCallInput, FbtTranslatedInput } from 'fbt/lib/FbtHooks';
 
@@ -14,7 +20,7 @@ function getTranslatedInput(input) {
   if (options.hk != null) {
     let translatedPayload = FbtI18nNativeAssets.getString(options.hk);
     if (translatedPayload) {
-      return { table: translatedPayload, args: input.args };
+      return { args: input.args, table: translatedPayload };
     }
   }
   return null;

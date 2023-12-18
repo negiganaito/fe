@@ -4,7 +4,6 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { RecoverableViolationWithComponentStack } from '@negiganaito/error';
 import { stylex } from '@stylexjs/stylex';
 import { forwardRef } from 'react';
 // @ts-ignore
@@ -16,6 +15,7 @@ import {
   coerceImageishURL,
   CometSSRBackgroundImageUtils,
 } from '@/faang/base-image';
+import { RecoverableViolationWithComponentStack } from '@/faang/error';
 import { xplatToDOMRef } from '@/faang/utils';
 
 // type CometImageFromIXValueProps = {

@@ -5,12 +5,12 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import React from 'react';
 
 import { TetraText } from '@/faang/tetra-text';
 
-import CometHeadlineWithAddOn from './comet-headline-with-add-on';
+import { CometHeadlineWithAddOn } from './comet-headline-with-add-on';
 import { getTetraTextHierarchyStyle } from './get-tetra-text-hierarchy-style';
 
 const styles = stylex.create({

@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import UserAgent from 'fbjs/lib/UserAgent';
 
 const fontFamilyStyles = stylex.create({
@@ -325,7 +325,7 @@ function updateTypographyStyles() {
     const styleOffsetsMap = new Map(offsets);
 
     styleOffsetsMap.forEach((offsets, textStyleKey) => {
-      updatedStyles[textStyleKey] = Object({}, updatedStyles[textStyleKey], {
+      updatedStyles[textStyleKey] = Object.assign({}, updatedStyles[textStyleKey], {
         fontFamily,
         offsets,
       });

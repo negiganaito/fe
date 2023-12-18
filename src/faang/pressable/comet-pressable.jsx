@@ -10,7 +10,7 @@ import React, {
   useState,
 } from 'react';
 
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 
 import { CometPressableOverlay } from './comet-pressable-overlay';
 import { CometContainerPressableContext } from '@/faang/pressable/comet-container-pressable-context';
@@ -181,12 +181,12 @@ export const CometPressable = forwardRef(
     const _classNameWith =
       typeof xstyle === 'function'
         ? xstyle({
-            disabled,
-            focused: focusedState,
-            focusVisible: focusVisibleState,
-            hovered: hoveredState,
-            pressed: pressedState,
-          })
+          disabled,
+          focused: focusedState,
+          focusVisible: focusVisibleState,
+          hovered: hoveredState,
+          pressed: pressedState,
+        })
         : xstyle;
 
     // overlayHoveredStyle =
@@ -223,9 +223,9 @@ export const CometPressable = forwardRef(
       //
       _classNameWith,
       _suppressFocusRing &&
-        (overlayFocusRingPosition === 'inset'
-          ? BaseFocusRing.focusRingInsetXStyle
-          : BaseFocusRing.focusRingXStyle),
+      (overlayFocusRingPosition === 'inset'
+        ? BaseFocusRing.focusRingInsetXStyle
+        : BaseFocusRing.focusRingXStyle),
       cometContainerPressableContextValue !== undefined && styles.zIndex,
     ];
 

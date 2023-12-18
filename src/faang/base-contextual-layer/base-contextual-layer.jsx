@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import Locale from 'fbjs/lib/Locale'
 import React, {
   forwardRef,
@@ -31,15 +31,16 @@ import {
   BaseLinkNestedPressableContext,
   BaseScrollableAreaContext,
   BaseViewportMarginsContext,
+  CometTextContext,
   HiddenSubtreeContext,
-  LayoutAnimationBoundaryContext,
+  LayoutAnimationBoundaryContext
 } from '@/faang/context'
 import { BasePortal } from '@/faang/dialog'
 import {
   FocusRegion,
   focusScopeQueries,
 } from '@/faang/focus-region'
-import { CometTextContext, mergeRefs, useLayoutAnimationEvents, useResizeObserver } from '@/faang/hooks'
+import { mergeRefs, useLayoutAnimationEvents, useResizeObserver } from '@/faang/hooks'
 import { BaseContextualLayerAnchorRoot } from '@/faang/modal'
 import { calculateBaseContextualLayerPosition, isElementFixedOrSticky } from '@/faang/utils'
 

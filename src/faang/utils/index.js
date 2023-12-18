@@ -18,4 +18,4 @@ export { sprintf } from './sprintf';
 export { stylexCompat } from './stylex-compat'
 export { testID } from './test-id';
 export { uniqueID } from './unique-id'
-export { xplatToInputRef } from './xplat-to-dom-ref';
+export { xplatToDOMRef } from './xplat-to-dom-ref';

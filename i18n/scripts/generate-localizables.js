@@ -1,4 +1,9 @@
-/* eslint-disable no-undef */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 const invariant = require('invariant');
 const fs = require('fs');
 const path = require('path');

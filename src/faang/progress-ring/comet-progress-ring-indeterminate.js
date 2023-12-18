@@ -4,12 +4,12 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import { jsx } from 'react/jsx-runtime';
 
 import { BaseLoadingStateElement } from '@/faang/base-glimmer/base-loading-state-element';
+import { useCurrentDisplayMode } from '@/faang/hooks';
 import { CometImageFromIXValue } from '@/faang/photo-editor/comet-image-from-ix-value';
-import { useCurrentDisplayMode } from '@/hooks';
 
 import { CometProgressRingUtils } from './comet-progress-ring-utils';
 

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 process.env.ASSET_PATH = '/';
@@ -23,16 +29,8 @@ const compiler = webpack(config);
 
 const server = new WebpackDevServer(
   {
-    https: false,
-    hot: false,
-    open: true,
+    allowedHosts: 'all',
     client: false,
-    host: 'localhost',
-    port: env.PORT,
-    historyApiFallback: true,
-    static: {
-      directory: path.join(__dirname, '../build'),
-    },
     devMiddleware: {
       publicPath: `http://localhost:${env.PORT}/`,
       writeToDisk: true,
@@ -40,7 +38,15 @@ const server = new WebpackDevServer(
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
-    allowedHosts: 'all',
+    historyApiFallback: true,
+    host: 'localhost',
+    hot: false,
+    https: false,
+    open: true,
+    port: env.PORT,
+    static: {
+      directory: path.join(__dirname, '../build'),
+    },
   },
   compiler,
 );

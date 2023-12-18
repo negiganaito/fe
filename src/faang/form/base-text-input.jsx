@@ -1,4 +1,4 @@
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import { memo, forwardRef } from 'react';
 
 import { jsx } from 'react/jsx-runtime';

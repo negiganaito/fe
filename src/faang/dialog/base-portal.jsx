@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import executionEnvironment from 'fbjs/lib/ExecutionEnvironment'
 import { useContext } from 'react'
 import { jsx } from 'react/jsx-runtime'

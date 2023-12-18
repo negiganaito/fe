@@ -1,4 +1,9 @@
-/* eslint-disable no-undef */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 
 const { generateLocalizableFiles } = require('./generate-localizables');
 const fs = require('fs');
@@ -6,15 +11,15 @@ const yargs = require('yargs');
 
 const args = {
   HELP: 'h',
-  TRANSLATION_OUTPUT: 'translationOutput',
   OUTPUT_DIR: 'outputDir',
   TRANSLATIONS_FILENAME: 'translationsFilename',
+  TRANSLATION_OUTPUT: 'translationOutput',
 };
 
 const argv = yargs
   .usage(
     'Take translations output, and write individual JSON files for each ' +
-      'locale:  raw-es_rES/localizable.json => {<hash>: translatedString}'
+    'locale:  raw-es_rES/localizable.json => {<hash>: translatedString}'
   )
   .string(args.TRANSLATION_OUTPUT)
   .default(args.TRANSLATION_OUTPUT, './i18n/fbt/translatedFbts.json')

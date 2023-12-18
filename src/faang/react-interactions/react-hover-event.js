@@ -4,13 +4,12 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import {
-  hasEventHookPropagationStopped,
-  stopEventHookPropagation,
-} from '@negiganaito/utils/common/react-event-hook-propagation';
 import { useEffect, useRef } from 'react';
 
 import { ReactEventHelpers } from './react-event-helpers';
+import {
+  ReactEventHookPropagation
+} from './react-event-hook-propagation';
 import { ReactUseEvent } from './react-use-event';
 
 const hoverOptions = {
@@ -118,10 +117,10 @@ const useHover = (target, options) => {
           cleanup(event);
           return;
         }
-        if (hasEventHookPropagationStopped(event, 'useHover')) {
+        if (ReactEventHookPropagation.hasEventHookPropagationStopped(event, 'useHover')) {
           return;
         }
-        stopEventHookPropagation(event, 'useHover');
+        ReactEventHookPropagation.stopEventHookPropagation(event, 'useHover');
 
         if (
           !hoverTouchRefCurrent.isHovered &&

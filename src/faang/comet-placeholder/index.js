@@ -5,3 +5,4 @@
  * See the LICENSE file in the root directory for details.
  */
 export { CometPlaceholder } from './comet-placeholder'
+export { HeroPlaceholder } from './hero-placeholder'

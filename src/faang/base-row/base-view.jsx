@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import React, { forwardRef } from 'react';
 
 import { LegacyHidden } from '@/faang/common'

@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 
 import { forwardRef, createElement } from 'react';
 
@@ -87,16 +87,16 @@ export const CometIcon = forwardRef((props, ref) => {
   const Img =
     normalizeIcon instanceof TintableIconSource
       ? jsx(CometTintedIcon, {
-          alt: _alt,
-          color: getColor(_color),
-          draggable: rest.draggable,
-          icon: normalizeIcon,
-          ref: _ref,
-          testid: undefined,
-          xstyle,
-        })
+        alt: _alt,
+        color: getColor(_color),
+        draggable: rest.draggable,
+        icon: normalizeIcon,
+        ref: _ref,
+        testid: undefined,
+        xstyle,
+      })
       : normalizeIcon instanceof ImageIconSource
-      ? jsx(BaseImage_DEPRECATED, {
+        ? jsx(BaseImage_DEPRECATED, {
           alt: _alt,
           className: stylex(
             styles.image,
@@ -112,64 +112,64 @@ export const CometIcon = forwardRef((props, ref) => {
           },
           testid: undefined,
         })
-      : normalizeIcon instanceof IconSource
-      ? jsx(BaseImage_DEPRECATED, {
-          alt: _alt,
-          className: stylex(styles.image, xstyle),
-          draggable: rest.draggable,
-          height: normalizeIcon.size,
-          ref: _ref,
-          src: normalizeIcon.src,
-          width: normalizeIcon.size,
-        })
-      : normalizeIcon instanceof SVGICON.LegacySVGIcon
-      ? createElement(normalizeIcon.component, {
-          alt: _alt,
-          color: _color,
-          'data-testid': _testid,
-          size,
-        })
-      : normalizeIcon instanceof SVGICON.SVGIcon
-      ? jsx(CometSvgIcon, {
-          alt: _alt,
-          color: _color,
-          component: normalizeIcon.component,
-          'data-testid': undefined,
-          size,
-        })
-      : jsx(CometSvgIcon, {
-          alt: _alt,
-          color: _color,
-          component: normalizeIcon.component ?? icon,
-          size,
-          'data-testid': void 0,
-        });
+        : normalizeIcon instanceof IconSource
+          ? jsx(BaseImage_DEPRECATED, {
+            alt: _alt,
+            className: stylex(styles.image, xstyle),
+            draggable: rest.draggable,
+            height: normalizeIcon.size,
+            ref: _ref,
+            src: normalizeIcon.src,
+            width: normalizeIcon.size,
+          })
+          : normalizeIcon instanceof SVGICON.LegacySVGIcon
+            ? createElement(normalizeIcon.component, {
+              alt: _alt,
+              color: _color,
+              'data-testid': _testid,
+              size,
+            })
+            : normalizeIcon instanceof SVGICON.SVGIcon
+              ? jsx(CometSvgIcon, {
+                alt: _alt,
+                color: _color,
+                component: normalizeIcon.component,
+                'data-testid': undefined,
+                size,
+              })
+              : jsx(CometSvgIcon, {
+                alt: _alt,
+                color: _color,
+                component: normalizeIcon.component ?? icon,
+                size,
+                'data-testid': void 0,
+              });
 
   return pressableComp
     ? jsx(
-        CometPressable,
-        Object.assign({}, rest, {
-          disabled,
-          focusable,
-          hideHoverOverlay,
-          linkProps,
-          onHoverIn,
-          onHoverOut,
-          onPress,
-          onPressIn,
-          onPressOut,
-          overlayDisabled: disableOverlay_DEPRECATED,
-          overlayOffset: 8,
-          overlayRadius: '50%',
-          ref,
-          testOnly_pressed,
-          testid: void 0,
-          xstyle: ({ pressed }) => {
-            return [styles.button, pressed && styles.pressed];
-          },
-          children: Img,
-        })
-      )
+      CometPressable,
+      Object.assign({}, rest, {
+        disabled,
+        focusable,
+        hideHoverOverlay,
+        linkProps,
+        onHoverIn,
+        onHoverOut,
+        onPress,
+        onPressIn,
+        onPressOut,
+        overlayDisabled: disableOverlay_DEPRECATED,
+        overlayOffset: 8,
+        overlayRadius: '50%',
+        ref,
+        testOnly_pressed,
+        testid: void 0,
+        xstyle: ({ pressed }) => {
+          return [styles.button, pressed && styles.pressed];
+        },
+        children: Img,
+      })
+    )
     : Img;
 });
 

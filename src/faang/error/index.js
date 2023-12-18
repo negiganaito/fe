@@ -5,3 +5,4 @@
  * See the LICENSE file in the root directory for details.
  */
 export { FBLogger } from './fb-logger'
+export { RecoverableViolationWithComponentStack } from './recoverable-violation-with-component-stack'

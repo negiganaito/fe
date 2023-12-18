@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import React, { forwardRef, useCallback, useContext, useRef, useState } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import Loadable from 'react-loadable';

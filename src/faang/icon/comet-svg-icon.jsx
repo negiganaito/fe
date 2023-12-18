@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import React, { useId, isValidElement, cloneElement } from 'react';
 import { jsx } from 'react/jsx-runtime';
 import { BaseSVGIcon } from './base-svg-icon';

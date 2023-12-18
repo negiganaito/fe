@@ -1,4 +1,4 @@
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import { useContext, useMemo, forwardRef } from 'react';
 
 import Locale from 'fbjs/lib/Locale';
@@ -89,25 +89,25 @@ export const BaseInput = forwardRef((props, ref) => {
   // NOTE Use React with JSX-html tag in the future
   return isTextarea
     ? jsx(
-        'textarea',
-        Object.assign(
-          {
-            suppressHydrationWarning: true,
-          },
-          commonProps,
-          { ref }
-        )
+      'textarea',
+      Object.assign(
+        {
+          suppressHydrationWarning: true,
+        },
+        commonProps,
+        { ref }
       )
+    )
     : jsx(
-        'input',
-        Object.assign(
-          {
-            suppressHydrationWarning: true,
-          },
-          commonProps,
-          { ref, type: compBaseOnType }
-        )
-      );
+      'input',
+      Object.assign(
+        {
+          suppressHydrationWarning: true,
+        },
+        commonProps,
+        { ref, type: compBaseOnType }
+      )
+    );
 });
 
 BaseInput.displayName = 'BaseInput.react';
