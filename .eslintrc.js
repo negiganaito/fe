@@ -5,8 +5,6 @@
  * See the LICENSE file in the root directory for details.
  */
 
-
-
 const restrictedGlobals = require('confusing-browser-globals');
 
 const OFF = 0;
@@ -14,12 +12,7 @@ const ERROR = 2;
 
 module.exports = {
   // Prettier must be last so it can override other configs (https://github.com/prettier/eslint-config-prettier#installation)
-  extends: [
-    'fbjs',
-    'plugin:react-hooks/recommended',
-    // 'plugin:lexical/all',
-    'prettier',
-  ],
+  extends: ['alloy', 'alloy/react'],
 
   globals: {
     JSX: true,
@@ -28,32 +21,13 @@ module.exports = {
 
   overrides: [
     {
-      // We apply these settings to the source files that get compiled.
-      // They can use all features including JSX (but shouldn't use `var`).
-      files: [
-        'packages/*/src/**/*.js',
-        'packages/*/__tests__/**/*.?(m)js',
-        'packages/*/src/**/*.jsx',
-      ],
-      parser: '@babel/eslint-parser',
-      parserOptions: {
-        allowImportExportEverywhere: true,
-        sourceType: 'module',
-
-      },
-      rules: {
-        'no-var': ERROR,
-        'prefer-const': ERROR,
-        strict: OFF,
-      },
-    },
-    {
       // node scripts should be console logging so don't lint against that
       files: ['scripts/**/*.js'],
       rules: {
         'no-console': OFF,
       },
     },
+
     {
       env: {
         browser: true,
@@ -83,16 +57,6 @@ module.exports = {
         'header/header': OFF,
       },
     },
-    {
-      files: [
-        'packages/**/src/__tests__/**',
-        'packages/lexical-playground/**',
-        'packages/lexical-devtools/**',
-      ],
-      rules: {
-        'lexical/no-optional-chaining': OFF,
-      },
-    },
   ],
 
   parser: '@babel/eslint-parser',
@@ -116,7 +80,7 @@ module.exports = {
     'no-function-declare-after-return',
     'react',
     'no-only-tests',
-    '@stylexjs'
+    '@stylexjs',
   ],
 
   // Stop ESLint from looking for a configuration file in parent folders
@@ -124,33 +88,22 @@ module.exports = {
   // We're stricter than the default config, mostly. We'll override a few rules
   // and then enable some React specific ones.
   rules: {
-    '@stylexjs/valid-styles': [
-      'error'
-    ],
-
-    'accessor-pairs': OFF,
-    'brace-style': [ERROR, '1tbs'],
-    'consistent-return': OFF,
-
-    'dot-location': [ERROR, 'property'],
-
-    // We use console['error']() as a signal to not transform it:
-    'dot-notation': [ERROR, { allowPattern: '^(error|warn)$' }],
-    'eol-last': ERROR,
+    // *
+    '@stylexjs/valid-styles': ['error'],
 
     eqeqeq: [ERROR, 'allow-null'],
 
-
     'header/header': [2, 'scripts/www/headerTemplate.js'],
 
-
+    // *
     // (This helps configure simple-import-sort) Make sure all imports are at the top of the file
     'import/first': ERROR,
 
-
+    // *
     // (This helps configure simple-import-sort) Make sure there's a newline after the imports
     'import/newline-after-import': ERROR,
 
+    // *
     // (This helps configure simple-import-sort) Merge imports of the same file
     'import/no-duplicates': ERROR,
 
@@ -158,54 +111,19 @@ module.exports = {
 
     'jsx-quotes': [ERROR, 'prefer-double'],
 
-
-    'keyword-spacing': [ERROR, { after: true, before: true }],
-
-
     // Enforced by Prettier
     // TODO: Prettier doesn't handle long strings or long comments. Not a big
     // deal. But I turned it off because loading the plugin causes some obscure
     // syntax error and it didn't seem worth investigating.
     'max-len': OFF,
 
-
-
-
-
-    'no-bitwise': OFF,
-
-    'no-console': ERROR,
-
-    'no-debugger': ERROR,
-
-
-    // Prevent function declarations after return statements
-    'no-function-declare-after-return/no-function-declare-after-return': ERROR,
-
-
-    'no-inner-declarations': [ERROR, 'functions'],
+    // 'max-len': ["error", { "code": 80 }],
 
     // 'no-multi-spaces': ERROR,
-
-    'no-only-tests/no-only-tests': ERROR,
-
-    'no-restricted-globals': [ERROR].concat(restrictedGlobals),
-
-    'no-restricted-syntax': [ERROR, 'WithStatement'],
-
-    // 'react/jsx-max-props-per-line': ['error', { maximum: 1, minimumLength: 120 }],
-
-    'no-shadow': OFF, // ERROR
 
     'no-unused-expressions': OFF, // ERROR
 
     'no-unused-vars': [ERROR, { args: 'none' }],
-
-    'no-use-before-define': OFF,
-
-    'no-useless-computed-key': OFF,
-
-    'no-useless-concat': OFF,
 
     // We apply these settings to files that should run on Node.
     // They can't use JSX or ES6 modules, and must be in strict mode.
@@ -213,75 +131,11 @@ module.exports = {
     // (Note these rules are overridden later for source files.)
     'no-var': ERROR,
 
+    'no-restricted-globals': [ERROR].concat(restrictedGlobals),
 
+    'no-param-reassign': OFF,
+    'no-void': OFF,
 
-
-
-    // "linebreak-style": ["error", "unix"],
-    quotes: [ERROR, 'single', { allowTemplateLiterals: true, avoidEscape: true }],
-
-
-
-    // React & JSX
-    // Our transforms set this automatically
-    'react/jsx-boolean-value': [ERROR, 'always'],
-
-
-    'react/jsx-max-props-per-line': [
-      'error',
-      {
-        'maximum': 1,
-        'when': 'multiline'
-      }
-    ],
-
-
-    'react/jsx-no-undef': ERROR,
-
-    // We don't care to do this
-    'react/jsx-sort-prop-types': OFF,
-
-    'react/jsx-tag-spacing': ERROR,
-
-
-    'react/jsx-uses-react': ERROR,
-
-
-    // We don't care to do this
-    'react/jsx-wrap-multilines': [
-      ERROR,
-      { assignment: false, declaration: false },
-    ],
-
-
-    'react/no-is-mounted': OFF,
-
-
-    // This isn't useful in our test code
-    'react/react-in-jsx-scope': ERROR,
-
-
-    'react/self-closing-comp': ERROR,
-
-    // This sorts re-exports (`export * from 'foo';`), but not other types of exports.
-    'simple-import-sort/exports': ERROR,
-
-    'simple-import-sort/imports': [
-      ERROR,
-      {
-        // The default grouping, but with type imports first as a separate group.
-        // See: https://github.com/lydell/eslint-plugin-simple-import-sort/blob/d9a116f71302c5dcfc1581fc7ded8d77392f1924/examples/.eslintrc.js#L122-L133
-        groups: [['^.*\\u0000$'], ['^\\u0000'], ['^@?\\w'], ['^'], ['^\\.']],
-      },
-    ],
-
-    'sort-keys-fix/sort-keys-fix': ERROR,
-
-    'space-before-blocks': ERROR,
-
-    'space-before-function-paren': OFF,
-    strict: ERROR,
-
-    'valid-typeof': [ERROR, { requireStringLiterals: true }]
+    'react/no-children-prop': OFF,
   },
 };

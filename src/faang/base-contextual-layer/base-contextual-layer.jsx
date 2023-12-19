@@ -5,8 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from '@stylexjs/stylex';
-import Locale from 'fbjs/lib/Locale'
+import stylex from "@stylexjs/stylex";
+import Locale from "fbjs/lib/Locale";
 import React, {
   forwardRef,
   useCallback,
@@ -18,10 +18,10 @@ import React, {
   useReducer,
   useRef,
   useState,
-} from 'react'
-import { jsx } from 'react/jsx-runtime'
+} from "react";
+import { jsx } from "react/jsx-runtime";
 
-import { LayoutAnimationEvent } from '@/faang/common'
+import { LayoutAnimationEvent } from "@/faang/common";
 import {
   BaseContextualLayerAnchorRootContext,
   BaseContextualLayerAvailableHeightContext,
@@ -33,18 +33,22 @@ import {
   BaseViewportMarginsContext,
   CometTextContext,
   HiddenSubtreeContext,
-  LayoutAnimationBoundaryContext
-} from '@/faang/context'
-import { BasePortal } from '@/faang/dialog'
+  LayoutAnimationBoundaryContext,
+} from "@/faang/context";
+import { BasePortal } from "@/faang/dialog";
+import { FocusRegion, focusScopeQueries } from "@/faang/focus-region";
 import {
-  FocusRegion,
-  focusScopeQueries,
-} from '@/faang/focus-region'
-import { mergeRefs, useLayoutAnimationEvents, useResizeObserver } from '@/faang/hooks'
-import { BaseContextualLayerAnchorRoot } from '@/faang/modal'
-import { calculateBaseContextualLayerPosition, isElementFixedOrSticky } from '@/faang/utils'
+  mergeRefs,
+  useLayoutAnimationEvents,
+  useResizeObserver,
+} from "@/faang/hooks";
+import { BaseContextualLayerAnchorRoot } from "@/faang/modal";
+import {
+  calculateBaseContextualLayerPosition,
+  isElementFixedOrSticky,
+} from "@/faang/utils";
 
-import { BaseContextualLayerDefaultContainer } from './base-contextual-layer-default-container'
+import { BaseContextualLayerDefaultContainer } from "./base-contextual-layer-default-container";
 
 // type BaseContextualLayerProps = {
 //   align?
@@ -68,21 +72,21 @@ import { BaseContextualLayerDefaultContainer } from './base-contextual-layer-def
 
 const styles = stylex.create({
   root: {
-    left: '0',
-    marginRight: '-9999px',
-    position: 'absolute',
-    top: '0',
+    left: "0",
+    marginRight: "-9999px",
+    position: "absolute",
+    top: "0",
   },
-})
+});
 
-const w = Locale.isRTL()
+const w = Locale.isRTL();
 
-const u = 8
+const u = 8;
 
 export const BaseContextualLayer = forwardRef(
   (
     {
-      align = 'start',
+      align = "start",
       disableAutoAlign = false,
       children,
       containFocus = false,
@@ -93,14 +97,13 @@ export const BaseContextualLayer = forwardRef(
       onEscapeFocusRegion,
       onIndeterminatePosition,
       presencePayload,
-      position = 'below',
+      position = "below",
       stopClickPropagation = false,
       xstyle,
       ...rest
     },
-    ref,
+    ref
   ) => {
-
     const [
       {
         adjustment: baseContextualLayerLayerAdjustmentValue,
@@ -110,310 +113,294 @@ export const BaseContextualLayer = forwardRef(
         position: I,
       },
       J,
-    ] = useReducer(ca, position, ba)
+    ] = useReducer(ca, position, ba);
 
     const baseContextualLayerAnchorRootValue = useContext(
-      BaseContextualLayerAnchorRootContext,
-    )
+      BaseContextualLayerAnchorRootContext
+    );
 
-    const L = useContext(BaseScrollableAreaContext)
-    const M = useContext(BaseViewportMarginsContext)
-    const N = useContext(LayoutAnimationBoundaryContext)
+    const L = useContext(BaseScrollableAreaContext);
+    const M = useContext(BaseViewportMarginsContext);
+    const N = useContext(LayoutAnimationBoundaryContext);
 
-    const [a, O] = useState(!1)
+    const [a, O] = useState(!1);
 
-    const { hidden: G } = useContext(HiddenSubtreeContext)
+    const { hidden: G } = useContext(HiddenSubtreeContext);
 
-    const P = G || hidden
+    const P = G || hidden;
 
-    const Q = useRef(null)
-    const R = useRef(null)
+    const Q = useRef(null);
+    const R = useRef(null);
 
-    const S = useCallback(
-      function () {
-        return rest.context_DEPRECATED == null && rest.contextRef != null
-          ? rest.contextRef.current
-          : rest.context_DEPRECATED
-      },
-      [rest.contextRef, rest.context_DEPRECATED],
-    )
+    const S = useCallback(() => {
+      return !rest.context_DEPRECATED && rest.contextRef
+        ? rest.contextRef.current
+        : rest.context_DEPRECATED;
+    }, [rest.contextRef, rest.context_DEPRECATED]);
 
     const T = useCallback(() => {
-      const a = document.documentElement
-      if (a == null) {
-        return
+      const a = document.documentElement;
+      if (!a) {
+        return;
       }
       return {
         bottom: a.clientHeight - M.bottom - u,
         left: M.left + u,
         right: a.clientWidth - M.right - u,
         top: M.top + u,
-      }
-    }, [M.bottom, M.left, M.right, M.top])
+      };
+    }, [M.bottom, M.left, M.right, M.top]);
 
-    const U = useCallback(
-      function () {
-        let a = Q.current;
-        let b = S();
-        let c = T()
-        if (a == null || b == null || c == null) return
-        b = r(b)
-        a = r(a)
-        const d = a.bottom - a.top
-        a = a.right - a.left
-        let e = w ? 'start' : 'end';
-        let f = w ? 'end' : 'start';
-        let g = I;
-        let h = null
-        disableAutoFlip ||
-          (I === 'above' || I === 'below'
-            ? I === 'above' && b.top - d < c.top && b.bottom + d < c.bottom
-              ? (g = 'below')
-              : I === 'above' && s(L) + b.top < d
-                ? (g = 'below')
-                : I === 'below' &&
-                b.bottom + d > c.bottom &&
-                b.top - d > c.top &&
-                (g = 'above')
-            : (I === 'start' || I === 'end') &&
+    // eslint-disable-next-line complexity
+    const U = useCallback(() => {
+      let a = Q.current;
+      let b = S();
+      let c = T();
+      if (!a || !b || !c) return;
+      b = r(b);
+      a = r(a);
+      const d = a.bottom - a.top;
+      a = a.right - a.left;
+      let e = w ? "start" : "end";
+      let f = w ? "end" : "start";
+      let g = I;
+      let h = null;
+      disableAutoFlip ||
+        (I === "above" || I === "below"
+          ? I === "above" && b.top - d < c.top && b.bottom + d < c.bottom
+            ? (g = "below")
+            : I === "above" && s(L) + b.top < d
+            ? (g = "below")
+            : I === "below" &&
+              b.bottom + d > c.bottom &&
+              b.top - d > c.top &&
+              (g = "above")
+          : (I === "start" || I === "end") &&
             (I === f && b.left - a < c.left && b.right + a < c.right
               ? (g = e)
               : I === e &&
-              b.right + a > c.right &&
-              b.left - a > c.left &&
-              (g = f)))
-        g === 'above' || g === 'below'
-          ? (h = g === 'above' ? b.top - c.top : c.bottom - b.bottom)
-          : (g === 'start' || g === 'end') &&
-          (h = Math.max(c.bottom, b.bottom) - Math.min(b.top, c.top))
+                b.right + a > c.right &&
+                b.left - a > c.left &&
+                (g = f)));
+      g === "above" || g === "below"
+        ? (h = g === "above" ? b.top - c.top : c.bottom - b.bottom)
+        : (g === "start" || g === "end") &&
+          (h = Math.max(c.bottom, b.bottom) - Math.min(b.top, c.top));
 
-        R.current = {
-          height: d,
-          width: a,
-        }
+      R.current = {
+        height: d,
+        width: a,
+      };
+      J({
+        availableHeight: h,
+        position: g,
+        type: "determine_direction",
+      });
+    }, [S, T, disableAutoFlip, I]);
+
+    const V = useCallback(() => {
+      let a = document.documentElement;
+      let b = baseContextualLayerAnchorRootValue.current;
+      let d = T();
+      let e = S();
+      if (!a || !b || !d || !e) {
+        return;
+      }
+      const h = t(b);
+      if (!h) {
+        return;
+      }
+      b = isElementFixedOrSticky(b);
+
+      b = !b && e.nodeType === 1 && isElementFixedOrSticky(e);
+
+      e = L.map((a) => {
+        return a.getDOMNode();
+      })
+        .filter(Boolean)
+        .filter((a) => {
+          return h.contains(a);
+        })
+        .reduce((a, b) => {
+          return a ? v(a, r(b)) : null;
+        }, r(e));
+      if (!e || (e.left === 0 && e.right === 0)) {
         J({
-          availableHeight: h,
-          position: g,
-          type: 'determine_direction',
-        })
-      },
-      [S, T, disableAutoFlip, I],
-    )
-
-    const V = useCallback(
-      function () {
-        let a = document.documentElement;
-        let b = baseContextualLayerAnchorRootValue.current;
-        let d = T();
-        let e = S()
-        if (!a || !b || !d || !e) {
-          return
-        }
-        const h = t(b)
-        if (!h) {
-          return
-        }
-        b = isElementFixedOrSticky(b)
-
-        b = !b && e.nodeType === 1 && isElementFixedOrSticky(e)
-
-        e = L.map(function (a) {
-          return a.getDOMNode()
-        })
-          .filter(Boolean)
-          .filter(function (a) {
-            return h.contains(a)
-          })
-          .reduce(function (a, b) {
-            return a != null ? v(a, r(b)) : null
-          }, r(e))
-        if (e == null || (e.left === 0 && e.right === 0)) {
-          J({
-            type: 'position_indeterminate',
-          })
-          onIndeterminatePosition && onIndeterminatePosition()
-          return
-        }
-        a = b
-          ? {
+          type: "position_indeterminate",
+        });
+        onIndeterminatePosition && onIndeterminatePosition();
+        return;
+      }
+      a = b
+        ? {
             bottom: a.clientHeight,
             left: 0,
             right: a.clientWidth,
             top: 0,
           }
-          : r(h)
-        b = calculateBaseContextualLayerPosition({
-          align,
-          contextRect: e,
-          contextualLayerSize: disableAutoAlign ? null : R.current,
-          fixed: b,
-          offsetRect: a,
-          position: I,
-          screenRect: d,
-        })
-        a = b.adjustment
-        d = b.style
-        b = Q.current
-        if (b) {
-          const i = Object.keys(d)
-          for (let j = 0; j < i.length; j++) {
-            const k = i[j];
-            const l = d[k]
-            l ? b.style.setProperty(k, l) : b.style.removeProperty(k)
-          }
-        }
-        J({
-          adjustment: a,
-          contextSize: {
-            height: e.bottom - e.top,
-            width: e.right - e.left,
-          },
-          type: 'reposition',
-        })
-      },
-      [
-        baseContextualLayerAnchorRootValue,
-        T,
-        S,
-        L,
-        disableAutoAlign,
+        : r(h);
+      b = calculateBaseContextualLayerPosition({
         align,
-        I,
-        onIndeterminatePosition,
-      ],
-    )
+        contextRect: e,
+        contextualLayerSize: disableAutoAlign ? null : R.current,
+        fixed: b,
+        offsetRect: a,
+        position: I,
+        screenRect: d,
+      });
+      a = b.adjustment;
+      d = b.style;
+      b = Q.current;
+      if (b) {
+        const i = Object.keys(d);
+        for (let j = 0; j < i.length; j++) {
+          const k = i[j];
+          const l = d[k];
+          l ? b.style.setProperty(k, l) : b.style.removeProperty(k);
+        }
+      }
+      J({
+        adjustment: a,
+        contextSize: {
+          height: e.bottom - e.top,
+          width: e.right - e.left,
+        },
+        type: "reposition",
+      });
+    }, [
+      baseContextualLayerAnchorRootValue,
+      T,
+      S,
+      L,
+      disableAutoAlign,
+      align,
+      I,
+      onIndeterminatePosition,
+    ]);
 
     const W = useCallback(
-      function (a) {
-        a === LayoutAnimationEvent.LayoutAnimationEventType.Start && O(!0),
-          a === LayoutAnimationEvent.LayoutAnimationEventType.Stop && (O(!1), V())
+      (a) => {
+        a === LayoutAnimationEvent.LayoutAnimationEventType.Start && O(!0);
+        a === LayoutAnimationEvent.LayoutAnimationEventType.Stop &&
+          (O(!1), V());
       },
-      [V, O],
-    )
+      [V, O]
+    );
 
-    useLayoutEffect(
-      function () {
-        N != null && N.getIsAnimating() && W(LayoutAnimationEvent.LayoutAnimationEventType.Start)
-      },
-      [N, W],
-    )
+    useLayoutEffect(() => {
+      N &&
+        N.getIsAnimating() &&
+        W(LayoutAnimationEvent.LayoutAnimationEventType.Start);
+    }, [N, W]);
 
-    useLayoutAnimationEvents(W)
+    useLayoutAnimationEvents(W);
 
     useImperativeHandle(
       imperativeRef,
-      function () {
+      () => {
         return {
           reposition: function (a) {
             if (!P) {
-              a = a || {}
-              a = a.autoflip
-              a = a === void 0 ? !1 : a
-              a && U()
-              V()
+              a = a || {};
+              a = a.autoflip;
+              a = a === void 0 ? !1 : a;
+              a && U();
+              V();
             }
           },
-        }
+        };
       },
-      [P, V, U],
-    )
+      [P, V, U]
+    );
 
-    const X = useResizeObserver(function (a) {
-      const b = a.height
-      a = a.width
+    const X = useResizeObserver((a) => {
+      const b = a.height;
+      a = a.width;
       R.current = {
         height: b,
         width: a,
-      }
-      V()
-    })
+      };
+      V();
+    });
 
-    const Y = useRef(position)
+    const Y = useRef(position);
 
-    useLayoutEffect(function () {
+    useLayoutEffect(() => {
       position !== Y.current &&
         (J({
           position,
-          type: 'position_changed',
+          type: "position_changed",
         }),
-          P || (U(), V()),
-          (Y.current = position))
-    })
+        P || (U(), V()),
+        (Y.current = position));
+    });
 
     const Z = useCallback(
-      function (a) {
-        Q.current = a
-        a != null && !P && (U(), V())
+      (a) => {
+        Q.current = a;
+        a && !P && (U(), V());
       },
-      [P, V, U],
-    )
+      [P, V, U]
+    );
 
     useEffect(() => {
-      if (P) return
+      if (P) return;
       const a = function () {
-        U(), V()
-      }
-      window.addEventListener('resize', a)
+        U();
+        V();
+      };
+      window.addEventListener("resize", a);
       return function () {
-        window.removeEventListener('resize', a)
-      }
-    }, [P, V, U])
+        window.removeEventListener("resize", a);
+      };
+    }, [P, V, U]);
 
     useEffect(() => {
-      if (P) return
-      const a = L.map(function (a) {
-        return a.getDOMNode()
-      }).filter(Boolean)
+      if (P) return;
+      const a = L.map((a) => {
+        return a.getDOMNode();
+      }).filter(Boolean);
       if (a.length > 0) {
-        a.forEach(function (a) {
-          return a.addEventListener('scroll', V, {
+        a.forEach((a) => {
+          return a.addEventListener("scroll", V, {
             passive: !0,
-          })
-        })
+          });
+        });
         return function () {
-          a.forEach(function (a) {
-            return a.removeEventListener('scroll', V, {
+          a.forEach((a) => {
+            return a.removeEventListener("scroll", V, {
               passive: !0,
-            })
-          })
-        }
+            });
+          });
+        };
       }
-    }, [P, V, L])
+    }, [P, V, L]);
 
-    useEffect(
-      function () {
-        if (window.addEventListener == null || P) return
-        window.addEventListener('scroll', V, {
+    useEffect(() => {
+      if (!window.addEventListener || P) return;
+      window.addEventListener("scroll", V, {
+        passive: !0,
+      });
+      return function () {
+        window.removeEventListener("scroll", V, {
+          // @ts-ignore
           passive: !0,
-        })
-        return function () {
-          window.removeEventListener('scroll', V, {
-            // @ts-ignore
-            passive: !0,
-          })
-        }
-      },
-      [P, V],
-    )
+        });
+      };
+    }, [P, V]);
 
-    const _ref = useMemo(
-      function () {
-        return mergeRefs(Z, X, ref)
-      },
-      [Z, X, ref],
-    )
+    const _ref = useMemo(() => {
+      return mergeRefs(Z, X, ref);
+    }, [Z, X, ref]);
 
-    const baseContextualLayerOrientationValue = useMemo(
-      function () {
-        return {
-          align: align,
-          position: I,
-        }
-      },
-      [align, I],
-    )
+    const baseContextualLayerOrientationValue = useMemo(() => {
+      return {
+        align: align,
+        position: I,
+      };
+    }, [align, I]);
 
-    const $ = hidden || H
+    const $ = hidden || H;
 
     return (
       <BasePortal
@@ -421,7 +408,9 @@ export const BaseContextualLayer = forwardRef(
         children={jsx(customContainer, {
           children: jsx(FocusRegion.FocusRegion, {
             autoFocusQuery:
-              !$ && containFocus ? focusScopeQueries.headerFirstTabbableSecondScopeQuery : null,
+              !$ && containFocus
+                ? focusScopeQueries.headerFirstTabbableSecondScopeQuery
+                : null,
             autoRestoreFocus: !$,
             children: jsx(BaseContextualLayerAnchorRoot, {
               children: jsx(BaseContextualLayerContextSizeContext.Provider, {
@@ -442,23 +431,26 @@ export const BaseContextualLayer = forwardRef(
                                   value: null,
                                 }),
                                 value: !1,
-                              },
+                              }
                             ),
                             value: baseContextualLayerOrientationValue,
-                          },
+                          }
                         ),
                         value: baseContextualLayerAvailableHeightValue,
-                      },
+                      }
                     ),
                     value: baseContextualLayerLayerAdjustmentValue,
-                  },
+                  }
                 ),
                 value: baseContextualLayerContextSizeValue,
               }),
             }),
-            containFocusQuery: !$ && containFocus ? focusScopeQueries.tabbableScopeQuery : null,
+            containFocusQuery:
+              !$ && containFocus ? focusScopeQueries.tabbableScopeQuery : null,
             onEscapeFocusRegion: onEscapeFocusRegion,
-            recoverFocusQuery: $ ? null : focusScopeQueries.headerFirstTabbableSecondScopeQuery,
+            recoverFocusQuery: $
+              ? null
+              : focusScopeQueries.headerFirstTabbableSecondScopeQuery,
           }),
           hidden: hidden || H || a,
           presencePayload: presencePayload,
@@ -468,49 +460,47 @@ export const BaseContextualLayer = forwardRef(
           xstyle: [styles.root, xstyle],
         })}
       />
-    )
-  },
-)
+    );
+  }
+);
 
 function ca(state, option) {
-  let c
+  let c;
   switch (option.type) {
-    case 'determine_direction':
+    case "determine_direction":
       if (
         state.position !== option.position ||
         state.availableHeight !== option.availableHeight
       )
-        return Object.assign({}, state, {
+        return {
+          ...state,
           availableHeight: option.availableHeight,
           position: option.position,
-        })
-      break
-    case 'reposition':
+        };
+      break;
+    case "reposition":
       if (
         state.adjustment !== option.adjustment ||
-        ((c = state.contextSize) == null ? void 0 : c.height) !==
-        ((c = option.contextSize) == null ? void 0 : c.height) ||
-        ((c = state.contextSize) == null ? void 0 : c.width) !==
-        ((c = option.contextSize) == null ? void 0 : c.width)
+        ((c = state.contextSize) === null ? void 0 : c.height) !==
+          ((c = option.contextSize) === null ? void 0 : c.height) ||
+        ((c = state.contextSize) === null ? void 0 : c.width) !==
+          ((c = option.contextSize) === null ? void 0 : c.width)
       )
-        return Object.assign({}, state, {
+        return {
+          ...state,
           adjustment: option.adjustment,
           contextSize: option.contextSize,
           isPositionIndeterminate: !1,
-        })
-      break
-    case 'position_indeterminate':
-      return Object.assign({}, state, {
-        isPositionIndeterminate: !0,
-      })
-    case 'position_changed':
+        };
+      break;
+    case "position_indeterminate":
+      return { ...state, isPositionIndeterminate: !0 };
+    case "position_changed":
       if (state.position !== option.position)
-        return Object.assign({}, state, {
-          position: option.position,
-        })
-      break
+        return { ...state, position: option.position };
+      break;
   }
-  return state
+  return state;
 }
 
 function ba(position) {
@@ -520,35 +510,51 @@ function ba(position) {
     contextSize: null,
     isPositionIndeterminate: !1,
     position,
-  }
+  };
 }
 
 function r(a) {
-  a = a.getBoundingClientRect()
+  a = a.getBoundingClientRect();
   return {
     bottom: a.bottom,
     left: a.left,
     right: a.right,
     top: a.top,
-  }
+  };
 }
 
-function s(a) {
-  return (a = !(a = a[a.length - 1])
-    ? void 0
-    : !(a = a.getDOMNode())
-      ? void 0
-      : a.scrollTop) != null
-    ? a
-    : window.pageYOffset
+// function s(a) {
+//   // eslint-disable-next-line no-return-assign, no-cond-assign
+//   return (a = !(a = a[a.length - 1]) ? void 0 : !(a = a.getDOMNode()) ? void 0 : a.scrollTop) ? a : window.pageYOffset;
+// }
+
+// getScrollTop
+function s(element) {
+  // Disable eslint warnings for assignment in conditions
+  // eslint-disable-next-line no-return-assign, no-cond-assign
+
+  // Get the last element in the array
+  const lastElement = element[element.length - 1];
+
+  // Check if the last element exists and has a getDOMNode method
+  const node = !lastElement
+    ? undefined
+    : !lastElement.getDOMNode()
+    ? undefined
+    : lastElement.getDOMNode();
+
+  // Get the scrollTop value of the element or use window.pageYOffset as a fallback
+  const scrollTop = node ? node.scrollTop : window.pageYOffset;
+
+  return scrollTop;
 }
 
 function t(a) {
-  const b = getComputedStyle(a)
-  return b && b.getPropertyValue('position') !== 'static'
+  const b = getComputedStyle(a);
+  return b && b.getPropertyValue("position") !== "static"
     ? a
     : (a instanceof HTMLElement && a.offsetParent) ||
-    a.ownerDocument.documentElement
+        a.ownerDocument.documentElement;
 }
 
 function v(a, b) {
@@ -558,10 +564,9 @@ function v(a, b) {
     b.right < b.left
     ? null
     : {
-      bottom: Math.min(a.bottom, b.bottom),
-      left: Math.max(a.left, b.left),
-      right: Math.min(a.right, b.right),
-      top: Math.max(a.top, b.top),
-    }
+        bottom: Math.min(a.bottom, b.bottom),
+        left: Math.max(a.left, b.left),
+        right: Math.min(a.right, b.right),
+        top: Math.max(a.top, b.top),
+      };
 }
-

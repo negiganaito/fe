@@ -5,17 +5,17 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from '@stylexjs/stylex';
-import React, { forwardRef, useMemo } from 'react';
+import stylex from "@stylexjs/stylex";
+import React, { forwardRef, useMemo } from "react";
 
-import { BaseRowContext } from '@/faang/context';
+import { BaseRowContext } from "@/faang/context";
 
-import { BaseView } from './base-view';
+import { BaseView } from "./base-view";
 
 const alignVariable = {
-  end: 'start',
-  start: 'end',
-}
+  end: "start",
+  start: "end",
+};
 
 const expandingStyles = stylex.create({
   expanding: {
@@ -25,62 +25,61 @@ const expandingStyles = stylex.create({
     minWidth: 0,
   },
   row: {
-    display: 'flex',
+    display: "flex",
     flexShrink: 0,
   },
-})
+});
 
 const alignStyles = stylex.create({
   center: {
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   end: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   justify: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   start: {
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
   },
-})
+});
 
 const verticalAlignStyles = stylex.create({
   bottom: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   center: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   stretch: {
-    alignItems: 'stretch',
+    alignItems: "stretch",
   },
   top: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
-})
+});
 
 const wrapStyles = stylex.create({
   backward: {
-    flexWrap: 'wrap-reverse',
+    flexWrap: "wrap-reverse",
   },
   forward: {
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   none: {
-    flexWrap: 'nowrap',
+    flexWrap: "nowrap",
   },
-})
+});
 
 const directionStyles = stylex.create({
   backward: {
-    flexDirection: 'row-reverse',
+    flexDirection: "row-reverse",
   },
   forward: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
-})
-
+});
 
 /**
  * @type React.ForwardRefRenderFunction<React.FunctionComponent, import("./types").BaseRowProps>
@@ -89,25 +88,23 @@ export const BaseRow = forwardRef(
   (
     {
       children,
-      align = 'justify',
+      align = "justify",
       columns = 0,
-      direction = 'forward',
+      direction = "forward",
       expanding = false,
-      verticalAlign = 'stretch',
-      wrap = 'none',
+      verticalAlign = "stretch",
+      wrap = "none",
       xstyle,
       ...rest
     },
-    ref,
+    ref
   ) => {
-
-
     let baseRowContextValue = useMemo(() => {
       return {
         columns,
         wrap,
-      }
-    }, [columns, wrap])
+      };
+    }, [columns, wrap]);
 
     return (
       <BaseView
@@ -118,9 +115,9 @@ export const BaseRow = forwardRef(
           expanding && expandingStyles.expanding,
           // @ts-ignore
           alignStyles[
-          direction === 'backward' && (align === 'start' || align === 'end')
-            ? alignVariable[align]
-            : align
+            direction === "backward" && (align === "start" || align === "end")
+              ? alignVariable[align]
+              : align
           ],
           verticalAlignStyles[verticalAlign],
           wrapStyles[wrap],
@@ -132,6 +129,6 @@ export const BaseRow = forwardRef(
           {children}
         </BaseRowContext.Provider>
       </BaseView>
-    )
-  },
-)
+    );
+  }
+);

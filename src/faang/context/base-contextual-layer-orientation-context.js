@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { createContext } from 'react'
+import { createContext } from "react";
 
 /**
  * @typedef {Object} BaseContextualLayerOrientationContextProps
@@ -16,12 +16,11 @@ import { createContext } from 'react'
  * @type {BaseContextualLayerOrientationContextProps} InitialContextualLayerOrientation - Initial values for contextual layer orientation.
  */
 const initial = {
-  align: 'start',
-  position: 'below',
+  align: "start",
+  position: "below",
 };
 
-
 /**
-* @type {import("react").Context<BaseContextualLayerOrientationContextProps>}
-*/
-export const BaseContextualLayerOrientationContext = createContext(initial)
+ * @type {import("react").Context<BaseContextualLayerOrientationContextProps>}
+ */
+export const BaseContextualLayerOrientationContext = createContext(initial);

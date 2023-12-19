@@ -5,9 +5,6 @@
  * See the LICENSE file in the root directory for details.
  */
 
-
-
-
 import React, {
   createContext,
   useCallback,
@@ -16,21 +13,19 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from 'react'
-import { jsx, jsxs } from 'react/jsx-runtime'
+} from "react";
+// import { jsx, jsxs } from "react/jsx-runtime";
 
-import { recoverableViolation } from '@/faang/error/recoverable-violation'
-import { useDelayedState, useStable } from '@/faang/hooks'
+import { recoverableViolation } from "@/faang/error/recoverable-violation";
+import { useDelayedState, useStable } from "@/faang/hooks";
 
-import { BaseTooltipTargetWrapper } from './base-tooltip-target-wrapper'
-
+import { BaseTooltipTargetWrapper } from "./base-tooltip-target-wrapper";
 
 /**
  * @typedef ContainerProps
  * @property {ReactNode?} children
  * @property {any} tooltipImpl
  */
-
 
 /**
  * @typedef InternalContextProps
@@ -42,72 +37,80 @@ import { BaseTooltipTargetWrapper } from './base-tooltip-target-wrapper'
  */
 
 /** @type {import('react').Context<InternalContextProps>} */
-const TooltipVisualizeContext = createContext(
-  undefined,
-)
+const TooltipVisualizeContext = createContext(undefined);
 
 /**
- * 
- * @param {ContainerProps} props 
+ *
+ * @param {ContainerProps} props
  */
 function Container(props) {
+  const { children, tooltipImpl: TooltipImpl } = props;
 
-  const { children, tooltipImpl } = props
+  const [isVisible, setVisible] = useDelayedState(false);
+  const [tooltipImplProps, setTooltipImplProps] = useState(null);
 
-  const [isVisible, setVisible] = useDelayedState(false)
-  const [tooltipImplProps, setTooltipImplProps] = useState(null)
-
-  const tooltipIdentifier = useId()
+  const tooltipIdentifier = useId();
 
   const activeContentKey =
     tooltipImplProps && tooltipImplProps.contentKey
       ? tooltipImplProps.contentKey
-      : null
+      : null;
 
   const internalContextValue = useMemo(() => {
     return {
       activeContentKey,
       isVisible,
       /**
-       * 
-       * @param {any} hideDelayMs 
-       * @param {any} onVisibilityChange 
+       *
+       * @param {any} hideDelayMs
+       * @param {any} onVisibilityChange
        */
       onHide: function (hideDelayMs, onVisibilityChange) {
-        setVisible(false, hideDelayMs, onVisibilityChange)
+        setVisible(false, hideDelayMs, onVisibilityChange);
       },
-      onShow: (
-        option,
-        showDelayMs,
-        onVisibilityChange,
-      ) => {
-        setTooltipImplProps(option)
-        setVisible(true, showDelayMs, onVisibilityChange)
+      onShow: (option, showDelayMs, onVisibilityChange) => {
+        setTooltipImplProps(option);
+        setVisible(true, showDelayMs, onVisibilityChange);
       },
       tooltipIdentifier,
-    }
-  }, [activeContentKey, isVisible, tooltipIdentifier, setVisible])
+    };
+  }, [activeContentKey, isVisible, tooltipIdentifier, setVisible]);
 
-  return jsxs(React.Fragment, {
-    children: [
-      jsx(TooltipVisualizeContext.Provider, {
-        children,
-        value: internalContextValue,
-      }),
-      tooltipImplProps
-        ? jsx(
-          tooltipImpl,
-          Object.assign({}, tooltipImplProps, {
-            id: isVisible ? tooltipIdentifier : void 0,
-            isVisible: isVisible,
-          }),
-        )
-        : null,
-    ],
-  })
+  return (
+    <>
+      <TooltipVisualizeContext.Provider value={internalContextValue}>
+        {children}
+      </TooltipVisualizeContext.Provider>
+      {tooltipImplProps && (
+        <TooltipImpl
+          {...tooltipImplProps}
+          id={isVisible ? tooltipIdentifier : undefined}
+          isVisible={isVisible}
+        />
+      )}
+    </>
+  );
+
+  // return jsxs(React.Fragment, {
+  //   children: [
+  //     jsx(TooltipVisualizeContext.Provider, {
+  //       children,
+  //       value: internalContextValue,
+  //     }),
+  //     tooltipImplProps
+  //       ? jsx(
+  //           tooltipImpl,
+  //           Object.assign({}, tooltipImplProps, {
+  //             id: isVisible ? tooltipIdentifier : void 0,
+  //             isVisible: isVisible,
+  //           }),
+  //         )
+  //       : null,
+  //   ],
+  // });
 }
 
-const Context = TooltipVisualizeContext
+const Context = TooltipVisualizeContext;
 
 // type ChildProps = {
 //   children?: ReactNode
@@ -122,14 +125,13 @@ const Context = TooltipVisualizeContext
 //   align?: any
 // }
 
-let count = 0
+let count = 0;
 
 function countTooltip() {
-  return 'tooltip-' + count++
+  return "tooltip-" + count++;
 }
 
 function Child(props) {
-
   const {
     children,
     disabled = false,
@@ -138,12 +140,12 @@ function Child(props) {
     showDelayMs,
     onVisibilityChange,
     ...rest
-  } = props
+  } = props;
 
-  const contentKey = useStable(countTooltip)
-  const contextRef = useRef(null)
+  const contentKey = useStable(countTooltip);
+  const contextRef = useRef(null);
 
-  const internalContextValue = useContext(TooltipVisualizeContext)
+  const internalContextValue = useContext(TooltipVisualizeContext);
 
   const {
     activeContentKey,
@@ -151,51 +153,63 @@ function Child(props) {
     onHide,
     onShow,
     tooltipIdentifier,
-  } = internalContextValue ?? {}
+  } = internalContextValue ?? {};
 
   const onShowCb = useCallback(() => {
     !disabled &&
       onShow &&
       onShow(
-        Object.assign(
-          {
-            contentKey: contentKey,
-            contextRef: contextRef,
-          },
-          rest,
-        ),
+        {
+          contentKey: contentKey,
+          contextRef: contextRef,
+          ...rest,
+        },
         showDelayMs,
-        onVisibilityChange,
-      )
-  }, [disabled, onShow, contentKey, rest, showDelayMs, onVisibilityChange])
+        onVisibilityChange
+      );
+  }, [disabled, onShow, contentKey, rest, showDelayMs, onVisibilityChange]);
 
   const onHideCb = useCallback(() => {
-    onHide && onHide(hideDelayMs, onVisibilityChange)
-  }, [hideDelayMs, onHide, onVisibilityChange])
+    if (onHide) {
+      onHide(hideDelayMs, onVisibilityChange);
+    }
+  }, [hideDelayMs, onHide, onVisibilityChange]);
 
   if (!internalContextValue) {
     recoverableViolation(
-      'BaseTooltipGroup: Cannot render a BaseTooltipGroupChild component outside of a BaseTooltipGroup component. ',
-      'comet_ui',
-    )
+      "BaseTooltipGroup: Cannot render a BaseTooltipGroupChild component outside of a BaseTooltipGroup component. ",
+      "comet_ui"
+    );
   }
 
-  return jsx(BaseTooltipTargetWrapper, {
-    children,
-    forceInlineDisplay,
-    onHide: onHideCb,
-    onShow: onShowCb,
-    ref: contextRef,
-    tooltipIdentifier:
-      isVisible && activeContentKey === contentKey
-        ? tooltipIdentifier
-        : undefined,
-  })
+  return (
+    <BaseTooltipTargetWrapper
+      forceInlineDisplay={forceInlineDisplay}
+      onHide={onHideCb}
+      onShow={onShowCb}
+      ref={contextRef}
+      tooltipIdentifier={
+        isVisible && activeContentKey === contentKey
+          ? tooltipIdentifier
+          : undefined
+      }
+    >
+      {children}
+    </BaseTooltipTargetWrapper>
+  );
+
+  // return jsx(BaseTooltipTargetWrapper, {
+  //   children,
+  //   forceInlineDisplay,
+  //   onHide: onHideCb,
+  //   onShow: onShowCb,
+  //   ref: contextRef,
+  //   tooltipIdentifier: isVisible && activeContentKey === contentKey ? tooltipIdentifier : undefined,
+  // });
 }
 
 export const BaseTooltipGroup = {
   Child,
   Container,
   Context,
-}
-
+};

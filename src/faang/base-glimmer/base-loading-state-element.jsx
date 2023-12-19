@@ -4,11 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from '@stylexjs/stylex';
-import React, { createContext, forwardRef, useContext, useMemo } from 'react';
+import stylex from "@stylexjs/stylex";
+import React, { createContext, forwardRef, useContext, useMemo } from "react";
 
-import { mergeRefs } from '@/faang/hooks';
-import { getLoadingStateAriaProps } from '@/faang/utils';
+import { mergeRefs } from "@/faang/hooks";
+import { getLoadingStateAriaProps } from "@/faang/utils";
 
 // type BaseLoadingStateElementProps = {
 //   children?: ReactNode
@@ -23,7 +23,7 @@ const l = createContext(false);
 
 const styles = stylex({
   hideOutline: {
-    outline: 'none',
+    outline: "none",
   },
 });
 
@@ -80,4 +80,4 @@ export const BaseLoadingStateElement = forwardRef(
   }
 );
 
-BaseLoadingStateElement.displayName = 'BaseLoadingStateElement.react';
+BaseLoadingStateElement.displayName = "BaseLoadingStateElement.react";

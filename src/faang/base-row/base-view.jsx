@@ -8,7 +8,7 @@
 import stylex from '@stylexjs/stylex';
 import React, { forwardRef } from 'react';
 
-import { LegacyHidden } from '@/faang/common'
+import { LegacyHidden } from '@/faang/common';
 
 import { testID } from '../utils';
 
@@ -22,28 +22,22 @@ const styles = stylex.create({
     position: 'relative',
     zIndex: 0,
   },
-})
+});
 
 /**
  * @type React.ForwardRefRenderFunction<React.FunctionComponent, import("./types").BaseViewReactProps>
  */
 export const BaseView = forwardRef((props, ref) => {
-
   // eslint-disable-next-line no-unused-vars
-  const { children, hidden, className, suppressHydrationWarning, xstyle, testid, ...rest } = props
+  const { children, hidden, className, suppressHydrationWarning, xstyle, testid, ...rest } = props;
 
-  const isHidden = hidden === true
-
+  const isHidden = hidden === true;
 
   return (
     <LegacyHidden
       {...testID(testid)}
       htmlAttributes={{
-        className: stylex.props(
-          styles.root,
-          xstyle,
-          isHidden && styles.hidden,
-        ).className,
+        className: stylex.props(styles.root, xstyle, isHidden && styles.hidden).className,
         ...rest,
       }}
       mode={isHidden ? 'hidden' : 'visible'}
@@ -52,8 +46,7 @@ export const BaseView = forwardRef((props, ref) => {
     >
       {children}
     </LegacyHidden>
-  )
-})
+  );
+});
 
-BaseView.displayName = 'BaseView.react'
-
+BaseView.displayName = 'BaseView.react';

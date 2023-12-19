@@ -11,14 +11,14 @@ import {
   useContext,
   useLayoutEffect,
   useRef,
-} from 'react'
-import { jsx, jsxs } from 'react/jsx-runtime'
+} from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
 
-import { useStable } from '@/faang/hooks'
-import { HeroFallbackTracker } from '@/faang/trace/hero-fallback-tracker'
-import { HeroInteractionContext } from '@/faang/trace/hero-interaction-context'
-import { HeroInteractionIDContext } from '@/faang/trace/hero-interaction-id-context'
-import { HeroPlaceholderUtils } from '@/faang/trace/hero-placeholder-utils'
+import { useStable } from "@/faang/hooks";
+import { HeroFallbackTracker } from "@/faang/trace/hero-fallback-tracker";
+import { HeroInteractionContext } from "@/faang/trace/hero-interaction-context";
+import { HeroInteractionIDContext } from "@/faang/trace/hero-interaction-id-context";
+import { HeroPlaceholderUtils } from "@/faang/trace/hero-placeholder-utils";
 
 // type HeroPlaceholderProps = {
 //   children?: ReactNode
@@ -29,14 +29,12 @@ import { HeroPlaceholderUtils } from '@/faang/trace/hero-placeholder-utils'
 // }
 
 function m({ cb }) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const ref = useRef(false)
+  const ref = useRef(false);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useLayoutEffect(function () {
-    ref.current || (cb(), (ref.current = true))
-  })
-  return null
+  useLayoutEffect(() => {
+    ref.current || (cb(), (ref.current = true));
+  });
+  return null;
 }
 
 export function HeroPlaceholder({
@@ -46,15 +44,15 @@ export function HeroPlaceholder({
   unstable_avoidThisFallback,
   unstable_onSuspense,
 }) {
-  const heroInteractionContextValue = useContext(HeroInteractionContext)
-  const heroInteractionIDContextValue = useContext(HeroInteractionIDContext)
+  const heroInteractionContextValue = useContext(HeroInteractionContext);
+  const heroInteractionIDContextValue = useContext(HeroInteractionIDContext);
 
-  const simpleUUID1 = useStable(HeroPlaceholderUtils.getSimpleUUID)
-  const simpleUUID2 = useStable(HeroPlaceholderUtils.getSimpleUUID)
+  const simpleUUID1 = useStable(HeroPlaceholderUtils.getSimpleUUID);
+  const simpleUUID2 = useStable(HeroPlaceholderUtils.getSimpleUUID);
 
-  const ref = useRef(false)
+  const ref = useRef(false);
 
-  const childrenClone = children
+  const childrenClone = children;
 
   const suspenseCallback = useCallback(
     (cbProps) => {
@@ -64,17 +62,17 @@ export function HeroPlaceholder({
           simpleUUID1,
           heroInteractionContextValue.pageletStack,
           cbProps,
-          name !== null ? name : 'Unnamed Suspense',
-        )
+          name !== null ? name : "Unnamed Suspense"
+        );
       }
 
       if (unstable_onSuspense) {
         const thenableDescription =
-          HeroPlaceholderUtils.createThenableDescription(cbProps)
+          HeroPlaceholderUtils.createThenableDescription(cbProps);
 
         unstable_onSuspense(
-          thenableDescription !== null ? thenableDescription : '',
-        )
+          thenableDescription !== null ? thenableDescription : ""
+        );
       }
     },
     [
@@ -83,8 +81,8 @@ export function HeroPlaceholder({
       name,
       simpleUUID1,
       unstable_onSuspense,
-    ],
-  )
+    ]
+  );
 
   useLayoutEffect(() => {
     if (
@@ -95,35 +93,35 @@ export function HeroPlaceholder({
       heroInteractionContextValue.hold(
         heroInteractionIDContextValue,
         heroInteractionContextValue.pageletStack,
-        'Hydration',
+        "Hydration",
         simpleUUID2,
-        name,
-      )
+        name
+      );
 
       return () => {
         return heroInteractionContextValue.unhold(
           heroInteractionIDContextValue,
-          simpleUUID2,
-        )
-      }
+          simpleUUID2
+        );
+      };
     }
   }, [
     heroInteractionContextValue,
     heroInteractionIDContextValue,
     name,
     simpleUUID2,
-  ])
+  ]);
 
   let t = function () {
-    ref.current = true
+    ref.current = true;
 
     if (heroInteractionIDContextValue !== null) {
       heroInteractionContextValue.unhold(
         heroInteractionIDContextValue,
-        simpleUUID2,
-      )
+        simpleUUID2
+      );
     }
-  }
+  };
 
   return jsxs(Suspense, {
     children: [
@@ -145,7 +143,7 @@ export function HeroPlaceholder({
     }),
     suspenseCallback,
     unstable_avoidThisFallback,
-  })
+  });
 }
 
-HeroPlaceholder.displayName = 'HeroPlaceholder'
+HeroPlaceholder.displayName = "HeroPlaceholder";

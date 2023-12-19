@@ -5,10 +5,9 @@
  * See the LICENSE file in the root directory for details.
  */
 
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React from 'react';
+import React from "react";
 
 export type SpritedImage = {
   h?: number;
@@ -33,10 +32,10 @@ export type BaseImage_DEPRECATEDProps = {
   style?: CSSProperties;
 };
 
-export type BaseImageProps = React.JSX.IntrinsicElements['img'] & {
+export type BaseImageProps = React.JSX.IntrinsicElements["img"] & {
   alt?: boolean;
   elementtiming?: any;
-  objectFit?: 'none' | 'contain' | 'cover' | 'fill';
+  objectFit?: "none" | "contain" | "cover" | "fill";
   onLoad?: any;
   referrerPolicy?: any;
   sizes?: any;
@@ -44,17 +43,14 @@ export type BaseImageProps = React.JSX.IntrinsicElements['img'] & {
   xstyle?: any;
 };
 
-
-
-
-export type CometImageProps = React.JSX.IntrinsicElements['img'] & {
-  alt?: string
-  objectFit?: 'none' | 'contain' | 'cover' | 'fill'
-  onError?: any
-  onLoad?: any
-  sizes?: any
-  src?: any
-  srcSet?: any
-  testid?: string
-  xstyle?: any
-}
+export type CometImageProps = React.JSX.IntrinsicElements["img"] & {
+  alt?: string;
+  objectFit?: "none" | "contain" | "cover" | "fill";
+  onError?: any;
+  onLoad?: any;
+  sizes?: any;
+  src?: any;
+  srcSet?: any;
+  testid?: string;
+  xstyle?: any;
+};

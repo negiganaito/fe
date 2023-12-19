@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { createContext } from 'react'
+import { createContext } from "react";
 
 /**
  * @typedef {Object} BaseButtonPopoverContextProps
@@ -15,15 +15,15 @@ import { createContext } from 'react'
  */
 
 /**
- * @type {BaseButtonPopoverContextProps} 
+ * @type {BaseButtonPopoverContextProps}
  */
 const initial = {
   bottom: 0,
   left: 0,
   right: 0,
   top: 0,
-}
+};
 /**
-* @type {import("react").Context<BaseButtonPopoverContextProps>}
-*/
-export const BaseViewportMarginsContext = createContext(initial)
+ * @type {import("react").Context<BaseButtonPopoverContextProps>}
+ */
+export const BaseViewportMarginsContext = createContext(initial);

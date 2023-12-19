@@ -5,17 +5,16 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import React from 'react'
+import React from 'react';
 
 import { CometPlaceholder } from '@/faang/comet-placeholder/comet-placeholder';
 
 import { CometTooltipDeferredImpl } from './comet-tooltip-deferred-impl';
-
 
 export function CometTooltipImpl(props) {
   return (
     <CometPlaceholder fallback={null}>
       <CometTooltipDeferredImpl {...props} />
     </CometPlaceholder>
-  )
+  );
 }

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 const imageCollection = new Set();
 const processedImages = new Set();
 
@@ -24,11 +30,11 @@ function clearImageCollection() {
  */
 function imagesToHTMLLinkString() {
   if (!imageCollection || imageCollection.size === 0) {
-    return '';
+    return "";
   }
 
   const linkTags = [];
-  imageCollection.forEach(function (imageUrl) {
+  imageCollection.forEach((imageUrl) => {
     if (!processedImages.has(imageUrl)) {
       linkTags.push(
         '<link rel="preload" as="image" href="' + imageUrl + '" />'
@@ -37,7 +43,7 @@ function imagesToHTMLLinkString() {
     }
   });
 
-  return linkTags.join('\n');
+  return linkTags.join("\n");
 }
 
 export const CometSSRPreloadImageCollection = {

@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { createContext } from 'react';
+import { createContext } from "react";
 
 /**
  * @typedef {Object} CometCompositeStructureContextProps
@@ -13,10 +13,9 @@ import { createContext } from 'react';
  * @property {string|undefined} role - The role of the composite structure (optional).
  */
 
-
 /**
-* @type {import("react").Context<CometCompositeStructureContextProps>}
-*/
+ * @type {import("react").Context<CometCompositeStructureContextProps>}
+ */
 export const CometCompositeStructureContext = createContext({
   horizontal: false,
   vertical: false,

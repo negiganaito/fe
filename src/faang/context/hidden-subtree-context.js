@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { createContext } from 'react'
+import { createContext } from "react";
 
 /**
  * @typedef {Object} HiddenSubtreeContextProps
@@ -14,14 +14,13 @@ import { createContext } from 'react'
  * @property {boolean} hiddenOrBackgrounded_FIXME - Indicates if the subtree is hidden or backgrounded (FIXME).
  */
 
-
 /**
-* @type {import("react").Context<HiddenSubtreeContextProps>}
-*/
+ * @type {import("react").Context<HiddenSubtreeContextProps>}
+ */
 export const HiddenSubtreeContext = createContext({
   backgrounded: false,
   hidden: false,
   hiddenOrBackgrounded: false,
   // eslint-disable-next-line camelcase
   hiddenOrBackgrounded_FIXME: false,
-})
+});

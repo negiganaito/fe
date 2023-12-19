@@ -6,31 +6,29 @@
  */
 
 export type BaseRowProps = {
-  align?: 'center' | 'end' | 'justify' | 'start'
-  children: ReactNode
-  columns?: number
-  direction?: 'backward' | 'forward'
-  expanding?: boolean
-  verticalAlign?: 'bottom' | 'center' | 'stretch' | 'top'
-  wrap?: 'backward' | 'forward' | 'none'
+  align?: "center" | "end" | "justify" | "start";
+  children: ReactNode;
+  columns?: number;
+  direction?: "backward" | "forward";
+  expanding?: boolean;
+  verticalAlign?: "bottom" | "center" | "stretch" | "top";
+  wrap?: "backward" | "forward" | "none";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  xstyle?: any
+  xstyle?: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  useDeprecatedStyles?: any
-}
-
+  useDeprecatedStyles?: any;
+};
 
 export type BaseViewReactProps = {
-  suppressHydrationWarning?: boolean
-  hidden?: boolean
-  testid?: string
+  suppressHydrationWarning?: boolean;
+  hidden?: boolean;
+  testid?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  xstyle?: any
-} & React.JSX.IntrinsicElements['div']
-
+  xstyle?: any;
+} & React.JSX.IntrinsicElements["div"];
 
 export type BaseRowItemReactProps = {
-  expanding?: boolean
-  useDeprecatedStyles?: boolean
-  verticalAlign?: 'bottom' | 'top' | 'center' | 'stretch'
-}
+  expanding?: boolean;
+  useDeprecatedStyles?: boolean;
+  verticalAlign?: "bottom" | "top" | "center" | "stretch";
+};

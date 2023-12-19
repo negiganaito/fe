@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { createContext } from 'react'
+import { createContext } from "react";
 
 /**
  * @typedef {Object} ActiveFocusRegion
@@ -23,4 +23,4 @@ import { createContext } from 'react'
 /**
  * @type {import("react").Context<ActiveFocusRegionUtilsContextProps | undefined>}
  */
-export const ActiveFocusRegionUtilsContext = createContext(undefined)
+export const ActiveFocusRegionUtilsContext = createContext(undefined);

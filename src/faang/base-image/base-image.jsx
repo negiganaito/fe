@@ -1,38 +1,43 @@
-/* eslint-disable react/prop-types */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 /* eslint-disable react/display-name */
-import executionEnvironment from 'fbjs/lib/ExecutionEnvironment';
-import { forwardRef, useEffect, useMemo, useRef } from 'react';
-import { CometSSRPreloadImageCollection } from '@/faang/base-image/comet-ssr-preload-image-collection';
-import { RecoverableViolationWithComponentStack } from '@/faang/error/recoverable-violation-with-component-stack';
+import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
+import { forwardRef, useEffect, useMemo, useRef } from "react";
+import { CometSSRPreloadImageCollection } from "@/faang/base-image/comet-ssr-preload-image-collection";
+import { RecoverableViolationWithComponentStack } from "@/faang/error/recoverable-violation-with-component-stack";
 
 // @ts-ignore
-import { jsx } from 'react/jsx-runtime';
+import { jsx } from "react/jsx-runtime";
 
-import stylex from '@stylexjs/stylex';
+import stylex from "@stylexjs/stylex";
 
-import { mergeRefs } from '@/faang/hooks';
+import { mergeRefs } from "@/faang/hooks";
 
 const styles = stylex({
   contain: {
-    objectFit: 'contain',
+    objectFit: "contain",
   },
   cover: {
-    objectFit: 'cover',
+    objectFit: "cover",
   },
   fill: {
-    objectFit: 'fill',
+    objectFit: "fill",
   },
 });
 
 export const BaseImage = forwardRef(
   (
     {
-      alt = '',
-      'aria-labelledby': al,
+      alt = "",
+      "aria-labelledby": al,
       elementtiming,
-      objectFit = 'none',
+      objectFit = "none",
       onLoad,
-      referrerPolicy = 'origin-when-cross-origin',
+      referrerPolicy = "origin-when-cross-origin",
       sizes,
       src,
       srcSet,
@@ -56,16 +61,15 @@ export const BaseImage = forwardRef(
       onLoad && u.current && u.current.complete && onLoad();
     }, [onLoad]);
 
-    return src === ''
+    return src === ""
       ? jsx(RecoverableViolationWithComponentStack, {
-        errorMessage: 'Invalid src provided to image',
-        projectName: 'comet_ui',
-      })
-      : jsx(
-        'img',
-        Object.assign({}, rest, {
+          errorMessage: "Invalid src provided to image",
+          projectName: "comet_ui",
+        })
+      : jsx("img", {
+          ...rest,
           alt,
-          'aria-labelledby': al,
+          "aria-labelledby": al,
           // className:
           //   objectFit === 'none' && className == null
           //     ? void 0
@@ -82,9 +86,8 @@ export const BaseImage = forwardRef(
           sizes,
           src,
           srcSet,
-        })
-      );
+        });
   }
 );
 
-BaseImage.displayName = 'BaseImage.react';
+BaseImage.displayName = "BaseImage.react";

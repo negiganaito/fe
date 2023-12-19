@@ -4,34 +4,33 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from '@stylexjs/stylex';
-import React, { useLayoutEffect, useRef } from 'react'
-import { jsx, jsxs } from 'react/jsx-runtime'
+import stylex from "@stylexjs/stylex";
+import React, { useLayoutEffect, useRef } from "react";
+// import { jsx, jsxs } from "react/jsx-runtime";
 
-import { BaseContextualLayer } from '@/faang/base-contextual-layer';
-import { CometPlaceholder } from '@/faang/comet-placeholder';
-import { useFadeEffect, useTooltipDelayedContent } from '@/faang/hooks'
-import { CometHeroInteractionContextPassthrough } from '@/faang/trace';
+import { BaseContextualLayer } from "@/faang/base-contextual-layer";
+import { CometPlaceholder } from "@/faang/comet-placeholder";
+import { useFadeEffect, useTooltipDelayedContent } from "@/faang/hooks";
+import { CometHeroInteractionContextPassthrough } from "@/faang/trace";
 
-import { BaseTooltipContainer } from './base-tooltip-container';
-
+import { BaseTooltipContainer } from "./base-tooltip-container";
 
 const styles = stylex.create({
   contextualLayer: {
-    pointerEvents: 'none',
+    pointerEvents: "none",
   },
   loadingState: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
-})
+});
 
 const dummyStyles = stylex.create({
   dummy1: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
-})
+});
 
 // type BaseTooltipImplProps = {
 //   contentKey?: string
@@ -49,15 +48,14 @@ const dummyStyles = stylex.create({
 //   tooltipTheme?: string
 // }
 
-function repositionContextualLayer({ contextualLayerRef }) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+function RepositionContextualLayer({ contextualLayerRef }) {
   useLayoutEffect(() => {
     contextualLayerRef.current &&
       contextualLayerRef.current.reposition({
         autoflip: true,
-      })
-  }, [contextualLayerRef])
-  return null
+      });
+  }, [contextualLayerRef]);
+  return null;
 }
 
 export function BaseTooltipImpl({
@@ -70,48 +68,86 @@ export function BaseTooltipImpl({
   tooltip,
   tooltipTheme,
   xstyle,
-  themeWrapper = React.Fragment,
+  themeWrapper: ThemeWrapper = React.Fragment,
   ...rest
 }) {
-  const ref = useRef(null)
-  const [isTransitioning, shouldBeVisible, fadeRef] = useFadeEffect(isVisible)
+  const ref = useRef(null);
+  const [isTransitioning, shouldBeVisible, fadeRef] = useFadeEffect(isVisible);
 
   // var r = c('useCometDisplayTimingTrackerForInteraction')('ToolTip')
 
   const { isPending } = useTooltipDelayedContent({
     delayContentMs,
     isVisible,
-  })
+  });
 
+  return !tooltip || !isTransitioning ? undefined : (
+    <CometHeroInteractionContextPassthrough clear>
+      <BaseContextualLayer align="middle" {...rest}>
+        <ThemeWrapper imperativeRef={ref} xstyle={styles.contextualLayer}>
+          <BaseTooltipContainer
+            id={id}
+            ref={fadeRef}
+            shouldFadeIn={shouldBeVisible}
+            xstyle={xstyle}
+          >
+            {isPending ? (
+              <div className={stylex(dummyStyles.dummy1)}>{loadingState}</div>
+            ) : (
+              <CometPlaceholder fallback={loadingState}>
+                <RepositionContextualLayer contextualLayerRef={ref} />
+                {tooltip}
+              </CometPlaceholder>
+            )}
+          </BaseTooltipContainer>
+        </ThemeWrapper>
+      </BaseContextualLayer>
+    </CometHeroInteractionContextPassthrough>
+  );
 
-  return !tooltip || !isTransitioning ? null : jsx(CometHeroInteractionContextPassthrough, {
-    children: jsx(BaseContextualLayer, Object.assign({}, {
-      align: 'middle'
-    }, rest, {
-      children: jsx(themeWrapper, {
-        children: jsx(BaseTooltipContainer, {
-          children: isPending ? jsx('div', {
-            children: loadingState,
-            className: dummyStyles.dummy1,
-          }) : jsxs(CometPlaceholder, {
-            children: [jsx(repositionContextualLayer, {
-              contextualLayerRef: ref
-            }), tooltip],
-            fallback: loadingState
-          }),
-          id,
-          ref: fadeRef,
-          shouldFadeIn: shouldBeVisible,
-          xstyle
-        })
-      }),
+  // return !tooltip || !isTransitioning
+  //   ? null
+  //   : jsx(CometHeroInteractionContextPassthrough, {
+  //       children: jsx(
+  //         BaseContextualLayer,
+  //         Object.assign(
+  //           {},
+  //           {
+  //             align: 'middle',
+  //           },
+  //           rest,
+  //           {
+  //             children: jsx(themeWrapper, {
+  //               children: jsx(BaseTooltipContainer, {
+  //                 children: isPending
+  //                   ? jsx('div', {
+  //                       children: loadingState,
+  //                       className: dummyStyles.dummy1,
+  //                     })
+  //                   : jsxs(CometPlaceholder, {
+  //                       children: [
+  //                         jsx(repositionContextualLayer, {
+  //                           contextualLayerRef: ref,
+  //                         }),
+  //                         tooltip,
+  //                       ],
+  //                       fallback: loadingState,
+  //                     }),
+  //                 id,
+  //                 ref: fadeRef,
+  //                 shouldFadeIn: shouldBeVisible,
+  //                 xstyle,
+  //               }),
+  //             }),
 
-      imperativeRef: ref,
-      // ref: fadeRef,
-      xstyle: styles.contextualLayer
-    })),
-    clear: true
-  })
+  //             imperativeRef: ref,
+  //             // ref: fadeRef,
+  //             xstyle: styles.contextualLayer,
+  //           },
+  //         ),
+  //       ),
+  //       clear: true,
+  //     });
 
   // return !tooltip || !isTransitioning
   //   ? null
@@ -154,9 +190,7 @@ export function BaseTooltipImpl({
   //             role: 'tooltip',
   //           }),
 
-
   //           imperativeRef: ref,
-
 
   //           // ref: r,
   //           xstyle: styles.contextualLayer,

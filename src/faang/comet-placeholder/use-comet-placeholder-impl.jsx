@@ -4,15 +4,15 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import executionEnvironment from 'fbjs/lib/ExecutionEnvironment';
-import React, { useCallback, useLayoutEffect, useRef } from 'react';
-import { jsx, jsxs } from 'react/jsx-runtime';
+import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
+import React, { useCallback, useLayoutEffect, useRef } from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
 
-import { useStable } from '@/faang/hooks';
+import { useStable } from "@/faang/hooks";
 
-import { CometSuspenseHUD } from './comet-suspense-hud';
-import { CometSSRHydrationMarkerUtils } from './cometssr-hydration-marker-utils';
-import { HeroPlaceholder } from './hero-placeholder';
+import { CometSuspenseHUD } from "./comet-suspense-hud";
+import { CometSSRHydrationMarkerUtils } from "./cometssr-hydration-marker-utils";
+import { HeroPlaceholder } from "./hero-placeholder";
 
 function useLayoutEffectCallback(props) {
   const { cb } = props;
@@ -47,7 +47,7 @@ export function useCometPlaceholderImpl(props) {
 
   const element = useStable(() => {
     return CometSuspenseHUD && executionEnvironment.canUseDOM
-      ? window.document.createElement('div')
+      ? window.document.createElement("div")
       : null;
   });
 
@@ -67,8 +67,8 @@ export function useCometPlaceholderImpl(props) {
   //   (e = d('CometSSRHydrationMarkerUtils').addMarkersToFallback(e)))
 
   if (
-    CometSSRHydrationMarkerUtils.addMarkersToChildren != null &&
-    CometSSRHydrationMarkerUtils.addMarkersToFallback != null
+    CometSSRHydrationMarkerUtils.addMarkersToChildren &&
+    CometSSRHydrationMarkerUtils.addMarkersToFallback
   ) {
     _children = CometSSRHydrationMarkerUtils.addMarkersToChildren(_children);
     _fallback = CometSSRHydrationMarkerUtils.addMarkersToFallback(_fallback);
@@ -76,7 +76,7 @@ export function useCometPlaceholderImpl(props) {
 
   const onSuspense = useCallback(
     (content) => {
-      if (element != null) {
+      if (element) {
         element.textContent = content;
       }
       currentContent.current = content;
@@ -87,7 +87,7 @@ export function useCometPlaceholderImpl(props) {
 
   let CometSuspenseHUDComponent = null;
 
-  if (element != null && CometSuspenseHUD != null) {
+  if (element && CometSuspenseHUD) {
     CometSuspenseHUDComponent = jsx(CometSuspenseHUD, {
       desc: element,
     });
