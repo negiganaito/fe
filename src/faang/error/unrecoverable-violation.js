@@ -5,10 +5,11 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { FBLogger } from './fb-logger';
+import { FBLogger } from "./fb-logger";
 
 /* eslint-disable eqeqeq */
 
+// eslint-disable-next-line max-params
 export function unrecoverableViolation(msg, projectName, category, errObj) {
   errObj == undefined && (errObj = {});
   errObj = errObj.error;

@@ -4,13 +4,13 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext } from "react";
 
-import { HeroTracingPlaceholder } from '@/faang/trace/hero-tracing-placeholder';
-import { InteractionTracingMetrics } from '@/faang/trace/interaction-tracing-metrics';
-import { QPLEvent } from '@/faang/trace/qpl-event';
+import { HeroTracingPlaceholder } from "@/faang/trace/hero-tracing-placeholder";
+import { InteractionTracingMetrics } from "@/faang/trace/interaction-tracing-metrics";
+import { QPLEvent } from "@/faang/trace/qpl-event";
 
-import { FbError } from './fb-error';
+import { FbError } from "./fb-error";
 
 /**
  * Custom React hook for obtaining hero error metadata.
@@ -40,25 +40,25 @@ export function useHeroErrorMetadata() {
 
         if (pageletStack) {
           errorMetadata.addEntry(
-            'COMET_INFRA',
-            'INTERACTION_PAGELET_STACK',
-            pageletStack.join(',')
+            "COMET_INFRA",
+            "INTERACTION_PAGELET_STACK",
+            pageletStack.join(",")
           );
         }
 
         if (interactionMetrics && !interactionMetrics.qplAction) {
           if (interactionMetrics.qplEvent) {
             errorMetadata.addEntry(
-              'COMET_INFRA',
-              'INTERACTION_QPL_EVENT',
+              "COMET_INFRA",
+              "INTERACTION_QPL_EVENT",
               String(QPLEvent.getMarkerId(interactionMetrics.qplEvent))
             );
           }
 
           if (interactionMetrics.tracePolicy) {
             errorMetadata.addEntry(
-              'COMET_INFRA',
-              'INTERACTION_TRACE_POLICY',
+              "COMET_INFRA",
+              "INTERACTION_TRACE_POLICY",
               interactionMetrics.tracePolicy
             );
           }

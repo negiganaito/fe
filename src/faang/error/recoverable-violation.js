@@ -4,8 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { FBLogger } from './fb-logger';
+import { FBLogger } from "./fb-logger";
 
+// eslint-disable-next-line max-params
 export function recoverableViolation(
   errorMessage,
   loggerIdentifier,
@@ -28,7 +29,7 @@ export function recoverableViolation(
 
   let temp;
 
-  e = (temp = e == null ? undefined : e.trackOnly) != null ? temp : false;
+  e = (temp = e === null ? undefined : e.trackOnly) !== null ? temp : false;
 
   if (e) {
     logger.debug(errorMessage);

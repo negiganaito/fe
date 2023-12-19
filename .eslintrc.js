@@ -5,14 +5,14 @@
  * See the LICENSE file in the root directory for details.
  */
 
-const restrictedGlobals = require('confusing-browser-globals');
+const restrictedGlobals = require("confusing-browser-globals");
 
 const OFF = 0;
 const ERROR = 2;
 
 module.exports = {
   // Prettier must be last so it can override other configs (https://github.com/prettier/eslint-config-prettier#installation)
-  extends: ['alloy', 'alloy/react'],
+  extends: ["alloy", "alloy/react"],
 
   globals: {
     JSX: true,
@@ -22,9 +22,9 @@ module.exports = {
   overrides: [
     {
       // node scripts should be console logging so don't lint against that
-      files: ['scripts/**/*.js'],
+      files: ["scripts/**/*.js"],
       rules: {
-        'no-console': OFF,
+        "no-console": OFF,
       },
     },
 
@@ -33,33 +33,33 @@ module.exports = {
         browser: true,
       },
       extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended',
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
       ],
-      files: ['**/*.ts', '**/*.tsx'],
-      parser: '@typescript-eslint/parser',
+      files: ["**/*.ts", "**/*.tsx"],
+      parser: "@typescript-eslint/parser",
       parserOptions: {
-        sourceType: 'module',
+        sourceType: "module",
       },
-      plugins: ['react', '@typescript-eslint', 'header'],
+      plugins: ["react", "@typescript-eslint", "header"],
       rules: {
-        '@typescript-eslint/ban-ts-comment': OFF,
-        '@typescript-eslint/no-this-alias': OFF,
-        '@typescript-eslint/no-unused-vars': [ERROR, { args: 'none' }],
-        'header/header': [2, 'scripts/www/headerTemplate.js'],
+        "@typescript-eslint/ban-ts-comment": OFF,
+        "@typescript-eslint/no-this-alias": OFF,
+        "@typescript-eslint/no-unused-vars": [ERROR, { args: "none" }],
+        "header/header": [2, "scripts/www/headerTemplate.js"],
       },
     },
     {
       // don't lint headers in entrypoint files so we can add TypeDoc module comments
-      files: ['packages/**/src/index.ts'],
+      files: ["packages/**/src/index.ts"],
       rules: {
-        'header/header': OFF,
+        "header/header": OFF,
       },
     },
   ],
 
-  parser: '@babel/eslint-parser',
+  parser: "@babel/eslint-parser",
 
   parserOptions: {
     ecmaFeatures: {
@@ -67,20 +67,20 @@ module.exports = {
     },
     ecmaVersion: 11,
     requireConfigFile: false,
-    sourceType: 'module',
+    sourceType: "module",
   },
 
   plugins: [
-    'sort-keys-fix',
-    'simple-import-sort',
-    'header',
+    "sort-keys-fix",
+    "simple-import-sort",
+    "header",
 
     // import helps to configure simple-import-sort
-    'import',
-    'no-function-declare-after-return',
-    'react',
-    'no-only-tests',
-    '@stylexjs',
+    "import",
+    "no-function-declare-after-return",
+    "react",
+    "no-only-tests",
+    "@stylexjs",
   ],
 
   // Stop ESLint from looking for a configuration file in parent folders
@@ -89,53 +89,55 @@ module.exports = {
   // and then enable some React specific ones.
   rules: {
     // *
-    '@stylexjs/valid-styles': ['error'],
+    "@stylexjs/valid-styles": ["error"],
 
-    eqeqeq: [ERROR, 'allow-null'],
+    eqeqeq: [ERROR, "allow-null"],
 
-    'header/header': [2, 'scripts/www/headerTemplate.js'],
+    "header/header": [2, "scripts/www/headerTemplate.js"],
 
     // *
     // (This helps configure simple-import-sort) Make sure all imports are at the top of the file
-    'import/first': ERROR,
+    "import/first": ERROR,
 
     // *
     // (This helps configure simple-import-sort) Make sure there's a newline after the imports
-    'import/newline-after-import': ERROR,
+    "import/newline-after-import": ERROR,
 
     // *
     // (This helps configure simple-import-sort) Merge imports of the same file
-    'import/no-duplicates': ERROR,
+    "import/no-duplicates": ERROR,
 
     indent: OFF,
 
-    'jsx-quotes': [ERROR, 'prefer-double'],
+    "jsx-quotes": [ERROR, "prefer-double"],
 
     // Enforced by Prettier
     // TODO: Prettier doesn't handle long strings or long comments. Not a big
     // deal. But I turned it off because loading the plugin causes some obscure
     // syntax error and it didn't seem worth investigating.
-    'max-len': OFF,
+    "max-len": OFF,
 
     // 'max-len': ["error", { "code": 80 }],
 
     // 'no-multi-spaces': ERROR,
 
-    'no-unused-expressions': OFF, // ERROR
+    "no-unused-expressions": OFF, // ERROR
 
-    'no-unused-vars': [ERROR, { args: 'none' }],
+    "no-unused-vars": [ERROR, { args: "none" }],
 
     // We apply these settings to files that should run on Node.
     // They can't use JSX or ES6 modules, and must be in strict mode.
     // They can, however, use other ES6 features.
     // (Note these rules are overridden later for source files.)
-    'no-var': ERROR,
+    "no-var": ERROR,
 
-    'no-restricted-globals': [ERROR].concat(restrictedGlobals),
+    "no-restricted-globals": [ERROR].concat(restrictedGlobals),
 
-    'no-param-reassign': OFF,
-    'no-void': OFF,
+    "no-param-reassign": OFF,
+    "no-void": OFF,
 
-    'react/no-children-prop': OFF,
+    "react/no-children-prop": OFF,
+
+    "@typescript-eslint/no-explicit-any": OFF,
   },
 };

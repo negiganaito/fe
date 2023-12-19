@@ -4,315 +4,305 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from '@stylexjs/stylex';
-import {
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from 'react'
-import { jsx, jsxs } from 'react/jsx-runtime'
+import stylex from "@stylexjs/stylex";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
 
-import { BaseFocusRing, FocusWithinHandler } from '@/faang/focus';
-import { isBlueprintStylesEnabled, useMergeRefs } from '@/faang/hooks';
-import { CometFormInputValidationStateIcon } from '@/faang/input';
+import { BaseFocusRing, FocusWithinHandler } from "@/faang/focus";
+import { isBlueprintStylesEnabled, useMergeRefs } from "@/faang/hooks";
+import { CometFormInputValidationStateIcon } from "@/faang/input";
 
-import { CometFormInputWrapperHelperText } from './cometform-input-wrapper-helper-text';
-
+import { CometFormInputWrapperHelperText } from "./cometform-input-wrapper-helper-text";
 
 const aniShake = stylex.keyframes({
-  '10%': {
-    transform: 'translate3d(-1px,0,0)',
+  "10%": {
+    transform: "translate3d(-1px,0,0)",
   },
 
-  '20%': {
-    transform: 'translate3d(2px,0,0)',
+  "20%": {
+    transform: "translate3d(2px,0,0)",
   },
 
-  '30%': {
-    transform: 'translate3d(-4px,0,0)',
+  "30%": {
+    transform: "translate3d(-4px,0,0)",
   },
 
-  '40%': {
-    transform: 'translate3d(4px,0,0)',
+  "40%": {
+    transform: "translate3d(4px,0,0)",
   },
 
-  '50%': {
-    transform: 'translate3d(-4px,0,0)',
+  "50%": {
+    transform: "translate3d(-4px,0,0)",
   },
 
-  '60%': {
-    transform: 'translate3d(4px,0,0)',
+  "60%": {
+    transform: "translate3d(4px,0,0)",
   },
 
-  '70%': {
-    transform: 'translate3d(-4px,0,0)',
+  "70%": {
+    transform: "translate3d(-4px,0,0)",
   },
 
-  '80%': {
-    transform: 'translate3d(2px,0,0)',
+  "80%": {
+    transform: "translate3d(2px,0,0)",
   },
 
-  '90%': {
-    transform: 'translate3d(-1px,0,0)',
+  "90%": {
+    transform: "translate3d(-1px,0,0)",
   },
-})
+});
 
 const styles = stylex.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
   },
   disabled: {
     // eslint-disable-next-line @stylexjs/valid-styles
-    ':active': {
-      backgroundColor: 'var(--input-background-disabled)',
+    ":active": {
+      backgroundColor: "var(--input-background-disabled)",
     },
-    backgroundColor: 'var(--input-background-disabled)',
-    borderColor: 'var(--input-border-color)',
-    boxShadow: 'none',
-    cursor: 'not-allowed',
+    backgroundColor: "var(--input-background-disabled)",
+    borderColor: "var(--input-border-color)",
+    boxShadow: "none",
+    cursor: "not-allowed",
   },
   dummy: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
   },
   dummy2: {
-    display: 'flex',
-    width: '100%',
+    display: "flex",
+    width: "100%",
   },
   dummy3: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     flexGrow: 1,
-    maxWidth: '100%',
+    maxWidth: "100%",
     minWidth: 0,
-    position: 'relative',
+    position: "relative",
   },
   dummy4: {
-    display: 'flex',
+    display: "flex",
   },
   dummy5: {
-    marginTop: '8px',
+    marginTop: "8px",
   },
   error: {
     // eslint-disable-next-line @stylexjs/valid-styles
-    ':active': {
-      backgroundColor: 'hsla(var(--negative-h),var(--negative-s),var(--negative-l),.05)',
+    ":active": {
+      backgroundColor:
+        "hsla(var(--negative-h),var(--negative-s),var(--negative-l),.05)",
     },
-    borderColor: 'var(--negative)',
+    borderColor: "var(--negative)",
   },
   errorFocused: {
-    boxShadow: '0 0 0 3px hsla(var(--negative-h),var(--negative-s),var(--negative-l),.2) inset',
+    boxShadow:
+      "0 0 0 3px hsla(var(--negative-h),var(--negative-s),var(--negative-l),.2) inset",
   },
   errorHovered: {
-    backgroundColor: 'hsla(var(--negative-h),var(--negative-s),var(--negative-l),.05)',
+    backgroundColor:
+      "hsla(var(--negative-h),var(--negative-s),var(--negative-l),.05)",
   },
   headerMask: {
-    backgroundColor: 'var(--input-background)',
-    height: '16px',
-    left: '16px',
-    position: 'absolute',
-    right: '16px',
-    top: '8px',
+    backgroundColor: "var(--input-background)",
+    height: "16px",
+    left: "16px",
+    position: "absolute",
+    right: "16px",
+    top: "8px",
   },
   helperText: {
-    marginTop: '8px',
+    marginTop: "8px",
   },
   helperTextIsHidden: {
-    clip: 'rect(0,0,0,0)',
-    clipPath: 'inset(50%)',
-    height: '1px',
-    overflowX: 'hidden',
-    overflowY: 'hidden',
-    position: 'absolute',
-    width: '1px',
+    clip: "rect(0,0,0,0)",
+    clipPath: "inset(50%)",
+    height: "1px",
+    overflowX: "hidden",
+    overflowY: "hidden",
+    position: "absolute",
+    width: "1px",
   },
   hiddenHelperText: {
     // eslint-disable-next-line @stylexjs/valid-styles
-    WebkitClipPath: 'inset(50%)',
-    clip: 'rect(0,0,0,0)',
-    clipPath: 'inset(50%)',
-    height: '1px',
-    overflowX: 'hidden',
-    overflowY: 'hidden',
-    position: 'absolute',
-    width: '1px',
+    WebkitClipPath: "inset(50%)",
+    clip: "rect(0,0,0,0)",
+    clipPath: "inset(50%)",
+    height: "1px",
+    overflowX: "hidden",
+    overflowY: "hidden",
+    position: "absolute",
+    width: "1px",
   },
   hovered: {
-    borderColor: 'var(--input-border-color-hover)',
+    borderColor: "var(--input-border-color-hover)",
   },
   input: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     flexGrow: 1,
-    maxWidth: '100%',
-    minWidth: '0',
-    position: 'relative',
+    maxWidth: "100%",
+    minWidth: "0",
+    position: "relative",
   },
 
   inputRow: {
-    display: 'flex',
-    width: '100%',
+    display: "flex",
+    width: "100%",
   },
-
 
   label: {
-    fontSize: '1rem',
-    fontWeight: 'normal',
-    lineHeight: '1.25',
-    maxWidth: '100%',
-    transformOrigin: 'top left',
+    fontSize: "1rem",
+    fontWeight: "normal",
+    lineHeight: "1.25",
+    maxWidth: "100%",
+    transformOrigin: "top left",
   },
-
 
   labelDisabled: {
-    color: 'var(--disabled-text)',
+    color: "var(--disabled-text)",
   },
-
 
   labelError: {
-    color: 'var(--negative)',
+    color: "var(--negative)",
   },
-
 
   labelHighlighted: {
-    color: 'var(--input-label-color-highlighted)',
+    color: "var(--input-label-color-highlighted)",
   },
 
-
   labelInside: {
-    color: 'var(--secondary-text)',
-    cursor: 'inherit',
-    display: 'block',
-    left: '16px',
-    overflowX: 'hidden',
-    overflowY: 'hidden',
-    pointerEvents: 'none',
-    position: 'absolute',
-    right: '8px',
-    textOverflow: 'ellipsis',
-    top: '18px',
-    transitionDuration: 'var(--fds-fast)',
-    transitionProperty: 'transform',
-    transitionTimingFunction: 'var(--fds-soft)',
-    whiteSpace: 'nowrap',
+    color: "var(--secondary-text)",
+    cursor: "inherit",
+    display: "block",
+    left: "16px",
+    overflowX: "hidden",
+    overflowY: "hidden",
+    pointerEvents: "none",
+    position: "absolute",
+    right: "8px",
+    textOverflow: "ellipsis",
+    top: "18px",
+    transitionDuration: "var(--fds-fast)",
+    transitionProperty: "transform",
+    transitionTimingFunction: "var(--fds-soft)",
+    whiteSpace: "nowrap",
   },
 
   //
   labelInternal: {
-    color: 'var(--text-input-outside-label)',
-    fontSize: '1rem',
-    fontWeight: 'normal',
+    color: "var(--text-input-outside-label)",
+    fontSize: "1rem",
+    fontWeight: "normal",
     lineHeight: 1.25,
-    marginBottom: '8px',
-    maxWidth: '100%',
-    position: 'relative',
-    transformOrigin: 'top left',
+    marginBottom: "8px",
+    maxWidth: "100%",
+    position: "relative",
+    transformOrigin: "top left",
   },
 
   labelOutside: {
-    color: 'var(--text-input-outside-label)',
-    marginBottom: ' 8px',
-    position: 'relative',
+    color: "var(--text-input-outside-label)",
+    marginBottom: " 8px",
+    position: "relative",
   },
 
   labelShrunk: {
-    right: 'auto',
-    transform: 'scale(.75) translateY(-11px)',
+    right: "auto",
+    transform: "scale(.75) translateY(-11px)",
   },
 
   root: {
     // eslint-disable-next-line @stylexjs/valid-styles
-    ':active': {
-      backgroundColor: 'hsla(var(--accent-h),var(--accent-s),var(--accent-l),.05)',
+    ":active": {
+      backgroundColor:
+        "hsla(var(--accent-h),var(--accent-s),var(--accent-l),.05)",
     },
-    backgroundColor: 'var(--input-background)',
-    borderColor: 'var(--input-border-color)',
-    borderRadius: 'var(--input-corner-radius)',
-    borderStyle: 'solid',
-    borderWidth: 'var(--input-border-width)',
-    display: 'flex',
-    flexDirection: 'column',
-    overflowX: 'hidden',
-    overflowY: 'hidden',
-    position: 'relative',
-    zIndex: 'unset',
+    backgroundColor: "var(--input-background)",
+    borderColor: "var(--input-border-color)",
+    borderRadius: "var(--input-corner-radius)",
+    borderStyle: "solid",
+    borderWidth: "var(--input-border-width)",
+    display: "flex",
+    flexDirection: "column",
+    overflowX: "hidden",
+    overflowY: "hidden",
+    position: "relative",
+    zIndex: "unset",
   },
 
-
-
   secondary: {
-    display: 'flex',
+    display: "flex",
   },
 
   shake: {
-    animationDuration: '.82s',
-    animationFillMode: 'both',
+    animationDuration: ".82s",
+    animationFillMode: "both",
     animationName: aniShake,
-    animationTimingFunction: 'var(--fds-soft)',
+    animationTimingFunction: "var(--fds-soft)",
   },
 
   validationIcon: {
-    paddingRight: '16px',
-    paddingTop: '18px',
+    paddingRight: "16px",
+    paddingTop: "18px",
   },
 
   validationIconHideLabel: {
-    paddingTop: '12px',
+    paddingTop: "12px",
   },
 
   warn: {
     // eslint-disable-next-line @stylexjs/valid-styles
-    ':active': {
-      backgroundColor: 'hsla(var(--warning-h),var(--warning-s),var(--warning-l),.05)',
+    ":active": {
+      backgroundColor:
+        "hsla(var(--warning-h),var(--warning-s),var(--warning-l),.05)",
     },
-    borderColor: 'var(--warning)',
+    borderColor: "var(--warning)",
   },
 
   warnFocused: {
     boxShadow:
-      '0 0 0 3px hsla(var(--warning-h),var(--warning-s),var(--warning-l),.2) inset',
+      "0 0 0 3px hsla(var(--warning-h),var(--warning-s),var(--warning-l),.2) inset",
   },
 
   warnHovered: {
     backgroundColor:
-      'hsla(var(--warning-h),var(--warning-s),var(--warning-l),.05)',
+      "hsla(var(--warning-h),var(--warning-s),var(--warning-l),.05)",
   },
-})
+});
 
 const cursorStyles = stylex.create({
   pointer: {
-    cursor: 'pointer',
+    cursor: "pointer",
   },
   text: {
-    cursor: 'text',
+    cursor: "text",
   },
-})
+});
 
 const bluePrintStyles = stylex.create({
   root: {
-    borderRadius: '12px',
+    borderRadius: "12px",
   },
-})
-
+});
 
 function isEmptyOrFalsy(value) {
   if (Array.isArray(value)) {
-    return value.length === 0
-  } else if (typeof value === 'object') {
+    return value.length === 0;
+  } else if (typeof value === "object") {
     if (value) {
-      for (let b in value) {
-        return false
+      // eslint-disable-next-line guard-for-in, no-unreachable-loop
+      for (let _b in value) {
+        return false;
       }
     }
-    return true
+    return true;
   } else {
-    return value == null || value === ''
+    return value === null || value === "";
   }
 }
-
 
 /**
  * @typedef {Object} CometFormInputWrapperProps
@@ -347,20 +337,19 @@ function isEmptyOrFalsy(value) {
  */
 
 /**
- * 
- * @param {CometFormInputWrapperProps} props 
- * @returns 
+ *
+ * @param {CometFormInputWrapperProps} props
+ * @returns
  */
 export function CometFormInputWrapper(props) {
-
   const {
     addOnBottom,
     addOnStart,
     alwaysShrinkLabel = false,
-    'aria-activedescendant': ariaActivedescendant,
-    'aria-controls': ariaControls,
-    'aria-expanded': ariaExpanded,
-    'aria-haspopup': ariaHaspopup,
+    "aria-activedescendant": ariaActivedescendant,
+    "aria-controls": ariaControls,
+    "aria-expanded": ariaExpanded,
+    "aria-haspopup": ariaHaspopup,
     ariaLabel,
     auxContent,
     children,
@@ -372,7 +361,7 @@ export function CometFormInputWrapper(props) {
     helperTextIsHidden = false,
     hideLabel = false,
     label,
-    labelLocation_INTERNAL = 'inside',
+    labelLocation_INTERNAL = "inside",
     labelRef,
     onFocusChange,
     onPress,
@@ -382,105 +371,177 @@ export function CometFormInputWrapper(props) {
     validationState,
     value,
     withHeaderMask = false,
-  } = props
+  } = props;
 
-  const id = useId()
-  const id2 = useId()
+  const id = useId();
+  const id2 = useId();
 
+  const [isShake, setShake] = useState(false);
+  const [_hovered, setHovered] = useState(false);
 
-  const [isShake, setShake] = useState(false)
-  const [_hovered, setHovered] = useState(false)
+  const filled = !isEmptyOrFalsy(value);
 
-  const filled = !isEmptyOrFalsy(value)
-
-  const labelLocation_INTERNALOutside = labelLocation_INTERNAL === 'outside'
+  const labelLocation_INTERNALOutside = labelLocation_INTERNAL === "outside";
 
   const W = (bool) => {
     return labelLocation_INTERNALOutside
-      ? jsx('label', {
-        children: label,
-        className: styles.labelInternal,
-        suppressHydrationWarning: true,
-      })
-      : jsx('span', {
-        children: label,
-        className: stylex(
-          styles.label,
-          styles.labelInside,
-          validationState === 'ERROR' && styles.labelError,
-          validationState == null && bool && styles.labelHighlighted,
-          (filled || alwaysShrinkLabel || (bool && shrinkLabelOnFocus)) &&
-          styles.labelShrunk,
-          disabled && styles.labelDisabled,
-        ),
-        ref: labelRef,
-      })
-  }
+      ? jsx("label", {
+          children: label,
+          className: styles.labelInternal,
+          suppressHydrationWarning: true,
+        })
+      : jsx("span", {
+          children: label,
+          className: stylex(
+            styles.label,
+            styles.labelInside,
+            validationState === "ERROR" && styles.labelError,
+            validationState === null && bool && styles.labelHighlighted,
+            (filled || alwaysShrinkLabel || (bool && shrinkLabelOnFocus)) &&
+              styles.labelShrunk,
+            disabled && styles.labelDisabled
+          ),
+          ref: labelRef,
+        });
+  };
 
   const onMouseEnterCb = useCallback(() => {
-    _hovered || setHovered(true)
-  }, [_hovered])
+    _hovered || setHovered(true);
+  }, [_hovered]);
 
   const onMouseLeaveCb = useCallback(() => {
-    _hovered && setHovered(false)
-  }, [_hovered])
+    _hovered && setHovered(false);
+  }, [_hovered]);
 
-  const rootRef = useRef(null)
-  const wrapperRef = useRef(null)
+  const rootRef = useRef(null);
+  const wrapperRef = useRef(null);
 
-  const _ref = useMergeRefs(rootRef, containerRef)
+  const _ref = useMergeRefs(rootRef, containerRef);
 
-  const [ba, ca] = useState(false)
+  const [ba, ca] = useState(false);
 
   useEffect(() => {
     if (!comboboxKeyDown) {
-      return
+      return;
     }
-    let a = wrapperRef && wrapperRef.current
+    let a = wrapperRef && wrapperRef.current;
     if (a) {
-      a.addEventListener('keydown', comboboxKeyDown)
+      a.addEventListener("keydown", comboboxKeyDown);
       return () => {
-        a.removeEventListener('keydown', comboboxKeyDown)
-      }
+        a.removeEventListener("keydown", comboboxKeyDown);
+      };
     }
-  }, [comboboxKeyDown])
+  }, [comboboxKeyDown]);
 
-  return jsxs('div', {
+  return (
+    <div className={stylex(styles.dummy)} ref={wrapperRef}>
+      {/*  */}
+      {labelLocation_INTERNALOutside && W(false)}
+
+      {/*  */}
+
+      <FocusWithinHandler
+        onFocusChange={onFocusChange}
+        children={(_focused) => {
+          return (
+            <BaseFocusRing
+              suppressFocusRing={!ba || suppressFocusRing}
+              children={(focusRingClassname) => {
+                return (
+                  <label
+                    aria-activedescendant={ariaActivedescendant}
+                    aria-controls={ariaControls}
+                    aria-expanded={ariaExpanded}
+                    aria-haspopup={ariaHaspopup}
+                    aria-label={ariaLabel ? ariaLabel : label}
+                    className={stylex(
+                      styles.root,
+                      isBlueprintStylesEnabled() && bluePrintStyles.root,
+                      cursorStyles[cursor],
+                      _hovered && styles.hovered,
+                      _focused && BaseFocusRing.focusRingXStyle,
+                      validationState === "WARN" && styles.warn,
+                      validationState === "WARN" &&
+                        _hovered &&
+                        styles.warnHovered,
+                      validationState === "WARN" &&
+                        _focused &&
+                        styles.warnFocused,
+                      //
+                      validationState === "ERROR" && styles.error,
+                      validationState === "ERROR" &&
+                        _hovered &&
+                        styles.errorHovered,
+                      validationState === "ERROR" &&
+                        _focused &&
+                        styles.errorFocused,
+                      //
+                      disabled && styles.disabled,
+                      isShake && styles.shake,
+                      focusRingClassname
+                    )}
+                  />
+                );
+              }}
+            />
+          );
+        }}
+      />
+
+      {/*  */}
+      {helperText &&
+        (helperTextIsHidden ? (
+          <div className={stylex(styles.helperTextIsHidden)} id={id2}>
+            {helperText}
+          </div>
+        ) : (
+          <div className={stylex(styles.dummy5)} id={id2}>
+            <CometFormInputWrapperHelperText
+              validationState={validationState}
+              value={helperText}
+            />
+          </div>
+        ))}
+    </div>
+  );
+
+  return jsxs("div", {
     children: [
       labelLocation_INTERNALOutside && W(false),
       jsx(FocusWithinHandler, {
         children: (_focused) => {
           return jsx(BaseFocusRing, {
+            // eslint-disable-next-line complexity
             children: (focusRingClassname) => {
-              return jsxs('label', {
-                'aria-activedescendant': ariaActivedescendant,
-                'aria-controls': ariaControls,
-                'aria-expanded': ariaExpanded,
-                'aria-haspopup': ariaHaspopup,
-                'aria-label': ariaLabel ? ariaLabel : label,
+              return jsxs("label", {
+                "aria-activedescendant": ariaActivedescendant,
+                "aria-controls": ariaControls,
+                "aria-expanded": ariaExpanded,
+                "aria-haspopup": ariaHaspopup,
+                "aria-label": ariaLabel ? ariaLabel : label,
                 children: [
-                  jsxs('div', {
+                  jsxs("div", {
                     children: [
                       addOnStart,
-                      jsxs('div', {
+                      jsxs("div", {
                         children: [
                           withHeaderMask &&
-                          !disabled &&
-                          (filled || _focused) &&
-                          jsx('span', {
-                            className: stylex(
-                              styles.headerMask,
-                              validationState === 'WARN' &&
-                              _hovered &&
-                              styles.warnHovered,
-                              validationState === 'ERROR' &&
-                              _hovered &&
-                              styles.errorHovered,
-                            ),
-                          }),
+                            !disabled &&
+                            (filled || _focused) &&
+                            jsx("span", {
+                              className: stylex(
+                                styles.headerMask,
+                                validationState === "WARN" &&
+                                  _hovered &&
+                                  styles.warnHovered,
+                                validationState === "ERROR" &&
+                                  _hovered &&
+                                  styles.errorHovered
+                              ),
+                            }),
                           !hideLabel &&
-                          !labelLocation_INTERNALOutside &&
-                          W(_focused),
+                            !labelLocation_INTERNALOutside &&
+                            W(_focused),
                           jsx(FocusWithinHandler, {
                             children: children({
                               filled: filled,
@@ -496,22 +557,25 @@ export function CometFormInputWrapper(props) {
                         className: stylex(styles.dummy3),
                       }),
                       (auxContent || validationState) &&
-                      jsxs('div', {
-                        children: [
-                          validationState &&
-                          jsx('div', {
-                            // TODO
-                            children: CometFormInputValidationStateIcon[validationState],
+                        jsxs("div", {
+                          children: [
+                            validationState &&
+                              jsx("div", {
+                                // TODO
+                                children:
+                                  CometFormInputValidationStateIcon[
+                                    validationState
+                                  ],
 
-                            className: stylex(
-                              styles.validationIcon,
-                              hideLabel && styles.validationIconHideLabel,
-                            ),
-                          }),
-                          auxContent,
-                        ],
-                        className: stylex(styles.dummy4),
-                      }),
+                                className: stylex(
+                                  styles.validationIcon,
+                                  hideLabel && styles.validationIconHideLabel
+                                ),
+                              }),
+                            auxContent,
+                          ],
+                          className: stylex(styles.dummy4),
+                        }),
                     ],
                     className: stylex(styles.dummy2),
                   }),
@@ -523,59 +587,59 @@ export function CometFormInputWrapper(props) {
                   cursorStyles[cursor],
                   _hovered && styles.hovered,
                   _focused && BaseFocusRing.focusRingXStyle,
-                  validationState === 'WARN' && styles.warn,
-                  validationState === 'WARN' && _hovered && styles.warnHovered,
-                  validationState === 'WARN' && _focused && styles.warnFocused,
+                  validationState === "WARN" && styles.warn,
+                  validationState === "WARN" && _hovered && styles.warnHovered,
+                  validationState === "WARN" && _focused && styles.warnFocused,
                   //
-                  validationState === 'ERROR' && styles.error,
-                  validationState === 'ERROR' &&
-                  _hovered &&
-                  styles.errorHovered,
-                  validationState === 'ERROR' &&
-                  _focused &&
-                  styles.errorFocused,
+                  validationState === "ERROR" && styles.error,
+                  validationState === "ERROR" &&
+                    _hovered &&
+                    styles.errorHovered,
+                  validationState === "ERROR" &&
+                    _focused &&
+                    styles.errorFocused,
                   //
                   disabled && styles.disabled,
                   isShake && styles.shake,
-                  focusRingClassname,
+                  focusRingClassname
                 ),
                 htmlFor: id,
                 onAnimationEnd: () => {
-                  setShake(false)
+                  setShake(false);
                 },
                 onClick: (event) => {
-                  disabled ? setShake(true) : onPress && onPress(event)
+                  disabled ? setShake(true) : onPress && onPress(event);
                 },
                 onMouseEnter: onMouseEnterCb,
                 onMouseLeave: onMouseLeaveCb,
                 ref: _ref,
-                role: onPress ? (role ? role : 'button') : void 0,
+                role: onPress ? (role ? role : "button") : void 0,
                 suppressHydrationWarning: true,
                 tabIndex: onPress ? 0 : void 0,
-              })
+              });
             },
             suppressFocusRing: !ba || suppressFocusRing,
-          })
+          });
         },
         onFocusChange,
       }),
-      helperText &&
-      (helperTextIsHidden
-        ? jsx('div', {
-          children: helperText,
-          className: stylex(styles.helperTextIsHidden),
-          id: id2,
-        })
-        : jsx('div', {
-          children: jsx(CometFormInputWrapperHelperText, {
-            validationState,
-            value: helperText,
-          }),
-          className: stylex(styles.dummy5),
-          id: id2,
-        })),
+      // helperText &&
+      //   (helperTextIsHidden
+      //     ? jsx("div", {
+      //         children: helperText,
+      //         className: stylex(styles.helperTextIsHidden),
+      //         id: id2,
+      //       })
+      //     : jsx("div", {
+      //         children: jsx(CometFormInputWrapperHelperText, {
+      //           validationState,
+      //           value: helperText,
+      //         }),
+      //         className: stylex(styles.dummy5),
+      //         id: id2,
+      //       })),
     ],
     className: stylex(styles.dummy),
     ref: wrapperRef,
-  })
+  });
 }

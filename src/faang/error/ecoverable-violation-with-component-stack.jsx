@@ -4,12 +4,13 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { jsx } from 'react/jsx-runtime';
 
-import { CometErrorBoundary } from './comet-error-boundary';
+import { CometErrorBoundary } from "./comet-error-boundary";
+import { err } from "./err";
 
-function parseError(errorMessage) {
-  throw new Error(errorMessage);
+function ParseError(errorMessage) {
+  // throw new Error(errorMessage);
+  throw err(errorMessage);
 }
 
 /**
@@ -19,11 +20,23 @@ function parseError(errorMessage) {
 export const RecoverableViolationWithComponentStack = (props) => {
   const { errorMessage, fallback, projectName } = props;
 
-  return jsx(CometErrorBoundary, {
-    children: jsx(parseError, {
-      errorMessage,
-    }),
-    context: { project: projectName, type: 'error' },
-    fallback: () => (fallback != null ? fallback : null),
-  });
+  // return jsx(CometErrorBoundary, {
+  //   children: jsx(ParseError, {
+  //     errorMessage,
+  //   }),
+  //   context: { project: projectName, type: "error" },
+  //   fallback: () => (fallback ? fallback : null),
+  // });
+
+  return (
+    <CometErrorBoundary
+      context={{
+        project: projectName,
+        type: "error",
+      }}
+      fallback={() => (fallback ? fallback : null)}
+    >
+      <ParseError errorMessage={errorMessage} />
+    </CometErrorBoundary>
+  );
 };

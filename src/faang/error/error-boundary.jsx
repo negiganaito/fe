@@ -4,12 +4,12 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from "react";
 
-import { ErrorPubSub } from './error-pub-sub';
-import { ErrorSerializer } from './error-serializer';
-import { getErrorSafe } from './get-error-safe';
-import { getReactElementDisplayName } from './get-react-element-display-name';
+import { ErrorPubSub } from "./error-pub-sub";
+import { ErrorSerializer } from "./error-serializer";
+import { getErrorSafe } from "./get-error-safe";
+import { getReactElementDisplayName } from "./get-react-element-display-name";
 
 function getReactDisplayName(children) {
   const _children =
@@ -20,6 +20,7 @@ function getReactDisplayName(children) {
 }
 
 export class ErrorBoundary extends PureComponent {
+  // eslint-disable-next-line react/sort-comp
   static defaultProps = {
     forceResetErrorCount: 0,
   };
@@ -45,9 +46,10 @@ export class ErrorBoundary extends PureComponent {
   componentDidUpdate(prevProps) {
     if (
       this.state.error &&
-      this.props.forceResetErrorCount != null &&
+      this.props.forceResetErrorCount &&
       this.props.forceResetErrorCount !== prevProps.forceResetErrorCount
     ) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         error: null,
       });
@@ -60,32 +62,32 @@ export class ErrorBoundary extends PureComponent {
     let {
       augmentError,
       context = {},
-      description = 'base',
+      description = "base",
       onError,
     } = this.props;
 
-    if (context.messageFormat == null) {
-      context.messageFormat = 'caught error in module %s (%s)';
+    if (!context.messageFormat) {
+      context.messageFormat = "caught error in module %s (%s)";
       context.messageParams = [this.state.moduleName, description];
     }
 
     const { error, moduleName } = this.state;
 
-    if (error != null) {
+    if (error) {
       ErrorSerializer.aggregateError(error, {
         componentStack,
-        loggingSource: 'ERROR_BOUNDARY',
+        loggingSource: "ERROR_BOUNDARY",
       });
 
       ErrorSerializer.aggregateError(error, context);
 
-      if (typeof augmentError === 'function') {
+      if (typeof augmentError === "function") {
         augmentError(error);
       }
 
       ErrorPubSub.reportError(error);
 
-      if (typeof onError === 'function') {
+      if (typeof onError === "function") {
         onError(error, moduleName);
       }
     }
@@ -95,8 +97,8 @@ export class ErrorBoundary extends PureComponent {
     const { error, moduleName } = this.state;
     if (error) {
       const { fallback } = this.props;
-      return fallback != null ? fallback(error, moduleName) : null;
+      return fallback ? fallback(error, moduleName) : null;
     }
-    return this.props.children != null ? this.props.children : null;
+    return this.props.children ? this.props.children : null;
   }
 }

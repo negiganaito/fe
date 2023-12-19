@@ -9,5 +9,5 @@ export function getReactComponentDisplayName(comp) {
     return comp.displayName;
   }
 
-  return comp.name ?? 'ReactComponent';
+  return comp.name ?? "ReactComponent";
 }

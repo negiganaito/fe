@@ -4,10 +4,10 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import React from 'react';
+import React from "react";
 
-import { CometErrorBoundary } from './comet-error-boundary';
-import { err } from './err';
+import { CometErrorBoundary } from "./comet-error-boundary";
+import { err } from "./err";
 
 function ThrowErr(props) {
   const { errorMessage } = props;
@@ -19,7 +19,7 @@ export const RecoverableViolationWithComponentStack = (props) => {
 
   return (
     <CometErrorBoundary
-      context={{ project: projectName, type: 'error' }}
+      context={{ project: projectName, type: "error" }}
       fallback={() => fallback ?? null}
       // eslint-disable-next-line react/no-children-prop
       children={<ThrowErr errorMessage={errorMessage} />}

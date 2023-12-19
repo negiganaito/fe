@@ -4,14 +4,14 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { unstable_Scope, useMemo, useRef, useState } from 'react';
-import { jsx } from 'react/jsx-runtime';
+import { unstable_Scope, useMemo, useRef, useState } from "react";
+import { jsx } from "react/jsx-runtime";
 
-import { ReactFocusEvent } from '@/faang/react-interactions/react-focus-event';
+import { ReactFocusEvent } from "@/faang/react-interactions/react-focus-event";
 
 /**
  *
- * @param {import("./focus-within-handler-non-strict-mode_DEPRECATED").FocusWithinHandlerNonStrictModeReactProps} param0
+ * @param {import("./types").FocusWithinHandlerNonStrictModeReactProps} param0
  */
 export function FocusWithinHandlerNonStrictMode_DEPRECATED({
   onBlurWithin,
@@ -45,29 +45,27 @@ export function FocusWithinHandlerNonStrictMode_DEPRECATED({
     ref,
     useMemo(() => {
       return {
-        onBlurWithin: (e) => {
+        onBlurWithin: (ev) => {
           if (onBlurWithin && isFocus) {
-            onBlurWithin(e);
+            onBlurWithin(ev);
           }
-          // onBlurWithin && isFocus && onBlurWithin(e)
         },
-        onFocusWithin: (e) => {
+        onFocusWithin: (ev) => {
           if (onFocusWithin && !isFocus) {
-            onFocusWithin(e);
+            onFocusWithin(ev);
           }
-          // onFocusWithin && !isFocus && onFocusWithin(e)
         },
         onFocusWithinChange: onFocusChange
-          ? (e) => {
-            setFocus(e);
-            onFocusChange(e);
-          }
+          ? (ev) => {
+              setFocus(ev);
+              onFocusChange(ev);
+            }
           : setFocus,
         onFocusWithinVisibleChange: onFocusVisibleChange
-          ? (e) => {
-            setFocusVisible(e);
-            onFocusVisibleChange(e);
-          }
+          ? (ev) => {
+              setFocusVisible(ev);
+              onFocusVisibleChange(ev);
+            }
           : setFocusVisible,
       };
     }, [
@@ -81,7 +79,7 @@ export function FocusWithinHandlerNonStrictMode_DEPRECATED({
 
   return jsx(unstable_Scope, {
     children:
-      typeof children === 'function'
+      typeof children === "function"
         ? children(isFocus, isFocusVisible)
         : children,
     ref: focusWithinStrictModeRef,

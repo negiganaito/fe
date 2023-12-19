@@ -10,10 +10,10 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react';
-import { jsx } from 'react/jsx-runtime';
+} from "react";
+import { jsx } from "react/jsx-runtime";
 
-import { ReactFocusEvent } from '@/faang/react-interactions/react-focus-event';
+import { ReactFocusEvent } from "@/faang/react-interactions/react-focus-event";
 
 /**
  *
@@ -57,15 +57,15 @@ export function FocusWithinHandlerStrictMode({
         },
         onFocusWithinChange: onFocusChange
           ? (e) => {
-            setFocus(e);
-            onFocusChange(e);
-          }
+              setFocus(e);
+              onFocusChange(e);
+            }
           : setFocus,
         onFocusWithinVisibleChange: onFocusVisibleChange
           ? (e) => {
-            setFocusVisible(e);
-            onFocusVisibleChange(e);
-          }
+              setFocusVisible(e);
+              onFocusVisibleChange(e);
+            }
           : setFocusVisible,
       };
     }, [
@@ -86,7 +86,7 @@ export function FocusWithinHandlerStrictMode({
 
   return jsx(unstable_Scope, {
     children:
-      typeof children === 'function'
+      typeof children === "function"
         ? children(isFocus, isFocusVisible)
         : children,
     ref,

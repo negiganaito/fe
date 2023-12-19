@@ -7,6 +7,19 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+export type FocusWithinHandlerNonStrictModeReactProps = {
+  children:
+    | ((
+        isFocus: boolean | undefined,
+        isFocusVisible: boolean | undefined
+      ) => React.ReactNode)
+    | React.ReactNode;
+  onFocusChange?: (...props: any) => any;
+  onFocusVisibleChange?: (...props: any) => any;
+  onFocusWithin?: (...props: any) => any;
+  onBlurWithin?: (...props: any) => any;
+  testOnly?: string;
+};
 
 export type FocusWithinHandlerStrictModeProps = {
   children?: any;
@@ -14,9 +27,5 @@ export type FocusWithinHandlerStrictModeProps = {
   onFocusVisibleChange?: (...props: any) => any;
   onFocusWithin?: (...props: any) => any;
   onBlurWithin?: (...props: any) => any;
-  testOnly?: any;
+  testOnly?: string;
 };
-
-declare function FocusWithinHandlerStrictMode(
-  props: FocusWithinHandlerStrictModeProps
-);

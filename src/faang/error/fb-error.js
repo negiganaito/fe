@@ -11,10 +11,12 @@
 /* eslint-disable no-catch-shadow */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-func-assign */
+/* eslint-disable no-inner-declarations */
+/* eslint-disable no-sequences */
+/* eslint-disable no-invalid-this */
 
-
-import performanceNowSinceAppStart from 'fbjs/lib/performanceNow';
-import removeFromArray from 'fbjs/lib/removeFromArray';
+import performanceNowSinceAppStart from "fbjs/lib/performanceNow";
+import removeFromArray from "fbjs/lib/removeFromArray";
 
 const g = {
   FORCED_KEY: 4,
@@ -28,7 +30,7 @@ function h(b) {
   if (a.stack === void 0)
     try {
       throw a;
-    } catch (a) { }
+    } catch (a) {}
   a.messageFormat = b;
   for (
     var c = arguments.length, d = new Array(c > 1 ? c - 1 : 0), e = 1;
@@ -36,7 +38,7 @@ function h(b) {
     e++
   )
     d[e - 1] = arguments[e];
-  a.messageParams = d.map(function (a) {
+  a.messageParams = d.map((a) => {
     return String(a);
   });
   a.taalOpcodes = [g.PREVIOUS_FRAME];
@@ -46,13 +48,13 @@ let i = !1;
 let j = {
   errorListener: function (b) {
     let c = window.console;
-    let d = c[b.type] ? b.type : 'error';
-    if (b.type === 'fatal' || (d === 'error' && !i)) {
+    let d = c[b.type] ? b.type : "error";
+    if (b.type === "fatal" || (d === "error" && !i)) {
       d = b.message;
       c.error(
-        'ErrorUtils caught an error:\n\n' +
-        d +
-        "\n\nSubsequent non-fatal errors won't be logged; see https://fburl.com/debugjs."
+        "ErrorUtils caught an error:\n\n" +
+          d +
+          "\n\nSubsequent non-fatal errors won't be logged; see https://fburl.com/debugjs."
       );
       i = !0;
     }
@@ -72,12 +74,12 @@ function q() {
     let c = a - n;
     for (
       var d = o,
-      e = Array.isArray(d),
-      f = 0,
-      // eslint-disable-next-line no-redeclare
-      d = e
-        ? d
-        : d[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+        e = Array.isArray(d),
+        f = 0,
+        // eslint-disable-next-line no-redeclare
+        d = e
+          ? d
+          : d[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"]();
       ;
 
     ) {
@@ -103,7 +105,7 @@ function r(a) {
   q();
   let c = performanceNowSinceAppStart();
   let d = o.get(a);
-  if (d == null) {
+  if (!d) {
     o.set(a, {
       dropped: 0,
       lastAccessed: c,
@@ -129,68 +131,68 @@ let s = {
     return r(a.hash);
   },
 };
-let t = 'RE_EXN_ID';
+let t = "RE_EXN_ID";
 function u(a) {
   let b = null;
-  a == null || typeof a !== 'object'
-    ? (b = h('Non-object thrown: %s', String(a)))
+  !a || typeof a !== "object"
+    ? (b = h("Non-object thrown: %s", String(a)))
     : Object.prototype.hasOwnProperty.call(a, t)
-      ? (b = h('Rescript exception thrown: %s', JSON.stringify(a)))
-      : typeof (a === null || a === void 0 ? void 0 : a.then) === 'function'
-        ? (b = h('Promise thrown: %s', JSON.stringify(a)))
-        : typeof a.message !== 'string'
-          ? (b = h(
-            'Non-error thrown: %s, keys: %s',
-            String(a),
-            JSON.stringify(Object.keys(a).sort())
-          ))
-          : a.messageFormat != null && typeof a.messageFormat !== 'string'
-            ? (b = h(
-              'Error with non-string messageFormat thrown: %s, %s, keys: %s',
-              String(a.message),
-              String(a),
-              JSON.stringify(Object.keys(a).sort())
-            ))
-            : Object.isExtensible &&
-            !Object.isExtensible(a) &&
-            (b = h('Non-extensible thrown: %s', String(a.message)));
-  if (b != null) {
+    ? (b = h("Rescript exception thrown: %s", JSON.stringify(a)))
+    : typeof (a === null || a === void 0 ? void 0 : a.then) === "function"
+    ? (b = h("Promise thrown: %s", JSON.stringify(a)))
+    : typeof a.message !== "string"
+    ? (b = h(
+        "Non-error thrown: %s, keys: %s",
+        String(a),
+        JSON.stringify(Object.keys(a).sort())
+      ))
+    : a.messageFormat && typeof a.messageFormat !== "string"
+    ? (b = h(
+        "Error with non-string messageFormat thrown: %s, %s, keys: %s",
+        String(a.message),
+        String(a),
+        JSON.stringify(Object.keys(a).sort())
+      ))
+    : Object.isExtensible &&
+      !Object.isExtensible(a) &&
+      (b = h("Non-extensible thrown: %s", String(a.message)));
+  if (b) {
     b.taalOpcodes = b.taalOpcodes || [];
     b.taalOpcodes.push(g.PREVIOUS_FRAME);
     return b;
   }
   return a;
 }
-let aa = typeof window === 'undefined' ? '<self.onerror>' : '<window.onerror>';
+let aa = typeof window === "undefined" ? "<self.onerror>" : "<window.onerror>";
 let v;
 function ba(a) {
-  let b = a.error != null ? u(a.error) : h(a.message || '');
-  b.fileName == null && a.filename != null && (b.fileName = a.filename);
-  b.line == null && a.lineno != null && (b.line = a.lineno);
-  b.column == null && a.colno != null && (b.column = a.colno);
+  let b = a.error ? u(a.error) : h(a.message || "");
+  b.fileName === null && a.filename !== null && (b.fileName = a.filename);
+  b.line === null && a.lineno !== null && (b.line = a.lineno);
+  b.column === null && a.colno !== null && (b.column = a.colno);
   b.guardList = [aa];
-  b.loggingSource = 'ONERROR';
+  b.loggingSource = "ONERROR";
   (a = v) === null || a === void 0 ? void 0 : a.reportError(b);
 }
 let w = {
   setup: function (b) {
-    if (typeof window.addEventListener !== 'function') return;
-    if (v != null) return;
+    if (typeof window.addEventListener !== "function") return;
+    if (v !== null) return;
     v = b;
-    window.addEventListener('error', ba);
+    window.addEventListener("error", ba);
   },
 };
 let x = [];
 let y = {
   cloneGuardList: function () {
-    return x.map(function (a) {
+    return x.map((a) => {
       return a.name;
     });
   },
   findDeferredSource: function () {
     for (let a = 0; a < x.length; a++) {
       let b = x[a];
-      if (b.deferredSource != null) return b.deferredSource;
+      if (b.deferredSource !== null) return b.deferredSource;
     }
   },
   inGuard: function () {
@@ -204,18 +206,18 @@ let y = {
   },
 };
 function ca(a) {
-  if (a.type != null) return a.type;
-  if (a.loggingSource == 'GUARDED' || a.loggingSource == 'ERROR_BOUNDARY')
-    return 'fatal';
-  if (a.name == 'SyntaxError') return 'fatal';
+  if (a.type !== null) return a.type;
+  if (a.loggingSource == "GUARDED" || a.loggingSource == "ERROR_BOUNDARY")
+    return "fatal";
+  if (a.name == "SyntaxError") return "fatal";
   if (
-    a.loggingSource == 'ONERROR' &&
-    a.message.indexOf('ResizeObserver loop') >= 0
+    a.loggingSource == "ONERROR" &&
+    a.message.indexOf("ResizeObserver loop") >= 0
   )
-    return 'warn';
-  return a.stack != null && a.stack.indexOf('chrome-extension://') >= 0
-    ? 'warn'
-    : 'error';
+    return "warn";
+  return a.stack !== null && a.stack.indexOf("chrome-extension://") >= 0
+    ? "warn"
+    : "error";
 }
 
 let z = [];
@@ -268,8 +270,8 @@ class A {
       .filter((entry) => entry && entry.length)
       .map((entry) =>
         entry
-          .map((item) => (item != null ? String(item).replace(/:/g, '_') : ''))
-          .join(':')
+          .map((item) => (item !== null ? String(item).replace(/:/g, "_") : ""))
+          .join(":")
       );
   }
 
@@ -286,7 +288,7 @@ class A {
   }
 
   static unsetGlobalMetadata(a, b) {
-    z = z.filter(function (c) {
+    z = z.filter((c) => {
       return !(Array.isArray(c) && c[0] === a && c[1] === b);
     });
 
@@ -346,38 +348,41 @@ class A {
 //   return a;
 // })(),
 
+// eslint-disable-next-line complexity
 function c(a, b) {
   if (Object.isFrozen(a)) return;
   b.type && (!a.type || B[a.type] > B[b.type]) && (a.type = b.type);
   let c = b.metadata;
-  if (c != null) {
+  if (c !== null) {
     var d;
     d = (d = a.metadata) !== null && d !== void 0 ? d : new A();
-    c != null && d.addEntries.apply(d, c.getAll());
+    c !== null && d.addEntries.apply(d, c.getAll());
     a.metadata = d;
   }
-  b.project != null && (a.project = b.project);
-  b.errorName != null && (a.errorName = b.errorName);
-  b.componentStack != null && (a.componentStack = b.componentStack);
-  b.deferredSource != null && (a.deferredSource = b.deferredSource);
-  b.blameModule != null && (a.blameModule = b.blameModule);
-  b.loggingSource != null && (a.loggingSource = b.loggingSource);
+  b.project !== null && (a.project = b.project);
+  b.errorName !== null && (a.errorName = b.errorName);
+  b.componentStack !== null && (a.componentStack = b.componentStack);
+  b.deferredSource !== null && (a.deferredSource = b.deferredSource);
+  b.blameModule !== null && (a.blameModule = b.blameModule);
+  b.loggingSource !== null && (a.loggingSource = b.loggingSource);
   d = (c = a.messageFormat) !== null && c !== void 0 ? c : a.message;
   c = (c = a.messageParams) !== null && c !== void 0 ? c : [];
-  if (d !== b.messageFormat && b.messageFormat != null) {
+  if (d !== b.messageFormat && b.messageFormat !== null) {
     var e;
-    d += ' [Caught in: ' + b.messageFormat + ']';
+    d += " [Caught in: " + b.messageFormat + "]";
     c.push.apply(c, (e = b.messageParams) !== null && e !== void 0 ? e : []);
   }
   a.messageFormat = d;
   a.messageParams = c;
   e = b.forcedKey;
   d = a.forcedKey;
-  c = e != null && d != null ? e + '_' + d : e !== null && e !== void 0 ? e : d;
+  c =
+    e !== null && d !== null ? e + "_" + d : e !== null && e !== void 0 ? e : d;
   a.forcedKey = c;
 }
 function d(a) {
   let b;
+  // eslint-disable-next-line no-return-assign
   return da(
     (b = a.messageFormat) !== null && b !== void 0 ? b : a.message,
     a.messageParams || []
@@ -386,14 +391,14 @@ function d(a) {
 function da(a, b) {
   let c = 0;
   a = String(a);
-  a = a.replace(/%s/g, function () {
-    return c < b.length ? b[c++] : 'NOPARAM';
+  a = a.replace(/%s/g, () => {
+    return c < b.length ? b[c++] : "NOPARAM";
   });
-  c < b.length && (a += ' PARAMS' + JSON.stringify(b.slice(c)));
+  c < b.length && (a += " PARAMS" + JSON.stringify(b.slice(c)));
   return a;
 }
 function f(a) {
-  return (a !== null && a !== void 0 ? a : []).map(function (a) {
+  return (a !== null && a !== void 0 ? a : []).map((a) => {
     return String(a);
   });
 }
@@ -409,8 +414,8 @@ function E(a) {
 }
 function F(a) {
   let b = a.getAllResponseHeaders();
-  if (b != null && b.indexOf('X-FB-Debug') >= 0) {
-    b = a.getResponseHeader('X-FB-Debug');
+  if (b !== null && b.indexOf("X-FB-Debug") >= 0) {
+    b = a.getResponseHeader("X-FB-Debug");
     b && E(b);
   }
 }
@@ -422,19 +427,19 @@ let G = {
   addFromXHR: F,
   getAll: fa,
 };
-let ga = 'abcdefghijklmnopqrstuvwxyz012345';
+let ga = "abcdefghijklmnopqrstuvwxyz012345";
 function H() {
   let a = 0;
   for (var b = arguments.length, c = new Array(b), d = 0; d < b; d++)
     c[d] = arguments[d];
   for (let e = 0; e < c.length; e++) {
     let f = c[e];
-    if (f != null) {
+    if (f !== null) {
       let g = f.length;
       for (let h = 0; h < g; h++) a = (a << 5) - a + f.charCodeAt(h);
     }
   }
-  let i = '';
+  let i = "";
   for (let j = 0; j < 6; j++) (i = ga.charAt(a & 31) + i), (a >>= 5);
   return i;
 }
@@ -445,51 +450,53 @@ let I = [
   /^at ([^\s\)\()]+):(\d+):(\d+)$/,
 ];
 let ha = /^\w+:\s.*?\n/g;
-Error.stackTraceLimit != null &&
+Error.stackTraceLimit !== null &&
   Error.stackTraceLimit < 80 &&
   (Error.stackTraceLimit = 80);
 function ia(a) {
   let b = a.name;
   let c = a.message;
   a = a.stack;
-  if (a == null) return null;
-  if (b != null && c != null && c !== '') {
-    var d = b + ': ' + c + '\n';
+  if (a === null) return null;
+  if (b !== null && c !== null && c !== "") {
+    var d = b + ": " + c + "\n";
     if (a.startsWith(d)) return a.substr(d.length);
-    if (a === b + ': ' + c) return null;
+    if (a === b + ": " + c) return null;
   }
-  if (b != null) {
-    d = b + '\n';
+  if (b !== null) {
+    d = b + "\n";
     if (a.startsWith(d)) return a.substr(d.length);
   }
-  if (c != null && c !== '') {
-    b = ': ' + c + '\n';
+  if (c !== null && c !== "") {
+    b = ": " + c + "\n";
     d = a.indexOf(b);
     c = a.substring(0, d);
     if (/^\w+$/.test(c)) return a.substring(d + b.length);
   }
-  return a.replace(ha, '');
+  return a.replace(ha, "");
 }
 function J(a) {
   a = a.trim();
   let b;
   a;
-  let c, d, e;
-  if (a.includes('charset=utf-8;base64,')) b = '<inlined-file>';
+  let c;
+  let d;
+  let e;
+  if (a.includes("charset=utf-8;base64,")) b = "<inlined-file>";
   else {
     let f;
     for (let g = 0; g < I.length; g++) {
       var h = I[g];
       f = a.match(h);
-      if (f != null) break;
+      if (f !== null) break;
     }
-    f != null && f.length === 4
+    f !== null && f.length === 4
       ? ((c = f[1]),
         (d = parseInt(f[2], 10)),
         (e = parseInt(f[3], 10)),
         (b = a.substring(0, a.length - f[0].length)))
       : (b = a);
-    b = b.replace(/^at /, '').trim();
+    b = b.replace(/^at /, "").trim();
   }
   h = {
     column: e,
@@ -501,17 +508,17 @@ function J(a) {
   return h;
 }
 function ja(a) {
-  return a == null || a === '' ? [] : a.split(/\n\n/)[0].split('\n').map(J);
+  return a === null || a === "" ? [] : a.split(/\n\n/)[0].split("\n").map(J);
 }
 function ka(a) {
   a = ia(a);
   return ja(a);
 }
 function la(a) {
-  if (a == null || a === '') return null;
-  a = a.split('\n');
+  if (a === null || a === "") return null;
+  a = a.split("\n");
   a.splice(0, 1);
-  return a.map(function (a) {
+  return a.map((a) => {
     return a.trim();
   });
 }
@@ -520,13 +527,14 @@ function K(a) {
   let c = a.script;
   let d = a.line;
   a = a.column;
-  b = '    at ' + (b !== null && b !== void 0 ? b : '<unknown>');
-  c != null &&
-    d != null &&
-    a != null &&
-    (b += ' (' + c + ':' + d + ':' + a + ')');
+  b = "    at " + (b !== null && b !== void 0 ? b : "<unknown>");
+  c !== null &&
+    d !== null &&
+    a !== null &&
+    (b += " (" + c + ":" + d + ":" + a + ")");
   return b;
 }
+// eslint-disable-next-line complexity
 function L(c) {
   let d;
   let e;
@@ -537,25 +545,23 @@ function L(c) {
   let k = ka(c);
   d = (d = c.taalOpcodes) !== null && d !== void 0 ? d : [];
   let l = c.framesToPop;
-  if (l != null) {
+  if (l !== null) {
     l = Math.min(l, k.length);
     while (l-- > 0) d.unshift(g.PREVIOUS_FRAME);
   }
   l = (l = c.messageFormat) !== null && l !== void 0 ? l : c.message;
-  e = ((e = c.messageParams) !== null && e !== void 0 ? e : []).map(function (
-    a
-  ) {
+  e = ((e = c.messageParams) !== null && e !== void 0 ? e : []).map((a) => {
     return String(a);
   });
   let m = la(c.componentStack);
-  let n = m == null ? null : m.map(J);
+  let n = m === null ? null : m.map(J);
   let o = c.metadata ? c.metadata.format() : new A().format();
   o.length === 0 && (o = void 0);
   let p = k
-    .map(function (a) {
+    .map((a) => {
       return a.text;
     })
-    .join('\n');
+    .join("\n");
   f = (f = c.errorName) !== null && f !== void 0 ? f : c.name;
   let q = ca(c);
   let r = c.loggingSource;
@@ -564,21 +570,21 @@ function L(c) {
   i = (i = c.columnNumber) !== null && i !== void 0 ? i : c.column;
   j = (j = c.fileName) !== null && j !== void 0 ? j : c.sourceURL;
   let t = k.length > 0;
-  t && h == null && (h = k[0].line);
-  t && i == null && (i = k[0].column);
-  t && j == null && (j = k[0].script);
+  t && h === null && (h = k[0].line);
+  t && i === null && (i = k[0].column);
+  t && j === null && (j = k[0].script);
   n = {
     blameModule: c.blameModule,
     clientTime: Math.floor(Date.now() / 1e3),
-    column: i == null ? null : String(i),
+    column: i === null ? null : String(i),
     componentStackFrames: n,
-    deferredSource: c.deferredSource != null ? L(c.deferredSource) : null,
+    deferredSource: c.deferredSource !== null ? L(c.deferredSource) : null,
     extra: (t = c.extra) !== null && t !== void 0 ? t : {},
     fbtrace_id: c.fbtrace_id,
     guardList: (i = c.guardList) !== null && i !== void 0 ? i : [],
     hash: H(f, p, q, s, r),
     isNormalizedError: !0,
-    line: h == null ? null : String(h),
+    line: h === null ? null : String(h),
     loggingSource: r,
     message: C.toReadableMessage(c),
     messageFormat: l,
@@ -595,15 +601,16 @@ function L(c) {
     type: q,
     xFBDebug: G.getAll(),
   };
-  c.forcedKey != null && (n.forcedKey = c.forcedKey);
+  c.forcedKey !== null && (n.forcedKey = c.forcedKey);
   d.length > 0 && (n.taalOpcodes = d);
   t = window.location;
   t && (n.windowLocationURL = t.href);
-  for (i in n) n[i] == null && delete n[i];
+  // eslint-disable-next-line guard-for-in
+  for (i in n) n[i] === null && delete n[i];
   return n;
 }
 function ma(a) {
-  return a != null && typeof a === 'object' && a.isNormalizedError === !0
+  return a !== null && typeof a === "object" && a.isNormalizedError === !0
     ? a
     : null;
 }
@@ -612,7 +619,7 @@ let M = {
   ifNormalizedError: ma,
   normalizeError: L,
 };
-let na = '<global.react>';
+let na = "<global.react>";
 let N = [];
 let O = [];
 let P = 50;
@@ -622,12 +629,13 @@ var R = {
     b === void 0 && (b = !1),
       N.push(a),
       b ||
-      O.forEach(function (b) {
-        return a(
-          b,
-          (b = b.loggingSource) !== null && b !== void 0 ? b : 'DEPRECATED'
-        );
-      });
+        O.forEach((b) => {
+          // eslint-disable-next-line no-return-assign
+          return a(
+            b,
+            (b = b.loggingSource) !== null && b !== void 0 ? b : "DEPRECATED"
+          );
+        });
   },
   history: O,
   removeListener: function (a) {
@@ -642,9 +650,9 @@ var R = {
     let a = y.cloneGuardList();
     b.componentStackFrames && a.unshift(na);
     a.length > 0 && (b.guardList = a);
-    if (b.deferredSource == null) {
+    if (b.deferredSource === null) {
       a = y.findDeferredSource();
-      a != null && (b.deferredSource = M.normalizeError(a));
+      a !== null && (b.deferredSource = M.normalizeError(a));
     }
     O.length > P && O.splice(P / 2, 1);
     O.push(b);
@@ -654,9 +662,9 @@ var R = {
         var c;
         N[a](
           b,
-          (c = b.loggingSource) !== null && c !== void 0 ? c : 'DEPRECATED'
+          (c = b.loggingSource) !== null && c !== void 0 ? c : "DEPRECATED"
         );
-      } catch (a) { }
+      } catch (a) {}
     Q = !1;
     return !0;
   },
@@ -665,17 +673,19 @@ var R = {
   },
 };
 R.addListener(j.errorListener);
-let oa = '<anonymous guard>';
+let oa = "<anonymous guard>";
 let S = !1;
 var T = {
+  // eslint-disable-next-line max-params, complexity
   applyWithGuard: function (a, b, c, d) {
     y.pushGuard({
       deferredSource: d === null || d === void 0 ? void 0 : d.deferredSource,
       name:
+        // eslint-disable-next-line no-eq-null
         ((d === null || d === void 0 ? void 0 : d.name) != null
           ? d.name
           : null) ||
-        (a.name ? 'func_name:' + a.name : null) ||
+        (a.name ? "func_name:" + a.name : null) ||
         oa,
     });
     if (S)
@@ -688,34 +698,34 @@ var T = {
       return Function.prototype.apply.call(a, b, c);
     } catch (h) {
       try {
-        b = d !== null && d !== void 0 ? d : Object.assign({}, null);
+        b = d !== null && d !== void 0 ? d : { ...null };
         let e = b.deferredSource;
         let f = b.onError;
         b = b.onNormalizedError;
         let g = u(h);
         e = {
           deferredSource: e,
-          loggingSource: 'GUARDED',
+          loggingSource: "GUARDED",
           project:
             (e = d === null || d === void 0 ? void 0 : d.project) !== null &&
-              e !== void 0
+            e !== void 0
               ? e
-              : 'ErrorGuard',
+              : "ErrorGuard",
           type: d === null || d === void 0 ? void 0 : d.errorType,
         };
         C.aggregateError(g, e);
         d = M.normalizeError(g);
-        g == null &&
+        g === null &&
           a &&
-          ((d.extra[a.toString().substring(0, 100)] = 'function'),
-            c != null &&
+          ((d.extra[a.toString().substring(0, 100)] = "function"),
+          c !== null &&
             c.length &&
-            (d.extra[Array.from(c).toString().substring(0, 100)] = 'args'));
+            (d.extra[Array.from(c).toString().substring(0, 100)] = "args"));
         d.guardList = y.cloneGuardList();
         f && f(g);
         b && b(d);
         R.reportNormalizedError(d);
-      } catch (a) { }
+      } catch (a) {}
     } finally {
       y.popGuard();
     }
@@ -724,6 +734,7 @@ var T = {
     function c() {
       for (var c = arguments.length, d = new Array(c), e = 0; e < c; e++)
         d[e] = arguments[e];
+      // eslint-disable-next-line no-invalid-this
       return T.applyWithGuard(a, this, d, b);
     }
     a.__SMmeta && (c.__SMmeta = a.__SMmeta);
@@ -743,21 +754,21 @@ function X(a) {
   return String(a);
 }
 function Y(a) {
-  return a == null ? null : String(a);
+  return a === null ? null : String(a);
 }
 function pa(a, b) {
   let c = {};
   b &&
-    b.forEach(function (a) {
+    b.forEach((a) => {
       c[a] = !0;
     });
-  Object.keys(a).forEach(function (b) {
+  Object.keys(a).forEach((b) => {
     a[b] ? (c[b] = !0) : c[b] && delete c[b];
   });
   return Object.keys(c);
 }
 function Z(a) {
-  return (a !== null && a !== void 0 ? a : []).map(function (a) {
+  return (a !== null && a !== void 0 ? a : []).map((a) => {
     return {
       column: Y(a.column),
       identifier: a.identifier,
@@ -768,7 +779,7 @@ function Z(a) {
 }
 function qa(a) {
   a = String(a);
-  return a.length > U ? a.substring(0, U - 3) + '...' : a;
+  return a.length > U ? a.substring(0, U - 3) + "..." : a;
 }
 function ra(a, b) {
   let c;
@@ -809,19 +820,19 @@ function ra(a, b) {
     stackFrames: Z(a.stackFrames),
     svn_rev: String(b.client_revision),
     taalOpcodes:
-      a.taalOpcodes == null
+      a.taalOpcodes === null
         ? null
-        : a.taalOpcodes.map(function (a) {
-          return a;
-        }),
+        : a.taalOpcodes.map((a) => {
+            return a;
+          }),
     type: a.type,
-    version: '3',
+    version: "3",
     web_session_id: b.web_session_id,
     xFBDebug: a.xFBDebug,
   };
   b = a.blameModule;
   let d = a.deferredSource;
-  b != null && (c.blameModule = String(b));
+  b !== null && (c.blameModule = String(b));
   d &&
     d.stackFrames &&
     (c.deferredSource = {
@@ -829,9 +840,9 @@ function ra(a, b) {
     });
   a.metadata && (c.metadata = a.metadata);
   a.loadingUrls && (c.loadingUrls = a.loadingUrls);
-  a.serverHash != null && (c.serverHash = a.serverHash);
-  a.windowLocationURL != null && (c.windowLocationURL = a.windowLocationURL);
-  a.loggingSource != null && (c.loggingSource = a.loggingSource);
+  a.serverHash !== null && (c.serverHash = a.serverHash);
+  a.windowLocationURL !== null && (c.windowLocationURL = a.windowLocationURL);
+  a.loggingSource !== null && (c.loggingSource = a.loggingSource);
   return c;
 }
 function sa(a, b, c) {
@@ -839,7 +850,7 @@ function sa(a, b, c) {
   W++;
   if (b.sample_weight === 0) return !1;
   let e = s.shouldLog(a);
-  if (e == null) return !1;
+  if (e === null) return !1;
   if (
     (d = b.projectBlocklist) !== null &&
     d !== void 0 &&
@@ -863,43 +874,43 @@ let ta = {
 let $ = null;
 let ua = !1;
 function va(a) {
-  if ($ == null) return;
+  if ($ === null) return;
   let b = $;
   let c = a.reason;
   let d;
   if (
-    c != null &&
-    typeof c === 'object' &&
-    (c.name == null || c.name === '' || c.message == null || c.message === '')
+    c !== null &&
+    typeof c === "object" &&
+    (c.name === null || c.name === "" || c.message === null || c.message === "")
   )
     try {
-      (d = h('UnhandledRejection: %s', JSON.stringify(c))),
-        (d.loggingSource = 'ONUNHANDLEDREJECTION');
+      (d = h("UnhandledRejection: %s", JSON.stringify(c))),
+        (d.loggingSource = "ONUNHANDLEDREJECTION");
     } catch (a) {
-      (d = h('UnhandledRejection: (circular) %s', Object.keys(c).join(','))),
-        (d.loggingSource = 'ONUNHANDLEDREJECTION');
+      (d = h("UnhandledRejection: (circular) %s", Object.keys(c).join(","))),
+        (d.loggingSource = "ONUNHANDLEDREJECTION");
     }
   else
-    (d = u(c)), d.loggingSource || (d.loggingSource = 'ONUNHANDLEDREJECTION');
+    (d = u(c)), d.loggingSource || (d.loggingSource = "ONUNHANDLEDREJECTION");
   try {
     c = a.promise;
     d.stack =
-      String(d.stack || '') +
-      (c != null && typeof c.settledStack === 'string'
-        ? '\n(<promise_settled_stack_below>)\n' + c.settledStack
-        : '') +
-      (c != null && typeof c.createdStack === 'string'
-        ? '\n(<promise_created_stack_below>)\n' + c.createdStack
-        : '');
-  } catch (a) { }
+      String(d.stack || "") +
+      (c !== null && typeof c.settledStack === "string"
+        ? "\n(<promise_settled_stack_below>)\n" + c.settledStack
+        : "") +
+      (c !== null && typeof c.createdStack === "string"
+        ? "\n(<promise_created_stack_below>)\n" + c.createdStack
+        : "");
+  } catch (a) {}
   b.reportError(d);
   a.preventDefault();
 }
 function wa(b) {
   ($ = b),
-    typeof window.addEventListener === 'function' &&
-    !ua &&
-    ((ua = !0), window.addEventListener('unhandledrejection', va));
+    typeof window.addEventListener === "function" &&
+      !ua &&
+      ((ua = !0), window.addEventListener("unhandledrejection", va));
 }
 let xa = {
   onunhandledrejection: va,
@@ -908,11 +919,11 @@ let xa = {
 
 c = {
   preSetup: function (a) {
-    (a == null || a.ignoreOnError !== !0) && w.setup(R),
-      (a == null || a.ignoreOnUnahndledRejection !== !0) && xa.setup(R);
+    (a === null || a.ignoreOnError !== !0) && w.setup(R),
+      (a === null || a.ignoreOnUnahndledRejection !== !0) && xa.setup(R);
   },
   setup: function (a, b) {
-    R.addListener(function (c) {
+    R.addListener((c) => {
       ta.postError(c, a, b);
     });
   },
@@ -944,27 +955,29 @@ let ya = (function () {
     if (this.normalizedError) {
       let p = {
         forcedKey: j,
-        message: this.normalizedError.messageFormat + ' [Caught in: ' + d + ']',
+        message: this.normalizedError.messageFormat + " [Caught in: " + d + "]",
         params: [].concat(this.normalizedError.messageParams, n),
       };
-      l = Object.assign({}, this.normalizedError, {
-        loggingSource: 'FBLOGGER',
+      l = {
+        ...this.normalizedError,
+        loggingSource: "FBLOGGER",
         message: p.message,
         messageFormat: p.message,
         messageParams: C.toStringParams(p.params),
         project: f,
         type: b,
-      });
+      };
     } else if (k)
       this.taalOpcodes.length > 0 &&
-        new a('fblogger')
+        // eslint-disable-next-line new-cap
+        new a("fblogger")
           .blameToPreviousFrame()
           .blameToPreviousFrame()
-          .warn('Blame helpers do not work with catching'),
+          .warn("Blame helpers do not work with catching"),
         C.aggregateError(k, {
           errorName: k.name,
           forcedKey: j,
-          loggingSource: 'FBLOGGER',
+          loggingSource: "FBLOGGER",
           messageFormat: d,
           messageParams: C.toStringParams(n),
           project: f,
@@ -976,29 +989,29 @@ let ya = (function () {
       if (k.stack === void 0)
         try {
           throw k;
-        } catch (a) { }
+        } catch (a) {}
       k.messageFormat = d;
       k.messageParams = C.toStringParams(n);
       k.blameModule = i;
       k.forcedKey = j;
       k.project = f;
       k.type = b;
-      k.loggingSource = 'FBLOGGER';
+      k.loggingSource = "FBLOGGER";
       k.taalOpcodes = [g.PREVIOUS_FRAME, g.PREVIOUS_FRAME].concat(
         this.taalOpcodes
       );
       l = M.normalizeError(k);
-      l.name = 'FBLogger';
+      l.name = "FBLogger";
     }
     if (!h.isEmpty())
-      if (l.metadata == null) l.metadata = h.format();
+      if (l.metadata === null) l.metadata = h.format();
       else {
         let q = l.metadata.concat(h.format());
         let r = new Set(q);
         l.metadata = Array.from(r.values());
       }
     if (e.length > 0)
-      if (l.events != null) {
+      if (l.events !== null) {
         let s;
         (s = l.events).push.apply(s, e);
       } else l.events = e;
@@ -1012,7 +1025,7 @@ let ya = (function () {
       d++
     )
       c[d - 1] = arguments[d];
-    this.$1.apply(this, ['fatal', a].concat(c));
+    this.$1.apply(this, ["fatal", a].concat(c));
   };
   b.mustfix = function (a) {
     for (
@@ -1021,7 +1034,7 @@ let ya = (function () {
       d++
     )
       c[d - 1] = arguments[d];
-    this.$1.apply(this, ['error', a].concat(c));
+    this.$1.apply(this, ["error", a].concat(c));
   };
   b.warn = function (a) {
     for (
@@ -1030,7 +1043,7 @@ let ya = (function () {
       d++
     )
       c[d - 1] = arguments[d];
-    this.$1.apply(this, ['warn', a].concat(c));
+    this.$1.apply(this, ["warn", a].concat(c));
   };
   b.info = function (a) {
     for (
@@ -1039,10 +1052,10 @@ let ya = (function () {
       d++
     )
       c[d - 1] = arguments[d];
-    this.$1.apply(this, ['info', a].concat(c));
+    this.$1.apply(this, ["info", a].concat(c));
   };
   // eslint-disable-next-line no-unused-vars
-  b.debug = function (a) { };
+  b.debug = function (a) {};
   b.mustfixThrow = function (a) {
     for (
       var b = arguments.length, c = new Array(b > 1 ? b - 1 : 0), d = 1;
@@ -1050,21 +1063,22 @@ let ya = (function () {
       d++
     )
       c[d - 1] = arguments[d];
-    let e = this.$1.apply(this, ['error', a].concat(c));
+    let e = this.$1.apply(this, ["error", a].concat(c));
     e ||
-      ((e = h('mustfixThrow does not support catchingNormalizedError')),
-        (e.taalOpcodes = e.taalOpcodes || []),
-        e.taalOpcodes.push(g.PREVIOUS_FRAME));
+      ((e = h("mustfixThrow does not support catchingNormalizedError")),
+      (e.taalOpcodes = e.taalOpcodes || []),
+      e.taalOpcodes.push(g.PREVIOUS_FRAME));
     try {
       e.message = C.toReadableMessage(e);
-    } catch (a) { }
+    } catch (a) {}
     throw e;
   };
   b.catching = function (b) {
     !(b instanceof Error)
-      ? new a('fblogger')
-        .blameToPreviousFrame()
-        .warn('Catching non-Error object is not supported')
+      ? // eslint-disable-next-line new-cap
+        new a("fblogger")
+          .blameToPreviousFrame()
+          .warn("Catching non-Error object is not supported")
       : (this.error = b);
     return this;
   };
@@ -1103,21 +1117,22 @@ let ya = (function () {
   return a;
 })();
 d = function (a, b) {
+  // eslint-disable-next-line new-cap
   let c = new ya(a);
-  return b != null ? c.event(a + '.' + b) : c;
+  return b !== null ? c.event(a + "." + b) : c;
 };
 d.addGlobalMetadata = function (a, b, c) {
   A.addGlobalMetadata(a, b, c);
 };
-let za = '<CUSTOM_NAME:';
-let Aa = '>';
+let za = "<CUSTOM_NAME:";
+let Aa = ">";
 function Ba(a, b) {
-  if (a != null && b != null)
+  if (a !== null && b !== null)
     try {
-      Object.defineProperty(a, 'name', {
-        value: za + ' ' + b + Aa,
+      Object.defineProperty(a, "name", {
+        value: za + " " + b + Aa,
       });
-    } catch (a) { }
+    } catch (a) {}
   return a;
 }
 f = {
