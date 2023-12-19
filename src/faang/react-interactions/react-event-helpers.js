@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 const isMac =
-  typeof window !== 'undefined' && window.navigator !== null
+  typeof window !== "undefined" && window.navigator !== null
     ? /^Mac/.test(window.navigator.platform)
     : false;
 
@@ -15,7 +15,7 @@ const isMac =
  * @type {boolean}
  */
 const hasPointerEvents =
-  typeof window !== 'undefined' && window.PointerEvent !== null;
+  typeof window !== "undefined" && window.PointerEvent !== null;
 
 /**
  * Checks if the related target is within the focusWithinTarget
@@ -32,7 +32,7 @@ function isRelatedTargetWithin(focusWithinTarget, relatedTarget) {
   // As the focusWithinTarget can be a Scope Instance (experimental API),
   // we need to use the containsNode() method. Otherwise, focusWithinTarget
   // must be a Node, which means we can use the contains() method.
-  return typeof focusWithinTarget.containsNode === 'function'
+  return typeof focusWithinTarget.containsNode === "function"
     ? focusWithinTarget.containsNode(relatedTarget)
     : focusWithinTarget.contains(relatedTarget);
 }

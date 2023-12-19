@@ -4,4 +4,4 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-export { BaseContextualLayerAnchorRoot } from './base-contextual-layer-anchor-root'
+export { BaseContextualLayerAnchorRoot } from "./base-contextual-layer-anchor-root";

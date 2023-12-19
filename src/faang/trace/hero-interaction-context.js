@@ -4,16 +4,16 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { createContext } from 'react';
+import { createContext } from "react";
 
-const fn = function (...a) { };
+const fn = function (...a) {};
 
 /**
  * @typedef {import("./types").HeroInteractionContextValue}
  */
 const defaultContextValue = {
   consumeBootload: fn,
-  hold: () => '',
+  hold: () => "",
   logHeroRender: fn,
   logMetadata: fn,
   logPageletVC: fn,

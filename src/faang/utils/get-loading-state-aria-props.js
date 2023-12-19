@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { fbt } from 'fbt';
+import { fbt } from "fbt";
 
 /**
  * Generates ARIA properties for a loading state or progress bar.
@@ -18,23 +18,25 @@ export function getLoadingStateAriaProps(currentValue, additionalProps) {
   additionalProps =
     currentValue === null
       ? {
-        'aria-label': fbt.c('Loading...'),
-      }
+          "aria-label": fbt.c("Loading..."),
+        }
       : {
-        'aria-valuemax':
-          (defaultValue =
-            additionalProps === null ? undefined : additionalProps.max) !== null
-            ? defaultValue
-            : 100,
-        'aria-valuemin':
-          (defaultValue =
-            additionalProps === null ? undefined : additionalProps.min) !== null
-            ? defaultValue
-            : 0,
-        'aria-valuenow': currentValue,
-      };
+          "aria-valuemax":
+            (defaultValue =
+              additionalProps === null ? undefined : additionalProps.max) !==
+            null
+              ? defaultValue
+              : 100,
+          "aria-valuemin":
+            (defaultValue =
+              additionalProps === null ? undefined : additionalProps.min) !==
+            null
+              ? defaultValue
+              : 0,
+          "aria-valuenow": currentValue,
+        };
   return {
-    role: 'progressbar',
-    ...additionalProps
+    role: "progressbar",
+    ...additionalProps,
   };
 }

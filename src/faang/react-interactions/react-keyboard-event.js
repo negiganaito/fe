@@ -33,10 +33,9 @@
 //   useKeyboard
 // }
 
+import { useEffect } from "react";
 
-import { useEffect } from 'react';
-
-import { ReactUseEvent } from './react-use-event';
+import { ReactUseEvent } from "./react-use-event";
 
 const defaultEventOptions = {
   passive: true,
@@ -45,15 +44,15 @@ const defaultEventOptions = {
 function useKeyboard(ref, options) {
   const { disabled = false, onKeyDown, onKeyUp } = options;
 
-  const keyDownEvent = ReactUseEvent('keydown');
-  const keyUpEvent = ReactUseEvent('keyup', defaultEventOptions);
+  const keyDownEvent = ReactUseEvent("keydown");
+  const keyUpEvent = ReactUseEvent("keyup", defaultEventOptions);
 
   useEffect(() => {
     const element = ref.current;
 
     if (element !== null) {
-      keyDownEvent.setListener(element, !disabled && onKeyDown || null);
-      keyUpEvent.setListener(element, !disabled && onKeyUp || null);
+      keyDownEvent.setListener(element, (!disabled && onKeyDown) || null);
+      keyUpEvent.setListener(element, (!disabled && onKeyUp) || null);
     }
   }, [disabled, onKeyDown, keyDownEvent, onKeyUp, keyUpEvent, ref]);
 }

@@ -5,5 +5,5 @@
  * See the LICENSE file in the root directory for details.
  */
 
-export { CometFormInputPasswordStateIcon } from './comet-form-input-password-state-icon'
-export { CometFormInputValidationStateIcon } from './comet-form-input-validation-state-icon'
+export { CometFormInputPasswordStateIcon } from "./comet-form-input-password-state-icon";
+export { CometFormInputValidationStateIcon } from "./comet-form-input-validation-state-icon";

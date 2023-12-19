@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 export type BaseSVGIconProps = {
   alt?: string;
@@ -20,71 +20,71 @@ export type BaseSVGIconProps = {
 export type CometIconProps = {
   alt?: string;
   color:
-  | 'active-tab'
-  | 'none'
-  | 'black'
-  | 'white'
-  | 'baseCherry'
-  | 'baseLemon'
-  | 'baseLime'
-  | 'blueLink'
-  | 'disabled'
-  | 'fb-logo'
-  | 'highlight'
-  | 'inactive-tab'
-  | 'negative'
-  | 'positive'
-  | 'primary'
-  | 'white'
-  | 'primaryAccent'
-  | 'rating-star-active'
-  | 'secondary'
-  | 'tertiary'
-  | 'warning'
-  | 'work-iris';
+    | "active-tab"
+    | "none"
+    | "black"
+    | "white"
+    | "baseCherry"
+    | "baseLemon"
+    | "baseLime"
+    | "blueLink"
+    | "disabled"
+    | "fb-logo"
+    | "highlight"
+    | "inactive-tab"
+    | "negative"
+    | "positive"
+    | "primary"
+    | "white"
+    | "primaryAccent"
+    | "rating-star-active"
+    | "secondary"
+    | "tertiary"
+    | "warning"
+    | "work-iris";
   size:
-  | 24
-  | 28
-  | 32
-  | 36
-  | 40
-  | 48
-  | 8
-  | 10
-  | 12
-  | 16
-  | 20
-  | 18
-  | 30
-  | 52
-  | 56
-  | 60
-  | 72
-  | 112
-  | 132;
+    | 24
+    | 28
+    | 32
+    | 36
+    | 40
+    | 48
+    | 8
+    | 10
+    | 12
+    | 16
+    | 20
+    | 18
+    | 30
+    | 52
+    | 56
+    | 60
+    | 72
+    | 112
+    | 132;
   viewBox?: string;
   children?: ReactNode;
   component?: ReactNode;
   inline?: boolean;
   shadow?: boolean;
-  icon?: any
+  icon?: any;
 };
 
 export type CometTintedIconProps = {
   alt?: string;
   color?:
-  | 'white'
-  | 'blueLink'
-  | 'disabled'
-  | 'negative'
-  | 'positive'
-  | 'primary'
-  | 'primaryAccent'
-  | 'secondary'
-  | 'warning'
-  | 'accent'
-  | 'placeholder'
-  | 'black';
+    | "white"
+    | "blueLink"
+    | "disabled"
+    | "negative"
+    | "positive"
+    | "primary"
+    | "primaryAccent"
+    | "secondary"
+    | "warning"
+    | "accent"
+    | "placeholder"
+    | "black";
   draggable?: boolean;
   icon?: any;
   testid?: string;
@@ -111,7 +111,7 @@ export type CometIconProps = {
   testOnly_pressed?: boolean;
   className?: string;
   testid?: string;
-  'aria-label'?: string;
+  "aria-label"?: string;
   iconAria?: any;
   iconBadgeAria?: any;
 };

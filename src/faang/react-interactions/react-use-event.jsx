@@ -4,10 +4,10 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useLayoutEffect } from 'react';
-import { unstable_createEventHandle } from 'react-dom';
+import { useLayoutEffect } from "react";
+import { unstable_createEventHandle } from "react-dom";
 
-import { useUnsafeRef_DEPRECATED } from '@/faang/hooks/use-unsafe-ref_DEPRECATED';
+import { useUnsafeRef_DEPRECATED } from "@/faang/hooks/use-unsafe-ref_DEPRECATED";
 
 /**
  *
@@ -30,7 +30,6 @@ export function ReactUseEvent(event, option) {
     let clears = new Map();
 
     useEventHandle = {
-
       clear: () => {
         // var a = Array.from(clears.values())
         // for (var b = 0; b < a.length; b++) a[b]()

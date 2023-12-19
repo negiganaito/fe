@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export type CometPressableOverlayProps = {
-  focusRingPosition?: 'default' | 'inset';
+  focusRingPosition?: "default" | "inset";
   focusVisible?: boolean;
   focusVisibleStyle?: any;
   hovered: boolean;
@@ -27,7 +27,7 @@ export type CometPressableProps = {
   className_DEPRECATED?: string;
   cursorDisabled?: boolean;
   xstyle?: string | ((...props: any) => any);
-  display?: 'block' | 'inline';
+  display?: "block" | "inline";
   expanding?: string;
   hideFocusOverlay?: boolean;
   hideHoverOverlay?: boolean;
@@ -49,7 +49,7 @@ export type CometPressableProps = {
   preventContextMenu?: any;
   overlayDisabled?: boolean;
   overlayOffset?: any;
-  overlayFocusRingPosition?: 'inset' | 'default';
+  overlayFocusRingPosition?: "inset" | "default";
   overlayFocusVisibleStyle?: any;
   overlayHoveredStyle?: any;
   overlayPressedStyle?: any;

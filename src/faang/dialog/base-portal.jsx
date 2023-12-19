@@ -8,7 +8,6 @@
 import stylex from "@stylexjs/stylex";
 import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
 import { useContext } from "react";
-import { jsx } from "react/jsx-runtime";
 import { createPortal } from "react-dom";
 
 import { BasePortalTargetContext } from "@/faang/context";
@@ -33,25 +32,45 @@ export const BasePortal = (props) => {
 
   return domNode
     ? createPortal(
-        jsx(BaseThemeProvider, {
-          children: (themeClasses, themeStyle) => {
-            return jsx("div", {
-              ...(hidden && { hidden }),
-              children: [
-                jsx(BasePortalTargetContext.Provider, {
-                  children,
-                  value: providerValue,
-                }),
-                jsx(BaseDOMContainer, {
-                  node: providerValue,
-                }),
-              ],
-              className: stylex(themeClasses.theme, xstyle),
-              style: themeStyle,
-            });
-          },
-        }),
+        <BaseThemeProvider>
+          {(themeClasses, themeStyle) => (
+            <div
+              {...(hidden && { hidden })}
+              className={stylex(themeClasses.theme, xstyle)}
+              style={themeStyle}
+            >
+              <BasePortalTargetContext.Provider value={providerValue}>
+                {children}
+              </BasePortalTargetContext.Provider>
+              <BaseDOMContainer node={providerValue} />
+            </div>
+          )}
+        </BaseThemeProvider>,
         domNode
       )
     : undefined;
+
+  // return domNode
+  //   ? createPortal(
+  //       jsx(BaseThemeProvider, {
+  //         children: (themeClasses, themeStyle) => {
+  //           return jsx("div", {
+  //             ...(hidden && { hidden }),
+  //             children: [
+  //               jsx(BasePortalTargetContext.Provider, {
+  //                 children,
+  //                 value: providerValue,
+  //               }),
+  //               jsx(BaseDOMContainer, {
+  //                 node: providerValue,
+  //               }),
+  //             ],
+  //             className: stylex(themeClasses.theme, xstyle),
+  //             style: themeStyle,
+  //           });
+  //         },
+  //       }),
+  //       domNode
+  //     )
+  //   : undefined;
 };

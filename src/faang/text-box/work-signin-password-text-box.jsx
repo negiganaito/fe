@@ -5,11 +5,10 @@
  * See the LICENSE file in the root directory for details.
  */
 
-
 /* FB_PKG_DELIM */
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { CometFormTextInput } from '@/faang/form';
+import { CometFormTextInput } from "@/faang/form";
 
 /**
  * @typedef {Object} WorkSigninPasswordTextBoxProps
@@ -23,18 +22,27 @@ import { CometFormTextInput } from '@/faang/form';
  */
 
 /**
- * 
- * @param {WorkSigninPasswordTextBoxProps} props 
+ *
+ * @param {WorkSigninPasswordTextBoxProps} props
  */
 export const WorkSigninPasswordTextBox = (props) => {
   /* eslint-disable no-unused-vars */
-  const { autoFocus, dataTestId = 'login_password', disabled, label, name, required, type, value } = props
+  const {
+    autoFocus,
+    dataTestId = "login_password",
+    disabled,
+    label,
+    name,
+    required,
+    type,
+    value,
+  } = props;
 
-  const [_value, setValue] = useState(value)
+  const [_value, setValue] = useState(value);
 
   const onValueChange = (val) => {
-    setValue(val)
-  }
+    setValue(val);
+  };
 
   return (
     <CometFormTextInput
@@ -48,5 +56,5 @@ export const WorkSigninPasswordTextBox = (props) => {
       type={type}
       value={_value}
     />
-  )
-}
+  );
+};

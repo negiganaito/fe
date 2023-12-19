@@ -5,12 +5,11 @@
  * See the LICENSE file in the root directory for details.
  */
 
-
 /* eslint-disable no-var */
 /* eslint-disable complexity */
 
 /* eslint-disable no-redeclare */
-import { performanceAbsoluteNow } from '@/faang/utils/performance-absolute-now';
+import { performanceAbsoluteNow } from "@/faang/utils/performance-absolute-now";
 
 let i = 50;
 let j = new Map();
@@ -18,7 +17,7 @@ function a(a, b, d) {
   // eslint-disable-next-line no-self-assign
   a = a;
   // eslint-disable-next-line no-self-assign
-  b = (b = b) !== null ? b : '';
+  b = (b = b) !== null ? b : "";
   let e = j.get(a);
   e || j.set(a, (e = new Map()));
   a = e.get(b);
@@ -28,7 +27,6 @@ function a(a, b, d) {
   e[1][e[0]++ % i] = performanceAbsoluteNow();
 }
 
-
 function k(a, b, c) {
   var d = j.get(a);
   if (!d) return [];
@@ -36,11 +34,11 @@ function k(a, b, c) {
   for (
     // eslint-disable-next-line no-inner-declarations
     var d = d,
-    g = Array.isArray(d),
-    h = 0,
-    d = g
-      ? d
-      : d[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+      g = Array.isArray(d),
+      h = 0,
+      d = g
+        ? d
+        : d[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"]();
     ;
 
   ) {
@@ -61,11 +59,11 @@ function k(a, b, c) {
     for (
       // eslint-disable-next-line no-inner-declarations
       var i = i,
-      l = Array.isArray(i),
-      m = 0,
-      i = l
-        ? i
-        : i[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+        l = Array.isArray(i),
+        m = 0,
+        i = l
+          ? i
+          : i[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"]();
       ;
 
     ) {
@@ -86,13 +84,13 @@ function k(a, b, c) {
       for (
         // eslint-disable-next-line no-inner-declarations
         var n = n[1],
-        p = Array.isArray(n),
-        q = 0,
-        n = p
-          ? n
-          : n[
-            typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'
-          ]();
+          p = Array.isArray(n),
+          q = 0,
+          n = p
+            ? n
+            : n[
+                typeof Symbol === "function" ? Symbol.iterator : "@@iterator"
+              ]();
         ;
 
       ) {
@@ -128,11 +126,11 @@ function b(a, b) {
   for (
     // eslint-disable-next-line no-inner-declarations
     var d = j.keys(),
-    e = Array.isArray(d),
-    f = 0,
-    d = e
-      ? d
-      : d[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+      e = Array.isArray(d),
+      f = 0,
+      d = e
+        ? d
+        : d[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"]();
     ;
 
   ) {

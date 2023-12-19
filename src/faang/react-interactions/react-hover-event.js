@@ -4,13 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-import { ReactEventHelpers } from './react-event-helpers';
-import {
-  ReactEventHookPropagation
-} from './react-event-hook-propagation';
-import { ReactUseEvent } from './react-use-event';
+import { ReactEventHelpers } from "./react-event-helpers";
+import { ReactEventHookPropagation } from "./react-event-hook-propagation";
+import { ReactUseEvent } from "./react-use-event";
 
 const hoverOptions = {
   passive: true,
@@ -55,14 +53,14 @@ const useHover = (target, options) => {
   const { disabled, onHoverStart, onHoverMove, onHoverEnd, onHoverChange } =
     options;
 
-  const touchstartHandler = ReactUseEvent('touchstart', hoverOptions);
-  const mouseoverHandler = ReactUseEvent('mouseover', hoverOptions);
-  const mouseoutHandler = ReactUseEvent('mouseout', hoverOptions);
-  const mousemoveHandler = ReactUseEvent('mousemove', hoverOptions);
-  const pointeroverHandler = ReactUseEvent('pointerover', hoverOptions);
-  const pointeroutHandler = ReactUseEvent('pointerout', hoverOptions);
-  const pointermoveHandler = ReactUseEvent('pointermove', hoverOptions);
-  const pointercancelHandler = ReactUseEvent('pointercancel', hoverOptions);
+  const touchstartHandler = ReactUseEvent("touchstart", hoverOptions);
+  const mouseoverHandler = ReactUseEvent("mouseover", hoverOptions);
+  const mouseoutHandler = ReactUseEvent("mouseout", hoverOptions);
+  const mousemoveHandler = ReactUseEvent("mousemove", hoverOptions);
+  const pointeroverHandler = ReactUseEvent("pointerover", hoverOptions);
+  const pointeroutHandler = ReactUseEvent("pointerout", hoverOptions);
+  const pointermoveHandler = ReactUseEvent("pointermove", hoverOptions);
+  const pointercancelHandler = ReactUseEvent("pointercancel", hoverOptions);
   const hoverTouchRef = useRef({
     isHovered: false,
     isTouched: false,
@@ -79,12 +77,12 @@ const useHover = (target, options) => {
         hoverTouchRefCurrent.isHovered &&
           !isAncestorOrSelfWithHover(targetElement, param.relatedTarget) &&
           ((hoverTouchRefCurrent.isHovered = false),
-            onHoverEnd &&
+          onHoverEnd &&
             onHoverEnd(
-              createCustomEventObject('hoverend', param, targetElement)
+              createCustomEventObject("hoverend", param, targetElement)
             ),
-            onHoverChange && onHoverChange(false),
-            cleanup(param));
+          onHoverChange && onHoverChange(false),
+          cleanup(param));
       };
 
       const handleMouseMove = function (param) {
@@ -96,7 +94,7 @@ const useHover = (target, options) => {
         hoverTouchRefCurrent.isHovered &&
           onHoverMove &&
           onHoverMove(
-            createCustomEventObject('hovermove', param, targetElement)
+            createCustomEventObject("hovermove", param, targetElement)
           );
       };
 
@@ -117,10 +115,15 @@ const useHover = (target, options) => {
           cleanup(event);
           return;
         }
-        if (ReactEventHookPropagation.hasEventHookPropagationStopped(event, 'useHover')) {
+        if (
+          ReactEventHookPropagation.hasEventHookPropagationStopped(
+            event,
+            "useHover"
+          )
+        ) {
           return;
         }
-        ReactEventHookPropagation.stopEventHookPropagation(event, 'useHover');
+        ReactEventHookPropagation.stopEventHookPropagation(event, "useHover");
 
         if (
           !hoverTouchRefCurrent.isHovered &&
@@ -129,7 +132,7 @@ const useHover = (target, options) => {
           hoverTouchRefCurrent.isHovered = true;
           if (onHoverStart) {
             onHoverStart(
-              createCustomEventObject('hoverstart', event, targetElement)
+              createCustomEventObject("hoverstart", event, targetElement)
             );
           }
           if (onHoverChange) {
@@ -147,11 +150,11 @@ const useHover = (target, options) => {
 
         ReactEventHelpers.hasPointerEvents
           ? pointeroverHandler.setListener(targetElement, (event) => {
-            event.pointerType !== 'touch' && handleMouseOver(event);
-          })
+              event.pointerType !== "touch" && handleMouseOver(event);
+            })
           : (mouseoverHandler.setListener(targetElement, (event) => {
-            hoverTouchRefCurrent.isTouched || handleMouseOver(event);
-          }),
+              hoverTouchRefCurrent.isTouched || handleMouseOver(event);
+            }),
             touchstartHandler.setListener(targetElement, () => {
               hoverTouchRefCurrent.isTouched = true;
             }),
@@ -186,7 +189,7 @@ const useHover = (target, options) => {
 
       if (ReactEventHelpers.hasPointerEvents) {
         pointeroverHandler.setListener(targetElement, (event) => {
-          if (event.pointerType !== 'touch') {
+          if (event.pointerType !== "touch") {
             handleMouseOver(event);
           }
         });

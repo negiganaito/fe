@@ -4,11 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { forwardRef } from 'react';
-import { jsx } from 'react/jsx-runtime';
+import { forwardRef } from "react";
+import { jsx } from "react/jsx-runtime";
 
-import { BootloaderResource } from './bootloader-resource';
-import { useHeroBootloadedComponent } from './use-hero-bootloaded-component';
+import { BootloaderResource } from "./bootloader-resource";
+import { useHeroBootloadedComponent } from "./use-hero-bootloaded-component";
 
 const j = new Map();
 
@@ -28,13 +28,10 @@ export function lazyLoadComponent(a) {
     e === void 0 && (e = void 0);
     let f = BootloaderResource.read(a);
     useHeroBootloadedComponent(a);
-    return jsx(
-      f,
-      { ...c, ref: e,}
-    );
+    return jsx(f, { ...c, ref: e });
   }
   // e.displayName = e.name + ' [from ' + f.id + ']';
-  e.displayName = 'lazyLoadComponent(' + a.getModuleId() + ')';
+  e.displayName = "lazyLoadComponent(" + a.getModuleId() + ")";
   c = forwardRef(e);
   k(a, c);
 

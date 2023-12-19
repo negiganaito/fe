@@ -8,7 +8,7 @@ let isPassiveSupported = false;
 
 try {
   // Attempt to create a property descriptor for the 'passive' property
-  const descriptor = Object.defineProperty({}, 'passive', {
+  const descriptor = Object.defineProperty({}, "passive", {
     // eslint-disable-next-line getter-return
     get: () => {
       isPassiveSupported = true;
@@ -16,7 +16,7 @@ try {
   });
 
   // Test if the browser supports passive event listeners by adding a dummy event listener
-  window.addEventListener('test', null, descriptor);
+  window.addEventListener("test", null, descriptor);
 } catch (error) {
   // Catch any exceptions that might occur (e.g., in environments that don't support Object.defineProperty)
 }
@@ -26,9 +26,9 @@ const makeEventOptions = function (options) {
   // Return the appropriate value based on whether passive event listeners are supported
   return isPassiveSupported
     ? options
-    : typeof options === 'boolean'
-      ? options
-      : options.capture || false;
+    : typeof options === "boolean"
+    ? options
+    : options.capture || false;
 };
 
 export const passiveEventListenerUtil = {

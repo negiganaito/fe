@@ -4,72 +4,72 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from '@stylexjs/stylex';
-import { Link } from '@tanstack/react-router';
-import joinClasses from 'fbjs/lib/joinClasses';
-import { useCallback, useContext, useRef, useState } from 'react';
-import { jsx } from 'react/jsx-runtime';
+import stylex from "@stylexjs/stylex";
+import { Link } from "@tanstack/react-router";
+import joinClasses from "fbjs/lib/joinClasses";
+import { useCallback, useContext, useRef, useState } from "react";
+import { jsx } from "react/jsx-runtime";
 
-import { WebPressableGroupContext } from '@/faang/context/web-pressable-group-context';
-import {WebPressability } from '@/faang/react-interactions';
+import { WebPressableGroupContext } from "@/faang/context/web-pressable-group-context";
+import { WebPressability } from "@/faang/react-interactions";
 
-import { useWebPressableTouchStartHandler } from './use-web-pressable-touch-start-handler';
+import { useWebPressableTouchStartHandler } from "./use-web-pressable-touch-start-handler";
 // Assuming there is a function c("UserAgent").isBrowser() that checks the user agent
 // It returns true if the user agent is "Safari" or "Mobile Safari", otherwise false
 
 const styles = stylex.create({
   disabled: {
-    cursor: 'not-allowed',
+    cursor: "not-allowed",
   },
   focusNotVisible: {
-    outline: 'none',
+    outline: "none",
   },
   root: {
-    WebkitTapHighlightColor: 'transparent',
-    alignItems: 'stretch',
-    backgroundColor: 'transparent',
-    borderColor: 'var(--always-dark-overlay)',
-    borderStyle: 'solid',
-    borderWidth: '0px',
+    WebkitTapHighlightColor: "transparent",
+    alignItems: "stretch",
+    backgroundColor: "transparent",
+    borderColor: "var(--always-dark-overlay)",
+    borderStyle: "solid",
+    borderWidth: "0px",
     // border: '0 solid var(--always-dark-overlay)',
-    boxSizing: 'border-box',
-    cursor: 'pointer',
-    display: 'flex',
-    flexBasis: 'auto',
-    flexDirection: 'column',
+    boxSizing: "border-box",
+    cursor: "pointer",
+    display: "flex",
+    flexBasis: "auto",
+    flexDirection: "column",
     flexShrink: 0,
-    listStyleType: 'none',
-    margin: '0',
+    listStyleType: "none",
+    margin: "0",
     minHeight: 0,
     minWidth: 0,
-    padding: '0',
-    position: 'relative',
-    textAlign: 'inherit',
-    textDecoration: 'none',
-    touchAction: 'manipulation',
+    padding: "0",
+    position: "relative",
+    textAlign: "inherit",
+    textDecoration: "none",
+    touchAction: "manipulation",
     zIndex: 0,
   },
   rootInGroup: {
-    touchAction: 'none',
+    touchAction: "none",
   },
 });
-const validElementTypes = ['menuitem', 'tab', 'none'];
+const validElementTypes = ["menuitem", "tab", "none"];
 const specialElements = {
-  article: 'article',
-  banner: 'header',
-  complementary: 'aside',
-  contentinfo: 'footer',
-  figure: 'figure',
-  form: 'form',
-  heading: 'h1',
-  label: 'label',
-  link: 'a',
-  list: 'ul',
-  listitem: 'li',
-  main: 'main',
-  navigation: 'nav',
-  none: 'div',
-  region: 'section',
+  article: "article",
+  banner: "header",
+  complementary: "aside",
+  contentinfo: "footer",
+  figure: "figure",
+  form: "form",
+  heading: "h1",
+  label: "label",
+  link: "a",
+  list: "ul",
+  listitem: "li",
+  main: "main",
+  navigation: "nav",
+  none: "div",
+  region: "section",
 };
 /**
  *
@@ -78,13 +78,13 @@ const specialElements = {
  * @returns {string}
  */
 function determineElementTag(elementType, additionalData) {
-  let tag = 'div';
+  let tag = "div";
   if (
     validElementTypes.includes(elementType) &&
     additionalData !== null &&
     additionalData.url !== null
   ) {
-    tag = 'a';
+    tag = "a";
   } else if (elementType !== null) {
     /**
      * @type {string | undefined}
@@ -131,15 +131,15 @@ function useChainedCallbacks(callbackA, callbackB) {
  */
 function isElementInDocument(a) {
   return (
-    typeof document !== 'undefined' &&
-    typeof document.contains === 'function' &&
+    typeof document !== "undefined" &&
+    typeof document.contains === "function" &&
     document.contains(a)
   );
 }
 function hasValidAncestorAnchor(el) {
   let elTemp = el;
   while (elTemp !== null) {
-    if (elTemp.tagName === 'A' && elTemp.href !== null) {
+    if (elTemp.tagName === "A" && elTemp.href !== null) {
       return true;
     }
     elTemp = elTemp.parentNode;
@@ -206,32 +206,32 @@ const shouldTriggerActionForKeyEvent = (event) => {
   // Check conditions related to the element's type
   const isContentEditable =
     targetElement.isContentEditable ||
-    (tagName === 'A' && targetElement.href !== null) ||
-    tagName === 'BUTTON' ||
-    tagName === 'INPUT' ||
-    tagName === 'SELECT' ||
-    tagName === 'TEXTAREA';
+    (tagName === "A" && targetElement.href !== null) ||
+    tagName === "BUTTON" ||
+    tagName === "INPUT" ||
+    tagName === "SELECT" ||
+    tagName === "TEXTAREA";
   // Check conditions based on tabIndex and key event
   if (targetElement.tabIndex === 0 && !isContentEditable) {
     const pressedKey = event.key;
     // Check if Enter key is pressed
-    if (pressedKey === 'Enter') {
+    if (pressedKey === "Enter") {
       return true;
     }
     // Check if Spacebar or ' ' key is pressed and the element's role allows it
-    const role = targetElement.getAttribute('role');
+    const role = targetElement.getAttribute("role");
     if (
-      (pressedKey === ' ' || pressedKey === 'Spacebar') &&
-      (role === 'button' ||
-        role === 'checkbox' ||
-        role === 'combobox' ||
-        role === 'menuitem' ||
-        role === 'menuitemcheckbox' ||
-        role === 'menuitemradio' ||
-        role === 'option' ||
-        role === 'radio' ||
-        role === 'switch' ||
-        role === 'tab')
+      (pressedKey === " " || pressedKey === "Spacebar") &&
+      (role === "button" ||
+        role === "checkbox" ||
+        role === "combobox" ||
+        role === "menuitem" ||
+        role === "menuitemcheckbox" ||
+        role === "menuitemradio" ||
+        role === "option" ||
+        role === "radio" ||
+        role === "switch" ||
+        role === "tab")
     )
       return true;
   }
@@ -241,18 +241,18 @@ const shouldTriggerActionForKeyEvent = (event) => {
 
 function responseRoleType(type) {
   switch (type) {
-    case 'none':
-      return 'presentation';
-    case 'label':
+    case "none":
+      return "presentation";
+    case "label":
       return undefined;
     default:
       return type;
   }
 }
 /**
- * 
- * @param {import("./types").CometPressableProps} props 
- * @returns 
+ *
+ * @param {import("./types").CometPressableProps} props
+ * @returns
  */
 // eslint-disable-next-line complexity
 export const WebPressable = (props) => {
@@ -308,25 +308,40 @@ export const WebPressable = (props) => {
   const ElementTagComponent = determineElementTag(accessibilityRole, link);
   const _disabled =
     disabled === true ||
-    (accessibilityState === null ? undefined : accessibilityState.disabled) === true;
+    (accessibilityState === null ? undefined : accessibilityState.disabled) ===
+      true;
   const ariaHidden =
     accessibilityState === null ? undefined : accessibilityState.hidden;
   const isAnchorTagAndNotDisable =
-    ElementTagComponent === 'a' && _disabled !== true;
+    ElementTagComponent === "a" && _disabled !== true;
   const _props = {
     disabled:
-      _disabled === true || (testOnly_state === null ? undefined : testOnly_state.disabled) === true || false,
-    focusVisible: focusVisibleChangeState || (testOnly_state === null ? undefined : testOnly_state.focusVisible) === true,
-    focused: focusChangeState || (testOnly_state === null ? undefined : testOnly_state.focused) === true,
-    hovered: hoverChangeState || (testOnly_state === null ? undefined : testOnly_state.hovered) === true,
-    pressed: pressChangeState || (testOnly_state === null ? undefined : testOnly_state.pressed) === true,
+      _disabled === true ||
+      (testOnly_state === null ? undefined : testOnly_state.disabled) ===
+        true ||
+      false,
+    focusVisible:
+      focusVisibleChangeState ||
+      (testOnly_state === null ? undefined : testOnly_state.focusVisible) ===
+        true,
+    focused:
+      focusChangeState ||
+      (testOnly_state === null ? undefined : testOnly_state.focused) === true,
+    hovered:
+      hoverChangeState ||
+      (testOnly_state === null ? undefined : testOnly_state.hovered) === true,
+    pressed:
+      pressChangeState ||
+      (testOnly_state === null ? undefined : testOnly_state.pressed) === true,
   };
-  const _children = typeof children === 'function' ? children(_props) : children;
-  const _className_DEPRECATED = typeof className_DEPRECATED === 'function'
-    ? className_DEPRECATED(_props)
-    : className_DEPRECATED;
-  const _style = typeof style === 'function' ? style(_props) : style;
-  const _className = typeof xstyle === 'function' ? xstyle(_props) : xstyle;
+  const _children =
+    typeof children === "function" ? children(_props) : children;
+  const _className_DEPRECATED =
+    typeof className_DEPRECATED === "function"
+      ? className_DEPRECATED(_props)
+      : className_DEPRECATED;
+  const _style = typeof style === "function" ? style(_props) : style;
+  const _className = typeof xstyle === "function" ? xstyle(_props) : xstyle;
   WebPressability.usePressability(targetRef, {
     disabled: _disabled,
     onBlur,
@@ -350,9 +365,8 @@ export const WebPressable = (props) => {
   });
   const onPressCallBack = useCallback(
     (event) => {
-
       if (onPress) {
-        onPress(event)
+        onPress(event);
       }
 
       if ((onPress || link !== null) && isAllowClickEventPropagation !== true) {
@@ -367,20 +381,19 @@ export const WebPressable = (props) => {
   );
   const onKeyDownCallBack = useCallback(
     (event) => {
-
       if (onKeyDown) {
-        onKeyDown(event)
+        onKeyDown(event);
       }
 
       if (shouldTriggerActionForKeyEvent(event)) {
         const key = event.key;
-        if (key === ' ' || key === 'Spacebar') {
+        if (key === " " || key === "Spacebar") {
           event.preventDefault();
         }
 
         if (onPress) {
-          onPress(event)
-          event.stopPropagation()
+          onPress(event);
+          event.stopPropagation();
         }
 
         // (b === ' ' || b === 'Spacebar') && a.preventDefault()
@@ -393,14 +406,13 @@ export const WebPressable = (props) => {
     (node) => {
       targetRef.current = node;
 
-      if (typeof forwardedRef === 'function') {
-        forwardedRef(node)
+      if (typeof forwardedRef === "function") {
+        forwardedRef(node);
       } else {
         if (forwardedRef) {
-          forwardedRef.current = node
+          forwardedRef.current = node;
         }
       }
-
     },
     [forwardedRef]
   );
@@ -418,77 +430,81 @@ export const WebPressable = (props) => {
     (_tabIndex = 0);
   const linkDownload = link === null ? undefined : link.download;
   const canDownload =
-    (linkDownload === true || typeof linkDownload === 'string') &&
+    (linkDownload === true || typeof linkDownload === "string") &&
     isAnchorTagAndNotDisable;
   return jsx(
     // TODO
-    ElementTagComponent === 'a' ? Link : ElementTagComponent,
-    { ...rest, 'aria-activedescendant':
+    ElementTagComponent === "a" ? Link : ElementTagComponent,
+    {
+      ...rest,
+      "aria-activedescendant":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.activedescendant,
-      'aria-busy':
+      "aria-busy":
         accessibilityState === null ? undefined : accessibilityState.busy,
-      'aria-checked':
+      "aria-checked":
         accessibilityState === null ? undefined : accessibilityState.checked,
-      'aria-controls':
+      "aria-controls":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.controls,
-      'aria-current':
+      "aria-current":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.current,
-      'aria-describedby':
+      "aria-describedby":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.describedby,
-      'aria-details':
+      "aria-details":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.details,
-      'aria-disabled': _disabled === true ? _disabled : undefined,
-      'aria-errormessage':
+      "aria-disabled": _disabled === true ? _disabled : undefined,
+      "aria-errormessage":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.errormessage,
-      'aria-expanded':
+      "aria-expanded":
         accessibilityState === null ? undefined : accessibilityState.expanded,
-      'aria-haspopup':
+      "aria-haspopup":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.haspopup,
-      'aria-hidden': ariaHidden,
-      'aria-invalid':
+      "aria-hidden": ariaHidden,
+      "aria-invalid":
         accessibilityState === null ? undefined : accessibilityState.invalid,
-      'aria-label': accessibilityLabel,
-      'aria-labelledby':
+      "aria-label": accessibilityLabel,
+      "aria-labelledby":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.labelledby,
-      'aria-modal':
+      "aria-modal":
         accessibilityState === null ? undefined : accessibilityState.modal,
-      'aria-orientation':
-        accessibilityState === null ? undefined : accessibilityState.orientation,
-      'aria-owns':
+      "aria-orientation":
+        accessibilityState === null
+          ? undefined
+          : accessibilityState.orientation,
+      "aria-owns":
         accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.owns,
-      'aria-pressed':
+      "aria-pressed":
         accessibilityState === null ? undefined : accessibilityState.pressed,
-      'aria-readonly':
+      "aria-readonly":
         accessibilityState === null ? undefined : accessibilityState.readonly,
-      'aria-required':
+      "aria-required":
         accessibilityState === null ? undefined : accessibilityState.required,
-      'aria-selected':
+      "aria-selected":
         accessibilityState === null ? undefined : accessibilityState.selected,
-      'aria-valuemax':
+      "aria-valuemax":
         accessibilityValue === null ? undefined : accessibilityValue.max,
-      'aria-valuemin':
+      "aria-valuemin":
         accessibilityValue === null ? undefined : accessibilityValue.min,
-      'aria-valuenow':
+      "aria-valuenow":
         accessibilityValue === null ? undefined : accessibilityValue.now,
-      'aria-valuetext':
+      "aria-valuetext":
         accessibilityValue === null ? undefined : accessibilityValue.text,
       attributionsrc: isAnchorTagAndNotDisable
         ? link === null
@@ -501,7 +517,7 @@ export const WebPressable = (props) => {
           styles.root,
           _props.disabled && styles.disabled,
           (!_props.focusVisible || suppressFocusRing === true) &&
-          styles.focusNotVisible,
+            styles.focusNotVisible,
           _className,
           webPressableGroupContextValue && styles.rootInGroup
         ).className,
@@ -514,7 +530,7 @@ export const WebPressable = (props) => {
         // webPressableGroupContextValue && classes.rootInGroup,
         // _className_DEPRECATED
       ),
-      'data-testid': undefined,
+      "data-testid": undefined,
       download: canDownload ? linkDownload : undefined,
       href: isAnchorTagAndNotDisable
         ? link === null
@@ -537,7 +553,8 @@ export const WebPressable = (props) => {
         ? link === null
           ? undefined
           : link.target
-        : undefined,}
+        : undefined,
+    }
   );
 };
 // fm.grandstream.com/gs

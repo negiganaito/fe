@@ -6,12 +6,11 @@
  */
 /* eslint-disable no-var */
 
+import { PromiseAnnotate } from "@/faang/utils";
 
-import { PromiseAnnotate } from '@/faang/utils';
-
-import { ifRequireable } from './if-requireable';
-import { ifRequired } from './if-required';
-import { JSResourceEvents } from './js-resource-events';
+import { ifRequireable } from "./if-requireable";
+import { ifRequired } from "./if-required";
+import { JSResourceEvents } from "./js-resource-events";
 
 let j = function (a) {
   return a;
@@ -21,7 +20,7 @@ let l = null;
 function m(a) {
   l ? a(l) : k.push(a);
 }
-let n = 'JSResource: unknown caller';
+let n = "JSResource: unknown caller";
 
 export const JSResourceReferenceImpl = (function () {
   a.setBootloader = function (a) {
@@ -47,21 +46,21 @@ export const JSResourceReferenceImpl = (function () {
   e.load = function () {
     let a = this;
     let c = this.$2;
-    JSResourceEvents.notify(this.$1, c, 'LOADED');
+    JSResourceEvents.notify(this.$1, c, "LOADED");
     let e = new Promise((b) => {
       m((e) => {
         // eslint-disable-next-line no-return-assign
         return e.loadModules(
           [a.getModuleIdAsRef()],
           (e) => {
-            JSResourceEvents.notify(a.$1, c, 'PROMISE_RESOLVED')
+            JSResourceEvents.notify(a.$1, c, "PROMISE_RESOLVED");
             b(e);
           },
           (e = a.$2) !== null ? e : n
         );
       });
     });
-    PromiseAnnotate.setDisplayName(e, 'Bootload(' + this.getModuleId() + ')');
+    PromiseAnnotate.setDisplayName(e, "Bootload(" + this.getModuleId() + ")");
     return e;
   };
   e.preload = function () {
@@ -69,11 +68,7 @@ export const JSResourceReferenceImpl = (function () {
     let b = this;
     let c = (a = this.$2) !== null ? a : n;
     m((a) => {
-      return a.loadModules(
-        [b.getModuleIdAsRef()],
-        () => { },
-        'preload: ' + c
-      );
+      return a.loadModules([b.getModuleIdAsRef()], () => {}, "preload: " + c);
     });
   };
   e.equals = function (a) {
@@ -81,12 +76,12 @@ export const JSResourceReferenceImpl = (function () {
     return this === a || this.$1 == a.$1;
   };
   e.getModuleIfRequireable = function () {
-    JSResourceEvents.notify(this.$1, this.$2, 'ACCESSED');
+    JSResourceEvents.notify(this.$1, this.$2, "ACCESSED");
     // eslint-disable-next-line no-useless-call
     return ifRequireable.call(null, this.$1, j);
   };
   e.getModuleIfRequired = function () {
-    JSResourceEvents.notify(this.$1, this.$2, 'ACCESSED');
+    JSResourceEvents.notify(this.$1, this.$2, "ACCESSED");
     // eslint-disable-next-line no-useless-call
     return ifRequired.call(null, this.$1, j);
   };
@@ -98,7 +93,7 @@ export const JSResourceReferenceImpl = (function () {
   };
   e.__setRef = function (a) {
     this.$2 = a;
-    JSResourceEvents.notify(this.$1, this.$2, 'CREATED');
+    JSResourceEvents.notify(this.$1, this.$2, "CREATED");
     return this;
   };
   a.loadAll = function (a, b) {
@@ -107,12 +102,12 @@ export const JSResourceReferenceImpl = (function () {
     for (
       // eslint-disable-next-line no-inner-declarations
       var f = a,
-      g = Array.isArray(f),
-      h = 0,
-      // eslint-disable-next-line no-redeclare
-      f = g
-        ? f
-        : f[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();
+        g = Array.isArray(f),
+        h = 0,
+        // eslint-disable-next-line no-redeclare
+        f = g
+          ? f
+          : f[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"]();
       ;
 
     ) {
@@ -130,7 +125,7 @@ export const JSResourceReferenceImpl = (function () {
       i = i;
       let j = i.$2;
       j && ((e = !0), (c[j] = !0));
-      JSResourceEvents.notify(i.$1, j, 'LOADED');
+      JSResourceEvents.notify(i.$1, j, "LOADED");
     }
     m((d) => {
       return d.loadModules(
@@ -138,7 +133,7 @@ export const JSResourceReferenceImpl = (function () {
           return a.getModuleId();
         }),
         b,
-        e ? Object.keys(c).join(':') : 'JSResource: unknown caller'
+        e ? Object.keys(c).join(":") : "JSResource: unknown caller"
       );
     });
   };

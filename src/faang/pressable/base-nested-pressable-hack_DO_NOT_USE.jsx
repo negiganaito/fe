@@ -4,9 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useState, useEffect } from 'react';
-
-import { jsx } from 'react/jsx-runtime';
+import { useState, useEffect } from "react";
 
 export function BaseNestedPressableHack_DO_NOT_USE(props) {
   const { children } = props;
@@ -24,9 +22,15 @@ export function BaseNestedPressableHack_DO_NOT_USE(props) {
         width: 0,
       };
 
-  return jsx(
-    'object',
-    { ...placeholderStyle, type: 'nested/pressable',
-      children,}
+  return (
+    <object {...placeholderStyle} type="nested/pressable">
+      {children}
+    </object>
   );
+
+  // return jsx("object", {
+  //   ...placeholderStyle,
+  //   type: "nested/pressable",
+  //   children,
+  // });
 }

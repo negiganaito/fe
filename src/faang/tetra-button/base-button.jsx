@@ -4,36 +4,36 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { forwardRef, useContext } from 'react';
+import { forwardRef, useContext } from "react";
 
-import { jsx } from 'react/jsx-runtime';
+import { jsx } from "react/jsx-runtime";
 
-import { Pressable } from '@/faang/pressable/pressable';
-import { PressableText } from '@/faang/pressable/pressable-text';
-import { BaseButtonPopoverContext } from '@/faang/context/base-button-popover-context';
+import { Pressable } from "@/faang/pressable/pressable";
+import { PressableText } from "@/faang/pressable/pressable-text";
+import { BaseButtonPopoverContext } from "@/faang/context/base-button-popover-context";
 
 // eslint-disable-next-line complexity
 export const BaseButton = forwardRef((props, ref) => {
   // TODO add js doc
   const {
     allowClickEventPropagation,
-    'aria-activedescendant': ariaActivedescendant,
-    'aria-checked': ariaChecked,
-    'aria-controls': ariaControls,
-    'aria-current': ariaCurrent,
-    'aria-describedby': ariaDescribedby,
-    'aria-expanded': ariaExpanded,
-    'aria-haspopup': ariaHaspopup,
-    'aria-hidden': ariaHidden,
-    'aria-invalid': ariaInvalid,
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledby,
-    'aria-pressed': ariaPressed,
-    'aria-selected': ariaSelected,
+    "aria-activedescendant": ariaActivedescendant,
+    "aria-checked": ariaChecked,
+    "aria-controls": ariaControls,
+    "aria-current": ariaCurrent,
+    "aria-describedby": ariaDescribedby,
+    "aria-expanded": ariaExpanded,
+    "aria-haspopup": ariaHaspopup,
+    "aria-hidden": ariaHidden,
+    "aria-invalid": ariaInvalid,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledby,
+    "aria-pressed": ariaPressed,
+    "aria-selected": ariaSelected,
     children,
     className_DEPRECATED,
     disabled = false,
-    display = 'inline',
+    display = "inline",
     focusable,
     id,
     label,
@@ -60,11 +60,11 @@ export const BaseButton = forwardRef((props, ref) => {
     //
   } = props;
 
-  const _role = role === 'presentation' ? 'none' : role;
+  const _role = role === "presentation" ? "none" : role;
 
   let _ariaLabel;
 
-  if (_role !== 'none') {
+  if (_role !== "none") {
     if (ariaLabel !== null) {
       _ariaLabel = ariaLabel;
     } else {
@@ -134,52 +134,61 @@ export const BaseButton = forwardRef((props, ref) => {
     xstyle,
   };
 
-  if (display === 'block') {
+  if (display === "block") {
     const accessibilityRole =
-      _role === 'menuitem' ||
-      _role === 'none' ||
-      _role === 'gridcell' ||
-      _role === 'switch' ||
-      _role === 'combobox' ||
-      _role === 'checkbox' ||
-      _role === 'tab' ||
-      _role === 'radio' ||
-      _role === 'option'
+      _role === "menuitem" ||
+      _role === "none" ||
+      _role === "gridcell" ||
+      _role === "switch" ||
+      _role === "combobox" ||
+      _role === "checkbox" ||
+      _role === "tab" ||
+      _role === "radio" ||
+      _role === "option"
         ? _role
-        : 'button';
+        : "button";
 
-    return jsx(
-      Pressable,
-      { ...internalProps, accessibilityRole,
-        allowClickEventPropagation,
-        suppressFocusRing,
-        tabbable: focusable,
-        children,}
-    );
+    return jsx(Pressable, {
+      ...internalProps,
+      accessibilityRole,
+      allowClickEventPropagation,
+      suppressFocusRing,
+      tabbable: focusable,
+      children,
+    });
   } else {
     const accessibilityRole =
-      _role === 'combobox' ||
-      _role === 'menuitem' ||
-      _role === 'menuitemcheckbox' ||
-      _role === 'menuitemradio' ||
-      _role === 'option' ||
-      _role === 'none' ||
-      _role === 'tab'
+      _role === "combobox" ||
+      _role === "menuitem" ||
+      _role === "menuitemcheckbox" ||
+      _role === "menuitemradio" ||
+      _role === "option" ||
+      _role === "none" ||
+      _role === "tab"
         ? _role
-        : 'button';
+        : "button";
 
-    return jsx(
-      PressableText,
-      {
-        focusable,
-        ...internalProps,
-        accessibilityRole,
-          direction: 'none',
-          suppressFocusRing,
-          children,
-      }
+    return (
+      <PressableText
+        {...internalProps}
+        focusable={focusable}
+        accessibilityRole={accessibilityRole}
+        direction="none"
+        suppressFocusRing={suppressFocusRing}
+      >
+        {children}
+      </PressableText>
     );
+
+    // return jsx(PressableText, {
+    //   focusable,
+    //   ...internalProps,
+    //   accessibilityRole,
+    //   direction: "none",
+    //   suppressFocusRing,
+    //   children,
+    // });
   }
 });
 
-BaseButton.displayName = 'BaseButton.react';
+BaseButton.displayName = "BaseButton.react";

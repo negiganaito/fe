@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 /**
  * React hook for creating an unsafe ref. (Deprecated)

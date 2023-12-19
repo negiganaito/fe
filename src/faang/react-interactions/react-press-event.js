@@ -4,11 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-import { ReactEventHelpers } from './react-event-helpers';
-import { ReactEventHookPropagation } from './react-event-hook-propagation';
-import { ReactUseEvent } from './react-use-event';
+import { ReactEventHelpers } from "./react-event-helpers";
+import { ReactEventHookPropagation } from "./react-event-hook-propagation";
+import { ReactUseEvent } from "./react-use-event";
 
 const eventOptions = {
   passive: !0,
@@ -61,15 +61,15 @@ const usePress = (target, options) => {
   const { disabled, onPressStart, onPressMove, onPressEnd, onPressChange } =
     options;
 
-  const pointerdownHandler = ReactUseEvent('pointerdown');
-  const pointermoveHanlder = ReactUseEvent('pointermove', eventOptions);
-  const pointerupHandler = ReactUseEvent('pointerup', eventOptions);
-  const pointercancelHandler = ReactUseEvent('pointercancel', eventOptions);
-  const mousedownHandler = ReactUseEvent('mousedown');
-  const mouseupHandler = ReactUseEvent('mouseup', eventOptions);
-  const mousemoveHandler = ReactUseEvent('mousemove', eventOptions);
-  const dragstartHandler = ReactUseEvent('dragstart', eventOptions);
-  const focusoutHandler = ReactUseEvent('focusout', eventOptions);
+  const pointerdownHandler = ReactUseEvent("pointerdown");
+  const pointermoveHanlder = ReactUseEvent("pointermove", eventOptions);
+  const pointerupHandler = ReactUseEvent("pointerup", eventOptions);
+  const pointercancelHandler = ReactUseEvent("pointercancel", eventOptions);
+  const mousedownHandler = ReactUseEvent("mousedown");
+  const mouseupHandler = ReactUseEvent("mouseup", eventOptions);
+  const mousemoveHandler = ReactUseEvent("mousemove", eventOptions);
+  const dragstartHandler = ReactUseEvent("dragstart", eventOptions);
+  const focusoutHandler = ReactUseEvent("focusout", eventOptions);
 
   const pressRef = useRef({
     activationEvent: null,
@@ -78,7 +78,7 @@ const usePress = (target, options) => {
     isPressActive: false,
     isPressed: false,
     pointerId: null,
-    pointerType: '',
+    pointerType: "",
   });
 
   useEffect(() => {
@@ -121,19 +121,19 @@ const usePress = (target, options) => {
         if (
           ReactEventHookPropagation.hasEventHookPropagationStopped(
             event,
-            'usePress'
+            "usePress"
           )
         ) {
           return;
         }
 
-        ReactEventHookPropagation.stopEventHookPropagation(event, 'usePress');
+        ReactEventHookPropagation.stopEventHookPropagation(event, "usePress");
 
         if (
           event.buttons === 2 ||
           event.buttons > 4 ||
           (ReactEventHelpers.isMac &&
-            event.pointerType === 'mouse' &&
+            event.pointerType === "mouse" &&
             event.ctrlKey)
         ) {
           return;
@@ -148,20 +148,20 @@ const usePress = (target, options) => {
           let pointerType = event;
           const pointerId = pointerType.pointerId;
           // TODO improve this
-          pointerType = pointerType.pointerType || 'mouse';
+          pointerType = pointerType.pointerType || "mouse";
           pressRefCurrent.isPressed = true;
           pressRefCurrent.isPressActive = true;
           pressRefCurrent.pointerId =
             pointerId !== undefined ? pointerId : null;
           pressRefCurrent.pointerType = pointerType;
           pressRefCurrent.activationEvent = event;
-          pointerType !== 'mouse' &&
+          pointerType !== "mouse" &&
             (pressRefCurrent.bounds = targetElement.getBoundingClientRect());
 
           onPressStart &&
             onPressStart(
               createExtendedEventObject(
-                'pressstart',
+                "pressstart",
                 pressRefCurrent.buttons,
                 pointerType,
                 event,
@@ -172,11 +172,8 @@ const usePress = (target, options) => {
           onPressChange && onPressChange(true);
 
           if (ReactEventHelpers.hasPointerEvents) {
-            pointerupHandler.setListener(document, handlePressEnd)
-              pointermoveHanlder.setListener(
-                document,
-                handlePressEndOrMouseMove
-              );
+            pointerupHandler.setListener(document, handlePressEnd);
+            pointermoveHanlder.setListener(document, handlePressEndOrMouseMove);
             pointercancelHandler.setListener(document, handlePressEnd);
           } else {
             mousemoveHandler.setListener(document, handlePressEndOrMouseMove);
@@ -206,7 +203,7 @@ const usePress = (target, options) => {
           onPressEnd &&
             onPressEnd(
               createExtendedEventObject(
-                'pressend',
+                "pressend",
                 pressRefCurrent.buttons,
                 pressRefCurrent.pointerType,
                 event,
@@ -245,7 +242,7 @@ const usePress = (target, options) => {
         const isPressed = pressRefCurrent.isPressed;
         let isInside = false;
 
-        if (pointerType === 'mouse') {
+        if (pointerType === "mouse") {
           const evtTarget = event.target;
           isInside = targetElement.contains(evtTarget);
         } else {
@@ -282,7 +279,7 @@ const usePress = (target, options) => {
             if (onPressMove) {
               onPressMove(
                 createExtendedEventObject(
-                  'pressmove',
+                  "pressmove",
                   pressRefCurrent.buttons,
                   pointerType,
                   event,

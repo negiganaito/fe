@@ -5,13 +5,19 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import React from 'react';
+import React from "react";
 
-import { BaseTooltip } from './base-tooltip';
-import { CometTooltipImpl } from './comet-tooltip-impl';
+import { BaseTooltip } from "./base-tooltip";
+import { CometTooltipImpl } from "./comet-tooltip-impl";
 
 export const CometTooltip = (props) => {
   const { delayMs, ...rest } = props;
 
-  return <BaseTooltip {...rest} delayTooltipMs={delayMs} tooltipImpl={CometTooltipImpl} />;
+  return (
+    <BaseTooltip
+      {...rest}
+      delayTooltipMs={delayMs}
+      tooltipImpl={CometTooltipImpl}
+    />
+  );
 };

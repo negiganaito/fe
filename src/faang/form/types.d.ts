@@ -7,21 +7,24 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React from 'react'
+import React from "react";
 
 export type CometFormTextInputProps = {
-  autoFocus_PLEASE_USE_FOCUS_REGION_INSTEAD?: boolean
-  auxContent?: any
-  emojiSkittle?: any
-  helperText?: any
-  helperTextIsHidden?: boolean
-  icon?: any
-  label?: string
-  labelRef?: any
-  onValueChange?: (value: string, event: React.ChangeEvent<HTMLElement>) => void
-  suppressFocusRing?: boolean
-  testid?: string
-  validationState?: any
-  validator?: any
-  xstyle?: any
-} & React.JSX.IntrinsicElements['input']
+  autoFocus_PLEASE_USE_FOCUS_REGION_INSTEAD?: boolean;
+  auxContent?: any;
+  emojiSkittle?: any;
+  helperText?: any;
+  helperTextIsHidden?: boolean;
+  icon?: any;
+  label?: string;
+  labelRef?: any;
+  onValueChange?: (
+    value: string,
+    event: React.ChangeEvent<HTMLElement>
+  ) => void;
+  suppressFocusRing?: boolean;
+  testid?: string;
+  validationState?: any;
+  validator?: any;
+  xstyle?: any;
+} & React.JSX.IntrinsicElements["input"];

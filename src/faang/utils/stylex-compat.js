@@ -5,11 +5,10 @@
  * See the LICENSE file in the root directory for details.
  */
 function makeNamespace(styles) {
-  styles.$$css = true
-  return styles
+  styles.$$css = true;
+  return styles;
 }
-
 
 export const stylexCompat = {
-  makeNamespace
-}
+  makeNamespace,
+};

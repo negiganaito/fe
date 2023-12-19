@@ -4,36 +4,36 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useMemo } from 'react'
-import { jsx } from 'react/jsx-runtime'
+import { useMemo } from "react";
+import { jsx } from "react/jsx-runtime";
 
-import { BaseThemeDisplayModeContext } from '@/faang/context'
+import { BaseThemeDisplayModeContext } from "@/faang/context";
 
-import { stylexCompat } from '../utils'
-import { useCurrentDisplayMode } from './use-current-display-mode'
+import { stylexCompat } from "../utils";
+import { useCurrentDisplayMode } from "./use-current-display-mode";
 
 const THEME_CLASSES = {
-  dark: '__fb-dark-mode ',
-  light: '__fb-light-mode ',
-}
+  dark: "__fb-dark-mode ",
+  light: "__fb-light-mode ",
+};
 
 /**
- * 
- * @param {string} val 
- * @returns 
+ *
+ * @param {string} val
+ * @returns
  */
 export function useCometTheme(val) {
-  const displayMode = useCurrentDisplayMode()
+  const displayMode = useCurrentDisplayMode();
 
   /**
    * @type {string}
    */
-  let mode
+  let mode;
 
-  if (val === 'invert') {
-    mode = displayMode === 'light' ? 'dark' : 'light'
+  if (val === "invert") {
+    mode = displayMode === "light" ? "dark" : "light";
   } else {
-    mode = val
+    mode = val;
   }
 
   const wrapper = useMemo(() => {
@@ -41,13 +41,13 @@ export function useCometTheme(val) {
       return jsx(BaseThemeDisplayModeContext.Provider, {
         children,
         value: mode,
-      })
-    }
-  }, [mode])
+      });
+    };
+  }, [mode]);
 
   const styles = stylexCompat.makeNamespace({
-    theme: THEME_CLASSES[mode]
-  })
+    theme: THEME_CLASSES[mode],
+  });
 
-  return [wrapper, styles]
+  return [wrapper, styles];
 }

@@ -5,33 +5,32 @@
  * See the LICENSE file in the root directory for details.
  */
 
-
 import {
   useCallback,
   useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
-} from 'react';
-import { unstable_createEventHandle } from 'react-dom';
+} from "react";
+import { unstable_createEventHandle } from "react-dom";
 
-import { useUnsafeRef_DEPRECATED } from '@/faang/hooks/use-unsafe-ref_DEPRECATED';
+import { useUnsafeRef_DEPRECATED } from "@/faang/hooks/use-unsafe-ref_DEPRECATED";
 
-import { ReactEventHelpers } from './react-event-helpers';
-import { ReactEventHookPropagation } from './react-event-hook-propagation';
-import { ReactUseEvent } from './react-use-event';
+import { ReactEventHelpers } from "./react-event-helpers";
+import { ReactEventHookPropagation } from "./react-event-hook-propagation";
+import { ReactUseEvent } from "./react-use-event";
 
 const globalFocusVisibleEvents = ReactEventHelpers.hasPointerEvents
-  ? ['keydown', 'pointermove', 'pointerdown', 'pointerup']
+  ? ["keydown", "pointermove", "pointerdown", "pointerup"]
   : [
-    'keydown',
-    'mousedown',
-    'mousemove',
-    'mouseup',
-    'touchmove',
-    'touchstart',
-    'touchend',
-  ];
+      "keydown",
+      "mousedown",
+      "mousemove",
+      "mouseup",
+      "touchmove",
+      "touchstart",
+      "touchend",
+    ];
 
 const eventOption = {
   passive: true,
@@ -76,12 +75,12 @@ function isValidKey(nativeEvent) {
  */
 function isTextInput(nativeEvent) {
   const { key, target } = nativeEvent;
-  if (key === 'Tab' || key === 'Escape') {
+  if (key === "Tab" || key === "Escape") {
     return false;
   }
   const { isContentEditable, tagName } = target;
 
-  return tagName === 'INPUT' || tagName === 'TEXTAREA' || isContentEditable;
+  return tagName === "INPUT" || tagName === "TEXTAREA" || isContentEditable;
 }
 
 /**
@@ -90,7 +89,7 @@ function isTextInput(nativeEvent) {
  * @returns
  */
 function handleGlobalFocusVisibleEvent(nativeEvent) {
-  if (nativeEvent.type === 'keydown') {
+  if (nativeEvent.type === "keydown") {
     if (isValidKey(nativeEvent)) {
       // KeyboardEvent
       isGlobalFocusVisible = true;
@@ -100,7 +99,7 @@ function handleGlobalFocusVisibleEvent(nativeEvent) {
 
     // Safari calls mousemove/pointermove events when you tab out of the active
     // Safari frame.
-    if (nodeName === 'HTML') {
+    if (nodeName === "HTML") {
       return;
     }
     // Handle all the other mouse/touch/pointer events
@@ -114,7 +113,7 @@ function handleGlobalFocusVisibleEvent(nativeEvent) {
  * @param {(v: boolean) => void} callback
  */
 function handleFocusVisibleTargetEvents(event, callback) {
-  if (event.type === 'keydown') {
+  if (event.type === "keydown") {
     const { nativeEvent } = event;
     if (isValidKey(nativeEvent) && !isTextInput(nativeEvent)) {
       callback(true);
@@ -143,12 +142,12 @@ function setFocusVisibleListeners(focusVisibleHandles, focusTarget, callback) {
 }
 
 function useFocusVisibleInputHandles() {
-  const mousedownHandle = ReactUseEvent('mousedown', eventOption);
+  const mousedownHandle = ReactUseEvent("mousedown", eventOption);
   const pointerHandle = ReactUseEvent(
-    ReactEventHelpers.hasPointerEvents ? 'pointerdown' : 'touchstart',
+    ReactEventHelpers.hasPointerEvents ? "pointerdown" : "touchstart",
     eventOption
   );
-  const keydownHandle = ReactUseEvent('keydown', eventOption);
+  const keydownHandle = ReactUseEvent("keydown", eventOption);
 
   return useMemo(() => {
     return [mousedownHandle, pointerHandle, keydownHandle];
@@ -162,10 +161,9 @@ function useFocusLifecycles() {
     //   trackGlobalFocusVisible()
     // }
 
-
     if (!hasTrackedGlobalFocusVisible) {
-      hasTrackedGlobalFocusVisible = true
-      trackGlobalFocusVisible()
+      hasTrackedGlobalFocusVisible = true;
+      trackGlobalFocusVisible();
     }
 
     // hasTrackedGlobalFocusVisible ||
@@ -187,8 +185,8 @@ function useFocus(
     isFocused: false,
   });
 
-  const focusHandle = ReactUseEvent('focusin', eventOption);
-  const blurHandle = ReactUseEvent('focusout', eventOption);
+  const focusHandle = ReactUseEvent("focusin", eventOption);
+  const blurHandle = ReactUseEvent("focusout", eventOption);
   const focusVisibleHandles = useFocusVisibleInputHandles();
 
   useLayoutEffect(() => {
@@ -232,12 +230,12 @@ function useFocus(
           if (
             ReactEventHookPropagation.hasEventHookPropagationStopped(
               event,
-              'useFocus'
+              "useFocus"
             )
           ) {
             return;
           }
-          ReactEventHookPropagation.stopEventHookPropagation(event, 'useFocus');
+          ReactEventHookPropagation.stopEventHookPropagation(event, "useFocus");
 
           if (!state.isFocused && focusTarget === event.target) {
             state.isFocused = true;
@@ -305,12 +303,12 @@ function useFocus(
           if (
             ReactEventHookPropagation.hasEventHookPropagationStopped(
               event,
-              'useFocus'
+              "useFocus"
             )
           ) {
             return;
           }
-          ReactEventHookPropagation.stopEventHookPropagation(event, 'useFocus');
+          ReactEventHookPropagation.stopEventHookPropagation(event, "useFocus");
 
           // onFocusCallback(event)
 
@@ -348,8 +346,8 @@ function useFocus(
     return () => {
       if (focusTargetRef.current === null && stateRefCurrent.isFocused) {
         stateRefCurrent.isFocused = false;
-        const focusEventBlur = new window.FocusEvent('blur');
-        Object.defineProperty(focusEventBlur, 'target', {
+        const focusEventBlur = new window.FocusEvent("blur");
+        Object.defineProperty(focusEventBlur, "target", {
           value: focusTargetCurrent,
         });
 
@@ -403,10 +401,10 @@ function useFocusWithin(
     isFocused: false,
   });
 
-  const focusHandle = ReactUseEvent('focusin', eventOption);
-  const blurHandle = ReactUseEvent('focusout', eventOption);
-  const afterBlurHandle = ReactUseEvent('afterblur', eventOption);
-  const beforeBlurHandle = ReactUseEvent('beforeblur', eventOption);
+  const focusHandle = ReactUseEvent("focusin", eventOption);
+  const blurHandle = ReactUseEvent("focusout", eventOption);
+  const afterBlurHandle = ReactUseEvent("afterblur", eventOption);
+  const beforeBlurHandle = ReactUseEvent("beforeblur", eventOption);
 
   const focusVisibleHandles = useFocusVisibleInputHandles();
 
@@ -419,7 +417,7 @@ function useFocusWithin(
       // Handle the incoming focusTargetRef. It can be either a function ref
       // or an object ref.
 
-      if (typeof focusWithinTargetRef === 'function') {
+      if (typeof focusWithinTargetRef === "function") {
         focusWithinTargetRef(focusWithinTarget);
       } else {
         focusWithinTargetRef.current = focusWithinTarget;
@@ -458,7 +456,7 @@ function useFocusWithin(
             if (
               ReactEventHookPropagation.hasEventHookPropagationStopped(
                 event,
-                'useFocusWithin'
+                "useFocusWithin"
               )
             ) {
               return;
@@ -518,7 +516,7 @@ function useFocusWithin(
             if (
               ReactEventHookPropagation.hasEventHookPropagationStopped(
                 event,
-                'useFocusWithin'
+                "useFocusWithin"
               )
             ) {
               return;
@@ -544,7 +542,7 @@ function useFocusWithin(
             } else {
               ReactEventHookPropagation.stopEventHookPropagation(
                 event,
-                'useFocusWithin'
+                "useFocusWithin"
               );
             }
           }
@@ -696,18 +694,15 @@ function useDOMEventListener(domEventName, eventOption) {
 }
 
 function useInteractionHandlers() {
-  const mousedownHandler = useDOMEventListener('mousedown', eventOption);
+  const mousedownHandler = useDOMEventListener("mousedown", eventOption);
   const downHandler = useDOMEventListener(
-    ReactEventHelpers.hasPointerEvents ? 'pointerdown' : 'touchstart',
+    ReactEventHelpers.hasPointerEvents ? "pointerdown" : "touchstart",
     eventOption
   );
-  const keydownHandler = useDOMEventListener('keydown', eventOption);
-  return useMemo(
-    () => {
-      return [mousedownHandler, downHandler, keydownHandler];
-    },
-    [keydownHandler, mousedownHandler, downHandler]
-  );
+  const keydownHandler = useDOMEventListener("keydown", eventOption);
+  return useMemo(() => {
+    return [mousedownHandler, downHandler, keydownHandler];
+  }, [keydownHandler, mousedownHandler, downHandler]);
 }
 
 function useFocusWithinStrictMode({
@@ -723,10 +718,10 @@ function useFocusWithinStrictMode({
     isFocusVisible: false,
     isFocused: false,
   });
-  const focusHandle = useDOMEventListener('focusin', eventOption);
-  const blurHandle = useDOMEventListener('focusout', eventOption);
-  const afterblurHandle = useDOMEventListener('afterblur', eventOption);
-  const beforeblurHandle = useDOMEventListener('beforeblur', eventOption);
+  const focusHandle = useDOMEventListener("focusin", eventOption);
+  const blurHandle = useDOMEventListener("focusout", eventOption);
+  const afterblurHandle = useDOMEventListener("afterblur", eventOption);
+  const beforeblurHandle = useDOMEventListener("beforeblur", eventOption);
   const handlerArr = useInteractionHandlers();
 
   const focusWithinStrictModeCallBack = useCallback(
@@ -734,11 +729,11 @@ function useFocusWithinStrictMode({
       const focusRefCurrent = focusRef.current;
       props !== null && focusRefCurrent !== null
         ? (setFocusVisibleListeners(handlerArr, props, (param) => {
-          focusRefCurrent.isFocused &&
-            focusRefCurrent.isFocusVisible !== param &&
-            ((focusRefCurrent.isFocusVisible = param),
+            focusRefCurrent.isFocused &&
+              focusRefCurrent.isFocusVisible !== param &&
+              ((focusRefCurrent.isFocusVisible = param),
               onFocusWithinVisibleChange && onFocusWithinVisibleChange(param));
-        }),
+          }),
           focusHandle.setListener(props, (param) => {
             if (!gkx5403 && disabled === true) {
               return;
@@ -746,21 +741,21 @@ function useFocusWithinStrictMode({
             if (
               ReactEventHookPropagation.hasEventHookPropagationStopped(
                 param,
-                'useFocusWithin'
+                "useFocusWithin"
               )
             )
               return;
             focusRefCurrent.isFocused ||
               ((focusRefCurrent.isFocused = true),
-                (focusRefCurrent.isFocusVisible = isGlobalFocusVisible),
-                onFocusWithinChange && onFocusWithinChange(true),
-                focusRefCurrent.isFocusVisible &&
+              (focusRefCurrent.isFocusVisible = isGlobalFocusVisible),
+              onFocusWithinChange && onFocusWithinChange(true),
+              focusRefCurrent.isFocusVisible &&
                 onFocusWithinVisibleChange &&
                 onFocusWithinVisibleChange(true));
             !focusRefCurrent.isFocusVisible &&
               isGlobalFocusVisible &&
               ((focusRefCurrent.isFocusVisible = isGlobalFocusVisible),
-                onFocusWithinVisibleChange && onFocusWithinVisibleChange(true));
+              onFocusWithinVisibleChange && onFocusWithinVisibleChange(true));
             onFocusWithin && onFocusWithin(param);
           }),
           blurHandle.setListener(props, (param) => {
@@ -769,34 +764,34 @@ function useFocusWithinStrictMode({
             if (
               ReactEventHookPropagation.hasEventHookPropagationStopped(
                 param,
-                'useFocusWithin'
+                "useFocusWithin"
               )
             )
               return;
             focusRefCurrent.isFocused &&
-              !ReactEventHelpers.isRelatedTargetWithin(props, relatedTarget)
+            !ReactEventHelpers.isRelatedTargetWithin(props, relatedTarget)
               ? ((focusRefCurrent.isFocused = false),
                 onFocusWithinChange && onFocusWithinChange(false),
                 focusRefCurrent.isFocusVisible &&
-                onFocusWithinVisibleChange &&
-                onFocusWithinVisibleChange(false),
+                  onFocusWithinVisibleChange &&
+                  onFocusWithinVisibleChange(false),
                 onBlurWithin && onBlurWithin(param))
               : ReactEventHookPropagation.stopEventHookPropagation(
-                param,
-                'useFocusWithin'
-              );
+                  param,
+                  "useFocusWithin"
+                );
           }),
           beforeblurHandle.setListener(props, (param) => {
             if (!gkx5403 && disabled === true) return;
             onBeforeBlurWithin &&
               (onBeforeBlurWithin(param),
-                afterblurHandle.setListener(document, (e) => {
-                  onAfterBlurWithin && onAfterBlurWithin(e)
-                    afterblurHandle.setListener(document, null);
-                }));
+              afterblurHandle.setListener(document, (e) => {
+                onAfterBlurWithin && onAfterBlurWithin(e);
+                afterblurHandle.setListener(document, null);
+              }));
           }))
         : props === null &&
-        (focusHandle.clear(), blurHandle.clear(), beforeblurHandle.clear());
+          (focusHandle.clear(), blurHandle.clear(), beforeblurHandle.clear());
     },
     [
       afterblurHandle,

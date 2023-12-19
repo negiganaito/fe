@@ -7,7 +7,6 @@
 
 /* eslint-disable complexity */
 
-
 import stylex from "@stylexjs/stylex";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
@@ -388,32 +387,39 @@ export function CometFormInputWrapper(props) {
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const W = (bool) => {
-    return labelLocation_INTERNALOutside 
-    ? <label className={stylex(styles.labelInternal)} suppressHydrationWarning>{label}</label>
-    : <span ref={labelRef} className={stylex(
-            styles.label,
-            styles.labelInside,
-            validationState === "ERROR" && styles.labelError,
-            validationState === null && bool && styles.labelHighlighted,
-            (filled || alwaysShrinkLabel || (bool && shrinkLabelOnFocus)) &&
-              styles.labelShrunk,
-            disabled && styles.labelDisabled
-          )}>
+    return labelLocation_INTERNALOutside ? (
+      <label className={stylex(styles.labelInternal)} suppressHydrationWarning>
         {label}
-      </span>  
-      // jsx("span", {
-      //     children: label,
-      //     className: stylex(
-      //       styles.label,
-      //       styles.labelInside,
-      //       validationState === "ERROR" && styles.labelError,
-      //       validationState === null && bool && styles.labelHighlighted,
-      //       (filled || alwaysShrinkLabel || (bool && shrinkLabelOnFocus)) &&
-      //         styles.labelShrunk,
-      //       disabled && styles.labelDisabled
-      //     ),
-      //     ref: labelRef,
-      //   });
+      </label>
+    ) : (
+      <span
+        ref={labelRef}
+        className={stylex(
+          styles.label,
+          styles.labelInside,
+          validationState === "ERROR" && styles.labelError,
+          validationState === null && bool && styles.labelHighlighted,
+          (filled || alwaysShrinkLabel || (bool && shrinkLabelOnFocus)) &&
+            styles.labelShrunk,
+          disabled && styles.labelDisabled
+        )}
+      >
+        {label}
+      </span>
+    );
+    // jsx("span", {
+    //     children: label,
+    //     className: stylex(
+    //       styles.label,
+    //       styles.labelInside,
+    //       validationState === "ERROR" && styles.labelError,
+    //       validationState === null && bool && styles.labelHighlighted,
+    //       (filled || alwaysShrinkLabel || (bool && shrinkLabelOnFocus)) &&
+    //         styles.labelShrunk,
+    //       disabled && styles.labelDisabled
+    //     ),
+    //     ref: labelRef,
+    //   });
   };
 
   const onMouseEnterCb = useCallback(() => {
@@ -443,7 +449,6 @@ export function CometFormInputWrapper(props) {
       };
     }
   }, [comboboxKeyDown]);
-
 
   // return jsxs("div", {
   //   children: [
@@ -583,15 +588,12 @@ export function CometFormInputWrapper(props) {
   //   ref: wrapperRef,
   // });
 
-
   return (
     <div className={stylex(styles.dummy)}>
       {labelLocation_INTERNALOutside && W(false)}
       <FocusWithinHandler onFocusChange={onFocusChange}>
         {(_focused) => (
-          <BaseFocusRing
-            suppressFocusRing={!ba || suppressFocusRing}
-          >
+          <BaseFocusRing suppressFocusRing={!ba || suppressFocusRing}>
             {(focusRingClassname) => (
               <label
                 aria-activedescendant={ariaActivedescendant}
@@ -605,12 +607,16 @@ export function CometFormInputWrapper(props) {
                   cursorStyles[cursor],
                   _hovered && styles.hovered,
                   _focused && BaseFocusRing.focusRingXStyle,
-                  validationState === 'WARN' && styles.warn,
-                  validationState === 'WARN' && _hovered && styles.warnHovered,
-                  validationState === 'WARN' && _focused && styles.warnFocused,
-                  validationState === 'ERROR' && styles.error,
-                  validationState === 'ERROR' && _hovered && styles.errorHovered,
-                  validationState === 'ERROR' && _focused && styles.errorFocused,
+                  validationState === "WARN" && styles.warn,
+                  validationState === "WARN" && _hovered && styles.warnHovered,
+                  validationState === "WARN" && _focused && styles.warnFocused,
+                  validationState === "ERROR" && styles.error,
+                  validationState === "ERROR" &&
+                    _hovered &&
+                    styles.errorHovered,
+                  validationState === "ERROR" &&
+                    _focused &&
+                    styles.errorFocused,
                   disabled && styles.disabled,
                   isShake && styles.shake,
                   focusRingClassname
@@ -625,7 +631,7 @@ export function CometFormInputWrapper(props) {
                 onMouseEnter={onMouseEnterCb}
                 onMouseLeave={onMouseLeaveCb}
                 ref={_ref}
-                role={onPress ? (role ? role : 'button') : undefined}
+                role={onPress ? (role ? role : "button") : undefined}
                 suppressHydrationWarning={true}
                 tabIndex={onPress ? 0 : undefined}
               >
@@ -633,27 +639,23 @@ export function CometFormInputWrapper(props) {
                   <div>
                     {addOnStart}
                     <div className={stylex(styles.dummy3)}>
-                      {withHeaderMask &&
-                        !disabled &&
-                        (filled || _focused) && (
-                          <span
-                            className={stylex(
-                              styles.headerMask,
-                              validationState === 'WARN' &&
-                                _hovered &&
-                                styles.warnHovered,
-                              validationState === 'ERROR' &&
-                                _hovered &&
-                                styles.errorHovered
-                            )}
-                          />
-                        )}
+                      {withHeaderMask && !disabled && (filled || _focused) && (
+                        <span
+                          className={stylex(
+                            styles.headerMask,
+                            validationState === "WARN" &&
+                              _hovered &&
+                              styles.warnHovered,
+                            validationState === "ERROR" &&
+                              _hovered &&
+                              styles.errorHovered
+                          )}
+                        />
+                      )}
                       {!hideLabel &&
                         !labelLocation_INTERNALOutside &&
                         W(_focused)}
-                      <FocusWithinHandler
-                        onFocusChange={ca}
-                      >
+                      <FocusWithinHandler onFocusChange={ca}>
                         {children({
                           filled: filled,
                           focused: _focused,
@@ -687,8 +689,8 @@ export function CometFormInputWrapper(props) {
           </BaseFocusRing>
         )}
       </FocusWithinHandler>
-      {helperText && (
-        helperTextIsHidden ? (
+      {helperText &&
+        (helperTextIsHidden ? (
           <div id={id2} className={stylex(styles.helperTextIsHidden)}>
             {helperText}
           </div>
@@ -699,9 +701,7 @@ export function CometFormInputWrapper(props) {
               value={helperText}
             />
           </div>
-        )
-      )}
+        ))}
     </div>
   );
 }
-

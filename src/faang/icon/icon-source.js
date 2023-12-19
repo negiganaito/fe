@@ -12,7 +12,7 @@ export class IconSource {
    * @param {number} size
    */
   constructor($$typeof, src, size) {
-    this.$$typeof = 'fb.iconsource';
+    this.$$typeof = "fb.iconsource";
     this.src = src;
     this.size = size;
   }

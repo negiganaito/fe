@@ -4,16 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext, useMemo } from "react";
 
-export const BaseTextContext = createContext(
-  undefined,
-);
+export const BaseTextContext = createContext(undefined);
 
-export function BaseTextContextProvider({
-  nested,
-  children,
-}) {
+export function BaseTextContextProvider({ nested, children }) {
   const value = useMemo(() => ({ nested }), [nested]);
 
   return (

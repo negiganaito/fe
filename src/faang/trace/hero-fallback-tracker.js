@@ -4,10 +4,10 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useContext, useLayoutEffect } from 'react';
+import { useContext, useLayoutEffect } from "react";
 
-import { HeroInteractionContext } from './hero-interaction-context';
-import { HeroInteractionIDContext } from './hero-interaction-id-context';
+import { HeroInteractionContext } from "./hero-interaction-context";
+import { HeroInteractionIDContext } from "./hero-interaction-id-context";
 
 // eslint-disable-next-line react/prop-types
 export function HeroFallbackTracker({ uuid }) {
@@ -34,4 +34,4 @@ export function HeroFallbackTracker({ uuid }) {
   return null;
 }
 
-HeroFallbackTracker.displayName = 'HeroFallbackTracker';
+HeroFallbackTracker.displayName = "HeroFallbackTracker";

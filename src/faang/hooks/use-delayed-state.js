@@ -5,26 +5,25 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import emptyFunction from 'fbjs/lib/emptyFunction'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import emptyFunction from "fbjs/lib/emptyFunction";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 /**
- * 
- * @param {boolean} initialValue 
- * @returns 
+ *
+ * @param {boolean} initialValue
+ * @returns
  */
 export function useDelayedState(initialValue) {
-  const [state, setState] = useState(initialValue)
-  const timeoutRef = useRef(undefined)
+  const [state, setState] = useState(initialValue);
+  const timeoutRef = useRef(undefined);
 
   useEffect(() => {
     return () => {
-      clearTimeout(timeoutRef.current)
-    }
-  }, [])
+      clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const setDelayedState = useCallback(
-
     /**
      * @param {boolean} newValue
      * @param { number | undefined} delay
@@ -32,30 +31,29 @@ export function useDelayedState(initialValue) {
      */
     (newValue, delay, callback) => {
       if (delay === undefined) {
-        delay = 0
+        delay = 0;
       }
 
       if (callback === undefined) {
-        callback = emptyFunction
+        callback = emptyFunction;
       }
 
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = undefined
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = undefined;
 
       if (delay === 0) {
-        setState(newValue)
-        callback(newValue)
+        setState(newValue);
+        callback(newValue);
       } else {
         timeoutRef.current = setTimeout(() => {
-          setState(newValue)
-          callback(newValue)
-          timeoutRef.current = undefined
-        }, delay)
+          setState(newValue);
+          callback(newValue);
+          timeoutRef.current = undefined;
+        }, delay);
       }
     },
-    [],
-  )
+    []
+  );
 
-  return [state, setDelayedState]
+  return [state, setDelayedState];
 }
-

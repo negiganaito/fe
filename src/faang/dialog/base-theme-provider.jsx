@@ -5,8 +5,6 @@
  * See the LICENSE file in the root directory for details.
  */
 import { useContext, useMemo } from "react";
-// @ts-ignore
-import { jsx } from "react/jsx-runtime";
 
 import {
   BaseThemeConfigContext,
@@ -74,13 +72,21 @@ export function BaseThemeProvider({ children, config, displayMode }) {
       : baseThemeConfigContextValue.lightVariables
   );
 
-  return jsx(BaseThemeConfigContext.Provider, {
-    children: jsx(BaseThemeDisplayModeContext.Provider, {
-      children: children(themeClass, themeVariable),
-      value: currentDisplayMode,
-    }),
-    value: baseThemeConfigContextValue,
-  });
+  // return jsx(BaseThemeConfigContext.Provider, {
+  //   children: jsx(BaseThemeDisplayModeContext.Provider, {
+  //     children: children(themeClass, themeVariable),
+  //     value: currentDisplayMode,
+  //   }),
+  //   value: baseThemeConfigContextValue,
+  // });
+
+  return (
+    <BaseThemeConfigContext.Provider value={baseThemeConfigContextValue}>
+      <BaseThemeDisplayModeContext.Provider value={currentDisplayMode}>
+        {children(themeClass, themeVariable)}
+      </BaseThemeDisplayModeContext.Provider>
+    </BaseThemeConfigContext.Provider>
+  );
 }
 
 function convert2CssVariable(a) {

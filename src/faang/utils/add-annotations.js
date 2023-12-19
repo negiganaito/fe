@@ -13,6 +13,6 @@
  */
 export function addAnnotations(target, annotations) {
   Object.keys(annotations).forEach((key) => {
-    target[key] = { ...target[key], ...annotations[key]};
+    target[key] = { ...target[key], ...annotations[key] };
   });
 }

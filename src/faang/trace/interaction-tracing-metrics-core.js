@@ -7,12 +7,11 @@
 
 /* eslint-disable no-undef */
 
+import performanceNowSinceAppStart from "fbjs/lib/performanceNow";
 
-import performanceNowSinceAppStart from 'fbjs/lib/performanceNow';
+import { addAnnotations } from "@/faang/utils/add-annotations";
 
-import { addAnnotations } from '@/faang/utils/add-annotations';
-
-import { HeroTracingPlaceholder } from './hero-tracing-placeholder';
+import { HeroTracingPlaceholder } from "./hero-tracing-placeholder";
 
 let h = new Map();
 let i = new Map();
@@ -40,16 +39,16 @@ const a = function () {
   };
   let d = {
     addGlobalMetadata: function (a, b) {
-      if (typeof b === 'number') {
+      if (typeof b === "number") {
         let e;
         addAnnotations(k, {
           int: ((e = {}), (e[a] = b), e),
         });
-      } else if (typeof b === 'string') {
+      } else if (typeof b === "string") {
         addAnnotations(k, {
           string: ((e = {}), (e[a] = b), e),
         });
-      } else if (typeof b === 'boolean') {
+      } else if (typeof b === "boolean") {
         addAnnotations(k, {
           bool: ((e = {}), (e[a] = b), e),
         });
@@ -58,16 +57,16 @@ const a = function () {
     },
     addMetadata: function (a, d) {
       b((b) => {
-        if (typeof d === 'number') {
+        if (typeof d === "number") {
           let e;
           addAnnotations(b.annotations, {
             int: ((e = {}), (e[a] = d), e),
           });
-        } else if (typeof d === 'string') {
+        } else if (typeof d === "string") {
           addAnnotations(b.annotations, {
             string: ((e = {}), (e[a] = d), e),
           });
-        } else if (typeof d === 'boolean') {
+        } else if (typeof d === "boolean") {
           addAnnotations(b.annotations, {
             bool: ((e = {}), (e[a] = d), e),
           });
@@ -85,8 +84,8 @@ const a = function () {
       });
       return function (a, b) {
         d.forEach((d) => {
-          d.end = a 
-          d.duration = a - c
+          d.end = a;
+          d.duration = a - c;
           b && (d.alreadyRequired = !0);
         });
       };
@@ -182,21 +181,21 @@ let m = {
         timestamp: d,
         type: c,
       }),
-        e && (a.markerPoints[b].data = e));
+      e && (a.markerPoints[b].data = e));
   },
   addGlobalMetadata: function (a, b, d) {
-    if (typeof d === 'number') {
+    if (typeof d === "number") {
       let e;
       addAnnotations(k, {
         int: ((e = {}), (e[b] = d), e),
       });
       m.addAnnotationInt(a, b, d);
-    } else if (typeof d === 'string') {
+    } else if (typeof d === "string") {
       addAnnotations(k, {
         string: ((e = {}), (e[b] = d), e),
       });
       m.addAnnotation(a, b, d);
-    } else if (typeof d === 'boolean') {
+    } else if (typeof d === "boolean") {
       addAnnotations(k, {
         bool: ((e = {}), (e[b] = d), e),
       });
@@ -238,33 +237,33 @@ let m = {
         timestamp: e,
         type: d,
       }),
-        f && (a.markerPoints[b].data = f));
+      f && (a.markerPoints[b].data = f));
   },
   addMetadata: function (a, b, d) {
     a = i.get(a);
     if (!a) return;
-    if (typeof d === 'number') {
+    if (typeof d === "number") {
       let e;
       addAnnotations(a.annotations, {
         int: ((e = {}), (e[b] = d), e),
       });
-    } else if (typeof d === 'string') {
+    } else if (typeof d === "string") {
       addAnnotations(a.annotations, {
         string: ((e = {}), (e[b] = d), e),
       });
-    } else if (typeof d === 'boolean') {
+    } else if (typeof d === "boolean") {
       addAnnotations(a.annotations, {
         bool: ((e = {}), (e[b] = d), e),
       });
     }
   },
   addMountPoint: function (a, b, c) {
-    c = 'Mount_' + c;
-    m.addFirstMarkerPoint(a, c, 'VisualCompletion', b);
+    c = "Mount_" + c;
+    m.addFirstMarkerPoint(a, c, "VisualCompletion", b);
   },
   addMountPointMetadata: function (a, b, c) {
     a = m.get(a);
-    b = 'Mount_' + b;
+    b = "Mount_" + b;
     a = a === null ? void 0 : a.markerPoints[b];
     if (a) {
       let d = a.data || {};
@@ -395,11 +394,14 @@ let m = {
       let e = HeroTracingPlaceholder.HeroPendingPlaceholderTracker.dump(
         b.traceId
       );
-      a[c] = { ...b, e2e:
+      a[c] = {
+        ...b,
+        e2e:
           b.completed !== null
             ? ((b.completed - b.start) / 1e3).toFixed(2)
-            : '?',
-        pendingPlaceholders: e,};
+            : "?",
+        pendingPlaceholders: e,
+      };
     });
     return a;
   },

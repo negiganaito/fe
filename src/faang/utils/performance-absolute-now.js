@@ -4,12 +4,12 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import performance from 'fbjs/lib/performance';
+import performance from "fbjs/lib/performance";
 
 let b;
-  let i = function () {
-    return Date.now();
-  };
+let i = function () {
+  return Date.now();
+};
 function a(a) {
   i = a;
 }

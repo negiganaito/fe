@@ -4,15 +4,15 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { ReactEventHookPropagation } from './react-event-hook-propagation';
-import { ReactUseEvent } from './react-use-event';
+import { ReactEventHookPropagation } from "./react-event-hook-propagation";
+import { ReactUseEvent } from "./react-use-event";
 
 function useContextMenu(target, options) {
   const { disabled, onContextMenu, preventDefault } = options;
 
-  const contextmenuHandler = ReactUseEvent('contextmenu');
+  const contextmenuHandler = ReactUseEvent("contextmenu");
 
   useEffect(() => {
     const curr = target.current;
@@ -25,7 +25,7 @@ function useContextMenu(target, options) {
         if (
           ReactEventHookPropagation.hasEventHookPropagationStopped(
             param,
-            'useContextMenu'
+            "useContextMenu"
           )
         ) {
           return;
@@ -33,7 +33,7 @@ function useContextMenu(target, options) {
 
         ReactEventHookPropagation.stopEventHookPropagation(
           param,
-          'useContextMenu'
+          "useContextMenu"
         );
 
         if (preventDefault !== false && !param.nativeEvent.defaultPrevented) {

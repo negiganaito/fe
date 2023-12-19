@@ -8,14 +8,14 @@
 /* eslint-disable react/display-name */
 
 /* eslint-disable camelcase */
-import React, { forwardRef, useContext, useMemo, useRef } from 'react';
-import { jsx, jsxs } from 'react/jsx-runtime';
+import React, { forwardRef, useContext, useMemo, useRef } from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
 
-import { BaseLinkNestedPressableContext } from '@/faang/context/base-link-nested-pressable-context';
-import { mergeRefs } from '@/faang/hooks/merge-refs';
-import { BaseNestedPressableHack_DO_NOT_USE } from '@/faang/pressable/base-nested-pressable-hack_DO_NOT_USE';
-import { Pressable } from '@/faang/pressable/pressable';
-import { PressableText } from '@/faang/pressable/pressable-text';
+import { BaseLinkNestedPressableContext } from "@/faang/context/base-link-nested-pressable-context";
+import { mergeRefs } from "@/faang/hooks/merge-refs";
+import { BaseNestedPressableHack_DO_NOT_USE } from "@/faang/pressable/base-nested-pressable-hack_DO_NOT_USE";
+import { Pressable } from "@/faang/pressable/pressable";
+import { PressableText } from "@/faang/pressable/pressable-text";
 
 // NOTE some potential bug
 
@@ -30,7 +30,7 @@ export const BaseLink = forwardRef(
       focusable,
       children,
       disabled,
-      display = 'inline',
+      display = "inline",
       label,
       onBlur,
       onClick,
@@ -78,19 +78,19 @@ export const BaseLink = forwardRef(
     const internalRef = useRef(null);
 
     const {
-      'aria-activedescendant': ariaActivedescendant,
-      'aria-checked': ariaChecked,
-      'aria-controls': ariaControls,
-      'aria-current': ariaCurrent,
-      'aria-describedby': ariaDescribedly,
-      'aria-expanded': ariaExpanded,
-      'aria-haspopup': ariaHaspopup,
-      'aria-hidden': ariaHidden,
-      'aria-invalid': ariaInvalid,
-      'aria-label': ariaLabel,
-      'aria-labelledby': ariaLabelledby,
-      'aria-owns': ariaOwns,
-      'aria-selected': ariaSelected,
+      "aria-activedescendant": ariaActivedescendant,
+      "aria-checked": ariaChecked,
+      "aria-controls": ariaControls,
+      "aria-current": ariaCurrent,
+      "aria-describedby": ariaDescribedly,
+      "aria-expanded": ariaExpanded,
+      "aria-haspopup": ariaHaspopup,
+      "aria-hidden": ariaHidden,
+      "aria-invalid": ariaInvalid,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
+      "aria-owns": ariaOwns,
+      "aria-selected": ariaSelected,
     } = props;
 
     const baseLinkNestedPressableValue = useContext(
@@ -102,9 +102,9 @@ export const BaseLink = forwardRef(
       [externalRef, internalRef]
     );
 
-    const _role = role === 'presentation' ? 'none' : role;
+    const _role = role === "presentation" ? "none" : role;
     const _accessibilityLabel =
-      label !== undefined && _role !== 'none' ? label : ariaLabel;
+      label !== undefined && _role !== "none" ? label : ariaLabel;
 
     const allProps = {
       accessibilityLabel: _accessibilityLabel,
@@ -130,7 +130,7 @@ export const BaseLink = forwardRef(
       forwardedRef: ref,
       link: {
         // TODO
-        attributionsrc: attributionsrc ?? 'T',
+        attributionsrc: attributionsrc ?? "T",
         download,
         rel,
         target,
@@ -150,7 +150,7 @@ export const BaseLink = forwardRef(
       onPressEnd,
       onPressStart,
       preventContextMenu,
-      preventDefault: target !== '_blank',
+      preventDefault: target !== "_blank",
       style,
       suppressHydrationWarning:
         suppressHydrationWarning === true ? true : undefined,
@@ -167,18 +167,18 @@ export const BaseLink = forwardRef(
 
     let _child;
 
-    if (display === 'block') {
+    if (display === "block") {
       const nestedAccessibilityRole =
-        _role === 'button' ||
-          _role === 'menuitem' ||
-          _role === 'none' ||
-          _role === 'switch' ||
-          _role === 'checkbox' ||
-          _role === 'article' ||
-          _role === 'radio' ||
-          _role === 'tab'
+        _role === "button" ||
+        _role === "menuitem" ||
+        _role === "none" ||
+        _role === "switch" ||
+        _role === "checkbox" ||
+        _role === "article" ||
+        _role === "radio" ||
+        _role === "tab"
           ? _role
-          : 'link';
+          : "link";
 
       _child = (
         <Pressable
@@ -194,14 +194,14 @@ export const BaseLink = forwardRef(
       );
     } else {
       const nestedAccessibilityRole =
-        _role === 'button' ||
-          _role === 'menuitem' ||
-          _role === 'menuitemradio' ||
-          _role === 'menuitemcheckbox' ||
-          _role === 'none' ||
-          _role === 'tab'
+        _role === "button" ||
+        _role === "menuitem" ||
+        _role === "menuitemradio" ||
+        _role === "menuitemcheckbox" ||
+        _role === "none" ||
+        _role === "tab"
           ? _role
-          : 'link';
+          : "link";
 
       _child = (
         <PressableText
@@ -223,8 +223,8 @@ export const BaseLink = forwardRef(
         // routeTarget === 'content' && jsx(m, {}),
         baseLinkNestedPressableValue
           ? jsx(BaseNestedPressableHack_DO_NOT_USE, {
-            children: _child,
-          })
+              children: _child,
+            })
           : _child,
       ],
     });

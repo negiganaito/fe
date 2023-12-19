@@ -18,7 +18,7 @@ const setDisplayName = (component, displayName) => {
 const getDisplayName = (component) => {
   const displayName = component.displayName;
 
-  if (typeof displayName === 'string') {
+  if (typeof displayName === "string") {
     return displayName;
   } else {
     return null;

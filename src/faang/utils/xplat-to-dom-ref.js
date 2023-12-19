@@ -9,9 +9,11 @@ function _xplatToDOMRef(target) {
   return function (node) {
     node =
       window.HTMLElement && node instanceof window.HTMLElement ? node : null;
-    typeof target === 'function'
+    typeof target === "function"
       ? target(node)
-      : target !== null && typeof target === 'object' && (target.current = node);
+      : target !== null &&
+        typeof target === "object" &&
+        (target.current = node);
   };
 }
 // TODO
@@ -23,14 +25,15 @@ function xplatToInputRef(target) {
       window.HTMLInputElement && node instanceof window.HTMLInputElement
         ? node
         : null;
-    typeof target === 'function'
+    typeof target === "function"
       ? target(node)
-      : target !== null && typeof target === 'object' && (target.current = node);
+      : target !== null &&
+        typeof target === "object" &&
+        (target.current = node);
   };
 }
 
-
 export const xplatToDOMRef = {
   xplatToDOMRef: _xplatToDOMRef,
-  xplatToInputRef
-}
+  xplatToInputRef,
+};

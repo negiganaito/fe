@@ -4,9 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import ExecutionEnvironment from 'fbjs/lib/ExecutionEnvironment';
+import ExecutionEnvironment from "fbjs/lib/ExecutionEnvironment";
 
-import { suspendOrThrowIfUsedInSSR } from './suspend-or-throw-if-used-in-ssr';
+import { suspendOrThrowIfUsedInSSR } from "./suspend-or-throw-if-used-in-ssr";
 
 const j = {};
 function preload(a) {
@@ -19,7 +19,7 @@ function read(b) {
     !ExecutionEnvironment.isInBrowser &&
       !b.isAvailableInSSR_DO_NOT_USE() &&
       suspendOrThrowIfUsedInSSR(
-        'Loading of bootloaded and T3 components is disabled during SSR'
+        "Loading of bootloaded and T3 components is disabled during SSR"
       );
     const d = b.getModuleId();
     if (!j[d]) {

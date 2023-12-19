@@ -11,15 +11,15 @@ import {
   useContext,
   useLayoutEffect,
   useRef,
-} from 'react';
-import { jsx, jsxs } from 'react/jsx-runtime';
+} from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
 
-import { useStable } from '@/faang/hooks/use-stable';
+import { useStable } from "@/faang/hooks/use-stable";
 
-import { HeroFallbackTracker } from './hero-fallback-tracker';
-import { HeroInteractionContext } from './hero-interaction-context';
-import { HeroInteractionIDContext } from './hero-interaction-id-context';
-import { HeroPlaceholderUtils } from './hero-placeholder-utils';
+import { HeroFallbackTracker } from "./hero-fallback-tracker";
+import { HeroInteractionContext } from "./hero-interaction-context";
+import { HeroInteractionIDContext } from "./hero-interaction-id-context";
+import { HeroPlaceholderUtils } from "./hero-placeholder-utils";
 
 // function n(a) {
 //   var b = a.cb,
@@ -39,7 +39,6 @@ import { HeroPlaceholderUtils } from './hero-placeholder-utils';
  */
 function performLayoutEffectOnce({ cb }) {
   const hasBeenCalled = useRef(false);
-
 
   useLayoutEffect(() => {
     if (!hasBeenCalled.current) {
@@ -82,7 +81,7 @@ export const HeroPlaceholder = (props) => {
           simpleUUID1,
           heroInteractionContextValue.pageletStack,
           cbProps,
-          name !== null ? name : 'Unnamed Suspense'
+          name !== null ? name : "Unnamed Suspense"
         );
       }
 
@@ -91,7 +90,7 @@ export const HeroPlaceholder = (props) => {
           HeroPlaceholderUtils.createThenableDescription(cbProps);
 
         unstable_onSuspense(
-          thenableDescription !== null ? thenableDescription : ''
+          thenableDescription !== null ? thenableDescription : ""
         );
       }
     },
@@ -113,7 +112,7 @@ export const HeroPlaceholder = (props) => {
       heroInteractionContextValue.hold(
         heroInteractionIDContextValue,
         heroInteractionContextValue.pageletStack,
-        'Hydration',
+        "Hydration",
         simpleUUID2,
         name
       );
@@ -166,4 +165,4 @@ export const HeroPlaceholder = (props) => {
   });
 };
 
-HeroPlaceholder.displayName = 'HeroPlaceholder';
+HeroPlaceholder.displayName = "HeroPlaceholder";

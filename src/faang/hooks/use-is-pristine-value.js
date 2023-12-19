@@ -4,21 +4,18 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useState } from 'react'
+import { useState } from "react";
 
-import { useStable } from './use-stable'
+import { useStable } from "./use-stable";
 
-export function useIsPristineValue(
-  value,
-  initialPristine,
-) {
-  const [isPristine, setIsPristine] = useState(initialPristine)
+export function useIsPristineValue(value, initialPristine) {
+  const [isPristine, setIsPristine] = useState(initialPristine);
 
-  const stableValue = useStable(() => value)
+  const stableValue = useStable(() => value);
 
   if (isPristine && value !== stableValue) {
-    setIsPristine(false)
+    setIsPristine(false);
   }
 
-  return isPristine
+  return isPristine;
 }

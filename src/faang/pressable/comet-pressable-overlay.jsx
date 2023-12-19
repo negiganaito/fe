@@ -4,39 +4,39 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from '@stylexjs/stylex';
+import stylex from "@stylexjs/stylex";
 
-import React, { useState } from 'react';
-import { BaseFocusRing } from '../focus/base-focus-ring';
-import { CometVisualCompletionAttributes } from '../common/comet-visual-completion-attributes';
-import { CometCompositeItemFocusIndicator } from './comet-composite-item-focus-indicator';
+import React, { useState } from "react";
+import { BaseFocusRing } from "../focus/base-focus-ring";
+import { CometVisualCompletionAttributes } from "../common/comet-visual-completion-attributes";
+import { CometCompositeItemFocusIndicator } from "./comet-composite-item-focus-indicator";
 
 const styles = stylex.create({
   circle: {
-    borderRadius: '50%',
+    borderRadius: "50%",
   },
   defaultHoveredStyle: {
-    backgroundColor: 'var(--hover-overlay)',
+    backgroundColor: "var(--hover-overlay)",
   },
   defaultPressedStyle: {
-    backgroundColor: 'var(--press-overlay)',
+    backgroundColor: "var(--press-overlay)",
   },
   overlay: {
-    borderRadius: 'inherit',
-    bottom: '0',
-    right: '0',
-    opacity: '0',
-    pointerEvents: 'none',
-    position: 'absolute',
-    left: '0',
-    top: '0',
-    transitionDuration: 'var(--fds-duration-extra-extra-short-out)',
-    transitionProperty: 'opacity',
-    transitionTimingFunction: 'var(--fds-animation-fade-out)',
+    borderRadius: "inherit",
+    bottom: "0",
+    right: "0",
+    opacity: "0",
+    pointerEvents: "none",
+    position: "absolute",
+    left: "0",
+    top: "0",
+    transitionDuration: "var(--fds-duration-extra-extra-short-out)",
+    transitionProperty: "opacity",
+    transitionTimingFunction: "var(--fds-animation-fade-out)",
   },
   overlayVisible: {
-    opacity: '1',
-    transitionDuration: '0s',
+    opacity: "1",
+    transitionDuration: "0s",
   },
 });
 
@@ -51,7 +51,7 @@ export const CometPressableOverlay = (props) => {
     focusVisible = false,
     hovered = false,
     pressed = false,
-    focusRingPosition = 'default',
+    focusRingPosition = "default",
     hoveredStyle = styles.defaultHoveredStyle,
     focusVisibleStyle = hoveredStyle,
     offset,
@@ -64,12 +64,12 @@ export const CometPressableOverlay = (props) => {
   const [state, setState] = useState();
 
   if (pressed) {
-    state !== 'pressed' && setState('pressed');
+    state !== "pressed" && setState("pressed");
   } else {
     if (focusVisible) {
-      state !== 'focused' && setState('focused');
+      state !== "focused" && setState("focused");
     } else {
-      hovered && state !== 'hovered' && setState('hovered');
+      hovered && state !== "hovered" && setState("hovered");
     }
   }
 
@@ -79,10 +79,13 @@ export const CometPressableOverlay = (props) => {
   //   ? state !== 'focused' && setState('focused')
   //   : hovered && state !== 'hovered' && setState('hovered');
 
-  let bottom; let left; let right; let top;
+  let bottom;
+  let left;
+  let right;
+  let top;
 
   if (offset) {
-    if (typeof offset === 'number') {
+    if (typeof offset === "number") {
       bottom = -offset;
       left = -offset;
       right = -offset;
@@ -111,27 +114,27 @@ export const CometPressableOverlay = (props) => {
       className={stylex(
         styles.overlay,
         (pressed || focusVisible || hovered || showGridSignifiers) &&
-        styles.overlayVisible,
-        state === 'pressed' && pressedStyle,
-        state === 'focus' && focusVisibleStyle,
-        state === 'hovered' && hoveredStyle,
-        state === 'focused' && showFocusRing
-          ? focusRingPosition === 'default'
+          styles.overlayVisible,
+        state === "pressed" && pressedStyle,
+        state === "focus" && focusVisibleStyle,
+        state === "hovered" && hoveredStyle,
+        state === "focused" && showFocusRing
+          ? focusRingPosition === "default"
             ? BaseFocusRing.focusRingXStyle
             : BaseFocusRing.focusRingInsetXStyle
           : undefined,
-        radius === '50%' && styles.circle
+        radius === "50%" && styles.circle
       )}
       {...CometVisualCompletionAttributes.IGNORE}
       style={
         state !== null
           ? {
-            borderRadius: typeof radius === 'number' ? radius : undefined,
-            bottom,
-            left,
-            right,
-            top,
-          }
+              borderRadius: typeof radius === "number" ? radius : undefined,
+              bottom,
+              left,
+              right,
+              top,
+            }
           : undefined
       }
     >
@@ -142,4 +145,4 @@ export const CometPressableOverlay = (props) => {
   );
 };
 
-CometPressableOverlay.displayName = 'CometPressableOverlay.react';
+CometPressableOverlay.displayName = "CometPressableOverlay.react";

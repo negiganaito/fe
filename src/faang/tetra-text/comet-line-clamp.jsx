@@ -5,28 +5,32 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from '@stylexjs/stylex';
-import React, { forwardRef, useCallback, useContext, useRef, useState } from 'react';
-import { jsx, jsxs } from 'react/jsx-runtime';
-import Loadable from 'react-loadable';
+import stylex from "@stylexjs/stylex";
+import React, {
+  forwardRef,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
+import Loadable from "react-loadable";
 
-import { CometPlaceholder } from '@/faang/comet-placeholder/comet-placeholder';
-import { CometTextContext } from '@/faang/context';
-import { useMergeRefs } from '@/faang/hooks';
-import { CometTextTypography } from '@/faang/tetra-text';
-import { cssUserAgentSupports } from '@/faang/utils';
-
+import { CometPlaceholder } from "@/faang/comet-placeholder/comet-placeholder";
+import { CometTextContext } from "@/faang/context";
+import { useMergeRefs } from "@/faang/hooks";
+import { CometTextTypography } from "@/faang/tetra-text";
+import { cssUserAgentSupports } from "@/faang/utils";
 
 // const CometToolTip = lazy(() => import('@/faang/base-tooltip').then(r => r.CometTooltip));
 
 const CometToolTip = Loadable({
-  loader: () => import('@/faang/base-tooltip').then(r => r.CometTooltip),
-  loading: () => null
-})
-
+  loader: () => import("@/faang/base-tooltip").then((r) => r.CometTooltip),
+  loading: () => null,
+});
 
 const e = {
-  useTranslationKeyForTextParent: function () { },
+  useTranslationKeyForTextParent: function () {},
 };
 
 const { useTranslationKeyForTextParent } = e;
@@ -41,27 +45,27 @@ function calculateLineHeight(type) {
 
 const styles = stylex.create({
   ellisis: {
-    overflowX: 'hidden',
-    overflowY: 'hidden',
-    position: 'absolute',
+    overflowX: "hidden",
+    overflowY: "hidden",
+    position: "absolute",
   },
 
   oneLine: {
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
 
   root: {
-    display: 'block',
-    overflowX: 'hidden',
-    overflowY: 'hidden',
-    position: 'relative',
+    display: "block",
+    overflowX: "hidden",
+    overflowY: "hidden",
+    position: "relative",
   },
 
   supportLineHeight: {
-    overflowX: 'hidden',
-    overflowY: 'hidden',
-    position: 'absolute',
+    overflowX: "hidden",
+    overflowY: "hidden",
+    position: "absolute",
     right: 0,
   },
 });
@@ -82,7 +86,7 @@ const _CometLineClamp = (props, externalRef) => {
 
   const [isOverflowing, setOverflowing] = useState(false);
 
-  const translationKeyComp = useTranslationKeyForTextParent()
+  const translationKeyComp = useTranslationKeyForTextParent();
 
   const y = useRef(null);
 
@@ -92,9 +96,9 @@ const _CometLineClamp = (props, externalRef) => {
   if (lines > 1) {
     if (notSupportWebkitLineClamp) {
       internalStyle = {
-        WebkitBoxOrient: 'vertical',
+        WebkitBoxOrient: "vertical",
         WebkitLineClamp: lines,
-        display: '-webkit-box',
+        display: "-webkit-box",
       };
     } else {
       const lineHeight = calculateLineHeight(
@@ -103,16 +107,16 @@ const _CometLineClamp = (props, externalRef) => {
       internalStyle = { maxHeight: lineHeight * lines + 0.1 };
 
       const calculateSize = {
-        maxHeight: 'calc((100% - ' + lineHeight * lines + 'px) * 999)',
+        maxHeight: "calc((100% - " + lineHeight * lines + "px) * 999)",
         top: lineHeight * (lines - 1),
       };
 
       childrenClone = jsxs(React.Fragment, {
         children: [
           childrenClone,
-          jsx('span', {
-            'aria-hidden': true,
-            children: '\u2026',
+          jsx("span", {
+            "aria-hidden": true,
+            children: "\u2026",
             className: stylex(styles.supportLineHeight),
             style: calculateSize,
           }),
@@ -141,7 +145,7 @@ const _CometLineClamp = (props, externalRef) => {
     }
     setOverflowing(
       curr.offsetWidth < curr.scrollWidth ||
-      curr.offsetHeight < curr.scrollHeight
+        curr.offsetHeight < curr.scrollHeight
     );
   };
 
@@ -151,23 +155,27 @@ const _CometLineClamp = (props, externalRef) => {
         return;
       }
       // n.preload()
-      CometToolTip.preload()
+      CometToolTip.preload();
     },
     [truncationTooltip]
   );
 
   const ref = useMergeRefs(externalRef, y);
 
-  const LineComp = jsx('span', {
-    children: childrenClone,
-    className: stylex(styles.root, lines === 1 && styles.oneLine, className),
-    'data-testid': undefined,
-    dir: useAutomaticTextDirection ? 'auto' : undefined,
-    id,
-    onMouseEnter: truncationTooltip ? onMouseEneterWithTooltip : undefined,
-    ref,
-    style: internalStyle,
-  }, translationKeyComp);
+  const LineComp = jsx(
+    "span",
+    {
+      children: childrenClone,
+      className: stylex(styles.root, lines === 1 && styles.oneLine, className),
+      "data-testid": undefined,
+      dir: useAutomaticTextDirection ? "auto" : undefined,
+      id,
+      onMouseEnter: truncationTooltip ? onMouseEneterWithTooltip : undefined,
+      ref,
+      style: internalStyle,
+    },
+    translationKeyComp
+  );
   // (
   //   <span
   //     className={mergeClasses(
@@ -188,14 +196,13 @@ const _CometLineClamp = (props, externalRef) => {
 
   return isOverflowing
     ? jsx(CometPlaceholder, {
-      children: jsx(CometToolTip, {
-        children: LineComp,
-        tooltip: truncationTooltip,
-      }),
-      fallback,
-    })
+        children: jsx(CometToolTip, {
+          children: LineComp,
+          tooltip: truncationTooltip,
+        }),
+        fallback,
+      })
     : LineComp;
 };
 
-
-export const CometLineClamp = forwardRef(_CometLineClamp)
+export const CometLineClamp = forwardRef(_CometLineClamp);

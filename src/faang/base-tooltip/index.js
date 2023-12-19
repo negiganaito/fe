@@ -4,4 +4,4 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-export { CometTooltip } from './comet-tooltip';
+export { CometTooltip } from "./comet-tooltip";

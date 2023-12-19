@@ -23,7 +23,7 @@
 //   else return null;
 // };
 
-import { PromiseAnnotate } from '@/faang/utils/promise-annotate';
+import { PromiseAnnotate } from "@/faang/utils/promise-annotate";
 
 let simpleUUIDCounter = 0;
 
@@ -47,9 +47,9 @@ const createThenableDescription = (promises) => {
     return Array.from(promises)
       .map((promise) => {
         const displayName = PromiseAnnotate.getDisplayName(promise);
-        return displayName !== null ? displayName : 'Promise';
+        return displayName !== null ? displayName : "Promise";
       })
-      .join(',');
+      .join(",");
   } else {
     return null;
   }

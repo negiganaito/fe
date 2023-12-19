@@ -4,8 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { fbErrorLite } from '@/faang/error/fb-error-lite';
-import { env } from './Env';
+import { fbErrorLite } from "@/faang/error/fb-error-lite";
+import { env } from "./Env";
 
 /**
  * Throws an error if the given condition is falsy.
@@ -17,7 +17,7 @@ export function invariant(condition, message, ...params) {
   if (!condition) {
     let errorMessage = message;
 
-    if (typeof errorMessage === 'number') {
+    if (typeof errorMessage === "number") {
       // If message is a number, retrieve the corresponding error message and decoder link
       const { message: decodedMessage, decoderLink } = decodeInvariantMessage(
         errorMessage,
@@ -27,11 +27,11 @@ export function invariant(condition, message, ...params) {
       params.unshift(decoderLink);
     } else if (errorMessage === undefined) {
       // If message is undefined, create a default message with placeholders for parameters
-      errorMessage = 'Invariant: ' + params.map(() => '%s').join(',');
+      errorMessage = "Invariant: " + params.map(() => "%s").join(",");
     }
 
     const error = new Error(errorMessage);
-    error.name = 'Invariant Violation';
+    error.name = "Invariant Violation";
     error.messageFormat = errorMessage;
     error.messageParams = params.map((param) => String(param));
     error.taalOpcodes = [fbErrorLite.TAALOpcode.PREVIOUS_FRAME];
@@ -47,18 +47,18 @@ export function invariant(condition, message, ...params) {
  * @returns {Object} - Decoded message and decoder link.
  */
 function decodeInvariantMessage(code, params) {
-  let message = 'Minified invariant #' + code + '; %s';
+  let message = "Minified invariant #" + code + "; %s";
 
   if (params.length > 0) {
-    message += ' Params: ' + params.map(() => '%s').join(', ');
+    message += " Params: " + params.map(() => "%s").join(", ");
   }
 
   const decoderLink =
     env.show_invariant_decoder === true
-      ? 'visit ' +
+      ? "visit " +
         generateDecoderLink(code, params) +
-        ' to see the full message.'
-      : '';
+        " to see the full message."
+      : "";
 
   return {
     message,
@@ -74,17 +74,17 @@ function decodeInvariantMessage(code, params) {
  */
 function generateDecoderLink(code, params) {
   // TODO replace this with my internal
-  let link = 'https://www.internalfb.com/intern/invariant/' + code + '/';
+  let link = "https://www.internalfb.com/intern/invariant/" + code + "/";
 
   if (params.length > 0) {
     link +=
-      '?' +
+      "?" +
       params
         .map(
           (param, index) =>
-            'args[' + index + ']=' + encodeURIComponent(String(param))
+            "args[" + index + "]=" + encodeURIComponent(String(param))
         )
-        .join('&');
+        .join("&");
   }
 
   return link;

@@ -4,9 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { mergeRefs } from './merge-refs';
+import { mergeRefs } from "./merge-refs";
 
 export function useMergeRefs(...refs) {
   return useMemo(() => {

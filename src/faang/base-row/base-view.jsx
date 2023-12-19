@@ -5,21 +5,21 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from '@stylexjs/stylex';
-import React, { forwardRef } from 'react';
+import stylex from "@stylexjs/stylex";
+import React, { forwardRef } from "react";
 
-import { LegacyHidden } from '@/faang/common';
+import { LegacyHidden } from "@/faang/common";
 
-import { testID } from '../utils';
+import { testID } from "../utils";
 
 const styles = stylex.create({
   hidden: {
-    display: 'none',
+    display: "none",
   },
 
   root: {
-    boxSizing: 'border-box',
-    position: 'relative',
+    boxSizing: "border-box",
+    position: "relative",
     zIndex: 0,
   },
 });
@@ -28,8 +28,16 @@ const styles = stylex.create({
  * @type React.ForwardRefRenderFunction<React.FunctionComponent, import("./types").BaseViewReactProps>
  */
 export const BaseView = forwardRef((props, ref) => {
-  // eslint-disable-next-line no-unused-vars
-  const { children, hidden, className, suppressHydrationWarning, xstyle, testid, ...rest } = props;
+  const {
+    children,
+    hidden,
+    // eslint-disable-next-line no-unused-vars
+    className,
+    suppressHydrationWarning,
+    xstyle,
+    testid,
+    ...rest
+  } = props;
 
   const isHidden = hidden === true;
 
@@ -37,10 +45,11 @@ export const BaseView = forwardRef((props, ref) => {
     <LegacyHidden
       {...testID(testid)}
       htmlAttributes={{
-        className: stylex.props(styles.root, xstyle, isHidden && styles.hidden).className,
+        className: stylex.props(styles.root, xstyle, isHidden && styles.hidden)
+          .className,
         ...rest,
       }}
-      mode={isHidden ? 'hidden' : 'visible'}
+      mode={isHidden ? "hidden" : "visible"}
       ref={ref}
       suppressHydrationWarning={suppressHydrationWarning}
     >
@@ -49,4 +58,4 @@ export const BaseView = forwardRef((props, ref) => {
   );
 });
 
-BaseView.displayName = 'BaseView.react';
+BaseView.displayName = "BaseView.react";

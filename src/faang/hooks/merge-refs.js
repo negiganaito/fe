@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { recoverableViolation } from '@/faang/error/recoverable-violation';
+import { recoverableViolation } from "@/faang/error/recoverable-violation";
 
 /**
  * Merges multiple refs into a single callback ref.
@@ -19,16 +19,16 @@ export function mergeRefs(...refs) {
         return;
       }
 
-      if (typeof ref === 'function') {
+      if (typeof ref === "function") {
         ref(node);
-      } else if (typeof ref === 'object') {
+      } else if (typeof ref === "object") {
         ref.current = node;
       }
 
       recoverableViolation(
-        'mergeRefs cannot handle Refs of type boolean, number or string, received ref ' +
-        String(ref),
-        'comet_ui'
+        "mergeRefs cannot handle Refs of type boolean, number or string, received ref " +
+          String(ref),
+        "comet_ui"
       );
     });
   };
