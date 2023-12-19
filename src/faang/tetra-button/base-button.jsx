@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { forwardRef, useContext } from 'react';
 
 import { jsx } from 'react/jsx-runtime';
@@ -6,6 +12,7 @@ import { Pressable } from '@/faang/pressable/pressable';
 import { PressableText } from '@/faang/pressable/pressable-text';
 import { BaseButtonPopoverContext } from '@/faang/context/base-button-popover-context';
 
+// eslint-disable-next-line complexity
 export const BaseButton = forwardRef((props, ref) => {
   // TODO add js doc
   const {
@@ -58,7 +65,7 @@ export const BaseButton = forwardRef((props, ref) => {
   let _ariaLabel;
 
   if (_role !== 'none') {
-    if (ariaLabel != null) {
+    if (ariaLabel !== null) {
       _ariaLabel = ariaLabel;
     } else {
       _ariaLabel = label;
@@ -143,13 +150,11 @@ export const BaseButton = forwardRef((props, ref) => {
 
     return jsx(
       Pressable,
-      Object.assign({}, internalProps, {
-        accessibilityRole,
+      { ...internalProps, accessibilityRole,
         allowClickEventPropagation,
         suppressFocusRing,
         tabbable: focusable,
-        children,
-      })
+        children,}
     );
   } else {
     const accessibilityRole =
@@ -165,18 +170,14 @@ export const BaseButton = forwardRef((props, ref) => {
 
     return jsx(
       PressableText,
-      Object.assign(
-        {
-          focusable,
-        },
-        internalProps,
-        {
-          accessibilityRole,
+      {
+        focusable,
+        ...internalProps,
+        accessibilityRole,
           direction: 'none',
           suppressFocusRing,
           children,
-        }
-      )
+      }
     );
   }
 });

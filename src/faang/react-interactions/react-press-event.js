@@ -14,6 +14,7 @@ const eventOptions = {
   passive: !0,
 };
 
+// eslint-disable-next-line max-params
 function createExtendedEventObject(
   type,
   buttons,
@@ -33,6 +34,7 @@ function createExtendedEventObject(
     pageY: originalEvent.pageY,
     pointerType: pointerType,
     preventDefault: () => {
+      // eslint-disable-next-line no-invalid-this
       this.defaultPrevented = true;
       originalEvent.preventDefault();
     },
@@ -170,7 +172,7 @@ const usePress = (target, options) => {
           onPressChange && onPressChange(true);
 
           if (ReactEventHelpers.hasPointerEvents) {
-            pointerupHandler.setListener(document, handlePressEnd),
+            pointerupHandler.setListener(document, handlePressEnd)
               pointermoveHanlder.setListener(
                 document,
                 handlePressEndOrMouseMove

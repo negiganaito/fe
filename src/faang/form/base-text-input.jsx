@@ -31,10 +31,8 @@ export const BaseTextInput = memo(
        * @param {string} _className
        */
       children: (_className) => {
-        return jsx(BaseInput, Object.assign({}, rest, {
-          ref,
-          xstyle: [styles.root, _className, xstyle],
-        }));
+        return jsx(BaseInput, { ...rest, ref,
+          xstyle: [styles.root, _className, xstyle],});
       },
 
 

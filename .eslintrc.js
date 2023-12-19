@@ -19,6 +19,12 @@ module.exports = {
     __DEV__: true,
   },
 
+  settings: {
+    react: {
+      version: "detect"
+    }
+  },
+
   overrides: [
     {
       // node scripts should be console logging so don't lint against that

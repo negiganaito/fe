@@ -78,17 +78,14 @@ export const CometTintedIcon = forwardRef((props, ref) => {
 
   return jsx(
     BaseImage_DEPRECATED,
-    Object.assign(
-      {},
-      {
-        ...stylex.props(
+    {
+      
+      ...stylex.props(
           imageStyles.image,
           tintableIconSource && color !== 'black' && filterStyles[color],
           xstyle
         ),
-      },
-      {
-        alt,
+      alt,
         // className: mergeClasses(
         //   classes.image,
         //   tintableIconSource && color !== 'black' && filterClasses[color],
@@ -98,8 +95,7 @@ export const CometTintedIcon = forwardRef((props, ref) => {
         ref,
         src: icon.src,
         testid: undefined,
-      }
-    )
+    }
   );
 });
 

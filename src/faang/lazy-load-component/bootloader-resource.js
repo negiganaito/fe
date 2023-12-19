@@ -15,7 +15,7 @@ function preload(a) {
 
 function read(b) {
   const a = b.getModuleIfRequireable();
-  if (a == null) {
+  if (a === null) {
     !ExecutionEnvironment.isInBrowser &&
       !b.isAvailableInSSR_DO_NOT_USE() &&
       suspendOrThrowIfUsedInSSR(
@@ -24,7 +24,7 @@ function read(b) {
     const d = b.getModuleId();
     if (!j[d]) {
       b = j[d] = b.load();
-      b.finally(function () {
+      b.finally(() => {
         delete j[d];
       });
     }

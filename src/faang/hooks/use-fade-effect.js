@@ -50,10 +50,10 @@ export const useFadeEffect = (visible) => {
   // useDoubleEffectHack_DO_NOT_USE_THIS_IS_TRACKED
   React.useEffect(() => {
     return () => {
-      if (hiddenRef.current != null) {
+      if (hiddenRef.current !== null) {
         clearTimeout(hiddenRef.current)
       }
-      if (showRef.current != null) {
+      if (showRef.current !== null) {
         window.cancelAnimationFrame(showRef.current)
       }
     }
@@ -63,7 +63,7 @@ export const useFadeEffect = (visible) => {
     setState({
       type: 'finish',
     })
-    if (hiddenRef.current != null) {
+    if (hiddenRef.current !== null) {
       clearTimeout(hiddenRef.current)
       hiddenRef.current = null
     }
@@ -75,7 +75,7 @@ export const useFadeEffect = (visible) => {
      * @param {boolean} visible 
      */
     (visible) => {
-      if (showRef.current != null) {
+      if (showRef.current !== null) {
         window.cancelAnimationFrame(showRef.current)
       }
 
@@ -87,7 +87,7 @@ export const useFadeEffect = (visible) => {
 
         showRef.current = null
 
-        if (hiddenRef.current != null) {
+        if (hiddenRef.current !== null) {
           clearTimeout(hiddenRef.current)
           hiddenRef.current = setTimeout(handleFinish, TIMEOUT)
         }
@@ -99,7 +99,7 @@ export const useFadeEffect = (visible) => {
   const visibleRef = React.useRef(false)
 
   React.useLayoutEffect(() => {
-    if (visibleRef.current !== visible && (!visible || ref.current != null)) {
+    if (visibleRef.current !== visible && (!visible || ref.current !== null)) {
       handleStart(visible)
       visibleRef.current = visible
     }

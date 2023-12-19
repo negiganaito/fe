@@ -21,6 +21,7 @@ function generateLocalizableFiles(
     'translationsFileName must not contain file extension'
   );
   try {
+    // eslint-disable-next-line guard-for-in
     for (const locale in translationOutput) {
       invariant(
         locale.split('_').length === 2,

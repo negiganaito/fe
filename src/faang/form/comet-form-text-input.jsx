@@ -190,10 +190,9 @@ export const CometFormTextInput = forwardRef(
       children: ({ focused, helperTextID, id }) => {
         return jsx(
           BaseTextInput,
-          Object.assign(
-            {},
-            {
-              'aria-describedby': helperTextID,
+          {
+            
+            'aria-describedby': helperTextID,
               'aria-invalid': normalTopResultType === 'ERROR',
               autoComplete,
               autoFocus: autoFocus_PLEASE_USE_FOCUS_REGION_INSTEAD,
@@ -218,9 +217,8 @@ export const CometFormTextInput = forwardRef(
                 readOnly && readOnly === true && styles.readOnly,
                 xstyle,
               ],
-            },
-            rest,
-          ),
+            ...rest,
+          },
         )
       },
       cursor: 'text',

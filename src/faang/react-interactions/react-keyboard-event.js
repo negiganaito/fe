@@ -48,7 +48,6 @@ function useKeyboard(ref, options) {
   const keyDownEvent = ReactUseEvent('keydown');
   const keyUpEvent = ReactUseEvent('keyup', defaultEventOptions);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const element = ref.current;
 

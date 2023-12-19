@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import { useState, useEffect } from 'react';
 
 import { jsx } from 'react/jsx-runtime';
@@ -7,7 +13,7 @@ export function BaseNestedPressableHack_DO_NOT_USE(props) {
 
   const [isMounted, setIsMounted] = useState();
 
-  useEffect(function () {
+  useEffect(() => {
     return setIsMounted(true);
   }, []);
 
@@ -20,9 +26,7 @@ export function BaseNestedPressableHack_DO_NOT_USE(props) {
 
   return jsx(
     'object',
-    Object.assign({}, placeholderStyle, {
-      type: 'nested/pressable',
-      children,
-    })
+    { ...placeholderStyle, type: 'nested/pressable',
+      children,}
   );
 }

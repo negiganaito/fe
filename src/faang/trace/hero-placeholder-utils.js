@@ -43,11 +43,11 @@ const getSimpleUUID = () => {
  * @returns {string | null} - The thenable description or null if the set is empty.
  */
 const createThenableDescription = (promises) => {
-  if (promises != null && promises.size > 0) {
+  if (promises !== null && promises.size > 0) {
     return Array.from(promises)
       .map((promise) => {
         const displayName = PromiseAnnotate.getDisplayName(promise);
-        return displayName != null ? displayName : 'Promise';
+        return displayName !== null ? displayName : 'Promise';
       })
       .join(',');
   } else {

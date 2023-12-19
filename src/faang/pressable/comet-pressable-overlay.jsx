@@ -1,4 +1,9 @@
-/* eslint-disable react/prop-types */
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 import stylex from '@stylexjs/stylex';
 
 import React, { useState } from 'react';
@@ -40,6 +45,7 @@ const styles = stylex.create({
  * @param {import("./types").CometPressableOverlayProps} props
  * @returns
  */
+// eslint-disable-next-line complexity
 export const CometPressableOverlay = (props) => {
   const {
     focusVisible = false,
@@ -73,7 +79,7 @@ export const CometPressableOverlay = (props) => {
   //   ? state !== 'focused' && setState('focused')
   //   : hovered && state !== 'hovered' && setState('hovered');
 
-  let bottom, left, right, top;
+  let bottom; let left; let right; let top;
 
   if (offset) {
     if (typeof offset === 'number') {

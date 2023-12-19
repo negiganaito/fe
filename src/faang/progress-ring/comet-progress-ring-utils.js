@@ -4,6 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
+// eslint-disable-next-line max-params
 export function getCubicBezierPercentageFunc(a, b, c, d) {
   function e(a, b) {
     return 1 - 3 * b + 3 * a;
@@ -35,6 +36,7 @@ export function getCubicBezierPercentageFunc(a, b, c, d) {
   };
 }
 
+// eslint-disable-next-line complexity
 export function getRingGifUrl(color, size, theme) {
   switch (size) {
     case '12':

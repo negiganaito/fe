@@ -7,5 +7,6 @@
 import { ifRequired } from './if-required';
 
 export function ifRequireable(a, b, d) {
+  // eslint-disable-next-line no-useless-call
   return ifRequired.call(null, a, b, d);
 }

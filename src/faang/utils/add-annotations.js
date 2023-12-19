@@ -1,9 +1,9 @@
-// export function addAnnotations(a, b) {
-//   Object.keys(b).forEach(function (c) {
-//     var d;
-//     a[c] = Object.assign((d = a[c]) != null ? d : {}, b[c]);
-//   });
-// }
+/**
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
+ */
 
 /**
  * Adds annotations to an object by merging properties from another object.
@@ -13,6 +13,6 @@
  */
 export function addAnnotations(target, annotations) {
   Object.keys(annotations).forEach((key) => {
-    target[key] = Object.assign({}, target[key], annotations[key]);
+    target[key] = { ...target[key], ...annotations[key]};
   });
 }

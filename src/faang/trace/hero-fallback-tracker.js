@@ -15,7 +15,7 @@ export function HeroFallbackTracker({ uuid }) {
   const heroInteractionIDContextValue = useContext(HeroInteractionIDContext);
 
   useLayoutEffect(() => {
-    if (heroInteractionIDContextValue != null) {
+    if (heroInteractionIDContextValue !== null) {
       heroInteractionContextValue.registerPlaceholder(
         heroInteractionIDContextValue,
         uuid,

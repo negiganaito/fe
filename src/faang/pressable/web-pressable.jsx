@@ -81,16 +81,16 @@ function determineElementTag(elementType, additionalData) {
   let tag = 'div';
   if (
     validElementTypes.includes(elementType) &&
-    additionalData != null &&
-    additionalData.url != null
+    additionalData !== null &&
+    additionalData.url !== null
   ) {
     tag = 'a';
-  } else if (elementType != null) {
+  } else if (elementType !== null) {
     /**
      * @type {string | undefined}
      */
     const mappedTag = specialElements[elementType];
-    if (mappedTag != null) {
+    if (mappedTag !== null) {
       tag = mappedTag;
     }
     return tag;
@@ -198,6 +198,7 @@ function shouldHandleClickEvent(event, preventDefault) {
  * @param {KeyboardEvent} event - The keyboard event.
  * @returns {boolean} - True if the event should trigger an action, otherwise false.
  */
+// eslint-disable-next-line complexity
 const shouldTriggerActionForKeyEvent = (event) => {
   // Retrieve target element and its tag name
   const targetElement = event.target;
@@ -205,7 +206,7 @@ const shouldTriggerActionForKeyEvent = (event) => {
   // Check conditions related to the element's type
   const isContentEditable =
     targetElement.isContentEditable ||
-    (tagName === 'A' && targetElement.href != null) ||
+    (tagName === 'A' && targetElement.href !== null) ||
     tagName === 'BUTTON' ||
     tagName === 'INPUT' ||
     tagName === 'SELECT' ||
@@ -253,6 +254,7 @@ function responseRoleType(type) {
  * @param {import("./types").CometPressableProps} props 
  * @returns 
  */
+// eslint-disable-next-line complexity
 export const WebPressable = (props) => {
   const targetRef = useRef(null);
   //
@@ -306,18 +308,18 @@ export const WebPressable = (props) => {
   const ElementTagComponent = determineElementTag(accessibilityRole, link);
   const _disabled =
     disabled === true ||
-    (accessibilityState == null ? undefined : accessibilityState.disabled) === true;
+    (accessibilityState === null ? undefined : accessibilityState.disabled) === true;
   const ariaHidden =
-    accessibilityState == null ? undefined : accessibilityState.hidden;
+    accessibilityState === null ? undefined : accessibilityState.hidden;
   const isAnchorTagAndNotDisable =
     ElementTagComponent === 'a' && _disabled !== true;
   const _props = {
     disabled:
-      _disabled === true || (testOnly_state == null ? undefined : testOnly_state.disabled) === true || false,
-    focusVisible: focusVisibleChangeState || (testOnly_state == null ? undefined : testOnly_state.focusVisible) === true,
-    focused: focusChangeState || (testOnly_state == null ? undefined : testOnly_state.focused) === true,
-    hovered: hoverChangeState || (testOnly_state == null ? undefined : testOnly_state.hovered) === true,
-    pressed: pressChangeState || (testOnly_state == null ? undefined : testOnly_state.pressed) === true,
+      _disabled === true || (testOnly_state === null ? undefined : testOnly_state.disabled) === true || false,
+    focusVisible: focusVisibleChangeState || (testOnly_state === null ? undefined : testOnly_state.focusVisible) === true,
+    focused: focusChangeState || (testOnly_state === null ? undefined : testOnly_state.focused) === true,
+    hovered: hoverChangeState || (testOnly_state === null ? undefined : testOnly_state.hovered) === true,
+    pressed: pressChangeState || (testOnly_state === null ? undefined : testOnly_state.pressed) === true,
   };
   const _children = typeof children === 'function' ? children(_props) : children;
   const _className_DEPRECATED = typeof className_DEPRECATED === 'function'
@@ -344,7 +346,7 @@ export const WebPressable = (props) => {
     onPressMove,
     onPressStart,
     preventContextMenu,
-    preventDefault: preventDefault == null ? true : preventDefault,
+    preventDefault: preventDefault === null ? true : preventDefault,
   });
   const onPressCallBack = useCallback(
     (event) => {
@@ -353,7 +355,7 @@ export const WebPressable = (props) => {
         onPress(event)
       }
 
-      if ((onPress || link != null) && isAllowClickEventPropagation !== true) {
+      if ((onPress || link !== null) && isAllowClickEventPropagation !== true) {
         event.stopPropagation();
       }
 
@@ -414,83 +416,82 @@ export const WebPressable = (props) => {
     ariaHidden !== true &&
     tabbable !== false &&
     (_tabIndex = 0);
-  const linkDownload = link == null ? undefined : link.download;
+  const linkDownload = link === null ? undefined : link.download;
   const canDownload =
     (linkDownload === true || typeof linkDownload === 'string') &&
     isAnchorTagAndNotDisable;
   return jsx(
     // TODO
     ElementTagComponent === 'a' ? Link : ElementTagComponent,
-    Object.assign({}, rest, {
-      'aria-activedescendant':
-        accessibilityRelationship == null
+    { ...rest, 'aria-activedescendant':
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.activedescendant,
       'aria-busy':
-        accessibilityState == null ? undefined : accessibilityState.busy,
+        accessibilityState === null ? undefined : accessibilityState.busy,
       'aria-checked':
-        accessibilityState == null ? undefined : accessibilityState.checked,
+        accessibilityState === null ? undefined : accessibilityState.checked,
       'aria-controls':
-        accessibilityRelationship == null
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.controls,
       'aria-current':
-        accessibilityRelationship == null
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.current,
       'aria-describedby':
-        accessibilityRelationship == null
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.describedby,
       'aria-details':
-        accessibilityRelationship == null
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.details,
       'aria-disabled': _disabled === true ? _disabled : undefined,
       'aria-errormessage':
-        accessibilityRelationship == null
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.errormessage,
       'aria-expanded':
-        accessibilityState == null ? undefined : accessibilityState.expanded,
+        accessibilityState === null ? undefined : accessibilityState.expanded,
       'aria-haspopup':
-        accessibilityRelationship == null
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.haspopup,
       'aria-hidden': ariaHidden,
       'aria-invalid':
-        accessibilityState == null ? undefined : accessibilityState.invalid,
+        accessibilityState === null ? undefined : accessibilityState.invalid,
       'aria-label': accessibilityLabel,
       'aria-labelledby':
-        accessibilityRelationship == null
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.labelledby,
       'aria-modal':
-        accessibilityState == null ? undefined : accessibilityState.modal,
+        accessibilityState === null ? undefined : accessibilityState.modal,
       'aria-orientation':
-        accessibilityState == null ? undefined : accessibilityState.orientation,
+        accessibilityState === null ? undefined : accessibilityState.orientation,
       'aria-owns':
-        accessibilityRelationship == null
+        accessibilityRelationship === null
           ? undefined
           : accessibilityRelationship.owns,
       'aria-pressed':
-        accessibilityState == null ? undefined : accessibilityState.pressed,
+        accessibilityState === null ? undefined : accessibilityState.pressed,
       'aria-readonly':
-        accessibilityState == null ? undefined : accessibilityState.readonly,
+        accessibilityState === null ? undefined : accessibilityState.readonly,
       'aria-required':
-        accessibilityState == null ? undefined : accessibilityState.required,
+        accessibilityState === null ? undefined : accessibilityState.required,
       'aria-selected':
-        accessibilityState == null ? undefined : accessibilityState.selected,
+        accessibilityState === null ? undefined : accessibilityState.selected,
       'aria-valuemax':
-        accessibilityValue == null ? undefined : accessibilityValue.max,
+        accessibilityValue === null ? undefined : accessibilityValue.max,
       'aria-valuemin':
-        accessibilityValue == null ? undefined : accessibilityValue.min,
+        accessibilityValue === null ? undefined : accessibilityValue.min,
       'aria-valuenow':
-        accessibilityValue == null ? undefined : accessibilityValue.now,
+        accessibilityValue === null ? undefined : accessibilityValue.now,
       'aria-valuetext':
-        accessibilityValue == null ? undefined : accessibilityValue.text,
+        accessibilityValue === null ? undefined : accessibilityValue.text,
       attributionsrc: isAnchorTagAndNotDisable
-        ? link == null
+        ? link === null
           ? undefined
           : link.attributionsrc
         : undefined,
@@ -516,7 +517,7 @@ export const WebPressable = (props) => {
       'data-testid': undefined,
       download: canDownload ? linkDownload : undefined,
       href: isAnchorTagAndNotDisable
-        ? link == null
+        ? link === null
           ? undefined
           : link.url
         : undefined,
@@ -525,7 +526,7 @@ export const WebPressable = (props) => {
       onKeyDown: _disabled ? undefined : onKeyDownCallBack,
       ref: cbFunc1Ref,
       rel: isAnchorTagAndNotDisable
-        ? link == null
+        ? link === null
           ? undefined
           : link.rel
         : undefined,
@@ -533,11 +534,10 @@ export const WebPressable = (props) => {
       style: _style,
       tabIndex: _tabIndex,
       target: isAnchorTagAndNotDisable
-        ? link == null
+        ? link === null
           ? undefined
           : link.target
-        : undefined,
-    })
+        : undefined,}
   );
 };
 // fm.grandstream.com/gs

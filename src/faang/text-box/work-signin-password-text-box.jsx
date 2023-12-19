@@ -6,7 +6,7 @@
  */
 
 
-/*FB_PKG_DELIM*/
+/* FB_PKG_DELIM */
 import React, { useState } from 'react';
 
 import { CometFormTextInput } from '@/faang/form';

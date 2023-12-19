@@ -33,6 +33,7 @@ export const JSResourceReferenceImpl = (function () {
     k = [];
   };
   function a(a) {
+    // eslint-disable-next-line no-invalid-this
     this.$1 = a;
   }
   let e = a.prototype;
@@ -47,14 +48,16 @@ export const JSResourceReferenceImpl = (function () {
     let a = this;
     let c = this.$2;
     JSResourceEvents.notify(this.$1, c, 'LOADED');
-    let e = new Promise(function (b) {
-      m(function (e) {
+    let e = new Promise((b) => {
+      m((e) => {
+        // eslint-disable-next-line no-return-assign
         return e.loadModules(
           [a.getModuleIdAsRef()],
-          function (e) {
-            JSResourceEvents.notify(a.$1, c, 'PROMISE_RESOLVED'), b(e);
+          (e) => {
+            JSResourceEvents.notify(a.$1, c, 'PROMISE_RESOLVED')
+            b(e);
           },
-          (e = a.$2) != null ? e : n
+          (e = a.$2) !== null ? e : n
         );
       });
     });
@@ -64,11 +67,11 @@ export const JSResourceReferenceImpl = (function () {
   e.preload = function () {
     let a;
     let b = this;
-    let c = (a = this.$2) != null ? a : n;
-    m(function (a) {
+    let c = (a = this.$2) !== null ? a : n;
+    m((a) => {
       return a.loadModules(
         [b.getModuleIdAsRef()],
-        function () { },
+        () => { },
         'preload: ' + c
       );
     });
@@ -79,10 +82,12 @@ export const JSResourceReferenceImpl = (function () {
   };
   e.getModuleIfRequireable = function () {
     JSResourceEvents.notify(this.$1, this.$2, 'ACCESSED');
+    // eslint-disable-next-line no-useless-call
     return ifRequireable.call(null, this.$1, j);
   };
   e.getModuleIfRequired = function () {
     JSResourceEvents.notify(this.$1, this.$2, 'ACCESSED');
+    // eslint-disable-next-line no-useless-call
     return ifRequired.call(null, this.$1, j);
   };
   a.disableForSSR_DO_NOT_USE = function () {
@@ -100,6 +105,7 @@ export const JSResourceReferenceImpl = (function () {
     let c = {};
     let e = !1;
     for (
+      // eslint-disable-next-line no-inner-declarations
       var f = a,
       g = Array.isArray(f),
       h = 0,
@@ -110,6 +116,7 @@ export const JSResourceReferenceImpl = (function () {
       ;
 
     ) {
+      // eslint-disable-next-line no-inner-declarations
       var i;
       if (g) {
         if (h >= f.length) break;
@@ -125,9 +132,9 @@ export const JSResourceReferenceImpl = (function () {
       j && ((e = !0), (c[j] = !0));
       JSResourceEvents.notify(i.$1, j, 'LOADED');
     }
-    m(function (d) {
+    m((d) => {
       return d.loadModules(
-        a.map(function (a) {
+        a.map((a) => {
           return a.getModuleId();
         }),
         b,

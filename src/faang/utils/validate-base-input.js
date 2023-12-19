@@ -12,7 +12,7 @@ export function validateBaseInput(
   validator,
 ) {
   const allResults =
-    validator != null && !isPristine
+    validator !== null && !isPristine
       ? processBaseInputValidators(value, validator)
       : []
   if (allResults.length === 0)
@@ -27,15 +27,15 @@ export function validateBaseInput(
   const topResultType =
     (value = allResults.find((result) => {
       return result.type === (hasError ? 'ERROR' : 'WARN')
-    })) != null
+    })) !== null
       ? value
       : null
   return {
     allResults: allResults,
     topResultReason:
-      topResultType != null && topResultType.reason != null
+      topResultType !== null && topResultType.reason !== null
         ? topResultType.reason
         : null,
-    topResultType: topResultType != null ? topResultType.type : 'CORRECT',
+    topResultType: topResultType !== null ? topResultType.type : 'CORRECT',
   }
 }

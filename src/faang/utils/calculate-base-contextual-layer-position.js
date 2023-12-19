@@ -19,6 +19,7 @@ const h = Locale.isRTL();
 //   screenRect: any
 // }
 
+// eslint-disable-next-line complexity
 export function calculateBaseContextualLayerPosition({
   align,
   contextRect,
@@ -129,7 +130,7 @@ export function calculateBaseContextualLayerPosition({
           m = contextRect.right - contextualLayerSize.width
           break
       }
-      m != null &&
+      m !== null &&
         (m < screenRect.left
           ? (adjustment = screenRect.left - m)
           : m + contextualLayerSize.width > screenRect.right &&

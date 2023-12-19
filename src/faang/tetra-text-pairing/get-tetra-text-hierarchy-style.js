@@ -33,6 +33,7 @@ export const getTetraTextHierarchyStyle = memoizeWithArgs(
           headlineType: emphasized ? 'headline3' : 'headlineEmphasized3',
           metaType: 'meta3',
         };
+      // eslint-disable-next-line default-case-last
       default:
       case 4:
         return {

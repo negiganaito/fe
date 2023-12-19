@@ -5,7 +5,6 @@
  * See the LICENSE file in the root directory for details.
  */
 
-/* eslint-disable react-hooks/rules-of-hooks */
 
 import { memo, useContext, useLayoutEffect } from 'react';
 
@@ -18,8 +17,8 @@ function heroComponent(props) {
   let e = useContext(HeroInteractionContext.Context);
   let f = useContext(HeroInteractionIDContext);
   useLayoutEffect(
-    function () {
-      f != null && e.logHeroRender(f, description, e.pageletStack);
+    () => {
+      f !== null && e.logHeroRender(f, description, e.pageletStack);
     },
     [description, e, f]
   );

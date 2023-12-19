@@ -34,7 +34,7 @@ let l = {
 const a = function () {
   let a = new Map(j);
   let b = function (b) {
-    a.forEach(function (a) {
+    a.forEach((a) => {
       b(a);
     });
   };
@@ -57,7 +57,7 @@ const a = function () {
       d.addMetadata(a, b);
     },
     addMetadata: function (a, d) {
-      b(function (b) {
+      b((b) => {
         if (typeof d === 'number') {
           let e;
           addAnnotations(b.annotations, {
@@ -76,21 +76,23 @@ const a = function () {
     },
     addRequireDeferred: function (a, c) {
       let d = [];
-      b(function (b) {
-        if (b.requireDeferreds[a] != null) return;
+      b((b) => {
+        if (b.requireDeferreds[a] !== null) return;
         b = b.requireDeferreds[a] = {
           start: c,
         };
         d.push(b);
       });
       return function (a, b) {
-        d.forEach(function (d) {
-          (d.end = a), (d.duration = a - c), b && (d.alreadyRequired = !0);
+        d.forEach((d) => {
+          d.end = a 
+          d.duration = a - c
+          b && (d.alreadyRequired = !0);
         });
       };
     },
     forEach: function (a) {
-      b(function (b) {
+      b((b) => {
         a(b);
       });
     },
@@ -168,6 +170,7 @@ let m = {
     if (!a) return;
     a.factoryTimings.push(b);
   },
+  // eslint-disable-next-line max-params
   addFirstMarkerPoint: function (a, b, c, d, e) {
     e === void 0 && (e = {});
     a = i.get(a);
@@ -225,6 +228,7 @@ let m = {
     if (!a) return;
     a.imagePreloaderTimings[b] = c;
   },
+  // eslint-disable-next-line max-params
   addMarkerPoint: function (a, b, d, e, f) {
     e === void 0 && (e = performanceNowSinceAppStart());
     a = i.get(a);
@@ -261,11 +265,11 @@ let m = {
   addMountPointMetadata: function (a, b, c) {
     a = m.get(a);
     b = 'Mount_' + b;
-    a = a == null ? void 0 : a.markerPoints[b];
+    a = a === null ? void 0 : a.markerPoints[b];
     if (a) {
       let d = a.data || {};
       a.data = d;
-      Object.keys(c).forEach(function (a) {
+      Object.keys(c).forEach((a) => {
         d[a] = c[a];
       });
     }
@@ -285,6 +289,7 @@ let m = {
     if (!a) return;
     a.payloadTimings[b] = c;
   },
+  // eslint-disable-next-line max-params
   addReactRender: function (a, b, c, d, e, f, g) {
     a = i.get(a);
     if (!a) return;
@@ -299,6 +304,7 @@ let m = {
     a.reactRender[b] ? a.reactRender[b].push(e) : (a.reactRender[b] = [e]);
     a.commitSet.add(d);
   },
+  // eslint-disable-next-line max-params
   addSubspan: function (a, b, c, d, e, f) {
     a = i.get(a);
     if (!a) return;
@@ -352,6 +358,7 @@ let m = {
       wasCanceled: !1,
       wasOffline: !1,
     };
+    // eslint-disable-next-line guard-for-in
     for (let d in k) for (let e in k[d]) b.annotations[d][e] = k[d][e];
     i.set(a, b);
     j.set(a, b);
@@ -361,7 +368,7 @@ let m = {
   },
   complete: function (a) {
     let b = i.get(a);
-    if (b && b.completed == null) {
+    if (b && b.completed === null) {
       addAnnotations(b.annotations, {
         int: {
           endedByHeroComplete: 1,
@@ -381,20 +388,18 @@ let m = {
   dump: function () {
     let a = {};
     let b = Array.from(i.values());
-    b.sort(function (a, b) {
+    b.sort((a, b) => {
       return a.start - b.start;
-    }).forEach(function (b) {
+    }).forEach((b) => {
       let c = b.traceId;
       let e = HeroTracingPlaceholder.HeroPendingPlaceholderTracker.dump(
         b.traceId
       );
-      a[c] = Object.assign({}, b, {
-        e2e:
-          b.completed != null
+      a[c] = { ...b, e2e:
+          b.completed !== null
             ? ((b.completed - b.start) / 1e3).toFixed(2)
             : '?',
-        pendingPlaceholders: e,
-      });
+        pendingPlaceholders: e,};
     });
     return a;
   },
@@ -412,6 +417,7 @@ let m = {
     a = i.get(a);
     a && (a.interactionClass = b);
   },
+  // eslint-disable-next-line max-params
   setInteractionType: function (a, b, c, d) {
     a = i.get(a);
     a && ((a.interactionClass = b), (a.type = c), (a.qplEvent = d));

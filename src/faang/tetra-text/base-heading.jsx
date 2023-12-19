@@ -5,7 +5,6 @@
  * See the LICENSE file in the root directory for details.
  */
 
-/* eslint-disable react-hooks/rules-of-hooks */
 
 import stylex from '@stylexjs/stylex';
 import { forwardRef, useContext, useMemo } from 'react';
@@ -38,22 +37,20 @@ const baseHeading = ({ children, xstyle, isPrimaryHeading = false, testid, ...re
 
   const baseTextContextValue = useBaseTextContext();
   const isNested =
-    (baseTextContextValue == null
+    (baseTextContextValue === null
       ? undefined
       : baseTextContextValue?.nested) === true;
 
   // HeadingComponent
   return jsx(
     HeadingComponent,
-    Object.assign({}, rest, {
-      children,
+    { ...rest, children,
       className: stylex(styles.root, xstyle),
       'data-testid': undefined,
       dir: isNested
         ? undefined
         : 'auto',
-      ref,
-    }),
+      ref,},
   );
 };
 

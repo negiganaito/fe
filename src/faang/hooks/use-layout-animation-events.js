@@ -14,18 +14,18 @@ export function useLayoutAnimationEvents(a) {
   const e = useRef([])
 
   useEffect(
-    function () {
+    () => {
       const c = (!b ? void 0 : b.animationEventTargets) || []
-      c.forEach(function (b) {
+      c.forEach((b) => {
         b = b.addListener(LayoutAnimationEvent.LAYOUT_ANIMATION_EVENT, a)
         // @ts-ignore
         e.current = [].concat(e.current, [b])
       })
       return function () {
-        e.current.forEach(function (a) {
+        e.current.forEach((a) => {
           a.remove()
-        }),
-          (e.current = [])
+        })        
+        e.current = []
       }
     },
     [a, b],

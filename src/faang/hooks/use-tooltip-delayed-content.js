@@ -44,7 +44,7 @@ export function useTooltipDelayedContent(props) {
         f.current = null
       }
     } else
-      f.current != null &&
+      f.current !== null &&
         (setPending(!1), clearTimeout(f.current), (f.current = null))
 
     visibleRef.current = isVisible

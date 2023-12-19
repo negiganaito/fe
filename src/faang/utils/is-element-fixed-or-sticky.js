@@ -6,9 +6,9 @@
  */
 export function isElementFixedOrSticky(a) {
   let b = a
-  while (b != null && b !== a.ownerDocument) {
+  while (b !== null && b !== a.ownerDocument) {
     let d = getComputedStyle(b)
-    if (d == null) return !1
+    if (d === null) return !1
     d = d.getPropertyValue('position')
     if (d === 'fixed' || d === 'sticky') return !0
     b = b.parentElement

@@ -7,5 +7,6 @@
 import { JSResource } from './js-resource';
 
 export function JSResourceForInteraction(a) {
+  // eslint-disable-next-line no-useless-call
   return JSResource.call(null, a);
 }

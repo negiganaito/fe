@@ -20,6 +20,7 @@ import { PressableText } from '@/faang/pressable/pressable-text';
 // NOTE some potential bug
 
 export const BaseLink = forwardRef(
+  // eslint-disable-next-line complexity
   (
     {
       href,

@@ -703,7 +703,7 @@ function useInteractionHandlers() {
   );
   const keydownHandler = useDOMEventListener('keydown', eventOption);
   return useMemo(
-    function () {
+    () => {
       return [mousedownHandler, downHandler, keydownHandler];
     },
     [keydownHandler, mousedownHandler, downHandler]
@@ -791,7 +791,7 @@ function useFocusWithinStrictMode({
             onBeforeBlurWithin &&
               (onBeforeBlurWithin(param),
                 afterblurHandle.setListener(document, (e) => {
-                  onAfterBlurWithin && onAfterBlurWithin(e),
+                  onAfterBlurWithin && onAfterBlurWithin(e)
                     afterblurHandle.setListener(document, null);
                 }));
           }))

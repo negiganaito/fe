@@ -56,14 +56,11 @@ export const BaseInput = forwardRef((props, ref) => {
     CometContainerPressableContext
   );
 
-  const commonProps = Object.assign(
-    {
-      dir: isRTL ? 'rtl' : 'ltr',
-    },
-    rest,
-    testID(testid),
-    {
-      // WARN
+  const commonProps = {
+    dir: isRTL ? 'rtl' : 'ltr',
+    ...rest,
+    ...testID(testid),
+    // WARN
       ...stylex.props(
         styles.root,
         xstyle,
@@ -87,30 +84,25 @@ export const BaseInput = forwardRef((props, ref) => {
           onClick(event);
         }
       },
-    },
-  );
+  };
 
   // NOTE Use React with JSX-html tag in the future
   return isTextarea
     ? jsx(
       'textarea',
-      Object.assign(
-        {
-          suppressHydrationWarning: true,
-        },
-        commonProps,
-        { ref }
-      )
+      {
+        suppressHydrationWarning: true,
+        ...commonProps,
+        ref
+      }
     )
     : jsx(
       'input',
-      Object.assign(
-        {
-          suppressHydrationWarning: true,
-        },
-        commonProps,
-        { ref, type: compBaseOnType }
-      )
+      {
+        suppressHydrationWarning: true,
+        ...commonProps,
+        ref, type: compBaseOnType
+      }
     );
 });
 

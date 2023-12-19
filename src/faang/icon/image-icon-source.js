@@ -12,6 +12,7 @@ export class ImageIconSource {
    * @param {*} height
    * @param {string} resizeStrategy
    */
+  // eslint-disable-next-line max-params
   constructor(src, width, height, resizeStrategy) {
     if (!resizeStrategy) {
       resizeStrategy = 'cover';

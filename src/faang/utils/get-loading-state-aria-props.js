@@ -16,27 +16,25 @@ export function getLoadingStateAriaProps(currentValue, additionalProps) {
   let defaultValue;
 
   additionalProps =
-    currentValue == null
+    currentValue === null
       ? {
         'aria-label': fbt.c('Loading...'),
       }
       : {
         'aria-valuemax':
           (defaultValue =
-            additionalProps == null ? undefined : additionalProps.max) != null
+            additionalProps === null ? undefined : additionalProps.max) !== null
             ? defaultValue
             : 100,
         'aria-valuemin':
           (defaultValue =
-            additionalProps == null ? undefined : additionalProps.min) != null
+            additionalProps === null ? undefined : additionalProps.min) !== null
             ? defaultValue
             : 0,
         'aria-valuenow': currentValue,
       };
-  return Object.assign(
-    {
-      role: 'progressbar',
-    },
-    additionalProps
-  );
+  return {
+    role: 'progressbar',
+    ...additionalProps
+  };
 }

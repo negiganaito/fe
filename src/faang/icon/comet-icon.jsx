@@ -153,8 +153,7 @@ export const CometIcon = forwardRef((props, ref) => {
   return pressableComp
     ? jsx(
       CometPressable,
-      Object.assign({}, rest, {
-        children: Img,
+      { ...rest, children: Img,
         disabled,
         focusable,
         hideHoverOverlay,
@@ -172,8 +171,7 @@ export const CometIcon = forwardRef((props, ref) => {
         testid: void 0,
         xstyle: ({ pressed }) => {
           return [styles.button, pressed && styles.pressed];
-        },
-      })
+        },}
     )
     : Img;
 });

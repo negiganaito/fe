@@ -39,7 +39,7 @@ function createCustomEventObject(name, param, target) {
 }
 
 function isAncestorOrSelfWithHover(childRef, parentRef) {
-  while (parentRef != null) {
+  while (parentRef !== null) {
     if (parentRef === childRef) {
       return true;
     }

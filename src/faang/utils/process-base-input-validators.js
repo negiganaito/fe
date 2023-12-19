@@ -8,7 +8,7 @@ export function processBaseInputValidators(a, b) {
   if (typeof b === 'function')
     return [b(a)];
   let c = [];
-  // eslint-disable-next-line no-redeclare, no-var
+  // eslint-disable-next-line no-redeclare, no-var, no-inner-declarations
   for (var b = b, d = Array.isArray(b), e = 0, b = d ? b : b[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'](); ;) {
     let f;
     if (d) {
@@ -21,10 +21,11 @@ export function processBaseInputValidators(a, b) {
         break;
       f = e.value
     }
+    // eslint-disable-next-line no-self-assign
     f = f;
     Array.isArray(f) ? c.push.apply(c, processBaseInputValidators(a, f)) : typeof f === 'function' && c.push(f(a))
   }
-  return c.filter(function (a) {
+  return c.filter((a) => {
     return a.type !== 'CORRECT'
   })
 }

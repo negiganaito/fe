@@ -1,10 +1,8 @@
 /**
- * Memoizes a function based on its arguments using a keyExtractor function.
- *
- * @param {Function} computation - The function to be memoized.
- * @param {Function} keyExtractor - A function that generates a unique key for each set of arguments.
- * @param {any} context - The context in which the functions are executed.
- * @returns {Function} - The memoized function.
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
  */
 // eslint-disable-next-line no-unused-vars
 export function memoizeWithArgs(computation, keyExtractor, context) {

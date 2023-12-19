@@ -74,9 +74,14 @@ const styles = stylex.create({
   },
 });
 
+// eslint-disable-next-line complexity
 export const CometPressable = forwardRef(
   (
-    {
+    props,
+    externalRef
+  ) => {
+
+    const {
       allowClickEventPropagation,
       children,
       xstyle,
@@ -113,9 +118,8 @@ export const CometPressable = forwardRef(
       testid,
       onContextMenu,
       ...rest
-    },
-    externalRef
-  ) => {
+    } = props
+
     const [pressedState, setPressed] = useState(testOnly_pressed);
     const [focusedState, setFocused] = useState(false);
     const [focusVisibleState, setFocusVisible] = useState(false);
@@ -326,9 +330,7 @@ export const CometPressable = forwardRef(
     if (linkProps) {
       const { url, ...restLinkProps } = linkProps;
 
-      const baseLinkProps = Object.assign({}, restLinkProps, {
-        href: url,
-      });
+      const baseLinkProps = { ...restLinkProps, href: url,};
 
       return (
         <BaseLink

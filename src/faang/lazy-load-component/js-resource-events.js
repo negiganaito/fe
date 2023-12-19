@@ -7,6 +7,7 @@
 
 
 /* eslint-disable no-var */
+/* eslint-disable complexity */
 
 /* eslint-disable no-redeclare */
 import { performanceAbsoluteNow } from '@/faang/utils/performance-absolute-now';
@@ -14,8 +15,10 @@ import { performanceAbsoluteNow } from '@/faang/utils/performance-absolute-now';
 let i = 50;
 let j = new Map();
 function a(a, b, d) {
+  // eslint-disable-next-line no-self-assign
   a = a;
-  b = (b = b) != null ? b : '';
+  // eslint-disable-next-line no-self-assign
+  b = (b = b) !== null ? b : '';
   let e = j.get(a);
   e || j.set(a, (e = new Map()));
   a = e.get(b);
@@ -24,11 +27,14 @@ function a(a, b, d) {
   e || a.set(d, (e = [0, []]));
   e[1][e[0]++ % i] = performanceAbsoluteNow();
 }
+
+
 function k(a, b, c) {
   var d = j.get(a);
   if (!d) return [];
   let e = [];
   for (
+    // eslint-disable-next-line no-inner-declarations
     var d = d,
     g = Array.isArray(d),
     h = 0,
@@ -38,6 +44,7 @@ function k(a, b, c) {
     ;
 
   ) {
+    // eslint-disable-next-line no-inner-declarations
     var i;
     if (g) {
       if (h >= d.length) break;
@@ -47,10 +54,12 @@ function k(a, b, c) {
       if (h.done) break;
       i = h.value;
     }
+    // eslint-disable-next-line no-self-assign
     i = i;
     let k = i[0];
     i = i[1];
     for (
+      // eslint-disable-next-line no-inner-declarations
       var i = i,
       l = Array.isArray(i),
       m = 0,
@@ -60,6 +69,7 @@ function k(a, b, c) {
       ;
 
     ) {
+      // eslint-disable-next-line no-inner-declarations
       var n;
       if (l) {
         if (m >= i.length) break;
@@ -69,10 +79,12 @@ function k(a, b, c) {
         if (m.done) break;
         n = m.value;
       }
+      // eslint-disable-next-line no-self-assign
       n = n;
       let o = n[0];
       n = n[1];
       for (
+        // eslint-disable-next-line no-inner-declarations
         var n = n[1],
         p = Array.isArray(n),
         q = 0,
@@ -84,6 +96,7 @@ function k(a, b, c) {
         ;
 
       ) {
+        // eslint-disable-next-line no-inner-declarations
         var r;
         if (p) {
           if (q >= n.length) break;
@@ -93,6 +106,7 @@ function k(a, b, c) {
           if (q.done) break;
           r = q.value;
         }
+        // eslint-disable-next-line no-self-assign
         r = r;
         r >= b &&
           r <= c &&
@@ -105,13 +119,14 @@ function k(a, b, c) {
       }
     }
   }
-  return e.sort(function (a, b) {
+  return e.sort((a, b) => {
     return a.time - b.time;
   });
 }
 function b(a, b) {
   let c = new Map();
   for (
+    // eslint-disable-next-line no-inner-declarations
     var d = j.keys(),
     e = Array.isArray(d),
     f = 0,
@@ -121,6 +136,7 @@ function b(a, b) {
     ;
 
   ) {
+    // eslint-disable-next-line no-inner-declarations
     var g;
     if (e) {
       if (f >= d.length) break;
@@ -130,6 +146,7 @@ function b(a, b) {
       if (f.done) break;
       g = f.value;
     }
+    // eslint-disable-next-line no-self-assign
     g = g;
     let h = k(g, a, b);
     h.length && c.set(g, h);

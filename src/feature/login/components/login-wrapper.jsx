@@ -7,6 +7,7 @@
 import { stylex } from '@stylexjs/stylex';
 import React from 'react';
 
+// eslint-disable-next-line no-unused-vars
 const styles = stylex.create({
   root: {},
 });

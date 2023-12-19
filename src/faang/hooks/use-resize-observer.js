@@ -6,7 +6,6 @@
  */
 
 
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-redeclare */
 /* eslint-disable no-var */
 /* eslint-disable no-unused-vars */
@@ -20,14 +19,14 @@ import { uniqueID } from '@/faang/utils';
 export function useResizeObserver(a) {
   let b = useRef(null)
     ; let c = useRef(a);
-  useLayoutEffect(function () {
+  useLayoutEffect(() => {
     c.current = a
   }, [a]);
-  return useCallback(function (d) {
+  return useCallback((d) => {
     let a = function (a, b, d) {
       c.current && c.current(a, b, d)
     };
-    d = d == null ? null : p(d, a);
+    d = d === null ? null : p(d, a);
     b.current && b.current();
     b.current = d
   }, [])
@@ -35,12 +34,12 @@ export function useResizeObserver(a) {
 let l = null
   ; let m = new Map();
 function n() {
-  l == null && (l = new ResizeObserver(o));
+  l === null && (l = new ResizeObserver(o));
   return l
 }
 function o(a) {
   let b = new Map()
-    ; let e = new Map(a.map(function (a) {
+    ; let e = new Map(a.map((a) => {
       let d = a.contentRect;
       // if (c('gkx')('1470120')) {
       //   let e = b.get(a.target);
@@ -54,8 +53,10 @@ function o(a) {
       return [a.target, d]
     }))
     ; let f = new Set(m.keys());
-  ReactDOMComet.unstable_batchedUpdates(function () {
+  ReactDOMComet.unstable_batchedUpdates(() => {
+    // eslint-disable-next-line no-inner-declarations
     for (var a = e, b = Array.isArray(a), d = 0, a = b ? a : a[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'](); ;) {
+      // eslint-disable-next-line no-inner-declarations
       var g;
       if (b) {
         if (d >= a.length)
@@ -67,12 +68,16 @@ function o(a) {
           break;
         g = d.value
       }
+      // eslint-disable-next-line no-self-assign
       g = g;
       let h = g[0];
       g = g[1];
+      // eslint-disable-next-line no-inner-declarations
       var i = m.get(h);
-      if (i != null)
+      if (i !== null)
+        // eslint-disable-next-line no-inner-declarations
         for (var i = i, j = Array.isArray(i), k = 0, i = j ? i : i[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator'](); ;) {
+          // eslint-disable-next-line no-inner-declarations
           var l;
           if (j) {
             if (k >= i.length)
@@ -84,6 +89,7 @@ function o(a) {
               break;
             l = k.value
           }
+          // eslint-disable-next-line no-self-assign
           l = l;
           l = l[1];
           try {
@@ -100,7 +106,7 @@ function o(a) {
 }
 function p(a, b) {
   let d; let e = uniqueID();
-  d = (d = m.get(a)) != null ? d : new Map();
+  d = (d = m.get(a)) !== null ? d : new Map();
   d.set(e, b);
   m.set(a, d);
   n().observe(a);
@@ -109,7 +115,7 @@ function p(a, b) {
 function q(a, b) {
   return function () {
     let c = m.get(a);
-    if (c == null)
+    if (c === null)
       return;
     c.delete(b);
     c.size === 0 && (n().unobserve(a),
@@ -120,8 +126,10 @@ function r(a) {
   return parseFloat(a) || 0
 }
 function s(a) {
-  return (a = a == null ? void 0 : (a = a.ownerDocument) == null ? void 0 : a.defaultView) != null ? a : window
+  // eslint-disable-next-line no-return-assign
+  return (a = a === null ? void 0 : (a = a.ownerDocument) === null ? void 0 : a.defaultView) !== null ? a : window
 }
+// eslint-disable-next-line max-params
 function t(a, b, c, d) {
   return {
     height: d,
@@ -142,9 +150,10 @@ function v(a) {
   return c
 }
 function w(a) {
+  // eslint-disable-next-line no-inner-declarations
   for (var b = arguments.length, c = new Array(b > 1 ? b - 1 : 0), d = 1; d < b; d++)
     c[d - 1] = arguments[d];
-  return c.reduce(function (b, c) {
+  return c.reduce((b, c) => {
     c = a['border-' + c + '-width'];
     return b + r(c)
   }, 0)

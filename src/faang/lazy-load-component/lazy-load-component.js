@@ -27,13 +27,10 @@ export function lazyLoadComponent(a) {
   function e(c, e) {
     e === void 0 && (e = void 0);
     let f = BootloaderResource.read(a);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useHeroBootloadedComponent(a);
     return jsx(
       f,
-      Object.assign({}, c, {
-        ref: e,
-      })
+      { ...c, ref: e,}
     );
   }
   // e.displayName = e.name + ' [from ' + f.id + ']';

@@ -38,10 +38,9 @@ import { HeroPlaceholderUtils } from './hero-placeholder-utils';
  * @returns {null} - Returns null.
  */
 function performLayoutEffectOnce({ cb }) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const hasBeenCalled = useRef(false);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   useLayoutEffect(() => {
     if (!hasBeenCalled.current) {
       cb();
@@ -77,13 +76,13 @@ export const HeroPlaceholder = (props) => {
 
   const suspenseCallback = useCallback(
     (cbProps) => {
-      if (heroInteractionIDContextValue != null) {
+      if (heroInteractionIDContextValue !== null) {
         heroInteractionContextValue.suspenseCallback(
           heroInteractionIDContextValue,
           simpleUUID1,
           heroInteractionContextValue.pageletStack,
           cbProps,
-          name != null ? name : 'Unnamed Suspense'
+          name !== null ? name : 'Unnamed Suspense'
         );
       }
 
@@ -92,7 +91,7 @@ export const HeroPlaceholder = (props) => {
           HeroPlaceholderUtils.createThenableDescription(cbProps);
 
         unstable_onSuspense(
-          thenableDescription != null ? thenableDescription : ''
+          thenableDescription !== null ? thenableDescription : ''
         );
       }
     },
@@ -108,8 +107,8 @@ export const HeroPlaceholder = (props) => {
   useLayoutEffect(() => {
     if (
       ref.current === false &&
-      heroInteractionIDContextValue != null &&
-      heroInteractionIDContextValue != null
+      heroInteractionIDContextValue !== null &&
+      heroInteractionIDContextValue !== null
     ) {
       heroInteractionContextValue.hold(
         heroInteractionIDContextValue,
@@ -136,7 +135,7 @@ export const HeroPlaceholder = (props) => {
   const t = function () {
     ref.current = true;
 
-    if (heroInteractionIDContextValue != null) {
+    if (heroInteractionIDContextValue !== null) {
       heroInteractionContextValue.unhold(
         heroInteractionIDContextValue,
         simpleUUID2

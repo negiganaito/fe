@@ -30,6 +30,7 @@ export function ix(key) {
 
 ix.add = function (entries, counters) {
   let hasDuplicates = false;
+  // eslint-disable-next-line guard-for-in
   for (const key in entries) {
     counters && counters.entry++;
     if (!(key in entriesMap)) {

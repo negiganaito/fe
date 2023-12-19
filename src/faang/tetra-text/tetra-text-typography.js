@@ -318,17 +318,15 @@ function getPlatformTypography() {
 }
 
 function updateTypographyStyles() {
-  const updatedStyles = Object.assign({}, typographyStyles);
+  const updatedStyles = { ...typographyStyles};
   const platformInfo = getPlatformTypography();
-  if (platformInfo != null) {
+  if (platformInfo !== null) {
     const { fontFamily, offsets } = platformInfo;
     const styleOffsetsMap = new Map(offsets);
 
     styleOffsetsMap.forEach((offsets, textStyleKey) => {
-      updatedStyles[textStyleKey] = Object.assign({}, updatedStyles[textStyleKey], {
-        fontFamily,
-        offsets,
-      });
+      updatedStyles[textStyleKey] = { ...updatedStyles[textStyleKey], fontFamily,
+        offsets,};
     });
   }
   return updatedStyles;

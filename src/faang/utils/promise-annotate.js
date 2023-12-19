@@ -1,9 +1,8 @@
 /**
- * Sets the display name for a React component.
- *
- * @param {React.ComponentType} component - The React component.
- * @param {string} displayName - The display name to set.
- * @returns {React.ComponentType} - The modified React component.
+ * @fileoverview
+ * Copyright (c) Xuan Tien and affiliated entities.
+ * All rights reserved. This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory for details.
  */
 const setDisplayName = (component, displayName) => {
   component.displayName = displayName;

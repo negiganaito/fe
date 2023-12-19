@@ -26,6 +26,7 @@ function addInteraction(key) {
  * @param {number} startTime - The start time of the placeholder.
  * @param {string[]} pageletStack - The pagelet stack associated with the placeholder.
  */
+// eslint-disable-next-line max-params
 function addPlaceholder(
   key,
   placeholderKey,

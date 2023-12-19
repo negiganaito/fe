@@ -22,15 +22,11 @@ const styles = stylex.create({
 export function BaseSVGIcon({ alt, xstyle, color, icon, size = 8 }) {
   return jsx(
     icon,
-    Object.assign(
-      {
-        height: size,
+    {
+      height: size,
         title: !alt || alt === '' ? undefined : alt,
         width: size,
-      },
-      {
-        ...stylex.props([color != null && styles.color(color), xstyle]),
-      }
-    )
+      ...stylex.props([color !== null && styles.color(color), xstyle]),
+    }
   );
 }
