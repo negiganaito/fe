@@ -7,13 +7,13 @@
 import stylex from "@stylexjs/stylex";
 import joinClasses from "fbjs/lib/joinClasses";
 import UserAgent from "fbjs/lib/UserAgent";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useRef, useState } from "react";
 import { jsx } from "react/jsx-runtime";
 
 import { WebPressableGroupContext } from "@/faang/context/web-pressable-group-context";
-import { useMergeRefs } from "@/faang/hooks";
-import { passiveEventListenerUtil } from "@/faang/react-interactions/passive-event-listener-util";
+import { useMergeRefs_Legacy } from "@/faang/hooks";
 import { WebPressability } from "@/faang/react-interactions/web-pressability";
+import { useWebPressableTouchStartHandler } from "./use-web-pressable-touch-start-handler";
 
 const styles = stylex.create({
   disabled: {
@@ -50,9 +50,6 @@ const styles = stylex.create({
 });
 
 const gkx5403 = false;
-
-const isSafari =
-  UserAgent.isBrowser("Safari") || UserAgent.isBrowser("Mobile Safari");
 
 // eslint-disable-next-line complexity
 export function PressableText(props) {
@@ -123,12 +120,12 @@ export function PressableText(props) {
       _disabled === true ||
       (!testOnly_state ? undefined : testOnly_state.disabled) === true ||
       false,
-    focusVisible:
-      (focusVisible && suppressFocusRing !== true) ||
-      (!testOnly_state ? undefined : testOnly_state.focusVisible) === true,
     focused:
       focused ||
       (!testOnly_state ? undefined : testOnly_state.focused) === true,
+    focusVisible:
+      (focusVisible && suppressFocusRing !== true) ||
+      (!testOnly_state ? undefined : testOnly_state.focusVisible) === true,
     hovered:
       hoverr || (!testOnly_state ? undefined : testOnly_state.hovered) === true,
     pressed:
@@ -210,9 +207,15 @@ export function PressableText(props) {
       break;
   }
 
-  const mergeRef = useMergeRefs(bRef, forwardedRef);
+  const mergeRef = useMergeRefs_Legacy(bRef, forwardedRef);
 
-  vFuncHooks(bRef, pressableGroupContextValue, onClickCbFunc);
+  useWebPressableTouchStartHandler(
+    bRef,
+    pressableGroupContextValue,
+    onClickCbFunc
+  );
+
+  // vFuncHooks(bRef, pressableGroupContextValue, onClickCbFunc);
 
   let tabIndexValue;
   const anchorTagOrButtonRole =
@@ -456,48 +459,3 @@ const shouldTriggerActionOnEvent = function (event) {
   }
   return false;
 };
-
-// eslint-disable-next-line no-var
-var vFuncHooks =
-  // (e = b('cr:7332')) != null
-  //   ? e
-  //   :
-  function (ref, pressableGroupContextValue, cbFunc) {
-    useEffect(() => {
-      let e;
-      let f = ref.current;
-      let g = !(e = window)
-        ? undefined
-        : !(e = e.document)
-        ? undefined
-        : e.body;
-      if (!g || !f || !isElementInDocument(f) || !f.addEventListener) return;
-      pressableGroupContextValue &&
-        pressableGroupContextValue.register(f, cbFunc);
-      let h = function (a) {
-        pressableGroupContextValue &&
-          (a.preventDefault(), pressableGroupContextValue.onTouchStart());
-        if (!isSafari) {
-          return;
-        }
-        if (!g) return;
-        g.style.WebkitUserSelect = "none";
-        let c = passiveEventListenerUtil.makeEventOptions({
-          passive: true,
-        });
-        a = function a() {
-          g.style.WebkitUserSelect = null;
-          document.removeEventListener("touchend", a, c);
-        };
-        document.addEventListener("touchend", a, c);
-      };
-      let i = passiveEventListenerUtil.makeEventOptions({
-        passive: !pressableGroupContextValue,
-      });
-      f.addEventListener("touchstart", h, i);
-      return function () {
-        pressableGroupContextValue && pressableGroupContextValue.unRegister(f);
-        f.removeEventListener("touchstart", h, i);
-      };
-    }, [pressableGroupContextValue, cbFunc, ref]);
-  };

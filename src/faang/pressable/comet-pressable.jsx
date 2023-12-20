@@ -48,7 +48,7 @@ const styles = stylex.create({
   root: {
     // eslint-disable-next-line @stylexjs/valid-styles
     ":hover": {
-      textDecorationLine: "none",
+      textDecoration: "none",
     },
     borderRadius: "inherit",
     display: "inline-flex",
@@ -61,7 +61,7 @@ const styles = stylex.create({
   root_DEPRECATED: {
     // eslint-disable-next-line @stylexjs/valid-styles
     ":hover": {
-      textDecorationLine: "none",
+      textDecoration: "none",
     },
     borderRadius: "inherit",
     position: "relative",

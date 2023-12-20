@@ -31,8 +31,6 @@ export const BaseView = forwardRef((props, ref) => {
   const {
     children,
     hidden,
-    // eslint-disable-next-line no-unused-vars
-    className,
     suppressHydrationWarning,
     xstyle,
     testid,

@@ -70,6 +70,8 @@ const useHover = (target, options) => {
     const targetElement = target.current;
     const hoverTouchRefCurrent = hoverTouchRef.current;
 
+    console.log({ targetElement, hoverTouchRefCurrent });
+
     if (targetElement && hoverTouchRefCurrent) {
       targetElement._hoverEventTarget = true;
 

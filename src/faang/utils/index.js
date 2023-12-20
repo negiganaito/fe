@@ -21,3 +21,4 @@ export { testID } from "./test-id";
 export { uniqueID } from "./unique-id";
 export { validateBaseInput } from "./validate-base-input";
 export { xplatToDOMRef } from "./xplat-to-dom-ref";
+export { stylexCompose } from "./stylex-compose";

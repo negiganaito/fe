@@ -61,6 +61,7 @@ export type CometPressableProps = {
   id?: string;
   focusable?: boolean;
   suppressHydrationWarning?: boolean;
+  accessibilityRole?: any;
 } & {
   [key: string]: any;
 };

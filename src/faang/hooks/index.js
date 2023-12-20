@@ -19,3 +19,4 @@ export { useResizeObserver } from "./use-resize-observer";
 export { useStable } from "./use-stable";
 export { useTooltipDelayedContent } from "./use-tooltip-delayed-content";
 export { useUnsafeRef_DEPRECATED } from "./use-unsafe-ref_DEPRECATED";
+export { useMergeRefs as useMergeRefs_Legacy } from "./use-merge-refs.legacy";

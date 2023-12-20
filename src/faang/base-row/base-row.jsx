@@ -113,7 +113,6 @@ export const BaseRow = forwardRef(
         xstyle={[
           expandingStyles.row,
           expanding && expandingStyles.expanding,
-          // @ts-ignore
           alignStyles[
             direction === "backward" && (align === "start" || align === "end")
               ? alignVariable[align]

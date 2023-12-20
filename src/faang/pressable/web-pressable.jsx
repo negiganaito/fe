@@ -340,6 +340,7 @@ export const WebPressable = (props) => {
       : className_DEPRECATED;
   const _style = typeof style === "function" ? style(_props) : style;
   const _className = typeof xstyle === "function" ? xstyle(_props) : xstyle;
+
   WebPressability.usePressability(targetRef, {
     disabled: _disabled,
     onBlur,

@@ -7,6 +7,8 @@
 import { ReactContextMenuEvent } from "./react-context-menu-event";
 import { ReactFocusEvent } from "./react-focus-event";
 import { ReactHoverEvent } from "./react-hover-event";
+// import { ReactHoverEvent } from "./react-hover-event";
+import { ReactHoverEvent_Legacy } from "./react-hover-event.legacy";
 import { ReactPressEvent } from "./react-press-event";
 
 function usePressability(targetRef, options) {
@@ -35,6 +37,14 @@ function usePressability(targetRef, options) {
     onHoverMove,
     onHoverStart,
   });
+
+  // ReactHoverEvent_Legacy.useHover(targetRef, {
+  //   disabled,
+  //   onHoverChange,
+  //   onHoverEnd,
+  //   onHoverMove,
+  //   onHoverStart,
+  // });
 
   ReactPressEvent.usePress(targetRef, {
     disabled,

@@ -8,7 +8,7 @@
 /* eslint-disable no-undef */
 
 import stylex from "@stylexjs/stylex";
-import { useContext, useRef, forwardRef } from "react";
+import React, { useContext, useRef, forwardRef } from "react";
 import {
   isBlueprintStylesEnabled,
   mergeRefs,
@@ -18,9 +18,8 @@ import { CometGHLRenderingContext } from "@/faang/context";
 import { BaseStyledButton } from "./base-styled-button";
 import { TetraText } from "../tetra-text";
 
-import { jsx } from "react/jsx-runtime";
-import { CometIcon } from "../icon";
-import { CometTooltip } from "../base-tooltip";
+import { CometIcon } from "@/faang/icon";
+import { CometTooltip } from "@/faang/base-tooltip";
 
 const colorStyles = stylex.create({
   contentDisabled: {
@@ -253,87 +252,155 @@ export const TetraButton = forwardRef((props, ref) => {
   // let d = rest["aria-label"] ?? label;
   // N = N ? undefined : d;
 
-  const tetraButtonChildren = jsx(BaseStyledButton, {
-    ...rest,
-    addOnEnd: addOnSecondary,
-    addOnStart: addOnPrimary,
-    "aria-label": cometGHLRenderingWithLink ? undefined : _label,
-    content: labelIsHidden
-      ? null
-      : jsx(TetraText, {
-          color: textColor,
-          numberOfLines: 1,
-          type: size === "large" ? "button1" : "button2",
-          children: label,
-        }),
-    contentXstyle: [
-      type === "overlay" && disabled && colorStyles.contentDisabled,
-      type === "overlay" && themeClassName,
-      size === "medium" &&
-        (isBlueprintStylesEnabled()
-          ? sizeStyles.sizeMedium
-          : colorStyles.sizeMedium),
-      size === "large" &&
-        (isBlueprintStylesEnabled()
-          ? sizeStyles.sizeLarge
-          : colorStyles.sizeLarge),
-      icon && labelIsHidden && colorStyles.paddingIconOnly,
-    ],
-    disabled,
-    icon:
-      icon &&
-      jsx(CometIcon, {
-        color: iconColor,
-        icon,
-        size: 16,
-      }),
-    id,
-    linkProps,
-    onFocusIn,
-    onFocusOut,
-    onHoverIn,
-    onHoverOut,
-    onPress,
-    onPressIn,
-    onPressOut,
-    overlayPressedStyle: overlayPressedStyle,
-    padding,
-    ref: mergeRefs(internalRef, ref),
-    suppressHydrationWarning,
-    testOnly_pressed,
-    testid: undefined,
-    xstyle: [
-      type === "primary" && colorStyles.primary,
-      type === "primary" && reduceEmphasis && colorStyles.primaryDeemphasized,
-      type === "secondary" && colorStyles.secondary,
-      type === "secondary" &&
-        reduceEmphasis &&
-        colorStyles.secondaryDeemphasized,
-      type === "fdsOverride_black" && colorStyles.fdsOverrideBlack,
-      type === "fdsOverride_negative" && colorStyles.fdsOverrideNegative,
-      type === "fdsOverride_positive" && colorStyles.fdsOverridePositive,
-      type === "fdsOverride_collaborativePostCTA" &&
-        colorStyles.fdsOverrideCollaborativePostCTA,
-      type === "overlay" && colorStyles.overlay,
-      type === "overlay" && reduceEmphasis && colorStyles.overlayDeemphasized,
-      disabled && colorStyles.disabled,
-      type === "overlay" && disabled && colorStyles.overlayDisabled,
-      type === "dark-overlay" && colorStyles.darkOverlay,
-    ],
-  });
+  const TetraButtonChildren = (
+    <BaseStyledButton
+      {...rest}
+      addOnStart={addOnPrimary}
+      addOnEnd={addOnSecondary}
+      aria-label={cometGHLRenderingWithLink ? undefined : _label}
+      content={
+        labelIsHidden ? null : (
+          <TetraText
+            color={textColor}
+            numberOfLines={1}
+            type={size === "large" ? "button1" : "button2"}
+          >
+            {label}
+          </TetraText>
+        )
+      }
+      contentXstyle={[
+        type === "overlay" && disabled && colorStyles.contentDisabled,
+        type === "overlay" && themeClassName,
+        size === "medium" &&
+          (isBlueprintStylesEnabled()
+            ? sizeStyles.sizeMedium
+            : colorStyles.sizeMedium),
+        size === "large" &&
+          (isBlueprintStylesEnabled()
+            ? sizeStyles.sizeLarge
+            : colorStyles.sizeLarge),
+        icon && labelIsHidden && colorStyles.paddingIconOnly,
+      ]}
+      disabled={disabled}
+      icon={icon && <CometIcon color={iconColor} icon={icon} size={16} />}
+      id={id}
+      linkProps={linkProps}
+      onFocusIn={onFocusIn}
+      onFocusOut={onFocusOut}
+      onHoverIn={onHoverIn}
+      onHoverOut={onHoverOut}
+      onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      overlayPressedStyle={overlayPressedStyle}
+      padding={padding}
+      ref={mergeRefs(internalRef, ref)}
+      suppressHydrationWarning={suppressHydrationWarning}
+      testOnly_pressed={testOnly_pressed}
+      testid={undefined}
+      xstyle={[
+        type === "primary" && colorStyles.primary,
+        type === "primary" && reduceEmphasis && colorStyles.primaryDeemphasized,
+        type === "secondary" && colorStyles.secondary,
+        type === "secondary" &&
+          reduceEmphasis &&
+          colorStyles.secondaryDeemphasized,
+        type === "fdsOverride_black" && colorStyles.fdsOverrideBlack,
+        type === "fdsOverride_negative" && colorStyles.fdsOverrideNegative,
+        type === "fdsOverride_positive" && colorStyles.fdsOverridePositive,
+        type === "fdsOverride_collaborativePostCTA" &&
+          colorStyles.fdsOverrideCollaborativePostCTA,
+        type === "overlay" && colorStyles.overlay,
+        type === "overlay" && reduceEmphasis && colorStyles.overlayDeemphasized,
+        disabled && colorStyles.disabled,
+        type === "overlay" && disabled && colorStyles.overlayDisabled,
+        type === "dark-overlay" && colorStyles.darkOverlay,
+      ]}
+    />
+  );
 
-  const tetraButtonChildrenNormalize =
-    type === "overlay"
-      ? jsx(ThemeWrapper, {
-          children: tetraButtonChildren,
-        })
-      : tetraButtonChildren;
+  const TetraButtonChildrenWithTheme =
+    type === "overlay" ? (
+      <ThemeWrapper>{TetraButtonChildren}</ThemeWrapper>
+    ) : (
+      TetraButtonChildren
+    );
 
-  return tooltip
-    ? jsx(CometTooltip, {
-        position: tooltipPosition,
-        tooltip,
-        children: tetraButtonChildrenNormalize,
-      })
-    : tetraButtonChildrenNormalize;
+  return tooltip ? (
+    <CometTooltip position={tooltipPosition} tooltip={tooltip}>
+      {TetraButtonChildrenWithTheme}
+    </CometTooltip>
+  ) : (
+    TetraButtonChildrenWithTheme
+  );
 });
+
+// const tetraButtonChildren = jsx(BaseStyledButton, {
+//   ...rest,
+//   addOnEnd: addOnSecondary,
+//   addOnStart: addOnPrimary,
+//   "aria-label": cometGHLRenderingWithLink ? undefined : _label,
+//   content: labelIsHidden
+//     ? null
+//     : jsx(TetraText, {
+//         color: textColor,
+//         numberOfLines: 1,
+//         type: size === "large" ? "button1" : "button2",
+//         children: label,
+//       }),
+//   contentXstyle: [
+//     type === "overlay" && disabled && colorStyles.contentDisabled,
+//     type === "overlay" && themeClassName,
+//     size === "medium" &&
+//       (isBlueprintStylesEnabled()
+//         ? sizeStyles.sizeMedium
+//         : colorStyles.sizeMedium),
+//     size === "large" &&
+//       (isBlueprintStylesEnabled()
+//         ? sizeStyles.sizeLarge
+//         : colorStyles.sizeLarge),
+//     icon && labelIsHidden && colorStyles.paddingIconOnly,
+//   ],
+//   disabled,
+//   icon:
+//     icon &&
+//     jsx(CometIcon, {
+//       color: iconColor,
+//       icon,
+//       size: 16,
+//     }),
+//   id,
+//   linkProps,
+//   onFocusIn,
+//   onFocusOut,
+//   onHoverIn,
+//   onHoverOut,
+//   onPress,
+//   onPressIn,
+//   onPressOut,
+//   overlayPressedStyle: overlayPressedStyle,
+//   padding,
+//   ref: mergeRefs(internalRef, ref),
+//   suppressHydrationWarning,
+//   testOnly_pressed,
+//   testid: undefined,
+//   xstyle: [
+//     type === "primary" && colorStyles.primary,
+//     type === "primary" && reduceEmphasis && colorStyles.primaryDeemphasized,
+//     type === "secondary" && colorStyles.secondary,
+//     type === "secondary" &&
+//       reduceEmphasis &&
+//       colorStyles.secondaryDeemphasized,
+//     type === "fdsOverride_black" && colorStyles.fdsOverrideBlack,
+//     type === "fdsOverride_negative" && colorStyles.fdsOverrideNegative,
+//     type === "fdsOverride_positive" && colorStyles.fdsOverridePositive,
+//     type === "fdsOverride_collaborativePostCTA" &&
+//       colorStyles.fdsOverrideCollaborativePostCTA,
+//     type === "overlay" && colorStyles.overlay,
+//     type === "overlay" && reduceEmphasis && colorStyles.overlayDeemphasized,
+//     disabled && colorStyles.disabled,
+//     type === "overlay" && disabled && colorStyles.overlayDisabled,
+//     type === "dark-overlay" && colorStyles.darkOverlay,
+//   ],
+// });

@@ -6,8 +6,6 @@
  */
 import React, { forwardRef, useContext } from "react";
 
-import { jsx } from "react/jsx-runtime";
-
 import { Pressable } from "@/faang/pressable/pressable";
 import { PressableText } from "@/faang/pressable/pressable-text";
 import { BaseButtonPopoverContext } from "@/faang/context/base-button-popover-context";
@@ -148,14 +146,25 @@ export const BaseButton = forwardRef((props, ref) => {
         ? _role
         : "button";
 
-    return jsx(Pressable, {
-      ...internalProps,
-      accessibilityRole,
-      allowClickEventPropagation,
-      suppressFocusRing,
-      tabbable: focusable,
-      children,
-    });
+    return (
+      <Pressable
+        {...internalProps}
+        accessibilityRole={accessibilityRole}
+        allowClickEventPropagation={allowClickEventPropagation}
+        tabbable={focusable}
+      >
+        {children}
+      </Pressable>
+    );
+
+    // return jsx(Pressable, {
+    //   ...internalProps,
+    //   accessibilityRole,
+    //   allowClickEventPropagation,
+    //   suppressFocusRing,
+    //   tabbable: focusable,
+    //   children,
+    // });
   } else {
     const accessibilityRole =
       _role === "combobox" ||
@@ -170,8 +179,8 @@ export const BaseButton = forwardRef((props, ref) => {
 
     return (
       <PressableText
-        {...internalProps}
         focusable={focusable}
+        {...internalProps}
         accessibilityRole={accessibilityRole}
         direction="none"
         suppressFocusRing={suppressFocusRing}

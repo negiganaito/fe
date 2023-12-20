@@ -38,8 +38,9 @@ export const HomePage = () => {
         }
       />
 
-      <TetraButton type="secondary" padding="wide" label="Create post" />
-
+      <div style={{ width: "200px" }}>
+        <TetraButton type="primary" padding="wide" label="Create post" />
+      </div>
       {/* <WorkSigninPasswordTextBox
         autoFocus={false}
         dataTestId="login_password"

@@ -9,9 +9,7 @@ import stylex from "@stylexjs/stylex";
 import React, { useRef, forwardRef } from "react";
 import { CometPressable } from "@/faang/pressable";
 import { BaseRow, BaseRowItem } from "@/faang/base-row";
-import { stylexCompat } from "../utils";
-
-import { jsx, jsxs } from "react/jsx-runtime";
+import { stylexCompat, stylexCompose } from "@/faang/utils";
 
 const styles = stylex.create({
   button: {
@@ -75,7 +73,7 @@ function p(a) {
   if (b) {
     return b;
   }
-  b = stylex(a);
+  b = stylexCompose.compose(a);
 
   const {
     alignSelf,
@@ -122,7 +120,9 @@ function p(a) {
 
   // eslint-disable-next-line guard-for-in
   for (let g in xStyleProps) {
-    xStyleProps[g] !== undefined && (f[g] = xStyleProps[g]);
+    if (xStyleProps[g]) {
+      f[g] = xStyleProps[g];
+    }
   }
 
   const i = [
@@ -192,62 +192,108 @@ export const BaseStyledButton = forwardRef((props, ref) => {
 
   const N = [styles.item, size === "large" && styles.sizeLargeItem];
 
-  const child = (childProps) => {
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const Child = (childProps) => {
     const { overlay } = childProps;
 
-    return jsxs(BaseRow, {
-      align: "center",
-      ref: childRef,
-      verticalAlign: "center",
-      xstyle: [
-        styles.content,
-        padding === "wide" && styles.paddingWide,
-        disabled && styles.disabled,
-        _N,
-        contentXstyle,
-      ],
-      children: [
-        jsxs("div", {
-          className: stylex([
+    return (
+      <BaseRow
+        align="center"
+        ref={childRef}
+        verticalAlign="center"
+        xstyle={[
+          styles.content,
+          padding === "wide" && styles.paddingWide,
+          disabled && styles.disabled,
+          _N,
+          contentXstyle,
+        ]}
+      >
+        <div
+          className={stylex([
             styles.offset,
             size === "large" && styles.sizeLargeOffset,
-          ]),
-          children: [
-            addOnStart
-              ? jsx(BaseRowItem, {
-                  role: "none",
-                  useDeprecatedStyles: true,
-                  xstyle: N,
-                  children: addOnStart,
-                })
-              : icon
-              ? jsx(BaseRowItem, {
-                  role: "none",
-                  useDeprecatedStyles: true,
-                  xstyle: N,
-                  children: icon,
-                })
-              : null,
-            content &&
-              jsx(BaseRowItem, {
-                role: "none",
-                useDeprecatedStyles: true,
-                xstyle: N,
-                children: content,
-              }),
-            addOnEnd &&
-              jsx(BaseRowItem, {
-                role: "none",
-                useDeprecatedStyles: true,
-                xstyle: N,
-                children: addOnEnd,
-              }),
-          ],
-        }),
-        overlay,
-        addOnAbsolute && addOnAbsolute,
-      ],
-    });
+          ])}
+        >
+          {addOnStart ? (
+            <BaseRowItem role="none" useDeprecatedStyles xstyle={N}>
+              {addOnStart}
+            </BaseRowItem>
+          ) : (
+            icon && (
+              <BaseRowItem role="none" useDeprecatedStyles xstyle={N}>
+                {icon}
+              </BaseRowItem>
+            )
+          )}
+          {content && (
+            <BaseRowItem role="none" useDeprecatedStyles xstyle={N}>
+              {content}
+            </BaseRowItem>
+          )}
+          {addOnEnd && (
+            <BaseRowItem role="none" useDeprecatedStyles xstyle={N}>
+              {addOnEnd}
+            </BaseRowItem>
+          )}
+        </div>
+        {overlay}
+        {addOnAbsolute && addOnAbsolute}
+      </BaseRow>
+    );
+    // return jsxs(BaseRow, {
+    //   align: "center",
+    //   ref: childRef,
+    //   verticalAlign: "center",
+    //   xstyle: [
+    //     styles.content,
+    //     padding === "wide" && styles.paddingWide,
+    //     disabled && styles.disabled,
+    //     _N,
+    //     contentXstyle,
+    //   ],
+    //   children: [
+    //     jsxs("div", {
+    //       className: stylex([
+    //         styles.offset,
+    //         size === "large" && styles.sizeLargeOffset,
+    //       ]),
+    //       children: [
+    //         addOnStart
+    //           ? jsx(BaseRowItem, {
+    //               role: "none",
+    //               useDeprecatedStyles: true,
+    //               xstyle: N,
+    //               children: addOnStart,
+    //             })
+    //           : icon
+    //           ? jsx(BaseRowItem, {
+    //               role: "none",
+    //               useDeprecatedStyles: true,
+    //               xstyle: N,
+    //               children: icon,
+    //             })
+    //           : null,
+    //         content &&
+    //           jsx(BaseRowItem, {
+    //             role: "none",
+    //             useDeprecatedStyles: true,
+    //             xstyle: N,
+    //             children: content,
+    //           }),
+    //         addOnEnd &&
+    //           jsx(BaseRowItem, {
+    //             role: "none",
+    //             useDeprecatedStyles: true,
+    //             xstyle: N,
+    //             children: addOnEnd,
+    //           }),
+    //       ],
+    //     }),
+    //     overlay,
+    //     addOnAbsolute && addOnAbsolute,
+    //   ],
+    // });
   };
 
   return (
@@ -273,7 +319,7 @@ export const BaseStyledButton = forwardRef((props, ref) => {
       testid={undefined}
       xstyle={[styles.button, M]}
     >
-      {child}
+      {Child}
     </CometPressable>
   );
 });
