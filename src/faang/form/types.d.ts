@@ -27,4 +27,4 @@ export type CometFormTextInputProps = {
   validationState?: any;
   validator?: any;
   xstyle?: any;
-} & React.JSX.IntrinsicElements["input"];
+} & Omit<React.JSX.IntrinsicElements["input"], "className">;

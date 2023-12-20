@@ -5,8 +5,6 @@
  * See the LICENSE file in the root directory for details.
  */
 import { forwardRef, useMemo, useRef } from "react";
-// @ts-ignore
-import { jsx } from "react/jsx-runtime";
 
 import { mergeRefs } from "@/faang/hooks";
 import { xplatToDOMRef } from "@/faang/utils";
@@ -56,28 +54,56 @@ export const CometImage = forwardRef((props, ref) => {
   // }
 
   if (typeof src === "string") {
-    return jsx(BaseImage, {
-      ...rest,
-      alt,
-      elementtiming: t,
-      objectFit,
-      onError,
-      onLoad,
-      ref: xplatToDOMRef.xplatToDOMRef(g),
-      sizes,
-      src,
-      srcSet,
-      testid: void 0,
-      xstyle,
-    });
+    return (
+      <BaseImage
+        {...rest}
+        alt={alt}
+        elementtiming={t}
+        objectFit={objectFit}
+        onError={onError}
+        onLoad={onLoad}
+        ref={xplatToDOMRef.xplatToDOMRef(g)}
+        sizes={sizes}
+        src={src}
+        srcSet={srcSet}
+        testid={undefined}
+        xstyle={xstyle}
+      />
+    );
+
+    // return jsx(BaseImage, {
+    //   ...rest,
+    //   alt,
+    //   elementtiming: t,
+    //   objectFit,
+    //   onError,
+    //   onLoad,
+    //   ref: xplatToDOMRef.xplatToDOMRef(g),
+    //   sizes,
+    //   src,
+    //   srcSet,
+    //   testid: void 0,
+    //   xstyle,
+    // });
   }
 
-  return jsx(CometImageFromIXValue, {
-    alt,
-    objectFit,
-    ref: g,
-    source: src,
-    testid: void 0,
-    xstyle,
-  });
+  return (
+    <CometImageFromIXValue
+      alt={alt}
+      objectFit={objectFit}
+      ref={g}
+      source={src}
+      testid={undefined}
+      xstyle={xstyle}
+    />
+  );
+
+  // return jsx(CometImageFromIXValue, {
+  //   alt,
+  //   objectFit,
+  //   ref: g,
+  //   source: src,
+  //   testid: void 0,
+  //   xstyle,
+  // });
 });

@@ -7,7 +7,6 @@
 
 import stylex from "@stylexjs/stylex";
 import React, { forwardRef, useState } from "react";
-import { jsx } from "react/jsx-runtime";
 
 import { useBaseInputValidators } from "@/faang/hooks";
 import { CometIcon, ImageIconSource } from "@/faang/icon";
@@ -16,6 +15,7 @@ import { CometPressable } from "@/faang/pressable";
 
 import { BaseTextInput } from "./base-text-input";
 import { CometFormInputWrapper } from "./comet-form-input-wrapper";
+import { CometImage } from "@/faang/base-image";
 
 const styles = stylex.create({
   disabled: {
@@ -125,8 +125,6 @@ export const CometFormTextInput = forwardRef((props, ref) => {
     value,
     xstyle,
     autoComplete,
-    // eslint-disable-next-line no-unused-vars
-    className,
     ...rest
   } = props;
 
@@ -144,10 +142,7 @@ export const CometFormTextInput = forwardRef((props, ref) => {
   const PasswordIcon = isPasswordIcon ? (
     <div className={stylex(styles.dummy1)}>
       <div className={stylex(styles.dummy2)}>
-        <CometPressable
-          onPress={() => setPress(!isPress)}
-          overlayDisabled={true}
-        >
+        <CometPressable onPress={() => setPress(!isPress)} overlayDisabled>
           <CometFormInputPasswordStateIcon isVisible={isPress} />
         </CometPressable>
       </div>
@@ -158,72 +153,137 @@ export const CometFormTextInput = forwardRef((props, ref) => {
   const normalTopResultType =
     topResultType !== "CORRECT" ? topResultType : validationState;
 
-  return jsx(CometFormInputWrapper, {
-    addOnStart:
-      (icon &&
-        icon instanceof ImageIconSource &&
-        icon.height === 40 &&
-        jsx("div", {
-          children: jsx("CometImage", {
-            className: stylex(styles.imageIcon),
-            height: parseInt(icon.height.toString(), 10),
-            src: icon.src,
-            width: parseInt(icon.width.toString(), 10),
-          }),
-          className: stylex(styles.icon, styles.largeImageIcon),
-        })) ||
-      (icon &&
-        jsx("div", {
-          children: jsx(CometIcon, {
-            color: "secondary",
-            icon,
-          }),
-          className: stylex(styles.icon),
-        })) ||
-      (emojiSkittle &&
-        jsx("div", {
-          children: emojiSkittle,
-          className: stylex(styles.emoji),
-        })),
-    auxContent: PasswordIcon ?? auxContent,
-    children: ({ focused, helperTextID, id }) => {
-      return jsx(BaseTextInput, {
-        "aria-describedby": helperTextID,
-        "aria-invalid": normalTopResultType === "ERROR",
-        autoComplete,
-        autoFocus: autoFocus_PLEASE_USE_FOCUS_REGION_INSTEAD,
-        disabled,
-        id,
-        inputMode,
-        maxLength,
-        onBlur,
-        onClick,
-        onFocus,
-        onValueChange,
-        placeholder: focused ? placeholder : null,
-        readOnly,
-        ref,
-        suppressFocusRing: true,
-        testid: undefined,
-        type: typeAfterChange,
-        value,
-        xstyle: [
-          styles.input,
-          disabled && styles.disabled,
-          readOnly && readOnly === true && styles.readOnly,
-          xstyle,
-        ],
-        ...rest,
-      });
-    },
-    cursor: "text",
-    disabled,
-    helperText: topResultReason ?? helperText,
-    helperTextIsHidden,
-    label,
-    labelRef,
-    suppressFocusRing,
-    validationState: normalTopResultType,
-    value,
-  });
+  // return jsx(CometFormInputWrapper, {
+  //   addOnStart:
+  //     (icon &&
+  //       icon instanceof ImageIconSource &&
+  //       icon.height === 40 &&
+  //       jsx("div", {
+  //         children: jsx("CometImage", {
+  //           className: stylex(styles.imageIcon),
+  //           height: parseInt(icon.height.toString(), 10),
+  //           src: icon.src,
+  //           width: parseInt(icon.width.toString(), 10),
+  //         }),
+  //         className: stylex(styles.icon, styles.largeImageIcon),
+  //       })) ||
+  //     (icon &&
+  //       jsx("div", {
+  //         children: jsx(CometIcon, {
+  //           color: "secondary",
+  //           icon,
+  //         }),
+  //         className: stylex(styles.icon),
+  //       })) ||
+  //     (emojiSkittle &&
+  //       jsx("div", {
+  //         children: emojiSkittle,
+  //         className: stylex(styles.emoji),
+  //       })),
+  //   auxContent: PasswordIcon ?? auxContent,
+  //   children: ({ focused, helperTextID, id }) => {
+  //     return jsx(BaseTextInput, {
+  //       "aria-describedby": helperTextID,
+  //       "aria-invalid": normalTopResultType === "ERROR",
+  //       autoComplete,
+  //       autoFocus: autoFocus_PLEASE_USE_FOCUS_REGION_INSTEAD,
+  //       disabled,
+  //       id,
+  //       inputMode,
+  //       maxLength,
+  //       onBlur,
+  //       onClick,
+  //       onFocus,
+  //       onValueChange,
+  //       placeholder: focused ? placeholder : null,
+  //       readOnly,
+  //       ref,
+  //       suppressFocusRing: true,
+  //       testid: undefined,
+  //       type: typeAfterChange,
+  //       value,
+  //       xstyle: [
+  //         styles.input,
+  //         disabled && styles.disabled,
+  //         readOnly && readOnly === true && styles.readOnly,
+  //         xstyle,
+  //       ],
+  //       ...rest,
+  //     });
+  //   },
+  //   cursor: "text",
+  //   disabled,
+  //   helperText: topResultReason ?? helperText,
+  //   helperTextIsHidden,
+  //   label,
+  //   labelRef,
+  //   suppressFocusRing,
+  //   validationState: normalTopResultType,
+  //   value,
+  // });
+
+  return (
+    <CometFormInputWrapper
+      addOnStart={
+        (icon && icon instanceof ImageIconSource && icon.height === 40 && (
+          <div className={stylex(styles.icon, styles.largeImageIcon)}>
+            <CometImage
+              className={stylex(styles.imageIcon)}
+              height={parseInt(icon.height.toString(), 10)}
+              src={icon.src}
+              width={parseInt(icon.width.toString(), 10)}
+            />
+          </div>
+        )) ||
+        (icon && (
+          <div className={stylex(styles.icon)}>
+            <CometIcon color="secondary" icon={icon} />
+          </div>
+        )) ||
+        (emojiSkittle && (
+          <div className={stylex(styles.emoji)}>{emojiSkittle}</div>
+        ))
+      }
+      auxContent={PasswordIcon ?? auxContent}
+      children={({ focused, helperTextID, id }) => (
+        <BaseTextInput
+          aria-describedby={helperTextID}
+          aria-invalid={normalTopResultType === "ERROR"}
+          autoComplete={autoComplete}
+          autoFocus={autoFocus_PLEASE_USE_FOCUS_REGION_INSTEAD}
+          disabled={disabled}
+          id={id}
+          inputMode={inputMode}
+          maxLength={maxLength}
+          onBlur={onBlur}
+          onClick={onClick}
+          onFocus={onFocus}
+          onValueChange={onValueChange}
+          placeholder={focused ? placeholder : null}
+          readOnly={readOnly}
+          ref={ref}
+          suppressFocusRing={true}
+          testid={undefined}
+          type={typeAfterChange}
+          value={value}
+          xstyle={[
+            styles.input,
+            disabled && styles.disabled,
+            readOnly && readOnly === true && styles.readOnly,
+            xstyle,
+          ]}
+          {...rest}
+        />
+      )}
+      cursor="text"
+      disabled={disabled}
+      helperText={topResultReason ?? helperText}
+      helperTextIsHidden={helperTextIsHidden}
+      label={label}
+      labelRef={labelRef}
+      suppressFocusRing={suppressFocusRing}
+      validationState={normalTopResultType}
+      value={value}
+    />
+  );
 });
