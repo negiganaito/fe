@@ -10,8 +10,6 @@
 import stylex from "@stylexjs/stylex";
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 
-import {jsx, jsxs} from "react/jsx-runtime"
-
 import { BaseFocusRing, FocusWithinHandler } from "@/faang/focus";
 import { isBlueprintStylesEnabled, useMergeRefs } from "@/faang/hooks";
 import { CometFormInputValidationStateIcon } from "@/faang/input";
@@ -525,7 +523,7 @@ export function CometFormInputWrapper(props) {
   //                         className: stylex(styles.dummy4),
   //                       }),
   //                   ],
-                    
+
   //                 }),
   //                 addOnBottom,
   //               ],
@@ -639,50 +637,50 @@ export function CometFormInputWrapper(props) {
                 tabIndex={onPress ? 0 : undefined}
               >
                 <div className={stylex(styles.dummy2)}>
-                    {addOnStart}
-                    <div className={stylex(styles.dummy3)}>
-                      {withHeaderMask && !disabled && (filled || _focused) && (
-                        <span
-                          className={stylex(
-                            styles.headerMask,
-                            validationState === "WARN" &&
-                              _hovered &&
-                              styles.warnHovered,
-                            validationState === "ERROR" &&
-                              _hovered &&
-                              styles.errorHovered
-                          )}
-                        />
-                      )}
-                      {!hideLabel &&
-                        !labelLocation_INTERNALOutside &&
-                        LabelRenderer(_focused)}
-                      <FocusWithinHandler onFocusChange={ca}>
-                        {children({
-                          filled: filled,
-                          focused: _focused,
-                          helperTextID:
-                            helperText && validationState ? id2 : undefined,
-                          id: id,
-                          rootRef: rootRef,
-                        })}
-                      </FocusWithinHandler>
-                    </div>
-                    {(auxContent || validationState) && (
-                      <div className={stylex(styles.dummy4)}>
-                        {validationState && (
-                          <div
-                            className={stylex(
-                              styles.validationIcon,
-                              hideLabel && styles.validationIconHideLabel
-                            )}
-                          >
-                            {CometFormInputValidationStateIcon[validationState]}
-                          </div>
+                  {addOnStart}
+                  <div className={stylex(styles.dummy3)}>
+                    {withHeaderMask && !disabled && (filled || _focused) && (
+                      <span
+                        className={stylex(
+                          styles.headerMask,
+                          validationState === "WARN" &&
+                            _hovered &&
+                            styles.warnHovered,
+                          validationState === "ERROR" &&
+                            _hovered &&
+                            styles.errorHovered
                         )}
-                        {auxContent}
-                      </div>
+                      />
                     )}
+                    {!hideLabel &&
+                      !labelLocation_INTERNALOutside &&
+                      LabelRenderer(_focused)}
+                    <FocusWithinHandler onFocusChange={ca}>
+                      {children({
+                        filled: filled,
+                        focused: _focused,
+                        helperTextID:
+                          helperText && validationState ? id2 : undefined,
+                        id: id,
+                        rootRef: rootRef,
+                      })}
+                    </FocusWithinHandler>
+                  </div>
+                  {(auxContent || validationState) && (
+                    <div className={stylex(styles.dummy4)}>
+                      {validationState && (
+                        <div
+                          className={stylex(
+                            styles.validationIcon,
+                            hideLabel && styles.validationIconHideLabel
+                          )}
+                        >
+                          {CometFormInputValidationStateIcon[validationState]}
+                        </div>
+                      )}
+                      {auxContent}
+                    </div>
+                  )}
                   {addOnBottom}
                 </div>
               </label>

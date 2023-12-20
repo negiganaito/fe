@@ -36,9 +36,7 @@ const baseHeading = (
 
   const baseTextContextValue = useBaseTextContext();
   const isNested =
-    (!baseTextContextValue
-      ? undefined
-      : baseTextContextValue?.nested) === true;
+    (!baseTextContextValue ? undefined : baseTextContextValue?.nested) === true;
 
   // HeadingComponent
   return jsx(HeadingComponent, {

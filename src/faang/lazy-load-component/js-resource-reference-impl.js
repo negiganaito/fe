@@ -56,7 +56,8 @@ export const JSResourceReferenceImpl = (function () {
             JSResourceEvents.notify(a.$1, c, "PROMISE_RESOLVED");
             b(e);
           },
-          (e = a.$2)  ? e : n
+          // eslint-disable-next-line no-cond-assign
+          (e = a.$2) ? e : n
         );
       });
     });
@@ -66,7 +67,8 @@ export const JSResourceReferenceImpl = (function () {
   e.preload = function () {
     let a;
     let b = this;
-    let c = (a = this.$2)  ? a : n;
+    // eslint-disable-next-line no-cond-assign
+    let c = (a = this.$2) ? a : n;
     m((a) => {
       return a.loadModules([b.getModuleIdAsRef()], () => {}, "preload: " + c);
     });

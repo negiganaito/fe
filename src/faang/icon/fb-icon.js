@@ -45,7 +45,7 @@ const _fbicon = memoizeWithArgs(
   (src, size) => {
     if (typeof src === "object") {
       const coercedImageObject = coerceImageishSprited(src);
-      if (coercedImageObject ) {
+      if (coercedImageObject) {
         return coercedImageObject.identifier + ":" + size;
       } else if (typeof src.uri === "string") {
         return src.uri + ":" + size;

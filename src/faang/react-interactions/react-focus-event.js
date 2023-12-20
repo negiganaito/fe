@@ -193,7 +193,7 @@ function useFocus(
     const focusTarget = focusTargetRef.current;
     const state = stateRef.current;
 
-    if (focusTarget  && focusTarget.nodeType === 1) {
+    if (focusTarget && focusTarget.nodeType === 1) {
       setFocusVisibleListeners(
         focusVisibleHandles,
         focusTarget,
@@ -344,7 +344,7 @@ function useFocus(
     const focusTargetCurrent = focusTargetRef.current;
     const stateRefCurrent = stateRef.current;
     return () => {
-      if (!focusTargetRef.current  && stateRefCurrent.isFocused) {
+      if (!focusTargetRef.current && stateRefCurrent.isFocused) {
         stateRefCurrent.isFocused = false;
         const focusEventBlur = new window.FocusEvent("blur");
         Object.defineProperty(focusEventBlur, "target", {
@@ -665,7 +665,7 @@ function useDOMEventListener(domEventName, eventOption) {
   const unsafeRef = useUnsafeRef_DEPRECATED(null);
   let unsafeRefCurrent = unsafeRef.current;
   eventOption && (eventOption.passive = undefined);
-  if (!unsafeRefCurrent ) {
+  if (!unsafeRefCurrent) {
     const eventHandler = unstable_createEventHandle(domEventName, eventOption);
     const map = new Map();
 
@@ -678,7 +678,7 @@ function useDOMEventListener(domEventName, eventOption) {
       setListener: (key, cb) => {
         let c = map.get(key);
         c !== undefined && c();
-        if (!cb ) {
+        if (!cb) {
           map.delete(key);
           return;
         }
@@ -727,7 +727,7 @@ function useFocusWithinStrictMode({
   const focusWithinStrictModeCallBack = useCallback(
     (props) => {
       const focusRefCurrent = focusRef.current;
-      props  && focusRefCurrent 
+      props && focusRefCurrent
         ? (setFocusVisibleListeners(handlerArr, props, (param) => {
             focusRefCurrent.isFocused &&
               focusRefCurrent.isFocusVisible !== param &&
@@ -790,7 +790,7 @@ function useFocusWithinStrictMode({
                 afterblurHandle.setListener(document, null);
               }));
           }))
-        : !props  &&
+        : !props &&
           (focusHandle.clear(), blurHandle.clear(), beforeblurHandle.clear());
     },
     [

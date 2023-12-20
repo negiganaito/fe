@@ -130,7 +130,7 @@ export function calculateBaseContextualLayerPosition({
           m = contextRect.right - contextualLayerSize.width;
           break;
       }
-      m  &&
+      m &&
         (m < screenRect.left
           ? (adjustment = screenRect.left - m)
           : m + contextualLayerSize.width > screenRect.right &&

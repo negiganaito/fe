@@ -49,11 +49,12 @@ export function getTabbableNodes(a, b) {
       h instanceof HTMLInputElement &&
       h.tagName === "INPUT" &&
       h.type === "radio" &&
-      h.name 
+      h.name
     ) {
       // eslint-disable-next-line no-inner-declarations
       var i;
-      d[h.name] = [].concat((i = d[h.name])  ? i : [], [h]);
+      // eslint-disable-next-line no-cond-assign
+      d[h.name] = [].concat((i = d[h.name]) ? i : [], [h]);
     }
   }
   let j = Object.values(d)

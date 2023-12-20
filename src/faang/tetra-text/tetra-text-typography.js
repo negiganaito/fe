@@ -320,7 +320,7 @@ function getPlatformTypography() {
 function updateTypographyStyles() {
   const updatedStyles = { ...typographyStyles };
   const platformInfo = getPlatformTypography();
-  if (platformInfo ) {
+  if (platformInfo) {
     const { fontFamily, offsets } = platformInfo;
     const styleOffsetsMap = new Map(offsets);
 

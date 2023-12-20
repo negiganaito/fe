@@ -65,7 +65,7 @@ export function ReactUseEvent(event, option) {
 
   useLayoutEffect(() => {
     return () => {
-      if (useEventHandle ) {
+      if (useEventHandle) {
         useEventHandle.clear();
       }
       handleRef.current = null;

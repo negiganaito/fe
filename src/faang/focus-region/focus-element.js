@@ -85,7 +85,7 @@ function b(a, b, c) {
   let e = c.focusWithoutUserIntent;
   c = c.focusWithAutoFocus;
   a = o(a, b);
-  a  &&
+  a &&
     p(a, {
       focusWithAutoFocus: c,
       focusWithoutUserIntent: e,
@@ -103,7 +103,7 @@ function p(a, b) {
   let c = b.preventScroll;
   let d = b.focusWithoutUserIntent;
   b = b.focusWithAutoFocus;
-  if (a ) {
+  if (a) {
     j || ((j = !0), l());
     let e = a._tabIndexState;
     if (e && e.canTab === !1) return;
@@ -144,7 +144,7 @@ function f(a, b, d) {
   let e = a[2];
   let f = a[3];
   a = a[4];
-  a  &&
+  a &&
     a !== e &&
     b &&
     p(b[f + 1], {
@@ -157,7 +157,7 @@ function q(a, b, d) {
   let e = a[1];
   let f = a[3];
   a = a[4];
-  a  &&
+  a &&
     a !== e &&
     b &&
     p(b[f - 1], {
@@ -175,7 +175,7 @@ function r(a, b, d, e, f) {
   a = a[4];
   if (!a || !b) return;
   a === h
-    ? f 
+    ? f
       ? f()
       : e === !0 && (p(g), d.preventDefault(), d.stopPropagation())
     : (p(b[i + 1]), d.preventDefault(), d.stopPropagation());
@@ -191,7 +191,7 @@ function s(a, b, d, e, f) {
   a = a[4];
   if (!a || !b) return;
   a === g
-    ? f 
+    ? f
       ? f()
       : e === !0 && (p(h), d.preventDefault(), d.stopPropagation())
     : (p(b[i - 1]), d.preventDefault(), d.stopPropagation());

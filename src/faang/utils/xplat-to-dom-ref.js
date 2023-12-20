@@ -11,9 +11,7 @@ function _xplatToDOMRef(target) {
       window.HTMLElement && node instanceof window.HTMLElement ? node : null;
     typeof target === "function"
       ? target(node)
-      : target  &&
-        typeof target === "object" &&
-        (target.current = node);
+      : target && typeof target === "object" && (target.current = node);
   };
 }
 // TODO
@@ -27,9 +25,7 @@ function xplatToInputRef(target) {
         : null;
     typeof target === "function"
       ? target(node)
-      : target  &&
-        typeof target === "object" &&
-        (target.current = node);
+      : target && typeof target === "object" && (target.current = node);
   };
 }
 

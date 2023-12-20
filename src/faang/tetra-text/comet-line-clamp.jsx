@@ -38,7 +38,7 @@ const { useTranslationKeyForTextParent } = e;
 const notSupportWebkitLineClamp = cssUserAgentSupports.webkitLineClamp();
 
 function calculateLineHeight(type) {
-  return type  && type in CometTextTypography
+  return type && type in CometTextTypography
     ? CometTextTypography[type].lineHeight
     : 16;
 }

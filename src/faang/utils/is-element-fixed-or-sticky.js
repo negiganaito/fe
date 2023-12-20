@@ -6,7 +6,7 @@
  */
 export function isElementFixedOrSticky(a) {
   let b = a;
-  while (b  && b !== a.ownerDocument) {
+  while (b && b !== a.ownerDocument) {
     let d = getComputedStyle(b);
     if (!d) return !1;
     d = d.getPropertyValue("position");

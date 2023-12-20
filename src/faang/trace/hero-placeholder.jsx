@@ -75,13 +75,13 @@ export const HeroPlaceholder = (props) => {
 
   const suspenseCallback = useCallback(
     (cbProps) => {
-      if (heroInteractionIDContextValue ) {
+      if (heroInteractionIDContextValue) {
         heroInteractionContextValue.suspenseCallback(
           heroInteractionIDContextValue,
           simpleUUID1,
           heroInteractionContextValue.pageletStack,
           cbProps,
-          name  ? name : "Unnamed Suspense"
+          name ? name : "Unnamed Suspense"
         );
       }
 
@@ -89,9 +89,7 @@ export const HeroPlaceholder = (props) => {
         const thenableDescription =
           HeroPlaceholderUtils.createThenableDescription(cbProps);
 
-        unstable_onSuspense(
-          thenableDescription  ? thenableDescription : ""
-        );
+        unstable_onSuspense(thenableDescription ? thenableDescription : "");
       }
     },
     [
@@ -106,8 +104,8 @@ export const HeroPlaceholder = (props) => {
   useLayoutEffect(() => {
     if (
       ref.current === false &&
-      heroInteractionIDContextValue  &&
-      heroInteractionIDContextValue 
+      heroInteractionIDContextValue &&
+      heroInteractionIDContextValue
     ) {
       heroInteractionContextValue.hold(
         heroInteractionIDContextValue,
@@ -134,7 +132,7 @@ export const HeroPlaceholder = (props) => {
   const t = function () {
     ref.current = true;
 
-    if (heroInteractionIDContextValue ) {
+    if (heroInteractionIDContextValue) {
       heroInteractionContextValue.unhold(
         heroInteractionIDContextValue,
         simpleUUID2

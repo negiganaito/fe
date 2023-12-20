@@ -16,7 +16,7 @@ function useContextMenu(target, options) {
 
   useEffect(() => {
     const curr = target.current;
-    if (curr ) {
+    if (curr) {
       contextmenuHandler.setListener(curr, (param) => {
         if (disabled === true) {
           return;

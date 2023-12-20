@@ -38,7 +38,7 @@ function i(a, b) {
   if (b.tabIndex === -1 || b.disabled === !0) return !1;
   if (b.tabIndex === 0 || b.contentEditable === !0) return !0;
   if (a === "a" || a === "area")
-    return b.href  && b.href !== "" && b.rel !== "ignore";
+    return b.href && b.href !== "" && b.rel !== "ignore";
   return a === "input"
     ? h(b)
     : a === "button" ||

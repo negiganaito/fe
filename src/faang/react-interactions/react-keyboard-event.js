@@ -50,7 +50,7 @@ function useKeyboard(ref, options) {
   useEffect(() => {
     const element = ref.current;
 
-    if (element ) {
+    if (element) {
       keyDownEvent.setListener(element, (!disabled && onKeyDown) || null);
       keyUpEvent.setListener(element, (!disabled && onKeyUp) || null);
     }

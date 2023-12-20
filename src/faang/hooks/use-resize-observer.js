@@ -82,7 +82,7 @@ function o(a) {
       g = g[1];
       // eslint-disable-next-line no-inner-declarations
       var i = m.get(h);
-      if (i )
+      if (i)
         for (
           // eslint-disable-next-line no-inner-declarations
           var i = i,
@@ -128,7 +128,7 @@ function p(a, b) {
   let d;
   let e = uniqueID();
   // eslint-disable-next-line no-cond-assign
-  d = (d = m.get(a))  ? d : new Map();
+  d = (d = m.get(a)) ? d : new Map();
   d.set(e, b);
   m.set(a, d);
   n().observe(a);
@@ -147,12 +147,7 @@ function r(a) {
 }
 function s(a) {
   // eslint-disable-next-line no-return-assign, no-cond-assign
-  return (a =
-    !a
-      ? void 0
-      : !(a = a.ownerDocument) 
-      ? void 0
-      : a.defaultView) 
+  return (a = !a ? void 0 : !(a = a.ownerDocument) ? void 0 : a.defaultView)
     ? a
     : window;
 }

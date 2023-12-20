@@ -15,26 +15,25 @@ import { fbt } from "fbt";
 export function getLoadingStateAriaProps(currentValue, additionalProps) {
   let defaultValue;
 
-  additionalProps =
-    !currentValue 
-      ? {
-          "aria-label": fbt.c("Loading..."),
-        }
-      : {
-          "aria-valuemax":
-            (defaultValue =
-              !additionalProps ? undefined : additionalProps.max) !==
-            null
-              ? defaultValue
-              : 100,
-          "aria-valuemin":
-            (defaultValue =
-              !additionalProps ? undefined : additionalProps.min) !==
-            null
-              ? defaultValue
-              : 0,
-          "aria-valuenow": currentValue,
-        };
+  additionalProps = !currentValue
+    ? {
+        "aria-label": fbt.c("Loading..."),
+      }
+    : {
+        // eslint-disable-next-line no-cond-assign
+        "aria-valuemax": (defaultValue = !additionalProps
+          ? undefined
+          : additionalProps.max)
+          ? defaultValue
+          : 100,
+        // eslint-disable-next-line no-cond-assign
+        "aria-valuemin": (defaultValue = !additionalProps
+          ? undefined
+          : additionalProps.min)
+          ? defaultValue
+          : 0,
+        "aria-valuenow": currentValue,
+      };
   return {
     role: "progressbar",
     ...additionalProps,

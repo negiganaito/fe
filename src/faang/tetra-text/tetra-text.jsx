@@ -233,7 +233,7 @@ function getTypoColor(color, type) {
   if (type) {
     // Check if the type is present in BUTTON_TYPE, otherwise use the provided color
     // eslint-disable-next-line no-return-assign, no-cond-assign
-    return (type = BUTTON_TYPE[color])  ? type : color;
+    return (type = BUTTON_TYPE[color]) ? type : color;
   } else {
     // If no type provided, use the given color directly
     return color;
@@ -288,9 +288,7 @@ export const TetraText = forwardRef((props, ref) => {
   const baseTextContextValue = useBaseTextContext();
 
   const nested =
-    (!baseTextContextValue
-      ? undefined
-      : baseTextContextValue.nested) === true;
+    (!baseTextContextValue ? undefined : baseTextContextValue.nested) === true;
 
   const textChild = (
     <BaseTextContextProvider nested={true}>

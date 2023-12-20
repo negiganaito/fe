@@ -16,7 +16,7 @@ export function HeroHoldTrigger({ description, hold }) {
   const interactionValue = useContext(HeroInteractionContext.Context);
   const interactionIDValue = useContext(HeroInteractionIDContext);
   useLayoutEffect(() => {
-    if (hold && interactionIDValue ) {
+    if (hold && interactionIDValue) {
       let a = interactionValue.hold(
         interactionIDValue,
         interactionValue.pageletStack,

@@ -16,7 +16,7 @@ function heroComponent(props) {
   let e = useContext(HeroInteractionContext.Context);
   let f = useContext(HeroInteractionIDContext);
   useLayoutEffect(() => {
-    f  && e.logHeroRender(f, description, e.pageletStack);
+    f && e.logHeroRender(f, description, e.pageletStack);
   }, [description, e, f]);
   return null;
 }

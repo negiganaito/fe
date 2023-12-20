@@ -65,7 +65,7 @@ export const BaseButton = forwardRef((props, ref) => {
   let _ariaLabel;
 
   if (_role !== "none") {
-    if (ariaLabel ) {
+    if (ariaLabel) {
       _ariaLabel = ariaLabel;
     } else {
       _ariaLabel = label;

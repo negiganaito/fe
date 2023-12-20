@@ -84,31 +84,27 @@ export function _FocusRegion({
   }, []);
 
   const F = useCallback(() => {
-    if (B ) {
+    if (B) {
       let a = B.getActiveFocusRegion();
       if (a !== E) {
         if (E.restorationFocusRegionItem !== a) {
           let b;
           if (
-            (!a ? undefined : a.lastFocused)  &&
-            !(!(b = z.current)
-              ? undefined
-              : b.containsNode(a.lastFocused))
+            (!a ? undefined : a.lastFocused) &&
+            !(!(b = z.current) ? undefined : b.containsNode(a.lastFocused))
           ) {
-            a  && a.triggeredFocusRegionItems.add(E);
+            a && a.triggeredFocusRegionItems.add(E);
             E.restorationFocusRegionItem = a;
           } else if (!E.restorationFocusRegionItem) {
             b = !a ? undefined : a.restorationFocusRegionItem;
             E.restorationFocusRegionItem = b;
-            a  &&
-              (!b ? undefined : b.triggeredFocusRegionItems.delete(a));
+            a && (!b ? undefined : b.triggeredFocusRegionItems.delete(a));
             !b ? undefined : b.triggeredFocusRegionItems.add(E);
             B.setActiveFocusRegion(E);
             return;
           }
         }
-        (!a ||
-          (a  && E  && a.lastFocused !== E.lastFocused)) &&
+        (!a || (a && E && a.lastFocused !== E.lastFocused)) &&
           B.setActiveFocusRegion(E);
       }
     }
@@ -122,9 +118,9 @@ export function _FocusRegion({
       E.scope = a;
       let b = G.current;
       forwardRef && (forwardRef.current = a);
-      b  && b !== id && !_map.get(b) && _map.delete(b);
-      id  &&
-        (a 
+      b && b !== id && !_map.get(b) && _map.delete(b);
+      id &&
+        (a
           ? ((G.current = id), _map.set(id, a))
           : !_map.get(id) && _map.delete(id));
     },
@@ -142,9 +138,9 @@ export function _FocusRegion({
           A.current = null;
           let c = document.activeElement;
           if (
-            a  &&
-            recoverFocusQuery  &&
-            b  &&
+            a &&
+            recoverFocusQuery &&
+            b &&
             (!c || c === document.body || !a.containsNode(c))
           ) {
             c = true;
@@ -155,7 +151,7 @@ export function _FocusRegion({
               recoverFocusQuery,
               a
             );
-            if (h  && f ) {
+            if (h && f) {
               let i = new Set(h);
               let j = new Set(f);
               // eslint-disable-next-line no-var, no-inner-declarations
@@ -210,7 +206,7 @@ export function _FocusRegion({
         },
         onBeforeBlurWithin: (a) => {
           let b = z.current;
-          if (b  && recoverFocusQuery !== undefined) {
+          if (b && recoverFocusQuery !== undefined) {
             a.stopPropagation();
             if (!recoverFocusQuery) return;
             a = a.target;
@@ -222,7 +218,7 @@ export function _FocusRegion({
             let c = b.indexOf(a);
             a = a._tabIndexState;
             A.current = {
-              detachedCanTab: a  && a.canTab,
+              detachedCanTab: a && a.canTab,
               recovery: b,
               recoveryIndex: c,
             };
@@ -244,9 +240,9 @@ export function _FocusRegion({
   const cb = useCallback(() => {
     let a = z.current;
     let b = document.activeElement;
-    if (autoFocusQuery  && a  && (!b || !a.containsNode(b))) {
+    if (autoFocusQuery && a && (!b || !a.containsNode(b))) {
       b = E.lastFocused;
-      b  && a.containsNode(b) && !isElementHidden(b)
+      b && a.containsNode(b) && !isElementHidden(b)
         ? FocusManager.focusElement(b, {
             focusWithAutoFocus: true,
             focusWithoutUserIntent: true,
@@ -278,8 +274,8 @@ export function _FocusRegion({
           // eslint-disable-next-line no-return-assign
           return (a.restorationFocusRegionItem = i);
         });
-      a  &&
-        i  &&
+      a &&
+        i &&
         (i.triggeredFocusRegionItems.delete(a),
         (!h ? undefined : h.size) &&
           h.forEach((a) => {
@@ -287,21 +283,17 @@ export function _FocusRegion({
           }));
       E.lastFocused = null;
       h = !B ? undefined : B.getActiveFocusRegion();
-      let j =
-        h 
-          ? h.restorationFocusRegionItem
-          : {
-              lastFocused: g,
-            };
+      let j = h
+        ? h.restorationFocusRegionItem
+        : {
+            lastFocused: g,
+          };
       h === a && (!B ? undefined : B.setActiveFocusRegion(i));
-      g =
-        (e  && f  && e.containsNode(f)) ||
-        !f ||
-        f === document.body;
-      if ((autoRestoreFocus === true || onEscapeFocusRegion ) && g) {
+      g = (e && f && e.containsNode(f)) || !f || f === document.body;
+      if ((autoRestoreFocus === true || onEscapeFocusRegion) && g) {
         let k = (a) => {
           a === undefined && (a = false);
-          if ((!j ? undefined : j.lastFocused) ) {
+          if (!j ? undefined : j.lastFocused) {
             let b = true;
             let c = true;
             let e = document.activeElement;
@@ -332,28 +324,24 @@ export function _FocusRegion({
     useMemo(() => {
       return {
         onKeyDown: (a) => {
-          if (
-            !containFocusQuery ||
-            a.key !== "Tab" ||
-            a.isDefaultPrevented()
-          )
+          if (!containFocusQuery || a.key !== "Tab" || a.isDefaultPrevented())
             return;
           let b = z.current;
-          b  &&
+          b &&
             (a.shiftKey
               ? FocusManager.focusPreviousContained(
                   containFocusQuery,
                   b,
                   a,
                   true,
-                  onEscapeFocusRegion  ? I : undefined
+                  onEscapeFocusRegion ? I : undefined
                 )
               : FocusManager.focusNextContained(
                   containFocusQuery,
                   b,
                   a,
                   true,
-                  onEscapeFocusRegion  ? I : undefined
+                  onEscapeFocusRegion ? I : undefined
                 ));
         },
       };
@@ -428,7 +416,7 @@ function focusRegionById(regionId, selector, preventScroll) {
   const region = _map.get(regionId);
   if (region) {
     const focusedNode = region.DO_NOT_USE_queryFirstNode(selector);
-    if (focusedNode ) {
+    if (focusedNode) {
       FocusManager.focusElement(focusedNode, {
         preventScroll,
       });

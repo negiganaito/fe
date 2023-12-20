@@ -110,33 +110,29 @@ export function PressableText(props) {
 
   const _disabled =
     disabled === true ||
-    (!accessibilityState ? undefined : accessibilityState.disabled) ===
-      true;
+    (!accessibilityState ? undefined : accessibilityState.disabled) === true;
 
-  const ariaHidden =
-    !accessibilityState ? undefined : accessibilityState.hidden;
+  const ariaHidden = !accessibilityState
+    ? undefined
+    : accessibilityState.hidden;
 
   const anchorTagAndNotDisable = ElementComponent === "a" && disabled !== true;
 
   const _props = {
     disabled:
       _disabled === true ||
-      (!testOnly_state ? undefined : testOnly_state.disabled) ===
-        true ||
+      (!testOnly_state ? undefined : testOnly_state.disabled) === true ||
       false,
     focusVisible:
       (focusVisible && suppressFocusRing !== true) ||
-      (!testOnly_state ? undefined : testOnly_state.focusVisible) ===
-        true,
+      (!testOnly_state ? undefined : testOnly_state.focusVisible) === true,
     focused:
       focused ||
       (!testOnly_state ? undefined : testOnly_state.focused) === true,
     hovered:
-      hoverr ||
-      (!testOnly_state ? undefined : testOnly_state.hovered) === true,
+      hoverr || (!testOnly_state ? undefined : testOnly_state.hovered) === true,
     pressed:
-      presss ||
-      (!testOnly_state ? undefined : testOnly_state.pressed) === true,
+      presss || (!testOnly_state ? undefined : testOnly_state.pressed) === true,
   };
 
   const _children =
@@ -175,9 +171,7 @@ export function PressableText(props) {
 
   const onClickCbFunc = useCallback(
     (event) => {
-      onPress &&
-        onPress(event)(onPress || link ) &&
-        event.stopPropagation();
+      onPress && onPress(event)(onPress || link) && event.stopPropagation();
       handleClickEventAndPreventDefault(event, preventDefault) &&
         event.nativeEvent.preventDefault();
     },
@@ -212,7 +206,7 @@ export function PressableText(props) {
     case "none":
       break;
     default:
-      direction  && (Z = direction);
+      direction && (Z = direction);
       break;
   }
 
@@ -250,60 +244,58 @@ export function PressableText(props) {
 
   return jsx(ElementComponent, {
     ...rest,
-    "aria-activedescendant":
-      !accessibilityRelationship
-        ? undefined
-        : accessibilityRelationship.activedescendant,
-    "aria-busy":
-      !accessibilityState ? undefined : accessibilityState.busy,
-    "aria-checked":
-      !accessibilityState ? undefined : accessibilityState.checked,
-    "aria-controls":
-     !accessibilityRelationship
-        ? undefined
-        : accessibilityRelationship.controls,
-    "aria-current":
-      !accessibilityRelationship
-        ? undefined
-        : accessibilityRelationship.current,
-    "aria-describedby":
-      !accessibilityRelationship
-        ? undefined
-        : accessibilityRelationship.describedby,
-    "aria-details":
-      !accessibilityRelationship
-        ? undefined
-        : accessibilityRelationship.details,
+    "aria-activedescendant": !accessibilityRelationship
+      ? undefined
+      : accessibilityRelationship.activedescendant,
+    "aria-busy": !accessibilityState ? undefined : accessibilityState.busy,
+    "aria-checked": !accessibilityState
+      ? undefined
+      : accessibilityState.checked,
+    "aria-controls": !accessibilityRelationship
+      ? undefined
+      : accessibilityRelationship.controls,
+    "aria-current": !accessibilityRelationship
+      ? undefined
+      : accessibilityRelationship.current,
+    "aria-describedby": !accessibilityRelationship
+      ? undefined
+      : accessibilityRelationship.describedby,
+    "aria-details": !accessibilityRelationship
+      ? undefined
+      : accessibilityRelationship.details,
     "aria-disabled":
       _disabled === true && ariaDisable !== "presentation"
         ? _disabled
         : undefined,
-    "aria-expanded":
-      !accessibilityState ? undefined : accessibilityState.expanded,
-    "aria-haspopup":
-      !accessibilityRelationship
-        ? undefined
-        : accessibilityRelationship.haspopup,
+    "aria-expanded": !accessibilityState
+      ? undefined
+      : accessibilityState.expanded,
+    "aria-haspopup": !accessibilityRelationship
+      ? undefined
+      : accessibilityRelationship.haspopup,
     "aria-hidden": ariaHidden,
-    "aria-invalid":
-      !accessibilityState ? undefined : accessibilityState.invalid,
+    "aria-invalid": !accessibilityState
+      ? undefined
+      : accessibilityState.invalid,
     "aria-label": accessibilityLabel,
-    "aria-labelledby":
-      !accessibilityRelationship
-        ? undefined
-        : accessibilityRelationship.labelledby,
-    "aria-owns":
-      !accessibilityRelationship
-        ? undefined
-        : accessibilityRelationship.owns,
-    "aria-pressed":
-      !accessibilityState ? undefined : accessibilityState.pressed,
-    "aria-readonly":
-      !accessibilityState ? undefined : accessibilityState.readonly,
-    "aria-required":
-      !accessibilityState ? undefined : accessibilityState.required,
-    "aria-selected":
-      !accessibilityState ? undefined : accessibilityState.selected,
+    "aria-labelledby": !accessibilityRelationship
+      ? undefined
+      : accessibilityRelationship.labelledby,
+    "aria-owns": !accessibilityRelationship
+      ? undefined
+      : accessibilityRelationship.owns,
+    "aria-pressed": !accessibilityState
+      ? undefined
+      : accessibilityState.pressed,
+    "aria-readonly": !accessibilityState
+      ? undefined
+      : accessibilityState.readonly,
+    "aria-required": !accessibilityState
+      ? undefined
+      : accessibilityState.required,
+    "aria-selected": !accessibilityState
+      ? undefined
+      : accessibilityState.selected,
     attributionsrc: anchorTagAndNotDisable
       ? !link
         ? undefined
@@ -340,20 +332,12 @@ export function PressableText(props) {
     "data-testid": undefined,
     dir: Z,
     download: canDownload ? linkDownload : undefined,
-    href: anchorTagAndNotDisable
-      ? !link
-        ? undefined
-        : link.url
-      : undefined,
+    href: anchorTagAndNotDisable ? (!link ? undefined : link.url) : undefined,
     id: nativeID,
     onClick: _disabled ? undefined : onClickCbFunc,
     onKeyDown: _disabled ? undefined : onKeyDownCbFunc,
     ref: mergeRef,
-    rel: anchorTagAndNotDisable
-      ? !link
-        ? undefined
-        : link.rel
-      : undefined,
+    rel: anchorTagAndNotDisable ? (!link ? undefined : link.rel) : undefined,
     role: ariaDisable,
     style: _style,
     tabIndex: tabIndexValue,
@@ -388,15 +372,14 @@ const specialElements = {
 function determineTagBasedOnAccessibilityRoleAndLink(accessibilityRole, link) {
   let tag = "div";
   if (
-    ((!link ? undefined : link.url)  &&
+    ((!link ? undefined : link.url) &&
       (!link ? undefined : link.url) !== "#") ||
-    (tabArr.includes(accessibilityRole) &&
-      (!link ? undefined : link.url) )
+    (tabArr.includes(accessibilityRole) && (!link ? undefined : link.url))
   )
     tag = "a";
-  else if (accessibilityRole ) {
+  else if (accessibilityRole) {
     link = specialElements[accessibilityRole];
-    link  && (tag = link);
+    link && (tag = link);
   }
   return tag;
 }
@@ -438,8 +421,8 @@ function isElementInDocument(node) {
 function isElementOrAncestorLink(el) {
   // eslint-disable-next-line no-self-assign
   el = el;
-  while (el ) {
-    if (el.tagName === "A" && el.href ) return true;
+  while (el) {
+    if (el.tagName === "A" && el.href) return true;
     el = el.parentNode;
   }
   return false;
@@ -450,7 +433,7 @@ const shouldTriggerActionOnEvent = function (event) {
   let tagName = target.tagName;
   const isNeedTagName =
     target.isContentEditable ||
-    (tagName === "A" && target.href ) ||
+    (tagName === "A" && target.href) ||
     tagName === "BUTTON" ||
     tagName === "INPUT" ||
     tagName === "SELECT" ||
@@ -483,19 +466,12 @@ var vFuncHooks =
     useEffect(() => {
       let e;
       let f = ref.current;
-      let g =
-        !(e = window)
-          ? undefined
-          : !(e = e.document)
-          ? undefined
-          : e.body;
-      if (
-        !g ||
-        !f ||
-        !isElementInDocument(f) ||
-        !f.addEventListener
-      )
-        return;
+      let g = !(e = window)
+        ? undefined
+        : !(e = e.document)
+        ? undefined
+        : e.body;
+      if (!g || !f || !isElementInDocument(f) || !f.addEventListener) return;
       pressableGroupContextValue &&
         pressableGroupContextValue.register(f, cbFunc);
       let h = function (a) {
