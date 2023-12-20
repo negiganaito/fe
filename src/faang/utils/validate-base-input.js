@@ -8,7 +8,7 @@ import { processBaseInputValidators } from "./process-base-input-validators";
 
 export function validateBaseInput(isPristine, value, validator) {
   const allResults =
-    validator !== null && !isPristine
+    validator  && !isPristine
       ? processBaseInputValidators(value, validator)
       : [];
   if (allResults.length === 0)
@@ -21,17 +21,18 @@ export function validateBaseInput(isPristine, value, validator) {
     return result.type === "ERROR";
   });
   const topResultType =
+    // eslint-disable-next-line no-cond-assign
     (value = allResults.find((result) => {
       return result.type === (hasError ? "ERROR" : "WARN");
-    })) !== null
+    })) 
       ? value
       : null;
   return {
     allResults: allResults,
     topResultReason:
-      topResultType !== null && topResultType.reason !== null
+      topResultType  && topResultType.reason 
         ? topResultType.reason
         : null,
-    topResultType: topResultType !== null ? topResultType.type : "CORRECT",
+    topResultType: topResultType  ? topResultType.type : "CORRECT",
   };
 }

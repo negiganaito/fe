@@ -25,7 +25,7 @@ export function ReactUseEvent(event, option) {
     option.passive = undefined;
   }
 
-  if (handleRef.current === null) {
+  if (!handleRef.current) {
     let setEventHandle = unstable_createEventHandle(event, option);
     let clears = new Map();
 
@@ -51,7 +51,7 @@ export function ReactUseEvent(event, option) {
           clear();
         }
 
-        if (callback === null) {
+        if (!callback) {
           clears.delete(target);
           return;
         }
@@ -65,7 +65,7 @@ export function ReactUseEvent(event, option) {
 
   useLayoutEffect(() => {
     return () => {
-      if (useEventHandle !== null) {
+      if (useEventHandle ) {
         useEventHandle.clear();
       }
       handleRef.current = null;

@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 export function testID(value, require = true) {
-  return require && value !== null
+  return require && value 
     ? {
         "data-testid": value,
       }

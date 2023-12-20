@@ -19,7 +19,7 @@ export function getTabbableNodes(a, b) {
           window.getComputedStyle(e).visibility !== "hidden";
   };
   b = c ? b.DO_NOT_USE_queryAllNodes(d) : null;
-  if (b === null) return [null, null, null, 0, null];
+  if (!b) return [null, null, null, 0, null];
   d = {};
   // eslint-disable-next-line no-var
   for (
@@ -49,11 +49,11 @@ export function getTabbableNodes(a, b) {
       h instanceof HTMLInputElement &&
       h.tagName === "INPUT" &&
       h.type === "radio" &&
-      h.name !== null
+      h.name 
     ) {
       // eslint-disable-next-line no-inner-declarations
       var i;
-      d[h.name] = [].concat((i = d[h.name]) !== null ? i : [], [h]);
+      d[h.name] = [].concat((i = d[h.name])  ? i : [], [h]);
     }
   }
   let j = Object.values(d)

@@ -24,7 +24,7 @@
 //   // eslint-disable-next-line react-hooks/rules-of-hooks
 //   useEffect(() => {
 //     let b = a.current;
-//     b !== null && (h.setListener(b, !e && f || null),
+//     b  && (h.setListener(b, !e && f || null),
 //       k.setListener(b, !e && g || null))
 //   }, [e, f, h, k, a, g])
 // }
@@ -50,7 +50,7 @@ function useKeyboard(ref, options) {
   useEffect(() => {
     const element = ref.current;
 
-    if (element !== null) {
+    if (element ) {
       keyDownEvent.setListener(element, (!disabled && onKeyDown) || null);
       keyUpEvent.setListener(element, (!disabled && onKeyUp) || null);
     }

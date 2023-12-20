@@ -127,7 +127,7 @@ export const CometPressableOverlay = (props) => {
       )}
       {...CometVisualCompletionAttributes.IGNORE}
       style={
-        state !== null
+        state 
           ? {
               borderRadius: typeof radius === "number" ? radius : undefined,
               bottom,

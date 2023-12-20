@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 const isMac =
-  typeof window !== "undefined" && window.navigator !== null
+  typeof window !== "undefined" && window.navigator 
     ? /^Mac/.test(window.navigator.platform)
     : false;
 
@@ -15,7 +15,7 @@ const isMac =
  * @type {boolean}
  */
 const hasPointerEvents =
-  typeof window !== "undefined" && window.PointerEvent !== null;
+  typeof window !== "undefined" && window.PointerEvent ;
 
 /**
  * Checks if the related target is within the focusWithinTarget
@@ -25,7 +25,7 @@ const hasPointerEvents =
  * @returns  {boolean} - True if the related target is within the focusWithinTarget, false otherwise.
  */
 function isRelatedTargetWithin(focusWithinTarget, relatedTarget) {
-  if (relatedTarget === null) {
+  if (!relatedTarget) {
     return false;
   }
 

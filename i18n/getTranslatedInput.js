@@ -17,7 +17,7 @@ import FbtI18nNativeAssets from './FbtI18nNativeAssets';
  */
 function getTranslatedInput(input) {
   const { options } = input;
-  if (options.hk !== null) {
+  if (options.hk ) {
     let translatedPayload = FbtI18nNativeAssets.getString(options.hk);
     if (translatedPayload) {
       return { args: input.args, table: translatedPayload };

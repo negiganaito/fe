@@ -8,7 +8,9 @@
 /* eslint-disable complexity */
 
 import stylex from "@stylexjs/stylex";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import React, { useCallback, useEffect, useId, useRef, useState } from "react";
+
+import {jsx, jsxs} from "react/jsx-runtime"
 
 import { BaseFocusRing, FocusWithinHandler } from "@/faang/focus";
 import { isBlueprintStylesEnabled, useMergeRefs } from "@/faang/hooks";
@@ -302,7 +304,7 @@ function isEmptyOrFalsy(value) {
     }
     return true;
   } else {
-    return value === null || value === "";
+    return !value || value === "";
   }
 }
 
@@ -386,7 +388,7 @@ export function CometFormInputWrapper(props) {
   const labelLocation_INTERNALOutside = labelLocation_INTERNAL === "outside";
 
   // eslint-disable-next-line react/no-unstable-nested-components
-  const W = (bool) => {
+  const LabelRenderer = (bool) => {
     return labelLocation_INTERNALOutside ? (
       <label className={stylex(styles.labelInternal)} suppressHydrationWarning>
         {label}
@@ -398,7 +400,7 @@ export function CometFormInputWrapper(props) {
           styles.label,
           styles.labelInside,
           validationState === "ERROR" && styles.labelError,
-          validationState === null && bool && styles.labelHighlighted,
+          !validationState && bool && styles.labelHighlighted,
           (filled || alwaysShrinkLabel || (bool && shrinkLabelOnFocus)) &&
             styles.labelShrunk,
           disabled && styles.labelDisabled
@@ -466,6 +468,7 @@ export function CometFormInputWrapper(props) {
   //               "aria-label": ariaLabel ? ariaLabel : label,
   //               children: [
   //                 jsxs("div", {
+  //                   className: stylex(styles.dummy2),
   //                   children: [
   //                     addOnStart,
   //                     jsxs("div", {
@@ -522,7 +525,7 @@ export function CometFormInputWrapper(props) {
   //                         className: stylex(styles.dummy4),
   //                       }),
   //                   ],
-  //                   className: stylex(styles.dummy2),
+                    
   //                 }),
   //                 addOnBottom,
   //               ],
@@ -590,7 +593,7 @@ export function CometFormInputWrapper(props) {
 
   return (
     <div className={stylex(styles.dummy)}>
-      {labelLocation_INTERNALOutside && W(false)}
+      {labelLocation_INTERNALOutside && LabelRenderer(false)}
       <FocusWithinHandler onFocusChange={onFocusChange}>
         {(_focused) => (
           <BaseFocusRing suppressFocusRing={!ba || suppressFocusRing}>
@@ -636,7 +639,6 @@ export function CometFormInputWrapper(props) {
                 tabIndex={onPress ? 0 : undefined}
               >
                 <div className={stylex(styles.dummy2)}>
-                  <div>
                     {addOnStart}
                     <div className={stylex(styles.dummy3)}>
                       {withHeaderMask && !disabled && (filled || _focused) && (
@@ -654,7 +656,7 @@ export function CometFormInputWrapper(props) {
                       )}
                       {!hideLabel &&
                         !labelLocation_INTERNALOutside &&
-                        W(_focused)}
+                        LabelRenderer(_focused)}
                       <FocusWithinHandler onFocusChange={ca}>
                         {children({
                           filled: filled,
@@ -681,7 +683,6 @@ export function CometFormInputWrapper(props) {
                         {auxContent}
                       </div>
                     )}
-                  </div>
                   {addOnBottom}
                 </div>
               </label>

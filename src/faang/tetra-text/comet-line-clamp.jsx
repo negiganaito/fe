@@ -38,7 +38,7 @@ const { useTranslationKeyForTextParent } = e;
 const notSupportWebkitLineClamp = cssUserAgentSupports.webkitLineClamp();
 
 function calculateLineHeight(type) {
-  return type !== null && type in CometTextTypography
+  return type  && type in CometTextTypography
     ? CometTextTypography[type].lineHeight
     : 16;
 }
@@ -102,7 +102,7 @@ const _CometLineClamp = (props, externalRef) => {
       };
     } else {
       const lineHeight = calculateLineHeight(
-        cometTextContextValue === null ? undefined : cometTextContextValue.type
+        !cometTextContextValue ? undefined : cometTextContextValue.type
       );
       internalStyle = { maxHeight: lineHeight * lines + 0.1 };
 
@@ -140,7 +140,7 @@ const _CometLineClamp = (props, externalRef) => {
 
   const onMouseEneterWithTooltip = () => {
     const curr = y.current;
-    if (curr === null || lines < 1) {
+    if (!curr || lines < 1) {
       return;
     }
     setOverflowing(

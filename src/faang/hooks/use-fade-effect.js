@@ -50,10 +50,10 @@ export const useFadeEffect = (visible) => {
   // useDoubleEffectHack_DO_NOT_USE_THIS_IS_TRACKED
   React.useEffect(() => {
     return () => {
-      if (hiddenRef.current !== null) {
+      if (hiddenRef.current ) {
         clearTimeout(hiddenRef.current);
       }
-      if (showRef.current !== null) {
+      if (showRef.current ) {
         window.cancelAnimationFrame(showRef.current);
       }
     };
@@ -63,7 +63,7 @@ export const useFadeEffect = (visible) => {
     setState({
       type: "finish",
     });
-    if (hiddenRef.current !== null) {
+    if (hiddenRef.current ) {
       clearTimeout(hiddenRef.current);
       hiddenRef.current = null;
     }
@@ -75,7 +75,7 @@ export const useFadeEffect = (visible) => {
      * @param {boolean} visible
      */
     (visible) => {
-      if (showRef.current !== null) {
+      if (showRef.current ) {
         window.cancelAnimationFrame(showRef.current);
       }
 
@@ -87,7 +87,7 @@ export const useFadeEffect = (visible) => {
 
         showRef.current = null;
 
-        if (hiddenRef.current !== null) {
+        if (hiddenRef.current ) {
           clearTimeout(hiddenRef.current);
           hiddenRef.current = setTimeout(handleFinish, TIMEOUT);
         }
@@ -99,7 +99,7 @@ export const useFadeEffect = (visible) => {
   const visibleRef = React.useRef(false);
 
   React.useLayoutEffect(() => {
-    if (visibleRef.current !== visible && (!visible || ref.current !== null)) {
+    if (visibleRef.current !== visible && (!visible || ref.current )) {
       handleStart(visible);
       visibleRef.current = visible;
     }
@@ -109,8 +109,8 @@ export const useFadeEffect = (visible) => {
     (_re) => {
       let _elm = ref.current;
       ref.current = _re;
-      if (_re !== null) {
-        if (_re.addEventListener !== null) {
+      if (_re ) {
+        if (_re.addEventListener ) {
           _re.addEventListener("transitionend", handleFinish);
           _re.addEventListener("webkitTransitionEnd", handleFinish);
         }
@@ -118,8 +118,8 @@ export const useFadeEffect = (visible) => {
         if (visibleRef.current) {
           handleStart(true);
         }
-      } else if (_elm !== null) {
-        if (_elm.removeEventListener !== null) {
+      } else if (_elm ) {
+        if (_elm.removeEventListener ) {
           _elm.removeEventListener("transitionend", handleFinish);
           _elm.removeEventListener("webkitTransitionEnd", handleFinish);
         }

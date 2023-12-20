@@ -9,11 +9,11 @@ function getMarkerId(a) {
 }
 function getSampleRate(a) {
   // eslint-disable-next-line no-return-assign
-  return (a = a.r) !== null ? a : 0;
+  return (a = a.r)  ? a : 0;
 }
 function getSamplingMethod(a) {
   // eslint-disable-next-line no-return-assign
-  return (a = a.m) !== null ? a : 1;
+  return (a = a.m)  ? a : 1;
 }
 
 export const QPLEvent = {

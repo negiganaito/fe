@@ -15,7 +15,7 @@ function preload(a) {
 
 function read(b) {
   const a = b.getModuleIfRequireable();
-  if (a === null) {
+  if (!a) {
     !ExecutionEnvironment.isInBrowser &&
       !b.isAvailableInSSR_DO_NOT_USE() &&
       suspendOrThrowIfUsedInSSR(

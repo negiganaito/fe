@@ -248,7 +248,7 @@ const usePress = (target, options) => {
         } else {
           const pointerId = event.pointerId;
           const bounds = pressRefCurrent.bounds;
-          if (pointerId !== pressRefCurrent.pointerId || bounds === null) {
+          if (pointerId !== pressRefCurrent.pointerId || !bounds ) {
             return;
           }
 
@@ -320,7 +320,7 @@ const usePress = (target, options) => {
 
       focusoutHandler.setListener(targetElement, (param) => {
         const activationEvent = pressRefCurrent.activationEvent;
-        if (param.target === targetElement && activationEvent !== null) {
+        if (param.target === targetElement && activationEvent ) {
           handlePressEnd(activationEvent);
         }
       });
@@ -346,8 +346,8 @@ const usePress = (target, options) => {
 
       return function () {
         const activationEvent = pressRefCurrent.activationEvent;
-        target.current === null &&
-          activationEvent !== null &&
+        !target.current  &&
+          activationEvent  &&
           handlePressEnd(activationEvent);
       };
     }

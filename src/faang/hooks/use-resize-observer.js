@@ -25,7 +25,7 @@ export function useResizeObserver(a) {
     let a = function (a, b, d) {
       c.current && c.current(a, b, d);
     };
-    d = d === null ? null : p(d, a);
+    d = !d ? null : p(d, a);
     b.current && b.current();
     b.current = d;
   }, []);
@@ -33,7 +33,7 @@ export function useResizeObserver(a) {
 let l = null;
 let m = new Map();
 function n() {
-  l === null && (l = new ResizeObserver(o));
+  !l && (l = new ResizeObserver(o));
   return l;
 }
 function o(a) {
@@ -82,7 +82,7 @@ function o(a) {
       g = g[1];
       // eslint-disable-next-line no-inner-declarations
       var i = m.get(h);
-      if (i !== null)
+      if (i )
         for (
           // eslint-disable-next-line no-inner-declarations
           var i = i,
@@ -127,7 +127,8 @@ function o(a) {
 function p(a, b) {
   let d;
   let e = uniqueID();
-  d = (d = m.get(a)) !== null ? d : new Map();
+  // eslint-disable-next-line no-cond-assign
+  d = (d = m.get(a))  ? d : new Map();
   d.set(e, b);
   m.set(a, d);
   n().observe(a);
@@ -136,7 +137,7 @@ function p(a, b) {
 function q(a, b) {
   return function () {
     let c = m.get(a);
-    if (c === null) return;
+    if (!c) return;
     c.delete(b);
     c.size === 0 && (n().unobserve(a), m.delete(a));
   };
@@ -145,13 +146,13 @@ function r(a) {
   return parseFloat(a) || 0;
 }
 function s(a) {
-  // eslint-disable-next-line no-return-assign
+  // eslint-disable-next-line no-return-assign, no-cond-assign
   return (a =
-    a === null
+    !a
       ? void 0
-      : (a = a.ownerDocument) === null
+      : !(a = a.ownerDocument) 
       ? void 0
-      : a.defaultView) !== null
+      : a.defaultView) 
     ? a
     : window;
 }

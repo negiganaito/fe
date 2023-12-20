@@ -481,10 +481,10 @@ function ca(state, option) {
     case "reposition":
       if (
         state.adjustment !== option.adjustment ||
-        ((c = state.contextSize) === null ? void 0 : c.height) !==
-          ((c = option.contextSize) === null ? void 0 : c.height) ||
-        ((c = state.contextSize) === null ? void 0 : c.width) !==
-          ((c = option.contextSize) === null ? void 0 : c.width)
+        (!(c = state.contextSize)  ? void 0 : c.height) !==
+          (!(c = option.contextSize)  ? void 0 : c.height) ||
+        (!(c = state.contextSize)  ? void 0 : c.width) !==
+          (!(c = option.contextSize) ? void 0 : c.width)
       )
         return {
           ...state,

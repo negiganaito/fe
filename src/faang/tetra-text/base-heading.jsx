@@ -36,7 +36,7 @@ const baseHeading = (
 
   const baseTextContextValue = useBaseTextContext();
   const isNested =
-    (baseTextContextValue === null
+    (!baseTextContextValue
       ? undefined
       : baseTextContextValue?.nested) === true;
 

@@ -17,7 +17,7 @@ function a(a, b, d) {
   // eslint-disable-next-line no-self-assign
   a = a;
   // eslint-disable-next-line no-self-assign
-  b = (b = b) !== null ? b : "";
+  b = (b = b)  ? b : "";
   let e = j.get(a);
   e || j.set(a, (e = new Map()));
   a = e.get(b);

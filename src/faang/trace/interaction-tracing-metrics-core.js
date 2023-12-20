@@ -76,7 +76,7 @@ const a = function () {
     addRequireDeferred: function (a, c) {
       let d = [];
       b((b) => {
-        if (b.requireDeferreds[a] !== null) return;
+        if (b.requireDeferreds[a] ) return;
         b = b.requireDeferreds[a] = {
           start: c,
         };
@@ -264,7 +264,7 @@ let m = {
   addMountPointMetadata: function (a, b, c) {
     a = m.get(a);
     b = "Mount_" + b;
-    a = a === null ? void 0 : a.markerPoints[b];
+    a = !a ? void 0 : a.markerPoints[b];
     if (a) {
       let d = a.data || {};
       a.data = d;
@@ -367,7 +367,7 @@ let m = {
   },
   complete: function (a) {
     let b = i.get(a);
-    if (b && b.completed === null) {
+    if (b && !b.completed) {
       addAnnotations(b.annotations, {
         int: {
           endedByHeroComplete: 1,
@@ -397,7 +397,7 @@ let m = {
       a[c] = {
         ...b,
         e2e:
-          b.completed !== null
+          b.completed 
             ? ((b.completed - b.start) / 1e3).toFixed(2)
             : "?",
         pendingPlaceholders: e,

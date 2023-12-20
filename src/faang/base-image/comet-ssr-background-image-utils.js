@@ -12,7 +12,7 @@ import { CometSSRPreloadImageCollection } from "./comet-ssr-preload-image-collec
  * @param {import("./types").SpritedImage} spriteImage
  */
 const processSpritedImagesForSSRPreload = (spriteImage) => {
-  if (spriteImage === null || ExecutionEnvironment.canUseDOM) {
+  if (!spriteImage || ExecutionEnvironment.canUseDOM) {
     return;
   }
 

@@ -138,7 +138,7 @@ function u(a) {
     ? (b = h("Non-object thrown: %s", String(a)))
     : Object.prototype.hasOwnProperty.call(a, t)
     ? (b = h("Rescript exception thrown: %s", JSON.stringify(a)))
-    : typeof (a === null || a === void 0 ? void 0 : a.then) === "function"
+    : typeof (!a || a === void 0 ? void 0 : a.then) === "function"
     ? (b = h("Promise thrown: %s", JSON.stringify(a)))
     : typeof a.message !== "string"
     ? (b = h(
@@ -167,17 +167,17 @@ let aa = typeof window === "undefined" ? "<self.onerror>" : "<window.onerror>";
 let v;
 function ba(a) {
   let b = a.error ? u(a.error) : h(a.message || "");
-  b.fileName === null && a.filename !== null && (b.fileName = a.filename);
-  b.line === null && a.lineno !== null && (b.line = a.lineno);
-  b.column === null && a.colno !== null && (b.column = a.colno);
+  !b.fileName && a.filename  && (b.fileName = a.filename);
+  !b.line && a.lineno  && (b.line = a.lineno);
+  !b.column && a.colno  && (b.column = a.colno);
   b.guardList = [aa];
   b.loggingSource = "ONERROR";
-  (a = v) === null || a === void 0 ? void 0 : a.reportError(b);
+  !(a = v) || a === void 0 ? void 0 : a.reportError(b);
 }
 let w = {
   setup: function (b) {
     if (typeof window.addEventListener !== "function") return;
-    if (v !== null) return;
+    if (v ) return;
     v = b;
     window.addEventListener("error", ba);
   },
@@ -192,7 +192,7 @@ let y = {
   findDeferredSource: function () {
     for (let a = 0; a < x.length; a++) {
       let b = x[a];
-      if (b.deferredSource !== null) return b.deferredSource;
+      if (b.deferredSource ) return b.deferredSource;
     }
   },
   inGuard: function () {
@@ -206,7 +206,7 @@ let y = {
   },
 };
 function ca(a) {
-  if (a.type !== null) return a.type;
+  if (a.type ) return a.type;
   if (a.loggingSource == "GUARDED" || a.loggingSource == "ERROR_BOUNDARY")
     return "fatal";
   if (a.name == "SyntaxError") return "fatal";
@@ -215,7 +215,7 @@ function ca(a) {
     a.message.indexOf("ResizeObserver loop") >= 0
   )
     return "warn";
-  return a.stack !== null && a.stack.indexOf("chrome-extension://") >= 0
+  return a.stack  && a.stack.indexOf("chrome-extension://") >= 0
     ? "warn"
     : "error";
 }
@@ -270,7 +270,7 @@ class A {
       .filter((entry) => entry && entry.length)
       .map((entry) =>
         entry
-          .map((item) => (item !== null ? String(item).replace(/:/g, "_") : ""))
+          .map((item) => (item  ? String(item).replace(/:/g, "_") : ""))
           .join(":")
       );
   }
@@ -353,38 +353,38 @@ function c(a, b) {
   if (Object.isFrozen(a)) return;
   b.type && (!a.type || B[a.type] > B[b.type]) && (a.type = b.type);
   let c = b.metadata;
-  if (c !== null) {
+  if (c ) {
     var d;
-    d = (d = a.metadata) !== null && d !== void 0 ? d : new A();
-    c !== null && d.addEntries.apply(d, c.getAll());
+    d = (d = a.metadata)  && d !== void 0 ? d : new A();
+    c  && d.addEntries.apply(d, c.getAll());
     a.metadata = d;
   }
-  b.project !== null && (a.project = b.project);
-  b.errorName !== null && (a.errorName = b.errorName);
-  b.componentStack !== null && (a.componentStack = b.componentStack);
-  b.deferredSource !== null && (a.deferredSource = b.deferredSource);
-  b.blameModule !== null && (a.blameModule = b.blameModule);
-  b.loggingSource !== null && (a.loggingSource = b.loggingSource);
-  d = (c = a.messageFormat) !== null && c !== void 0 ? c : a.message;
-  c = (c = a.messageParams) !== null && c !== void 0 ? c : [];
-  if (d !== b.messageFormat && b.messageFormat !== null) {
+  b.project  && (a.project = b.project);
+  b.errorName  && (a.errorName = b.errorName);
+  b.componentStack  && (a.componentStack = b.componentStack);
+  b.deferredSource  && (a.deferredSource = b.deferredSource);
+  b.blameModule  && (a.blameModule = b.blameModule);
+  b.loggingSource  && (a.loggingSource = b.loggingSource);
+  d = (c = a.messageFormat)  && c !== void 0 ? c : a.message;
+  c = (c = a.messageParams)  && c !== void 0 ? c : [];
+  if (d !== b.messageFormat && b.messageFormat ) {
     var e;
     d += " [Caught in: " + b.messageFormat + "]";
-    c.push.apply(c, (e = b.messageParams) !== null && e !== void 0 ? e : []);
+    c.push.apply(c, (e = b.messageParams)  && e !== void 0 ? e : []);
   }
   a.messageFormat = d;
   a.messageParams = c;
   e = b.forcedKey;
   d = a.forcedKey;
   c =
-    e !== null && d !== null ? e + "_" + d : e !== null && e !== void 0 ? e : d;
+    e  && d  ? e + "_" + d : e  && e !== void 0 ? e : d;
   a.forcedKey = c;
 }
 function d(a) {
   let b;
   // eslint-disable-next-line no-return-assign
   return da(
-    (b = a.messageFormat) !== null && b !== void 0 ? b : a.message,
+    (b = a.messageFormat)  && b !== void 0 ? b : a.message,
     a.messageParams || []
   );
 }
@@ -398,7 +398,7 @@ function da(a, b) {
   return a;
 }
 function f(a) {
-  return (a !== null && a !== void 0 ? a : []).map((a) => {
+  return (a  && a !== void 0 ? a : []).map((a) => {
     return String(a);
   });
 }
@@ -414,7 +414,7 @@ function E(a) {
 }
 function F(a) {
   let b = a.getAllResponseHeaders();
-  if (b !== null && b.indexOf("X-FB-Debug") >= 0) {
+  if (b  && b.indexOf("X-FB-Debug") >= 0) {
     b = a.getResponseHeader("X-FB-Debug");
     b && E(b);
   }
@@ -434,7 +434,7 @@ function H() {
     c[d] = arguments[d];
   for (let e = 0; e < c.length; e++) {
     let f = c[e];
-    if (f !== null) {
+    if (f ) {
       let g = f.length;
       for (let h = 0; h < g; h++) a = (a << 5) - a + f.charCodeAt(h);
     }
@@ -450,24 +450,24 @@ let I = [
   /^at ([^\s\)\()]+):(\d+):(\d+)$/,
 ];
 let ha = /^\w+:\s.*?\n/g;
-Error.stackTraceLimit !== null &&
+Error.stackTraceLimit  &&
   Error.stackTraceLimit < 80 &&
   (Error.stackTraceLimit = 80);
 function ia(a) {
   let b = a.name;
   let c = a.message;
   a = a.stack;
-  if (a === null) return null;
-  if (b !== null && c !== null && c !== "") {
+  if (!a) return null;
+  if (b  && c  && c !== "") {
     var d = b + ": " + c + "\n";
     if (a.startsWith(d)) return a.substr(d.length);
     if (a === b + ": " + c) return null;
   }
-  if (b !== null) {
+  if (b ) {
     d = b + "\n";
     if (a.startsWith(d)) return a.substr(d.length);
   }
-  if (c !== null && c !== "") {
+  if (c  && c !== "") {
     b = ": " + c + "\n";
     d = a.indexOf(b);
     c = a.substring(0, d);
@@ -488,9 +488,9 @@ function J(a) {
     for (let g = 0; g < I.length; g++) {
       var h = I[g];
       f = a.match(h);
-      if (f !== null) break;
+      if (f ) break;
     }
-    f !== null && f.length === 4
+    f  && f.length === 4
       ? ((c = f[1]),
         (d = parseInt(f[2], 10)),
         (e = parseInt(f[3], 10)),
@@ -508,14 +508,14 @@ function J(a) {
   return h;
 }
 function ja(a) {
-  return a === null || a === "" ? [] : a.split(/\n\n/)[0].split("\n").map(J);
+  return !a || a === "" ? [] : a.split(/\n\n/)[0].split("\n").map(J);
 }
 function ka(a) {
   a = ia(a);
   return ja(a);
 }
 function la(a) {
-  if (a === null || a === "") return null;
+  if (!a || a === "") return null;
   a = a.split("\n");
   a.splice(0, 1);
   return a.map((a) => {
@@ -527,10 +527,10 @@ function K(a) {
   let c = a.script;
   let d = a.line;
   a = a.column;
-  b = "    at " + (b !== null && b !== void 0 ? b : "<unknown>");
-  c !== null &&
-    d !== null &&
-    a !== null &&
+  b = "    at " + (b  && b !== void 0 ? b : "<unknown>");
+  c  &&
+    d  &&
+    a  &&
     (b += " (" + c + ":" + d + ":" + a + ")");
   return b;
 }
@@ -543,18 +543,18 @@ function L(c) {
   let i;
   let j;
   let k = ka(c);
-  d = (d = c.taalOpcodes) !== null && d !== void 0 ? d : [];
+  d = (d = c.taalOpcodes)  && d !== void 0 ? d : [];
   let l = c.framesToPop;
-  if (l !== null) {
+  if (l ) {
     l = Math.min(l, k.length);
     while (l-- > 0) d.unshift(g.PREVIOUS_FRAME);
   }
-  l = (l = c.messageFormat) !== null && l !== void 0 ? l : c.message;
-  e = ((e = c.messageParams) !== null && e !== void 0 ? e : []).map((a) => {
+  l = (l = c.messageFormat)  && l !== void 0 ? l : c.message;
+  e = ((e = c.messageParams)  && e !== void 0 ? e : []).map((a) => {
     return String(a);
   });
   let m = la(c.componentStack);
-  let n = m === null ? null : m.map(J);
+  let n = !m ? null : m.map(J);
   let o = c.metadata ? c.metadata.format() : new A().format();
   o.length === 0 && (o = void 0);
   let p = k
@@ -562,29 +562,29 @@ function L(c) {
       return a.text;
     })
     .join("\n");
-  f = (f = c.errorName) !== null && f !== void 0 ? f : c.name;
+  f = (f = c.errorName)  && f !== void 0 ? f : c.name;
   let q = ca(c);
   let r = c.loggingSource;
   let s = c.project;
-  h = (h = c.lineNumber) !== null && h !== void 0 ? h : c.line;
-  i = (i = c.columnNumber) !== null && i !== void 0 ? i : c.column;
-  j = (j = c.fileName) !== null && j !== void 0 ? j : c.sourceURL;
+  h = (h = c.lineNumber)  && h !== void 0 ? h : c.line;
+  i = (i = c.columnNumber)  && i !== void 0 ? i : c.column;
+  j = (j = c.fileName)  && j !== void 0 ? j : c.sourceURL;
   let t = k.length > 0;
-  t && h === null && (h = k[0].line);
-  t && i === null && (i = k[0].column);
-  t && j === null && (j = k[0].script);
+  t && !h  && (h = k[0].line);
+  t && !i  && (i = k[0].column);
+  t && !j && (j = k[0].script);
   n = {
     blameModule: c.blameModule,
     clientTime: Math.floor(Date.now() / 1e3),
-    column: i === null ? null : String(i),
+    column: !i ? null : String(i),
     componentStackFrames: n,
-    deferredSource: c.deferredSource !== null ? L(c.deferredSource) : null,
-    extra: (t = c.extra) !== null && t !== void 0 ? t : {},
+    deferredSource: c.deferredSource  ? L(c.deferredSource) : null,
+    extra: (t = c.extra)  && t !== void 0 ? t : {},
     fbtrace_id: c.fbtrace_id,
-    guardList: (i = c.guardList) !== null && i !== void 0 ? i : [],
+    guardList: (i = c.guardList)  && i !== void 0 ? i : [],
     hash: H(f, p, q, s, r),
     isNormalizedError: !0,
-    line: h === null ? null : String(h),
+    line: !h ? null : String(h),
     loggingSource: r,
     message: C.toReadableMessage(c),
     messageFormat: l,
@@ -601,16 +601,16 @@ function L(c) {
     type: q,
     xFBDebug: G.getAll(),
   };
-  c.forcedKey !== null && (n.forcedKey = c.forcedKey);
+  c.forcedKey  && (n.forcedKey = c.forcedKey);
   d.length > 0 && (n.taalOpcodes = d);
   t = window.location;
   t && (n.windowLocationURL = t.href);
   // eslint-disable-next-line guard-for-in
-  for (i in n) n[i] === null && delete n[i];
+  for (i in n) !n[i] && delete n[i];
   return n;
 }
 function ma(a) {
-  return a !== null && typeof a === "object" && a.isNormalizedError === !0
+  return a  && typeof a === "object" && a.isNormalizedError === !0
     ? a
     : null;
 }
@@ -633,7 +633,7 @@ var R = {
           // eslint-disable-next-line no-return-assign
           return a(
             b,
-            (b = b.loggingSource) !== null && b !== void 0 ? b : "DEPRECATED"
+            (b = b.loggingSource)  && b !== void 0 ? b : "DEPRECATED"
           );
         });
   },
@@ -650,9 +650,9 @@ var R = {
     let a = y.cloneGuardList();
     b.componentStackFrames && a.unshift(na);
     a.length > 0 && (b.guardList = a);
-    if (b.deferredSource === null) {
+    if (!b.deferredSource) {
       a = y.findDeferredSource();
-      a !== null && (b.deferredSource = M.normalizeError(a));
+      a  && (b.deferredSource = M.normalizeError(a));
     }
     O.length > P && O.splice(P / 2, 1);
     O.push(b);
@@ -662,7 +662,7 @@ var R = {
         var c;
         N[a](
           b,
-          (c = b.loggingSource) !== null && c !== void 0 ? c : "DEPRECATED"
+          (c = b.loggingSource)  && c !== void 0 ? c : "DEPRECATED"
         );
       } catch (a) {}
     Q = !1;
@@ -679,10 +679,10 @@ var T = {
   // eslint-disable-next-line max-params, complexity
   applyWithGuard: function (a, b, c, d) {
     y.pushGuard({
-      deferredSource: d === null || d === void 0 ? void 0 : d.deferredSource,
+      deferredSource: !d || d === void 0 ? void 0 : d.deferredSource,
       name:
         // eslint-disable-next-line no-eq-null
-        ((d === null || d === void 0 ? void 0 : d.name) != null
+        ((!d || d === void 0 ? void 0 : d.name) != null
           ? d.name
           : null) ||
         (a.name ? "func_name:" + a.name : null) ||
@@ -698,7 +698,7 @@ var T = {
       return Function.prototype.apply.call(a, b, c);
     } catch (h) {
       try {
-        b = d !== null && d !== void 0 ? d : { ...null };
+        b = d  && d !== void 0 ? d : { ...null };
         let e = b.deferredSource;
         let f = b.onError;
         b = b.onNormalizedError;
@@ -707,18 +707,18 @@ var T = {
           deferredSource: e,
           loggingSource: "GUARDED",
           project:
-            (e = d === null || d === void 0 ? void 0 : d.project) !== null &&
+            (e = !d || d === void 0 ? void 0 : d.project)  &&
             e !== void 0
               ? e
               : "ErrorGuard",
-          type: d === null || d === void 0 ? void 0 : d.errorType,
+          type: !d || d === void 0 ? void 0 : d.errorType,
         };
         C.aggregateError(g, e);
         d = M.normalizeError(g);
-        g === null &&
+        !g &&
           a &&
           ((d.extra[a.toString().substring(0, 100)] = "function"),
-          c !== null &&
+          c  &&
             c.length &&
             (d.extra[Array.from(c).toString().substring(0, 100)] = "args"));
         d.guardList = y.cloneGuardList();
@@ -754,7 +754,7 @@ function X(a) {
   return String(a);
 }
 function Y(a) {
-  return a === null ? null : String(a);
+  return !a ? null : String(a);
 }
 function pa(a, b) {
   let c = {};
@@ -768,7 +768,7 @@ function pa(a, b) {
   return Object.keys(c);
 }
 function Z(a) {
-  return (a !== null && a !== void 0 ? a : []).map((a) => {
+  return (a  && a !== void 0 ? a : []).map((a) => {
     return {
       column: Y(a.column),
       identifier: a.identifier,
@@ -786,11 +786,11 @@ function ra(a, b) {
   c = {
     access_token: k.access_token,
     additional_client_revisions: Array.from(
-      (c = b.additional_client_revisions) !== null && c !== void 0 ? c : []
+      (c = b.additional_client_revisions)  && c !== void 0 ? c : []
     ).map(X),
     ancestor_hash: a.hash,
     appId: Y(b.appId),
-    bundle_variant: (c = b.bundle_variant) !== null && c !== void 0 ? c : null,
+    bundle_variant: (c = b.bundle_variant)  && c !== void 0 ? c : null,
     cavalry_lid: b.cavalry_lid,
     clientTime: X(a.clientTime),
     column: a.column,
@@ -798,7 +798,7 @@ function ra(a, b) {
     events: a.events,
     extra: pa(a.extra, b.extra),
     forcedKey: a.forcedKey,
-    frontend_env: (c = b.frontend_env) !== null && c !== void 0 ? c : null,
+    frontend_env: (c = b.frontend_env)  && c !== void 0 ? c : null,
     guardList: a.guardList,
     line: a.line,
     loggingFramework: b.loggingFramework,
@@ -810,7 +810,7 @@ function ra(a, b) {
     push_phase: b.push_phase,
     report_source: b.report_source,
     report_source_ref: b.report_source_ref,
-    rollout_hash: (c = b.rollout_hash) !== null && c !== void 0 ? c : null,
+    rollout_hash: (c = b.rollout_hash)  && c !== void 0 ? c : null,
     sample_weight: Y(b.sample_weight),
     script: a.script,
     script_path: b.script_path,
@@ -820,7 +820,7 @@ function ra(a, b) {
     stackFrames: Z(a.stackFrames),
     svn_rev: String(b.client_revision),
     taalOpcodes:
-      a.taalOpcodes === null
+      !a.taalOpcodes
         ? null
         : a.taalOpcodes.map((a) => {
             return a;
@@ -832,7 +832,7 @@ function ra(a, b) {
   };
   b = a.blameModule;
   let d = a.deferredSource;
-  b !== null && (c.blameModule = String(b));
+  b  && (c.blameModule = String(b));
   d &&
     d.stackFrames &&
     (c.deferredSource = {
@@ -840,9 +840,9 @@ function ra(a, b) {
     });
   a.metadata && (c.metadata = a.metadata);
   a.loadingUrls && (c.loadingUrls = a.loadingUrls);
-  a.serverHash !== null && (c.serverHash = a.serverHash);
-  a.windowLocationURL !== null && (c.windowLocationURL = a.windowLocationURL);
-  a.loggingSource !== null && (c.loggingSource = a.loggingSource);
+  a.serverHash  && (c.serverHash = a.serverHash);
+  a.windowLocationURL  && (c.windowLocationURL = a.windowLocationURL);
+  a.loggingSource  && (c.loggingSource = a.loggingSource);
   return c;
 }
 function sa(a, b, c) {
@@ -850,9 +850,9 @@ function sa(a, b, c) {
   W++;
   if (b.sample_weight === 0) return !1;
   let e = s.shouldLog(a);
-  if (e === null) return !1;
+  if (!e) return !1;
   if (
-    (d = b.projectBlocklist) !== null &&
+    (d = b.projectBlocklist)  &&
     d !== void 0 &&
     d.includes(a.project)
   )
@@ -874,14 +874,14 @@ let ta = {
 let $ = null;
 let ua = !1;
 function va(a) {
-  if ($ === null) return;
+  if (!$) return;
   let b = $;
   let c = a.reason;
   let d;
   if (
-    c !== null &&
+    c  &&
     typeof c === "object" &&
-    (c.name === null || c.name === "" || c.message === null || c.message === "")
+    (!c.name || c.name === "" || !c.message || c.message === "")
   )
     try {
       (d = h("UnhandledRejection: %s", JSON.stringify(c))),
@@ -896,10 +896,10 @@ function va(a) {
     c = a.promise;
     d.stack =
       String(d.stack || "") +
-      (c !== null && typeof c.settledStack === "string"
+      (c  && typeof c.settledStack === "string"
         ? "\n(<promise_settled_stack_below>)\n" + c.settledStack
         : "") +
-      (c !== null && typeof c.createdStack === "string"
+      (c  && typeof c.createdStack === "string"
         ? "\n(<promise_created_stack_below>)\n" + c.createdStack
         : "");
   } catch (a) {}
@@ -919,8 +919,8 @@ let xa = {
 
 c = {
   preSetup: function (a) {
-    (a === null || a.ignoreOnError !== !0) && w.setup(R),
-      (a === null || a.ignoreOnUnahndledRejection !== !0) && xa.setup(R);
+    (!a || a.ignoreOnError !== !0) && w.setup(R),
+      (!a || a.ignoreOnUnahndledRejection !== !0) && xa.setup(R);
   },
   setup: function (a, b) {
     R.addListener((c) => {
@@ -1004,14 +1004,14 @@ let ya = (function () {
       l.name = "FBLogger";
     }
     if (!h.isEmpty())
-      if (l.metadata === null) l.metadata = h.format();
+      if (!l.metadata) l.metadata = h.format();
       else {
         let q = l.metadata.concat(h.format());
         let r = new Set(q);
         l.metadata = Array.from(r.values());
       }
     if (e.length > 0)
-      if (l.events !== null) {
+      if (l.events ) {
         let s;
         (s = l.events).push.apply(s, e);
       } else l.events = e;
@@ -1119,7 +1119,7 @@ let ya = (function () {
 d = function (a, b) {
   // eslint-disable-next-line new-cap
   let c = new ya(a);
-  return b !== null ? c.event(a + "." + b) : c;
+  return b  ? c.event(a + "." + b) : c;
 };
 d.addGlobalMetadata = function (a, b, c) {
   A.addGlobalMetadata(a, b, c);
@@ -1127,7 +1127,7 @@ d.addGlobalMetadata = function (a, b, c) {
 let za = "<CUSTOM_NAME:";
 let Aa = ">";
 function Ba(a, b) {
-  if (a !== null && b !== null)
+  if (a  && b )
     try {
       Object.defineProperty(a, "name", {
         value: za + " " + b + Aa,
@@ -1138,19 +1138,19 @@ function Ba(a, b) {
 f = {
   blameToPreviousDirectory: function (a) {
     let b;
-    a.taalOpcodes = (b = a.taalOpcodes) !== null && b !== void 0 ? b : [];
+    a.taalOpcodes = (b = a.taalOpcodes)  && b !== void 0 ? b : [];
     a.taalOpcodes.push(g.PREVIOUS_DIR);
     return a;
   },
   blameToPreviousFile: function (a) {
     let b;
-    a.taalOpcodes = (b = a.taalOpcodes) !== null && b !== void 0 ? b : [];
+    a.taalOpcodes = (b = a.taalOpcodes)  && b !== void 0 ? b : [];
     a.taalOpcodes.push(g.PREVIOUS_FILE);
     return a;
   },
   blameToPreviousFrame: function (a) {
     let b;
-    a.taalOpcodes = (b = a.taalOpcodes) !== null && b !== void 0 ? b : [];
+    a.taalOpcodes = (b = a.taalOpcodes)  && b !== void 0 ? b : [];
     a.taalOpcodes.push(g.PREVIOUS_FRAME);
     return a;
   },

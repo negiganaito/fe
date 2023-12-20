@@ -29,7 +29,8 @@ export function recoverableViolation(
 
   let temp;
 
-  e = (temp = e === null ? undefined : e.trackOnly) !== null ? temp : false;
+  // eslint-disable-next-line no-cond-assign
+  e = (temp = !e ? undefined : e.trackOnly)  ? temp : false;
 
   if (e) {
     logger.debug(errorMessage);

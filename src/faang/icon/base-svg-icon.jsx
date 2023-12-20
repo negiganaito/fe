@@ -24,6 +24,6 @@ export function BaseSVGIcon({ alt, xstyle, color, icon, size = 8 }) {
     height: size,
     title: !alt || alt === "" ? undefined : alt,
     width: size,
-    ...stylex.props([color !== null && styles.color(color), xstyle]),
+    ...stylex.props([color  && styles.color(color), xstyle]),
   });
 }

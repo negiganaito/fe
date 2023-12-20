@@ -6,6 +6,8 @@
  */
 import stylex from "@stylexjs/stylex";
 
+import React from "react";
+
 import { FocusWithinHandler } from "./focus-within-handler";
 
 const defaultStyles = stylex.create({
