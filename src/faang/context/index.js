@@ -23,3 +23,4 @@ export { CometTextLangContext } from "./comet-text-lang-context";
 export { HiddenSubtreeContext } from "./hidden-subtree-context";
 export { LayoutAnimationBoundaryContext } from "./layout-animation-boundary-context";
 export { RelayProfilerContext } from "./relay-profiler-context";
+export { CometGHLRenderingContext } from "./comet-ghl-rendering-context";

@@ -8,7 +8,7 @@ import { jsx } from "react/jsx-runtime";
 
 import { useCometTheme } from "@/faang/hooks";
 import { CometProgressRingIndeterminate } from "@/faang/progress-ring";
-import { TetraTextPairing } from "@/faang/tetra-text-pairing";
+import { TetraTextPairing } from "@/faang/tetra-text";
 
 import { BaseTooltipImpl } from "./base-tooltip-impl";
 

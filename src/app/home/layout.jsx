@@ -6,9 +6,11 @@
  */
 import React from "react";
 
-// import { TetraText } from '@/faang/tetra-text'
-// import { TetraTextPairing } from '@/faang/tetra-text-pairing';
+import { TetraText, TetraTextPairing } from "@/faang/tetra-text";
+
+// eslint-disable-next-line no-unused-vars
 import { WorkSigninPasswordTextBox } from "@/faang/text-box";
+import { TetraButton } from "@/faang/tetra-button";
 
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {
@@ -19,19 +21,26 @@ export const HomePage = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        padding: "24px",
-        width: "440px",
+        gap: "1rem",
       }}
     >
-      {/* <TetraText align="center" type="headlineEmphasized2">Create a post in News Feed</TetraText> */}
+      {/* <TetraText align="center" type="headlineEmphasized2">
+        Create a post in News Feed
+      </TetraText> */}
 
-      {/* <TetraTextPairing
+      <TetraTextPairing
         headline="Feed"
         level={2}
-        body={<TetraText color="secondary" type="body4">Discover posts from across your organization</TetraText>}
-      /> */}
+        body={
+          <TetraText color="secondary" type="body4">
+            Discover posts from across your organization
+          </TetraText>
+        }
+      />
 
-      <WorkSigninPasswordTextBox
+      <TetraButton type="secondary" padding="wide" label="Create post" />
+
+      {/* <WorkSigninPasswordTextBox
         autoFocus={false}
         dataTestId="login_password"
         disabled={false}
@@ -39,7 +48,7 @@ export const HomePage = () => {
         name="pass"
         type="password"
         value=""
-      />
+      /> */}
     </div>
   );
 };

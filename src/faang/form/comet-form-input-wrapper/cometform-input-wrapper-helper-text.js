@@ -6,7 +6,7 @@
  */
 import { jsx } from "react/jsx-runtime";
 
-import { TetraTextPairing } from "@/faang/tetra-text-pairing";
+import { TetraTextPairing } from "@/faang/tetra-text";
 
 export function CometFormInputWrapperHelperText(props) {
   const { validationState, value } = props;

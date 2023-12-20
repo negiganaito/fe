@@ -9,7 +9,7 @@ import Locale from "fbjs/lib/Locale";
 import React, { forwardRef } from "react";
 
 import { BaseRow, BaseRowItem } from "../base-row";
-import { TetraText } from "../tetra-text";
+import { TetraText } from ".";
 
 const directionStyles = stylex.create({
   ltr: {

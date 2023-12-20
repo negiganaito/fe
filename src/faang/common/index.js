@@ -6,4 +6,4 @@
  */
 export { CometVisualCompletionAttributes } from "./comet-visual-completion-attributes";
 export { LayoutAnimationEvent } from "./layout-animation-event";
-export { LegacyHidden } from "./legacy-hidden";
+export { LegacyHidden, LegacyHiddenOffscreen } from "./legacy-hidden";
