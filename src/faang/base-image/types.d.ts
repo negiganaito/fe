@@ -32,16 +32,16 @@ export type BaseImage_DEPRECATEDProps = {
   style?: CSSProperties;
 };
 
-export type BaseImageProps = React.JSX.IntrinsicElements["img"] & {
-  alt?: boolean;
-  elementtiming?: any;
-  objectFit?: "none" | "contain" | "cover" | "fill";
-  onLoad?: any;
-  referrerPolicy?: any;
-  sizes?: any;
-  testid?: string;
-  xstyle?: any;
-};
+// export type BaseImageProps = React.JSX.IntrinsicElements["img"] & {
+//   alt?: boolean;
+//   elementtiming?: any;
+//   objectFit?: "none" | "contain" | "cover" | "fill";
+//   onLoad?: any;
+//   referrerPolicy?: any;
+//   sizes?: any;
+//   testid?: string;
+//   xstyle?: any;
+// };
 
 export type CometImageProps = React.JSX.IntrinsicElements["img"] & {
   alt?: string;
@@ -51,6 +51,20 @@ export type CometImageProps = React.JSX.IntrinsicElements["img"] & {
   sizes?: any;
   src?: any;
   srcSet?: any;
+  testid?: string;
+  xstyle?: any;
+};
+
+export type BaseImageProps = Omit<
+  React.JSX.IntrinsicElements["img"],
+  "className"
+> & {
+  alt?: boolean;
+  elementtiming?: any;
+  objectFit?: "none" | "contain" | "cover" | "fill";
+  onLoad?: any;
+  referrerPolicy?: any;
+  sizes?: any;
   testid?: string;
   xstyle?: any;
 };

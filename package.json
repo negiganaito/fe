@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "@stylexjs/stylex": "0.3.0",
-    "@tanstack/react-router": "0.0.1-beta.234",
+    "@tanstack/react-router": "0.0.1-beta.284",
+    "@tanstack/router-devtools": "0.0.1-alpha.0",
     "babel-plugin-fbt": "1.0.0",
     "babel-plugin-fbt-runtime": "1.0.0",
     "fb-tiger-hash": "1.0.0",

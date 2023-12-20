@@ -6,12 +6,9 @@
  */
 /* eslint-disable react/display-name */
 import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
-import { forwardRef, useEffect, useMemo, useRef } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import { CometSSRPreloadImageCollection } from "@/faang/base-image/comet-ssr-preload-image-collection";
 import { RecoverableViolationWithComponentStack } from "@/faang/error/recoverable-violation-with-component-stack";
-
-// @ts-ignore
-import { jsx } from "react/jsx-runtime";
 
 import stylex from "@stylexjs/stylex";
 
@@ -29,65 +26,91 @@ const styles = stylex({
   },
 });
 
-export const BaseImage = forwardRef(
-  (
-    {
-      alt = "",
-      "aria-labelledby": al,
-      elementtiming,
-      objectFit = "none",
-      onLoad,
-      referrerPolicy = "origin-when-cross-origin",
-      sizes,
-      src,
-      srcSet,
-      // eslint-disable-next-line no-unused-vars
-      testid,
-      xstyle,
-      ...rest
-    },
-    ref
-  ) => {
-    const u = useRef(null);
-    const _ref = useMemo(() => {
-      return mergeRefs(u, ref);
-    }, [u, ref]);
+/**
+ * @type React.ForwardRefRenderFunction<React.FunctionComponent, import("./types").BaseImageProps>
+ */
+export const BaseImage = forwardRef((props, ref) => {
+  const {
+    alt = "",
+    "aria-labelledby": al,
+    elementtiming,
+    objectFit = "none",
+    onLoad,
+    referrerPolicy = "origin-when-cross-origin",
+    sizes,
+    src,
+    srcSet,
+    // eslint-disable-next-line no-unused-vars
+    testid,
+    xstyle,
+    ...rest
+  } = props;
 
-    !executionEnvironment.canUseDOM &&
-      src &&
-      CometSSRPreloadImageCollection.addImage(src);
+  const u = useRef(null);
+  const _ref = useMemo(() => {
+    return mergeRefs(u, ref);
+  }, [u, ref]);
 
-    useEffect(() => {
-      onLoad && u.current && u.current.complete && onLoad();
-    }, [onLoad]);
+  !executionEnvironment.canUseDOM &&
+    src &&
+    CometSSRPreloadImageCollection.addImage(src);
 
-    return src === ""
-      ? jsx(RecoverableViolationWithComponentStack, {
-          errorMessage: "Invalid src provided to image",
-          projectName: "comet_ui",
-        })
-      : jsx("img", {
-          ...rest,
-          alt,
-          "aria-labelledby": al,
-          // className:
-          //   objectFit === 'none' && className == null
-          //     ? void 0
-          //     : mergeClasses(
-          //         objectFit !== 'none' && classes[objectFit],
-          //         className
-          //       ),
+  useEffect(() => {
+    onLoad && u.current && u.current.complete && onLoad();
+  }, [onLoad]);
 
-          className: stylex(styles[objectFit], xstyle),
-          elementtiming,
-          onLoad,
-          ref: _ref,
-          referrerPolicy,
-          sizes,
-          src,
-          srcSet,
-        });
+  if (src === "") {
+    return (
+      <RecoverableViolationWithComponentStack
+        errorMessage="Invalid src provided to image"
+        projectName="comet_ui"
+      />
+    );
+  } else {
+    return (
+      <img
+        {...rest}
+        alt={alt}
+        aria-labelledby={al}
+        className={stylex(styles[objectFit], xstyle)}
+        // eslint-disable-next-line react/no-unknown-property
+        elementtiming={elementtiming}
+        onLoad={onLoad}
+        ref={_ref}
+        referrerPolicy={referrerPolicy}
+        sizes={sizes}
+        src={src}
+        srcSet={srcSet}
+      />
+    );
   }
-);
+
+  // return src === ""
+  //   ? jsx(RecoverableViolationWithComponentStack, {
+  //       errorMessage: "Invalid src provided to image",
+  //       projectName: "comet_ui",
+  //     })
+  //   : jsx("img", {
+  //       ...rest,
+  //       alt,
+  //       "aria-labelledby": al,
+  //       // className:
+  //       //   objectFit === 'none' && className == null
+  //       //     ? void 0
+  //       //     : mergeClasses(
+  //       //         objectFit !== 'none' && classes[objectFit],
+  //       //         className
+  //       //       ),
+
+  //       className: stylex(styles[objectFit], xstyle),
+  //       elementtiming,
+  //       onLoad,
+  //       ref: _ref,
+  //       referrerPolicy,
+  //       sizes,
+  //       src,
+  //       srcSet,
+  //     });
+});
 
 BaseImage.displayName = "BaseImage.react";

@@ -4,5 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-export { WorkSigninPasswordTextBox } from "./work-signin-password-text-box";
-export { WorkSigninTextBox } from "./work-signin-text-box";
+import { LoginWrapper } from "@/feature/login";
+import React from "react";
+
+export const LoginPage = () => {
+  return <LoginWrapper />;
+};

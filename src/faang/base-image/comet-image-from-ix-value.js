@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 import { stylex } from "@stylexjs/stylex";
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 // @ts-ignore
 import { jsx } from "react/jsx-runtime";
 
@@ -74,11 +74,18 @@ export const CometImageFromIXValue = forwardRef((props, ref) => {
     });
   }
 
-  return jsx(RecoverableViolationWithComponentStack, {
-    errorMessage:
-      "asset provided to CometImageFromIXValue cannot be transformed by Haste",
-    projectName: "comet_ui",
-  });
+  return (
+    <RecoverableViolationWithComponentStack
+      errorMessage="asset provided to CometImageFromIXValue cannot be transformed by Haste"
+      projectName="comet_ui"
+    />
+  );
+
+  // return jsx(RecoverableViolationWithComponentStack, {
+  //   errorMessage:
+  //     "asset provided to CometImageFromIXValue cannot be transformed by Haste",
+  //   projectName: "comet_ui",
+  // });
 });
 
 CometImageFromIXValue.displayName = "CometImageFromIXValue.react";
