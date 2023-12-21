@@ -36,6 +36,14 @@ function usePressability(targetRef, options) {
     onHoverStart,
   });
 
+  // ReactHoverEvent_Legacy.useHover(targetRef, {
+  //   disabled,
+  //   onHoverChange,
+  //   onHoverEnd,
+  //   onHoverMove,
+  //   onHoverStart,
+  // });
+
   ReactPressEvent.usePress(targetRef, {
     disabled,
     onPressChange,

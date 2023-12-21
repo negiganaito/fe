@@ -4,11 +4,13 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
+
+import React from "react";
 import { jsx } from "react/jsx-runtime";
 
 import { useCometTheme } from "@/faang/hooks";
 import { CometProgressRingIndeterminate } from "@/faang/progress-ring";
-import { TetraTextPairing } from "@/faang/tetra-text-pairing";
+import { TetraTextPairing } from "@/faang/tetra-text";
 
 import { BaseTooltipImpl } from "./base-tooltip-impl";
 

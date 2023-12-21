@@ -14,7 +14,8 @@
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss}'",
     "relay": "relay-compiler",
     "translate-fbts": "fbt-translate --jenkins --source-strings i18n/fbt/source_strings.json --translations i18n/fbt/translationScriptInput/*.json > i18n/fbt/translatedFbts.json",
-    "upgrade": "npx npm-check-updates &&  npx npm-check-updates -u"
+    "upgrade": "npx npm-check-updates &&  npx npm-check-updates -u",
+    "depcruise:all": "npx depcruise src --include-only \"^src\" --output-type dot | dot -T svg > dependency-graph.svg"
   },
   "dependencies": {
     "@stylexjs/stylex": "0.3.0",
@@ -52,6 +53,7 @@
     "confusing-browser-globals": "1.0.11",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
+    "dependency-cruiser": "^15.5.0",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.55.0",
     "eslint-config-alloy": "^5.1.2",

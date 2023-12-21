@@ -4,13 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { forwardRef, useContext } from "react";
+import React, { forwardRef, useContext } from "react";
 
-import { jsx } from "react/jsx-runtime";
-
+import { BaseButtonPopoverContext } from "@/faang/context/base-button-popover-context";
 import { Pressable } from "@/faang/pressable/pressable";
 import { PressableText } from "@/faang/pressable/pressable-text";
-import { BaseButtonPopoverContext } from "@/faang/context/base-button-popover-context";
 
 // eslint-disable-next-line complexity
 export const BaseButton = forwardRef((props, ref) => {
@@ -148,14 +146,25 @@ export const BaseButton = forwardRef((props, ref) => {
         ? _role
         : "button";
 
-    return jsx(Pressable, {
-      ...internalProps,
-      accessibilityRole,
-      allowClickEventPropagation,
-      suppressFocusRing,
-      tabbable: focusable,
-      children,
-    });
+    return (
+      <Pressable
+        {...internalProps}
+        accessibilityRole={accessibilityRole}
+        allowClickEventPropagation={allowClickEventPropagation}
+        tabbable={focusable}
+      >
+        {children}
+      </Pressable>
+    );
+
+    // return jsx(Pressable, {
+    //   ...internalProps,
+    //   accessibilityRole,
+    //   allowClickEventPropagation,
+    //   suppressFocusRing,
+    //   tabbable: focusable,
+    //   children,
+    // });
   } else {
     const accessibilityRole =
       _role === "combobox" ||
@@ -170,8 +179,8 @@ export const BaseButton = forwardRef((props, ref) => {
 
     return (
       <PressableText
-        {...internalProps}
         focusable={focusable}
+        {...internalProps}
         accessibilityRole={accessibilityRole}
         direction="none"
         suppressFocusRing={suppressFocusRing}

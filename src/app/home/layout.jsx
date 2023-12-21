@@ -6,8 +6,9 @@
  */
 import React from "react";
 
-// import { TetraText } from '@/faang/tetra-text'
-// import { TetraTextPairing } from '@/faang/tetra-text-pairing';
+import { TetraButton } from "@/faang/tetra-button";
+import { TetraText, TetraTextPairing } from "@/faang/tetra-text";
+// eslint-disable-next-line no-unused-vars
 import { WorkSigninPasswordTextBox } from "@/faang/text-box";
 
 // eslint-disable-next-line react/prop-types
@@ -19,19 +20,65 @@ export const HomePage = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        padding: "24px",
-        width: "440px",
+        gap: "1rem",
+        paddingTop: "1rem",
       }}
     >
-      {/* <TetraText align="center" type="headlineEmphasized2">Create a post in News Feed</TetraText> */}
+      {/* <TetraText align="center" type="headlineEmphasized2">
+        Create a post in News Feed
+      </TetraText> */}
 
-      {/* <TetraTextPairing
+      <TetraTextPairing
         headline="Feed"
         level={2}
-        body={<TetraText color="secondary" type="body4">Discover posts from across your organization</TetraText>}
-      /> */}
+        body={
+          <TetraText color="secondary" type="body4">
+            Discover posts from across your organization
+          </TetraText>
+        }
+      />
 
-      <WorkSigninPasswordTextBox
+      <div
+        style={{
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: ".5rem",
+        }}
+      >
+        <TetraButton
+          type="primary"
+          tooltip="Hello"
+          tooltipPosition="start"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton type="secondary" padding="wide" label="Create post" />
+        <TetraButton type="dark-overlay" padding="wide" label="Create post" />
+        <TetraButton
+          type="fdsOverride_black"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton
+          type="fdsOverride_collaborativePostCTA"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton
+          type="fdsOverride_negative"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton
+          type="fdsOverride_positive"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton type="overlay" padding="wide" label="Create post" />
+      </div>
+      {/* <WorkSigninPasswordTextBox
         autoFocus={false}
         dataTestId="login_password"
         disabled={false}
@@ -39,7 +86,7 @@ export const HomePage = () => {
         name="pass"
         type="password"
         value=""
-      />
+      /> */}
     </div>
   );
 };

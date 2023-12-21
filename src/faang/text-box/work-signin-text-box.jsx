@@ -4,9 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
+import React, { useState } from "react";
 import stylex from "@stylexjs/stylex";
 
-import React, { useState } from "react";
 import { CometFormTextInput } from "@/faang/form";
 
 const styles = stylex.create({

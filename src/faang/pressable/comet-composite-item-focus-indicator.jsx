@@ -5,13 +5,12 @@
  * See the LICENSE file in the root directory for details.
  */
 import React, { useContext } from "react";
-
 import { jsx, jsxs } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
 
+import { ICONS } from "@/faang/_/icon";
 import { CometCompositeStructureContext } from "@/faang/context/comet-composite-structure-context";
 import { CometIcon, fbicon } from "@/faang/icon";
-import { ICONS } from "@/faang/_/icon";
-import stylex from "@stylexjs/stylex";
 
 const styles = stylex.create({
   i1: {

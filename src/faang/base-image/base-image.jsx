@@ -5,13 +5,12 @@
  * See the LICENSE file in the root directory for details.
  */
 /* eslint-disable react/display-name */
-import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
 import React, { forwardRef, useEffect, useMemo, useRef } from "react";
+import stylex from "@stylexjs/stylex";
+import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
+
 import { CometSSRPreloadImageCollection } from "@/faang/base-image/comet-ssr-preload-image-collection";
 import { RecoverableViolationWithComponentStack } from "@/faang/error/recoverable-violation-with-component-stack";
-
-import stylex from "@stylexjs/stylex";
-
 import { mergeRefs } from "@/faang/hooks";
 
 const styles = stylex({

@@ -4,8 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import UserAgent from "fbjs/lib/UserAgent";
 import { useEffect } from "react";
+import UserAgent from "fbjs/lib/UserAgent";
 
 import { useDynamicCallbackDANGEROUS } from "@/faang/hooks/use-dynamic-callback_DANGEROUS";
 import { passiveEventListenerUtil } from "@/faang/react-interactions";

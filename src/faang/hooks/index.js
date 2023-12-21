@@ -15,6 +15,7 @@ export { useFadeEffect } from "./use-fade-effect";
 export { useIsPristineValue } from "./use-is-pristine-value";
 export { useLayoutAnimationEvents } from "./use-layout-animation-events";
 export { useMergeRefs } from "./use-merge-refs";
+export { useMergeRefs as useMergeRefs_Legacy } from "./use-merge-refs.legacy";
 export { useResizeObserver } from "./use-resize-observer";
 export { useStable } from "./use-stable";
 export { useTooltipDelayedContent } from "./use-tooltip-delayed-content";

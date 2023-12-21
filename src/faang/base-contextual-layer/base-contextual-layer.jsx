@@ -5,8 +5,6 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from "@stylexjs/stylex";
-import Locale from "fbjs/lib/Locale";
 import React, {
   forwardRef,
   useCallback,
@@ -20,6 +18,8 @@ import React, {
   useState,
 } from "react";
 import { jsx } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
+import Locale from "fbjs/lib/Locale";
 
 import { LayoutAnimationEvent } from "@/faang/common";
 import {

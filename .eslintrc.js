@@ -21,8 +21,8 @@ module.exports = {
 
   settings: {
     react: {
-      version: "detect"
-    }
+      version: "detect",
+    },
   },
 
   overrides: [
@@ -63,6 +63,30 @@ module.exports = {
         "header/header": OFF,
       },
     },
+    {
+      files: ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      rules: {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            groups: [
+              // Packages `react` related packages come first.
+              ["^react", "^@?\\w"],
+              // Internal packages.
+              ["^(@|components)(/.*|$)"],
+              // Side effect imports.
+              ["^\\u0000"],
+              // Parent imports. Put `..` last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+              // Style imports.
+              ["^.+\\.?(css)$"],
+            ],
+          },
+        ],
+      },
+    },
   ],
 
   parser: "@babel/eslint-parser",
@@ -77,14 +101,12 @@ module.exports = {
   },
 
   plugins: [
-    "sort-keys-fix",
-    "simple-import-sort",
-    "header",
-
-    // import helps to configure simple-import-sort
-    "import",
-    "no-function-declare-after-return",
     "react",
+    "simple-import-sort",
+    "sort-keys-fix",
+    "import",
+    "header",
+    "no-function-declare-after-return",
     "no-only-tests",
     "@stylexjs",
   ],
@@ -94,6 +116,10 @@ module.exports = {
   // We're stricter than the default config, mostly. We'll override a few rules
   // and then enable some React specific ones.
   rules: {
+    // increase the severity of rules so they are auto-fixable
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+
     // *
     "@stylexjs/valid-styles": ["error"],
 

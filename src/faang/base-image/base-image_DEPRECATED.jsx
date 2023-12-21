@@ -4,8 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import joinClasses from "fbjs/lib/joinClasses";
 import React, { forwardRef, useEffect, useMemo, useRef } from "react";
+import joinClasses from "fbjs/lib/joinClasses";
 
 import { CometVisualCompletionAttributes } from "@/faang/common/comet-visual-completion-attributes";
 import { RecoverableViolationWithComponentStack } from "@/faang/error/ecoverable-violation-with-component-stack";

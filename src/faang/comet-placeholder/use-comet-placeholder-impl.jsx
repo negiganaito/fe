@@ -4,9 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
 import React, { useCallback, useLayoutEffect, useRef } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
+import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
 
 import { useStable } from "@/faang/hooks";
 

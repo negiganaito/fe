@@ -4,10 +4,10 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from "@stylexjs/stylex";
-import Locale from "fbjs/lib/Locale";
 import { forwardRef, useContext, useMemo } from "react";
 import { jsx } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
+import Locale from "fbjs/lib/Locale";
 
 import { CometContainerPressableContext } from "@/faang/pressable/comet-container-pressable-context";
 import { testID } from "@/faang/utils/test-id";

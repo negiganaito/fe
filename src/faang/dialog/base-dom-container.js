@@ -6,7 +6,7 @@
  */
 import React, { forwardRef, memo, useLayoutEffect, useRef } from "react";
 
-import { useMergeRefs } from "@/faang/hooks";
+import { useMergeRefs_Legacy } from "@/faang/hooks";
 
 export const BaseDOMContainer = memo(
   forwardRef(({ node }, ref) => {
@@ -21,7 +21,7 @@ export const BaseDOMContainer = memo(
       }
     }, [node]);
 
-    const mergeRef = useMergeRefs(ref, storeRef);
+    const mergeRef = useMergeRefs_Legacy(ref, storeRef);
 
     return <div ref={mergeRef} />;
   })

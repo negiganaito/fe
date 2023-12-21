@@ -25,7 +25,7 @@ export type BaseViewReactProps = {
   testid?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   xstyle?: any;
-} & React.JSX.IntrinsicElements["div"];
+} & Omit<React.JSX.IntrinsicElements["div"], "className">;
 
 export type BaseRowItemReactProps = {
   expanding?: boolean;

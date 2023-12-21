@@ -5,8 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from "@stylexjs/stylex";
 import React, { forwardRef, useMemo } from "react";
+import stylex from "@stylexjs/stylex";
 
 import { BaseRowContext } from "@/faang/context";
 
@@ -113,7 +113,6 @@ export const BaseRow = forwardRef(
         xstyle={[
           expandingStyles.row,
           expanding && expandingStyles.expanding,
-          // @ts-ignore
           alignStyles[
             direction === "backward" && (align === "start" || align === "end")
               ? alignVariable[align]

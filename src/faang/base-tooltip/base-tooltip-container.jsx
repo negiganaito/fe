@@ -4,8 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from "@stylexjs/stylex";
 import React, { forwardRef } from "react";
+import stylex from "@stylexjs/stylex";
 
 const styles = stylex.create({
   container: {
@@ -49,7 +49,7 @@ export const BaseTooltipContainer = forwardRef((props, ref) => {
       className={stylex(
         styles.container,
         xstyle,
-        !shouldFadeIn && styles.containerVisible
+        shouldFadeIn && styles.containerVisible
       )}
       data-testid={undefined}
       id={id}

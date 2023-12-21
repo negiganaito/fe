@@ -5,7 +5,6 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from "@stylexjs/stylex";
 import React, {
   forwardRef,
   useCallback,
@@ -15,10 +14,11 @@ import React, {
 } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 import Loadable from "react-loadable";
+import stylex from "@stylexjs/stylex";
 
 import { CometPlaceholder } from "@/faang/comet-placeholder/comet-placeholder";
 import { CometTextContext } from "@/faang/context";
-import { useMergeRefs } from "@/faang/hooks";
+import { useMergeRefs_Legacy } from "@/faang/hooks";
 import { CometTextTypography } from "@/faang/tetra-text";
 import { cssUserAgentSupports } from "@/faang/utils";
 
@@ -160,7 +160,7 @@ const _CometLineClamp = (props, externalRef) => {
     [truncationTooltip]
   );
 
-  const ref = useMergeRefs(externalRef, y);
+  const ref = useMergeRefs_Legacy(externalRef, y);
 
   const LineComp = jsx(
     "span",

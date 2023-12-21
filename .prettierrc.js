@@ -1,1 +1,1 @@
-"eslint-config-alloy/.prettierrc.js"
+"eslint-config-alloy/.prettierrc.js";
