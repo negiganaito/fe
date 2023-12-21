@@ -19,6 +19,7 @@ export { BaseThemeConfigContext } from "./base-theme-config-context";
 export { BaseThemeDisplayModeContext } from "./base-theme-display-mode-context";
 export { BaseViewportMarginsContext } from "./base-viewport-margins-context";
 export { CometDangerouslySuppressInteractiveElementsContext } from "./comet-dangerously-suppress-interactive-elements-context";
+export { CometFocusTableContext } from "./comet-focus-table-context";
 export { CometGHLRenderingContext } from "./comet-ghl-rendering-context";
 export { CometTextContext } from "./comet-text-context";
 export { CometTextLangContext } from "./comet-text-lang-context";
