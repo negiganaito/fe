@@ -21,6 +21,7 @@ export const HomePage = () => {
         flexDirection: "column",
         justifyContent: "center",
         gap: "1rem",
+        paddingTop: "1rem",
       }}
     >
       {/* <TetraText align="center" type="headlineEmphasized2">
@@ -37,8 +38,45 @@ export const HomePage = () => {
         }
       />
 
-      <div style={{ width: "200px" }}>
-        <TetraButton type="primary" padding="wide" label="Create post" />
+      <div
+        style={{
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: ".5rem",
+        }}
+      >
+        <TetraButton
+          type="primary"
+          tooltip="Hello"
+          tooltipPosition="start"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton type="secondary" padding="wide" label="Create post" />
+        <TetraButton type="dark-overlay" padding="wide" label="Create post" />
+        <TetraButton
+          type="fdsOverride_black"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton
+          type="fdsOverride_collaborativePostCTA"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton
+          type="fdsOverride_negative"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton
+          type="fdsOverride_positive"
+          padding="wide"
+          label="Create post"
+        />
+        <TetraButton type="overlay" padding="wide" label="Create post" />
       </div>
       {/* <WorkSigninPasswordTextBox
         autoFocus={false}

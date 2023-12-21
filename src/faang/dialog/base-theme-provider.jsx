@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useContext, useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 
 import {
   BaseThemeConfigContext,

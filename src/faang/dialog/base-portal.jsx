@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { createPortal } from "react-dom";
 import stylex from "@stylexjs/stylex";
 import executionEnvironment from "fbjs/lib/ExecutionEnvironment";

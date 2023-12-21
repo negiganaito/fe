@@ -49,7 +49,7 @@ export const BaseTooltipContainer = forwardRef((props, ref) => {
       className={stylex(
         styles.container,
         xstyle,
-        !shouldFadeIn && styles.containerVisible
+        shouldFadeIn && styles.containerVisible
       )}
       data-testid={undefined}
       id={id}
