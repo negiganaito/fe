@@ -5,9 +5,9 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from "@stylexjs/stylex";
 import { forwardRef, useContext, useMemo } from "react";
 import { jsx } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
 
 import { BaseHeadingContext } from "./base-heading-context";
 import { useBaseTextContext } from "./base-text-context";

@@ -4,9 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from "@stylexjs/stylex";
 import { createElement, forwardRef } from "react";
 import { jsx } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
 
 import { BaseImage_DEPRECATED } from "@/faang/base-image/base-image_DEPRECATED";
 import { CometPressable } from "@/faang/pressable/comet-pressable";

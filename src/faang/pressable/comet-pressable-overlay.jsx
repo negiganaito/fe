@@ -4,11 +4,12 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
+import React, { useState } from "react";
 import stylex from "@stylexjs/stylex";
 
-import React, { useState } from "react";
-import { BaseFocusRing } from "../focus/base-focus-ring";
 import { CometVisualCompletionAttributes } from "../common/comet-visual-completion-attributes";
+import { BaseFocusRing } from "../focus/base-focus-ring";
+
 import { CometCompositeItemFocusIndicator } from "./comet-composite-item-focus-indicator";
 
 const styles = stylex.create({

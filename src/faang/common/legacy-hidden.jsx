@@ -34,8 +34,7 @@
 // LegacyHidden.displayName = "LegacyHidden";
 
 /* eslint-disable camelcase */
-import { forwardRef, unstable_Offscreen, unstable_LegacyHidden } from "react";
-
+import { forwardRef, unstable_LegacyHidden, unstable_Offscreen } from "react";
 // @ts-ignore
 import { jsx } from "react/jsx-runtime";
 

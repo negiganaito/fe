@@ -4,15 +4,15 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from "@stylexjs/stylex";
-import joinClasses from "fbjs/lib/joinClasses";
-import UserAgent from "fbjs/lib/UserAgent";
 import { useCallback, useContext, useRef, useState } from "react";
 import { jsx } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
+import joinClasses from "fbjs/lib/joinClasses";
 
 import { WebPressableGroupContext } from "@/faang/context/web-pressable-group-context";
 import { useMergeRefs_Legacy } from "@/faang/hooks";
 import { WebPressability } from "@/faang/react-interactions/web-pressability";
+
 import { useWebPressableTouchStartHandler } from "./use-web-pressable-touch-start-handler";
 
 const styles = stylex.create({

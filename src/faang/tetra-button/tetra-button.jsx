@@ -7,19 +7,21 @@
 
 /* eslint-disable no-undef */
 
+import React, { forwardRef, useContext, useRef } from "react";
 import stylex from "@stylexjs/stylex";
-import React, { useContext, useRef, forwardRef } from "react";
+
+import { CometTooltip } from "@/faang/base-tooltip";
+import { CometGHLRenderingContext } from "@/faang/context";
 import {
   isBlueprintStylesEnabled,
   mergeRefs,
   useCometTheme,
 } from "@/faang/hooks";
-import { CometGHLRenderingContext } from "@/faang/context";
-import { BaseStyledButton } from "./base-styled-button";
+import { CometIcon } from "@/faang/icon";
+
 import { TetraText } from "../tetra-text";
 
-import { CometIcon } from "@/faang/icon";
-import { CometTooltip } from "@/faang/base-tooltip";
+import { BaseStyledButton } from "./base-styled-button";
 
 const colorStyles = stylex.create({
   contentDisabled: {

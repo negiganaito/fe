@@ -5,9 +5,10 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from "@stylexjs/stylex";
 import React, { forwardRef, useState } from "react";
+import stylex from "@stylexjs/stylex";
 
+import { CometImage } from "@/faang/base-image";
 import { useBaseInputValidators } from "@/faang/hooks";
 import { CometIcon, ImageIconSource } from "@/faang/icon";
 import { CometFormInputPasswordStateIcon } from "@/faang/input";
@@ -15,7 +16,6 @@ import { CometPressable } from "@/faang/pressable";
 
 import { BaseTextInput } from "./base-text-input";
 import { CometFormInputWrapper } from "./comet-form-input-wrapper";
-import { CometImage } from "@/faang/base-image";
 
 const styles = stylex.create({
   disabled: {

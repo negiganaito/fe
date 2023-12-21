@@ -5,6 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 import { useEffect, useRef } from "react";
+
 import { ReactEventHelpers } from "./react-event-helpers";
 import { ReactEventHookPropagation } from "./react-event-hook-propagation";
 import { ReactUseEvent } from "./react-use-event";

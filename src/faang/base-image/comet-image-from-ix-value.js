@@ -4,11 +4,12 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { stylex } from "@stylexjs/stylex";
 import React, { forwardRef } from "react";
 // @ts-ignore
 import { jsx } from "react/jsx-runtime";
+import { stylex } from "@stylexjs/stylex";
 
+import { CometVisualCompletionAttributes } from "@/faang/common";
 import { RecoverableViolationWithComponentStack } from "@/faang/error";
 import { testID, xplatToDOMRef } from "@/faang/utils";
 
@@ -16,7 +17,6 @@ import { BaseImage } from "./base-image";
 import { coerceImageishSprited } from "./coerce-imageish-sprited";
 import { coerceImageishURL } from "./coerce-imageish-URL";
 import { CometSSRBackgroundImageUtils } from "./comet-ssr-background-image-utils";
-import { CometVisualCompletionAttributes } from "@/faang/common";
 
 // type CometImageFromIXValueProps = {
 //   alt?: string

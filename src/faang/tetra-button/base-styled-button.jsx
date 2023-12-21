@@ -4,11 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
+import React, { forwardRef, useRef } from "react";
 import stylex from "@stylexjs/stylex";
 
-import React, { useRef, forwardRef } from "react";
-import { CometPressable } from "@/faang/pressable";
 import { BaseRow, BaseRowItem } from "@/faang/base-row";
+import { CometPressable } from "@/faang/pressable";
 import { stylexCompat, stylexCompose } from "@/faang/utils";
 
 const styles = stylex.create({

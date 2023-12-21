@@ -6,11 +6,10 @@
  */
 import React from "react";
 
+import { TetraButton } from "@/faang/tetra-button";
 import { TetraText, TetraTextPairing } from "@/faang/tetra-text";
-
 // eslint-disable-next-line no-unused-vars
 import { WorkSigninPasswordTextBox } from "@/faang/text-box";
-import { TetraButton } from "@/faang/tetra-button";
 
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {

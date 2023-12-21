@@ -5,10 +5,10 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from "@stylexjs/stylex";
-import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
 import { useContext } from "react";
 import { createPortal } from "react-dom";
+import stylex from "@stylexjs/stylex";
+import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
 
 import { BasePortalTargetContext } from "@/faang/context";
 import { useStable } from "@/faang/hooks";

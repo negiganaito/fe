@@ -4,8 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { LoginWrapper } from "@/feature/login";
 import React from "react";
+
+import { LoginWrapper } from "@/feature/login";
 
 export const LoginPage = () => {
   return <LoginWrapper />;

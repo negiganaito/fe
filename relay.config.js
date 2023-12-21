@@ -5,18 +5,14 @@
  * See the LICENSE file in the root directory for details.
  */
 module.exports = {
+  excludes: ["**/node_modules/**", "**/__mocks__/**", "**/__generated__/**"],
 
-
-  excludes: ['**/node_modules/**', '**/__mocks__/**', '**/__generated__/**'],
-
-
-  language: 'javascript',
-
+  language: "javascript",
 
   // "javascript" | "typescript" | "flow"
-  schema: './data/schema.graphql',
+  schema: "./data/schema.graphql",
 
   // ...
   // Configuration options accepted by the `relay-compiler` command-line tool and `babel-plugin-relay`.
-  src: './src',
+  src: "./src",
 };

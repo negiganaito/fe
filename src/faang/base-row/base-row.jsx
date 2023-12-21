@@ -5,8 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import stylex from "@stylexjs/stylex";
 import React, { forwardRef, useMemo } from "react";
+import stylex from "@stylexjs/stylex";
 
 import { BaseRowContext } from "@/faang/context";
 

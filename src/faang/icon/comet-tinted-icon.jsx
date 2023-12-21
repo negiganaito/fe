@@ -7,9 +7,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @stylexjs/valid-styles */
 
-import stylex from "@stylexjs/stylex";
 import { forwardRef } from "react";
 import { jsx } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
 
 import { BaseImage_DEPRECATED } from "@/faang/base-image/base-image_DEPRECATED";
 

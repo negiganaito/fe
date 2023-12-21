@@ -7,11 +7,11 @@
 
 /* eslint-disable complexity */
 
-import stylex from "@stylexjs/stylex";
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
+import stylex from "@stylexjs/stylex";
 
 import { BaseFocusRing, FocusWithinHandler } from "@/faang/focus";
-import { isBlueprintStylesEnabled, useMergeRefs } from "@/faang/hooks";
+import { isBlueprintStylesEnabled, useMergeRefs_Legacy } from "@/faang/hooks";
 import { CometFormInputValidationStateIcon } from "@/faang/input";
 
 import { CometFormInputWrapperHelperText } from "./cometform-input-wrapper-helper-text";
@@ -433,7 +433,7 @@ export function CometFormInputWrapper(props) {
   const rootRef = useRef(null);
   const wrapperRef = useRef(null);
 
-  const _ref = useMergeRefs(rootRef, containerRef);
+  const _ref = useMergeRefs_Legacy(rootRef, containerRef);
 
   const [ba, ca] = useState(false);
 

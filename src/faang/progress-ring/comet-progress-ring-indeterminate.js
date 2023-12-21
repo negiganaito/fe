@@ -4,8 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from "@stylexjs/stylex";
 import { jsx } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
 
 import { BaseLoadingStateElement } from "@/faang/base-glimmer/base-loading-state-element";
 import { CometImageFromIXValue } from "@/faang/base-image";

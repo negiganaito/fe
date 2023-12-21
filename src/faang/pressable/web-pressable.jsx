@@ -4,11 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
+import { useCallback, useContext, useRef, useState } from "react";
+import { jsx } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 import { Link } from "@tanstack/react-router";
 import joinClasses from "fbjs/lib/joinClasses";
-import { useCallback, useContext, useRef, useState } from "react";
-import { jsx } from "react/jsx-runtime";
 
 import { WebPressableGroupContext } from "@/faang/context/web-pressable-group-context";
 import { WebPressability } from "@/faang/react-interactions";

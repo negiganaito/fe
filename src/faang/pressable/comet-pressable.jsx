@@ -7,7 +7,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
-import stylex from "@stylexjs/stylex";
 import React, {
   forwardRef,
   useCallback,
@@ -15,14 +14,15 @@ import React, {
   useRef,
   useState,
 } from "react";
+import stylex from "@stylexjs/stylex";
 
-import { CometDangerouslySuppressInteractiveElementsContext } from "@/faang/context/comet-dangerously-suppress-interactive-elements-context";
-import { BaseFocusRing } from "@/faang/focus/base-focus-ring";
-import { useMergeRefs } from "@/faang/hooks/use-merge-refs";
-import { BaseLink } from "@/faang/link/base-link";
-import { CometContainerPressableContext } from "@/faang/pressable/comet-container-pressable-context";
-import { BaseButton } from "@/faang/tetra-button/base-button";
+import { CometDangerouslySuppressInteractiveElementsContext } from "@/faang/context";
+import { BaseFocusRing } from "@/faang/focus";
+import { useMergeRefs_Legacy } from "@/faang/hooks";
+import { BaseLink } from "@/faang/link";
+import { BaseButton } from "@/faang/tetra-button";
 
+import { CometContainerPressableContext } from "./comet-container-pressable-context";
 import { CometPressableOverlay } from "./comet-pressable-overlay";
 
 //  n = c("gkx")("1721477") || c("gkx")("1459")
@@ -300,7 +300,7 @@ export const CometPressable = forwardRef((props, externalRef) => {
   //   !linkProps ? undefined : linkProps.target,
   // ])
 
-  const ref = useMergeRefs(externalRef, internalRef);
+  const ref = useMergeRefs_Legacy(externalRef, internalRef);
 
   // TODO
   // if (cometDangerouslySuppressInteractiveElementsContextValue) {

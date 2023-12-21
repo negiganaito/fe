@@ -5,8 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import emptyFunction from "fbjs/lib/emptyFunction";
 import { useCallback, useEffect, useRef, useState } from "react";
+import emptyFunction from "fbjs/lib/emptyFunction";
 
 /**
  *

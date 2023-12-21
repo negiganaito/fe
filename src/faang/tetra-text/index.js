@@ -5,10 +5,9 @@
  * See the LICENSE file in the root directory for details.
  */
 export { CometDensityModeContext } from "./comet-density-mode-context";
-export { CometTextTypography } from "./comet-text-typography";
-export { TetraText } from "./tetra-text";
-export { TetraTextTypography } from "./tetra-text-typography";
-
 export { CometHeadlineWithAddOn } from "./comet-headline-with-add-on";
+export { CometTextTypography } from "./comet-text-typography";
 export { getTetraTextHierarchyStyle } from "./get-tetra-text-hierarchy-style";
+export { TetraText } from "./tetra-text";
 export { TetraTextPairing } from "./tetra-text-pairing";
+export { TetraTextTypography } from "./tetra-text-typography";

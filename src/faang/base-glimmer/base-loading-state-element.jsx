@@ -4,8 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from "@stylexjs/stylex";
 import React, { createContext, forwardRef, useContext, useMemo } from "react";
+import stylex from "@stylexjs/stylex";
 
 import { mergeRefs } from "@/faang/hooks";
 import { getLoadingStateAriaProps } from "@/faang/utils";

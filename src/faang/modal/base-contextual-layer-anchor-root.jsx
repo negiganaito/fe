@@ -5,9 +5,9 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
 import React from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
+import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
 
 import { BaseContextualLayerAnchorRootContext } from "@/faang/context";
 import { BaseDOMContainer } from "@/faang/dialog";

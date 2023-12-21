@@ -4,10 +4,10 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import stylex from "@stylexjs/stylex";
 import React, { useLayoutEffect, useRef } from "react";
-// import { jsx, jsxs } from "react/jsx-runtime";
+import stylex from "@stylexjs/stylex";
 
+// import { jsx, jsxs } from "react/jsx-runtime";
 import { BaseContextualLayer } from "@/faang/base-contextual-layer";
 import { CometPlaceholder } from "@/faang/comet-placeholder";
 import { useFadeEffect, useTooltipDelayedContent } from "@/faang/hooks";
