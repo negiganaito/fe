@@ -19,6 +19,37 @@ const entriesMap = {
     spriteMapCssClass: "sp_oKdKOdjtJ90",
     sprited: 1,
   },
+  477820: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/Xtvez-N6Pda.png",
+    _spi: "/faang/assets/icon-list/Xtvez-N6Pda.png",
+    w: 20,
+    h: 20,
+    p: "0 -410px",
+    sz: "auto",
+    loggingID: "477820",
+  },
+  621400: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/t4RdauIjqvm.png",
+    _spi: "/faang/assets/icon-list/t4RdauIjqvm.png",
+    w: 24,
+    h: 24,
+    p: "0 -62px",
+    sz: "auto",
+    loggingID: "621400",
+  },
+
+  545519: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/t4RdauIjqvm.png",
+    _spi: "/faang/assets/icon-list/t4RdauIjqvm.png",
+    w: 24,
+    h: 24,
+    p: "0 -87px",
+    sz: "auto",
+    loggingID: "545519",
+  },
 };
 const usedPathsSet = new Set();
 

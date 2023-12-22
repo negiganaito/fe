@@ -6,8 +6,10 @@
  */
 export { InternalEnum } from "./$internal-enum";
 export { FocusManager } from "./focus-element";
+export { FocusInertRegion } from "./focus-inert-region";
 export { focusKeyboardEventPropagation } from "./focus-keyboard-event-propagation";
 export { FocusRegion } from "./focus-region";
+export { FocusRegionStrictMode } from "./focus-region-strict-mode";
 export { FocusRegionType } from "./focus-region-type";
 export { focusScopeQueries } from "./focus-scope-queries";
 export { getTabbableNodes } from "./get-tabbable-nodes";

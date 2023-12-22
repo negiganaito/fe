@@ -43,6 +43,31 @@
   - CometIcon
   - CometMenu
     - CometMenuBaseWithPopover
+      - BaseContextualLayerAvailableHeightContext
+      - BaseMultiPageView
+        - BaseMultiPageViewContainer
+          - BaseMultiPageViewContext
+          - FocusInertRegion
+          - FocusRegionStrictMode
+          - HiddenSubtreeContextProvider
+          - getPrefersReducedMotion
+        - BaseMultiPageViewReducer
+      - CometMenuBase
+        - fbt
+        - BaseScrollableArea
+        - CometErrorBoundary
+        - CometFocusGroupFirstLetterNavigation
+        - CometListCellStrict
+        - CometMenuFocusGroup
+        - CometMenuItemBaseRoleContext
+        - CometSeparatorMenuItem
+        - DangerouslyAccessReactElementInternals_DO_NOT_USE_IN_NEW_CODE
+        - FocusRegion
+        - TetraTextPairing
+        - fbicon
+        - focusScopeQueries
+      - CometPopover
+      - CometPopoverLoadingStateContent
   - CometProfilePhoto
   - FocusInertRegion
     - setElementCanTab
