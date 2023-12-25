@@ -7,6 +7,7 @@
 export { isBlueprintStylesEnabled } from "./is-blueprint-styles-enabled";
 export { mergeRefs } from "./merge-refs";
 export { useBaseInputValidators } from "./use-base-input-validators";
+export { useCometFormSelectOnlyComboboxKeyConfigs } from "./use-comet-form-select-only-combobox-key-configs";
 export { useCometTheme } from "./use-comet-theme";
 export { useCurrentDisplayMode } from "./use-current-display-mode";
 export { useDelayedState } from "./use-delayed-state";
@@ -23,3 +24,5 @@ export { useResizeObserver } from "./use-resize-observer";
 export { useStable } from "./use-stable";
 export { useTooltipDelayedContent } from "./use-tooltip-delayed-content";
 export { useUnsafeRef_DEPRECATED } from "./use-unsafe-ref_DEPRECATED";
+export { useVisibilityObserver } from "./use-visibility-observer";
+export { useViewportDuration } from "./useViewportDuration";

@@ -20,6 +20,8 @@ export { BaseThemeConfigContext } from "./base-theme-config-context";
 export { BaseThemeDisplayModeContext } from "./base-theme-display-mode-context";
 export { BaseViewportMarginsContext } from "./base-viewport-margins-context";
 export { CometDangerouslySuppressInteractiveElementsContext } from "./comet-dangerously-suppress-interactive-elements-context";
+export { CometDensityAwarenessContext } from "./comet-density-awareness-context";
+export { CometFocusGroupContext } from "./comet-focus-group-context";
 export { CometFocusTableContext } from "./comet-focus-table-context";
 export { CometGHLRenderingContext } from "./comet-ghl-rendering-context";
 export { CometKeyCommandContext } from "./comet-key-command-context";
@@ -30,5 +32,6 @@ export { CometMenuItemBaseRoleContext } from "./comet-menu-item-base-role-contex
 export { CometTextContext } from "./comet-text-context";
 export { CometTextLangContext } from "./comet-text-lang-context";
 export { HiddenSubtreeContext } from "./hidden-subtree-context";
+export { HiddenSubtreePassiveContext } from "./hidden-subtree-context";
 export { LayoutAnimationBoundaryContext } from "./layout-animation-boundary-context";
 export { RelayProfilerContext } from "./relay-profiler-context";

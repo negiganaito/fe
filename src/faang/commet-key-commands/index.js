@@ -13,4 +13,5 @@ export { createKeyCommand } from "./create-key-command";
 export { createKeyCommandWidget } from "./create-key-command-widget";
 export { createKeyCommandWrapper } from "./create-key-command-wrapper";
 export { isSingleCharKey } from "./is-single-char-key";
+export { useCometFormSelectMenuTriggerKeyDownHandler } from "./use-comet-form-select-menu-trigger-key-down-handler";
 export { useKeyCommands } from "./use-key-commands";

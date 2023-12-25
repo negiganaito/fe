@@ -6,11 +6,15 @@
  */
 export { addAnnotations } from "./add-annotations";
 export { calculateBaseContextualLayerPosition } from "./calculate-base-contextual-layer-position";
+export { CometDebounce } from "./comet-debounce";
 export { cssUserAgentSupports } from "./css-useragent-supports";
+export { DOMRectReadOnly } from "./dom-rect-read-only";
 export { env } from "./Env";
 export { executionEnvironment } from "./executionEnvironment";
+export { getIntersectionMarginFromViewportMargin } from "./get-intersection-margin-from-viewport-margin";
 export { getLoadingStateAriaProps } from "./get-loading-state-aria-props";
 export { getPrefersReducedMotion } from "./get-prefers-reduced-motion";
+export { intersectionObserverEntryIsIntersecting } from "./intersection-observer-entry-is-intersecting";
 export { invariant } from "./invariant";
 export { isElementFixedOrSticky } from "./is-element-fixed-or-sticky";
 export { isStringNullOrEmpty } from "./is-string-null-or-empty";

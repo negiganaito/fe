@@ -17,14 +17,16 @@ import { jsx } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 import emptyFunction from "fbjs/lib/emptyFunction";
 
-import { BaseMultiPageViewContext } from "../context";
+import { BaseMultiPageViewContext } from "@/faang/context";
 import {
   FocusInertRegion,
   FocusRegionStrictMode,
   focusScopeQueries,
-} from "../focus-region";
-import { mergeRefs_Legacy } from "../hooks";
-import { testID } from "../utils";
+} from "@/faang/focus-region";
+import { mergeRefs_Legacy } from "@/faang/hooks";
+import { testID } from "@/faang/utils";
+
+import { HiddenSubtreeContextProvider } from "./hidden-subtree-context-provider";
 
 const styles = stylex.create({
   page: {
@@ -65,7 +67,7 @@ function r(a) {
   return Math.cos((a + 1) * Math.PI) / 2 + 0.5;
 }
 
-const BaseMultiPageViewContainer = forwardRef(
+export const BaseMultiPageViewContainer = forwardRef(
   (
     {
       children,

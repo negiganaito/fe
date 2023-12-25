@@ -67,6 +67,11 @@
         - fbicon
         - focusScopeQueries
       - CometPopover
+        - BaseContextualLayerOrientationContext
+        - BasePopover
+        - BasePopoverSVGArrowContainer
+        - isBlueprintStylesEnabled
+        - useCometDisplayTimingTrackerForInteraction
       - CometPopoverLoadingStateContent
   - CometProfilePhoto
   - FocusInertRegion
