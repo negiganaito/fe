@@ -302,23 +302,7 @@ export function CometFormSelectOnlyCombobox({
           ariaLabel={ariaLabel}
           auxContent={
             <div className={stylex(dummyStyles.dummy3)}>
-              <CometIcon
-                color="primary"
-                icon={fbicon._(
-                  ix(481882),
-                  // {
-                  //   sprited: 2,
-                  //   spi: "/assets/fb/yTUMQJovBsj.png",
-                  //   _spi: "/assets/fb/yTUMQJovBsj.png",
-                  //   w: 16,
-                  //   h: 16,
-                  //   p: "-119px -147px",
-                  //   sz: "auto",
-                  //   loggingID: "481882",
-                  // },
-                  16
-                )}
-              />
+              <CometIcon color="primary" icon={fbicon._(ix(481882), 16)} />
             </div>
           }
           comboboxKeyDown={comboboxKeyDown}
@@ -329,8 +313,8 @@ export function CometFormSelectOnlyCombobox({
           label={label}
           labelLocation_INTERNAL={labelLocation_INTERNAL}
           labelRef={labelRef}
-          onPress={(a) => {
-            if (a.target === contextRef.current) {
+          onPress={(ev) => {
+            if (ev.target === contextRef.current) {
               return;
             }
             onShowCb();

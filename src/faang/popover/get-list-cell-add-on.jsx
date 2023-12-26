@@ -102,7 +102,7 @@ const expanderComp = function (props, disabled, e) {
     ...rest,
     color: disabled ? "disabled" : "secondary",
     disabled,
-    icon: open ? fbicon(ix(505565), 20) : fbicon(ix(492454), 20),
+    icon: open ? fbicon._(ix(505565), 20) : fbicon._(ix(492454), 20),
     onPress,
   });
 };
@@ -180,7 +180,7 @@ const moreOrCloseComp = function (a, disabled) {
     ...rest,
     color: disabled ? "disabled" : "secondary",
     disabled,
-    icon: type === "more" ? fbicon(ix(484391), 24) : fbicon(ix(478237), 16),
+    icon: type === "more" ? fbicon._(ix(484391), 24) : fbicon._(ix(478237), 16),
     onPress,
   });
 };

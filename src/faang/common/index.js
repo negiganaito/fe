@@ -12,4 +12,5 @@ export { JSScheduler } from "./jss-scheduler";
 export { LayoutAnimationEvent } from "./layout-animation-event";
 export { LegacyHidden, LegacyHiddenOffscreen } from "./legacy-hidden";
 export { observeIntersection } from "./observe-intersection";
+export * from "./resize-observer-polyfill-deprecated";
 export { RunComet } from "./run-comet";

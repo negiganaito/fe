@@ -20,6 +20,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 import Locale from "fbjs/lib/Locale";
 import UserAgent from "fbjs/lib/UserAgent";
+import ResizeObserver from "resize-observer-polyfill";
 
 import { BaseScrollableAreaContext } from "@/faang/context";
 import { useUnsafeRef_DEPRECATED, useVisibilityObserver } from "@/faang/hooks";

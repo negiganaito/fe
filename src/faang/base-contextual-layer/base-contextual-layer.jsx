@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import React, {
+import {
   forwardRef,
   useCallback,
   useContext,
