@@ -299,6 +299,7 @@ export const BaseMultiPageViewContainer = forwardRef(
             ref: b === N ? P : null,
             ...testID(b === 0 ? "base-multistep-container-first-step" : null),
             children: jsx(FocusRegionStrictMode.FocusRegion, {
+              // FocusRegionStrictMode
               autoFocusQuery:
                 !disableAutoFocus && !I && b === N
                   ? focusScopeQueries.headerOrTabbableScopeQuery

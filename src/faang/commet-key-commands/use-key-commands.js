@@ -6,6 +6,4 @@
  */
 import { CometKeyCommandWidget } from "./comet-key-command-widget";
 
-export const useKeyCommands = {
-  CometKeyCommandWidget,
-};
+export const useKeyCommands = CometKeyCommandWidget.useKeyCommands;

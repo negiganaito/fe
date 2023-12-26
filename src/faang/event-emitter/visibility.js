@@ -27,7 +27,7 @@ if (ExecutionEnvironment.canUseDOM) {
   }
 }
 
-export class Visibility extends BaseEventEmitter {
+class _Visibility extends BaseEventEmitter {
   constructor() {
     super();
     this.HIDDEN = "hidden";
@@ -49,7 +49,7 @@ export class Visibility extends BaseEventEmitter {
   }
 }
 
-const visibility = new Visibility();
+const visibility = new _Visibility();
 visibility.isSupported() &&
   document.addEventListener(visibility.hiddenEvent, () => {
     /*
@@ -62,3 +62,8 @@ visibility.isSupported() &&
 
 */
   });
+
+export const Visibility = {
+  visibility,
+  Visibility: _Visibility,
+};

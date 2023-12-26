@@ -35,8 +35,8 @@ export const BasePortal = (props) => {
         <BaseThemeProvider>
           {(themeClasses, themeStyle) => (
             <div
-              {...(hidden && { hidden })}
-              className={stylex(themeClasses.theme, xstyle)}
+              {...(hidden && { hidden: true })}
+              className={stylex(themeClasses, xstyle)}
               style={themeStyle}
             >
               <BasePortalTargetContext.Provider value={providerValue}>

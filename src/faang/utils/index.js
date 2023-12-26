@@ -7,6 +7,7 @@
 export { addAnnotations } from "./add-annotations";
 export { calculateBaseContextualLayerPosition } from "./calculate-base-contextual-layer-position";
 export { CometDebounce } from "./comet-debounce";
+export { createCancelableFunction } from "./create-cancelable-function";
 export { cssUserAgentSupports } from "./css-useragent-supports";
 export { DOMRectReadOnly } from "./dom-rect-read-only";
 export { env } from "./Env";

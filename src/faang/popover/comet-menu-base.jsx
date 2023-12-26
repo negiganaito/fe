@@ -9,14 +9,18 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 import fbt from "fbt";
 
-import { CometMenuItemBaseRoleContext } from "../context";
+import { CometMenuItemBaseRoleContext } from "@/faang//context";
+import {
+  CometFocusGroupFirstLetterNavigation,
+  CometMenuFocusGroup,
+} from "@/faang/focus";
+import { FocusRegion, focusScopeQueries } from "@/faang/focus-region";
+import { fbicon } from "@/faang/icon";
+import { ix } from "@/faang/utils";
+
+import { DangerouslyAccessReactElementInternals_DO_NOT_USE_IN_NEW_CODE } from "../common";
 import { CometErrorBoundary } from "../error/comet-error-boundary";
-import { CometFocusGroupFirstLetterNavigation } from "../focus";
-import { FocusGroup } from "../focus/focus-group";
-import { FocusRegion, focusScopeQueries } from "../focus-region";
-import { fbicon } from "../icon";
 import { TetraTextPairing } from "../tetra-text";
-import { ix } from "../utils";
 
 import { BaseScrollableArea } from "./base-scrollable-area";
 import { CometListCellStrict } from "./comet-list-cell-strict";
@@ -109,7 +113,8 @@ export function CometMenuBase({
 
     let b = p++;
 
-    return child.type === CometSeparatorMenuItem
+    return DangerouslyAccessReactElementInternals_DO_NOT_USE_IN_NEW_CODE(child)
+      .type === CometSeparatorMenuItem
       ? child
       : jsx(
           CometErrorBoundary,
@@ -160,7 +165,7 @@ export function CometMenuBase({
                           paddingHorizontal: 8,
                         })
                       : jsx("div", {
-                          className: stylex(styles.listItem),
+                          className: stylex([styles.listItem]),
                           children: jsx(TetraTextPairing, {
                             body: header.body,
                             headline: header.title,
@@ -173,17 +178,17 @@ export function CometMenuBase({
                   ],
                 })
               : null,
-            jsx(FocusRegion, {
-              autoFocusQuery: (header === null ? void 0 : header.onPressBack)
+            jsx(FocusRegion.FocusRegion, {
+              autoFocusQuery: (!header ? undefined : header.onPressBack)
                 ? focusScopeQueries.tabbableScopeQuery
                 : null,
-              children: jsx(FocusGroup, {
+              children: jsx(CometMenuFocusGroup.FocusGroup, {
                 onNavigate:
                   CometFocusGroupFirstLetterNavigation.handleFirstLetterNavigation,
                 orientation: "vertical",
                 preventScrollOnFocus: false,
                 tabScopeQuery: focusScopeQueries.tabbableScopeQuery,
-                wrap: !0,
+                wrap: true,
                 children: _children,
               }),
             }),

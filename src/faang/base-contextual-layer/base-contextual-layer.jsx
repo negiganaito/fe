@@ -90,7 +90,7 @@ export const BaseContextualLayer = forwardRef(
       disableAutoAlign = false,
       children,
       containFocus = false,
-      customContainer = BaseContextualLayerDefaultContainer,
+      customContainer: CustomContainer = BaseContextualLayerDefaultContainer,
       disableAutoFlip = false,
       hidden = false,
       imperativeRef,
@@ -100,10 +100,13 @@ export const BaseContextualLayer = forwardRef(
       position = "below",
       stopClickPropagation = false,
       xstyle,
+      from,
       ...rest
     },
     ref
   ) => {
+    console.log({ des: "BaseContextualLayer", from, children });
+
     const [
       {
         adjustment: baseContextualLayerLayerAdjustmentValue,
@@ -402,65 +405,176 @@ export const BaseContextualLayer = forwardRef(
 
     const $ = hidden || H;
 
-    return (
-      <BasePortal
-        target={baseContextualLayerAnchorRootValue.current}
-        children={jsx(customContainer, {
-          children: jsx(FocusRegion.FocusRegion, {
-            autoFocusQuery:
-              !$ && containFocus
-                ? focusScopeQueries.headerFirstTabbableSecondScopeQuery
-                : null,
-            autoRestoreFocus: !$,
-            children: jsx(BaseContextualLayerAnchorRoot, {
-              children: jsx(BaseContextualLayerContextSizeContext.Provider, {
-                children: jsx(
-                  BaseContextualLayerLayerAdjustmentContext.Provider,
-                  {
-                    children: jsx(
-                      BaseContextualLayerAvailableHeightContext.Provider,
-                      {
-                        children: jsx(
-                          BaseContextualLayerOrientationContext.Provider,
-                          {
-                            children: jsx(
-                              BaseLinkNestedPressableContext.Provider,
-                              {
-                                children: jsx(CometTextContext.Provider, {
-                                  children: children,
-                                  value: null,
-                                }),
-                                value: !1,
-                              }
-                            ),
-                            value: baseContextualLayerOrientationValue,
-                          }
-                        ),
-                        value: baseContextualLayerAvailableHeightValue,
-                      }
-                    ),
-                    value: baseContextualLayerLayerAdjustmentValue,
-                  }
-                ),
-                value: baseContextualLayerContextSizeValue,
-              }),
+    // return (
+    //   <BasePortal target={baseContextualLayerAnchorRootValue.current}>
+    //     <CustomContainer
+    //       hidden={hidden || H || a}
+    //       presencePayload={presencePayload}
+    //       ref={_ref}
+    //       stopClickPropagation={stopClickPropagation}
+    //       testid={undefined}
+    //       xstyle={[styles.root, xstyle]}
+    //     >
+    //       <FocusRegion.FocusRegion
+    //         autoFocusQuery={
+    //           !$ && containFocus
+    //             ? focusScopeQueries.headerFirstTabbableSecondScopeQuery
+    //             : null
+    //         }
+    //         autoRestoreFocus={!$}
+    //         containFocusQuery={
+    //           !$ && containFocus ? focusScopeQueries.tabbableScopeQuery : null
+    //         }
+    //         onEscapeFocusRegion={onEscapeFocusRegion}
+    //         recoverFocusQuery={
+    //           $ ? null : focusScopeQueries.headerFirstTabbableSecondScopeQuery
+    //         }
+    //       >
+    //         <BaseContextualLayerAnchorRoot>
+    //           <BaseContextualLayerContextSizeContext.Provider
+    //             value={baseContextualLayerContextSizeValue}
+    //           >
+    //             <BaseContextualLayerLayerAdjustmentContext.Provider
+    //               value={baseContextualLayerLayerAdjustmentValue}
+    //             >
+    //               <BaseContextualLayerAvailableHeightContext.Provider
+    //                 value={baseContextualLayerAvailableHeightValue}
+    //               >
+    //                 <BaseContextualLayerOrientationContext.Provider
+    //                   value={baseContextualLayerOrientationValue}
+    //                 >
+    //                   <BaseLinkNestedPressableContext.Provider value={false}>
+    //                     <CometTextContext.Provider value={null}>
+    //                       {children}
+    //                     </CometTextContext.Provider>
+    //                   </BaseLinkNestedPressableContext.Provider>
+    //                 </BaseContextualLayerOrientationContext.Provider>
+    //               </BaseContextualLayerAvailableHeightContext.Provider>
+    //             </BaseContextualLayerLayerAdjustmentContext.Provider>
+    //           </BaseContextualLayerContextSizeContext.Provider>
+    //         </BaseContextualLayerAnchorRoot>
+    //       </FocusRegion.FocusRegion>
+    //     </CustomContainer>
+    //   </BasePortal>
+    // );
+
+    return jsx(BasePortal, {
+      children: jsx(CustomContainer, {
+        children: jsx(FocusRegion.FocusRegion, {
+          autoFocusQuery:
+            !$ && containFocus
+              ? focusScopeQueries.headerFirstTabbableSecondScopeQuery
+              : null,
+          autoRestoreFocus: !$,
+          children: jsx(BaseContextualLayerAnchorRoot, {
+            children: jsx(BaseContextualLayerContextSizeContext.Provider, {
+              children: jsx(
+                BaseContextualLayerLayerAdjustmentContext.Provider,
+                {
+                  children: jsx(
+                    BaseContextualLayerAvailableHeightContext.Provider,
+                    {
+                      children: jsx(
+                        BaseContextualLayerOrientationContext.Provider,
+                        {
+                          children: jsx(
+                            BaseLinkNestedPressableContext.Provider,
+                            {
+                              children: jsx(CometTextContext.Provider, {
+                                children,
+                                value: null,
+                              }),
+                              value: false,
+                            }
+                          ),
+                          value: baseContextualLayerOrientationValue,
+                        }
+                      ),
+                      value: baseContextualLayerAvailableHeightValue,
+                    }
+                  ),
+                  value: baseContextualLayerLayerAdjustmentValue,
+                }
+              ),
+              value: baseContextualLayerContextSizeValue,
             }),
-            containFocusQuery:
-              !$ && containFocus ? focusScopeQueries.tabbableScopeQuery : null,
-            onEscapeFocusRegion: onEscapeFocusRegion,
-            recoverFocusQuery: $
-              ? null
-              : focusScopeQueries.headerFirstTabbableSecondScopeQuery,
           }),
-          hidden: hidden || H || a,
-          presencePayload: presencePayload,
-          ref: _ref,
-          stopClickPropagation: stopClickPropagation,
-          testid: void 0,
-          xstyle: [styles.root, xstyle],
-        })}
-      />
-    );
+          containFocusQuery:
+            !$ && containFocus ? focusScopeQueries.tabbableScopeQuery : null,
+          onEscapeFocusRegion: onEscapeFocusRegion,
+          recoverFocusQuery: $
+            ? null
+            : focusScopeQueries.headerFirstTabbableSecondScopeQuery,
+        }),
+        hidden: hidden || H || a,
+        presencePayload: presencePayload,
+        ref: _ref,
+        stopClickPropagation,
+        testid: void 0,
+        xstyle: [styles.root, xstyle],
+      }),
+      target: baseContextualLayerAnchorRootValue.current,
+    });
+
+    // return (
+    //   <BasePortal
+    //     target={baseContextualLayerAnchorRootValue.current}
+    //     children={jsx(customContainer, {
+    //       children: jsx(FocusRegion.FocusRegion, {
+    //         autoFocusQuery:
+    //           !$ && containFocus
+    //             ? focusScopeQueries.headerFirstTabbableSecondScopeQuery
+    //             : null,
+    //         autoRestoreFocus: !$,
+    //         children: jsx(BaseContextualLayerAnchorRoot, {
+    //           children: jsx(BaseContextualLayerContextSizeContext.Provider, {
+    //             children: jsx(
+    //               BaseContextualLayerLayerAdjustmentContext.Provider,
+    //               {
+    //                 children: jsx(
+    //                   BaseContextualLayerAvailableHeightContext.Provider,
+    //                   {
+    //                     children: jsx(
+    //                       BaseContextualLayerOrientationContext.Provider,
+    //                       {
+    //                         children: jsx(
+    //                           BaseLinkNestedPressableContext.Provider,
+    //                           {
+    //                             children: jsx(CometTextContext.Provider, {
+    //                               children,
+    //                               value: null,
+    //                             }),
+    //                             value: false,
+    //                           }
+    //                         ),
+    //                         value: baseContextualLayerOrientationValue,
+    //                       }
+    //                     ),
+    //                     value: baseContextualLayerAvailableHeightValue,
+    //                   }
+    //                 ),
+    //                 value: baseContextualLayerLayerAdjustmentValue,
+    //               }
+    //             ),
+    //             value: baseContextualLayerContextSizeValue,
+    //           }),
+    //         }),
+    //         containFocusQuery:
+    //           !$ && containFocus ? focusScopeQueries.tabbableScopeQuery : null,
+    //         onEscapeFocusRegion: onEscapeFocusRegion,
+    //         recoverFocusQuery: $
+    //           ? null
+    //           : focusScopeQueries.headerFirstTabbableSecondScopeQuery,
+    //       }),
+    //       hidden: hidden || H || a,
+    //       presencePayload: presencePayload,
+    //       ref: _ref,
+    //       stopClickPropagation,
+    //       testid: void 0,
+    //       xstyle: [styles.root, xstyle],
+    //     })}
+    //   />
+    // );
   }
 );
 

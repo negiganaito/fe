@@ -37,10 +37,10 @@ export const BaseMultiPageView = forwardRef((props, ref) => {
   );
 
   const onPopPageCb = useCallback(
-    (props) => {
+    (p) => {
       return dispatch({
-        index: !props ? undefined : props.index,
-        pageKey: !props ? undefined : props.pageKey,
+        index: !p ? undefined : p.index,
+        pageKey: !p ? undefined : p.pageKey,
         type: "pop_page",
       });
     },

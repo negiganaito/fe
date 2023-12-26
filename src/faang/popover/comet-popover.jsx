@@ -4,8 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { forwardRef, useContext } from "react";
-import { jsx } from "react/jsx-runtime";
+import React, { forwardRef, useContext } from "react";
 import stylex from "@stylexjs/stylex";
 
 import { BaseContextualLayerOrientationContext } from "../context";
@@ -106,25 +105,46 @@ export const CometPopover = forwardRef(
       BaseContextualLayerOrientationContext
     );
 
-    return jsx(BasePopover, {
-      ...rest,
-      arrowImpl: withArrow ? BasePopoverSVGArrowContainer : undefined,
-      ref,
-      className: withArrow && styles.popoverWithArrow,
-      children: jsx("div", {
-        children,
-        className: stylex(
-          styles.card,
-          styles.cardBackground,
-          styles.cardShadow,
-          styles.cardBorderRadius,
-          styles.cardOverflow,
-          withArrow &&
-            o(position, align, aboveStyles, belowStyles, endStyles, startStyles)
-        ),
-        // ref,
-      }),
-    });
+    return (
+      <BasePopover
+        {...rest}
+        arrowImpl={withArrow ? BasePopoverSVGArrowContainer : undefined}
+        ref={ref}
+        xstyle={withArrow && styles.popoverWithArrow}
+      >
+        <div
+          className={stylex(
+            styles.card,
+            styles.cardBackground,
+            styles.cardShadow,
+            styles.cardBorderRadius,
+            styles.cardOverflow,
+            withArrow && getPositionalStyle(position, align)
+          )}
+        >
+          {children}
+        </div>
+      </BasePopover>
+    );
+
+    // return jsx(BasePopover, {
+    //   ...rest,
+    //   arrowImpl: withArrow ? BasePopoverSVGArrowContainer : undefined,
+    //   ref,
+    //   xstyle: withArrow && styles.popoverWithArrow,
+    //   children: jsx("div", {
+    //     children,
+    //     className: stylex(
+    //       styles.card,
+    //       styles.cardBackground,
+    //       styles.cardShadow,
+    //       styles.cardBorderRadius,
+    //       styles.cardOverflow,
+    //       withArrow && getPositionalStyle(position, align)
+    //     ),
+    //     // ref,
+    //   }),
+    // });
   }
 );
 
@@ -132,22 +152,18 @@ export const CometPopover = forwardRef(
  *
  * @param {"end" | "start" | "above" | "below"} position
  * @param {"end" | "start" | "stretch" | "middle"} align
- * @param {*} k
- * @param {*} l
- * @param {*} n
- * @param {*} m
  * @returns
  */
 // eslint-disable-next-line max-params
-function o(position, align, k, l, n, m) {
+function getPositionalStyle(position, align) {
   switch (position) {
     case "above":
-      return k[align];
+      return aboveStyles[align];
     case "below":
-      return l[align];
+      return belowStyles[align];
     case "end":
-      return n[align];
+      return endStyles[align];
     case "start":
-      return m[align];
+      return startStyles[align];
   }
 }

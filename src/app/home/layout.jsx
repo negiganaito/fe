@@ -6,6 +6,7 @@
  */
 import React from "react";
 
+import { CometFormSelectOnlyCombobox } from "@/faang/combo-box";
 import { TetraButton } from "@/faang/tetra-button";
 import { TetraText, TetraTextPairing } from "@/faang/tetra-text";
 // eslint-disable-next-line no-unused-vars
@@ -13,22 +14,25 @@ import { WorkSigninPasswordTextBox } from "@/faang/text-box";
 
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {
+  const [comboboxValue, setComboboxValue] = React.useState("MARRIED_NAME");
+
   return (
-    <div
-      style={{
-        alignItems: "center",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        gap: "1rem",
-        paddingTop: "1rem",
-      }}
-    >
-      {/* <TetraText align="center" type="headlineEmphasized2">
+    <div style={{ height: "100vh" }}>
+      <div
+        style={{
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: "1rem",
+          paddingTop: "1rem",
+        }}
+      >
+        {/* <TetraText align="center" type="headlineEmphasized2">
         Create a post in News Feed
       </TetraText> */}
 
-      <TetraTextPairing
+        {/* <TetraTextPairing
         headline="Feed"
         level={2}
         body={
@@ -77,8 +81,8 @@ export const HomePage = () => {
           label="Create post"
         />
         <TetraButton type="overlay" padding="wide" label="Create post" />
-      </div>
-      {/* <WorkSigninPasswordTextBox
+      </div> */}
+        {/* <WorkSigninPasswordTextBox
         autoFocus={false}
         dataTestId="login_password"
         disabled={false}
@@ -87,6 +91,52 @@ export const HomePage = () => {
         type="password"
         value=""
       /> */}
+
+        <CometFormSelectOnlyCombobox
+          disabled={false}
+          label="Name type"
+          value={comboboxValue}
+          onValueChange={setComboboxValue}
+          options={[
+            {
+              label: "Nickname",
+              value: "NICKNAME",
+            },
+            {
+              label: "Maiden Name",
+              value: "MAIDEN_NAME",
+            },
+            {
+              label: "Alternate Spelling",
+              value: "ALTERNATE_SPELLING",
+            },
+            {
+              label: "Married Name",
+              value: "MARRIED_NAME",
+            },
+            {
+              label: "Father's Name",
+              value: "FATHERS_NAME",
+            },
+            {
+              label: "Birth Name",
+              value: "BIRTH_NAME",
+            },
+            {
+              label: "Former Name",
+              value: "FORMER_NAME",
+            },
+            {
+              label: "Name with Title",
+              value: "NAME_WITH_TITLE",
+            },
+            {
+              label: "Other",
+              value: "OTHER",
+            },
+          ]}
+        />
+      </div>
     </div>
   );
 };

@@ -127,6 +127,8 @@ export const CometMenuItemBase = forwardRef(
     },
     ref
   ) => {
+    console.log("CometMenuItemBase");
+
     const internalRef = useRef(null);
     const cometMenuContextValue = useContext(CometMenuContext);
     const _onClose =

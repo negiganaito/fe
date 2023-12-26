@@ -232,7 +232,7 @@ const styles = stylex.create({
     overflowX: "hidden",
     overflowY: "hidden",
     position: "relative",
-    zIndex: "unset",
+    zIndex: 0,
   },
 
   secondary: {

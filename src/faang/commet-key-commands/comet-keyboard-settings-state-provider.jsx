@@ -7,10 +7,8 @@
 
 import React from "react";
 
-import { CometKeyCommandWidget } from "./comet-key-command-widget";
+import { BaseKeyCommandListener } from "./base-key-command-listener";
 
-export const CometKeyCommandWrapper = (props) => {
-  const { children, ...rest } = props;
-
-  return <CometKeyCommandWidget.Wrapper {...rest} children={children} />;
+export const CometKeyboardSettingsStateProvider = ({ children }) => {
+  return <BaseKeyCommandListener>{children}</BaseKeyCommandListener>;
 };

@@ -34,7 +34,11 @@
 // LegacyHidden.displayName = "LegacyHidden";
 
 /* eslint-disable camelcase */
-import { forwardRef, unstable_LegacyHidden, unstable_Offscreen } from "react";
+import React, {
+  forwardRef,
+  unstable_LegacyHidden as Unstable_LegacyHidden,
+  unstable_Offscreen,
+} from "react";
 // @ts-ignore
 import { jsx } from "react/jsx-runtime";
 
@@ -47,18 +51,33 @@ import { jsx } from "react/jsx-runtime";
 
 const LegacyHidden = forwardRef(
   ({ htmlAttributes, mode, children, suppressHydrationWarning }, ref) => {
-    // @ts-ignore
-    return jsx("div", {
-      ...htmlAttributes,
-      hidden: mode === "hidden" ? true : undefined,
-      ref,
-      suppressHydrationWarning,
-      // @ts-ignore
-      children: jsx(unstable_LegacyHidden, {
-        mode: mode === "hidden" ? "unstable-defer-without-hiding" : mode,
-        children,
-      }),
-    });
+    return (
+      <div
+        {...htmlAttributes}
+        hidden={mode === "hidden" ? true : undefined}
+        ref={ref}
+        suppressHydrationWarning={suppressHydrationWarning}
+      >
+        {/* eslint-disable-next-line react/jsx-pascal-case */}
+        <Unstable_LegacyHidden
+          mode={mode === "hidden" ? "unstable-defer-without-hiding" : mode}
+        >
+          {children}
+        </Unstable_LegacyHidden>
+      </div>
+    );
+
+    // return jsx("div", {
+    //   ...htmlAttributes,
+    //   hidden: mode === "hidden" ? true : undefined,
+    //   ref,
+    //   suppressHydrationWarning,
+    //   // @ts-ignore
+    //   children: jsx(unstable_LegacyHidden, {
+    //     mode: mode === "hidden" ? "unstable-defer-without-hiding" : mode,
+    //     children,
+    //   }),
+    // });
   }
 );
 

@@ -5,9 +5,10 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { forwardRef } from "react";
-import { jsx } from "react/jsx-runtime";
+import React, { forwardRef } from "react";
 import stylex from "@stylexjs/stylex";
+
+import { testID } from "@/faang/utils";
 
 const styles = stylex.create({
   root: {
@@ -28,35 +29,61 @@ export const BasePopover = forwardRef(
     {
       label,
       arrowAlignment,
-      arrowImpl,
+      arrowImpl: ArrowImpl,
       xstyle,
       role = "dialog",
       id,
       labelledby,
+      testid,
       ...rest
     },
     ref
   ) => {
-    return arrowImpl
-      ? jsx(arrowImpl, {
-          arrowAlignment,
-          id,
-          label,
-          labelledby,
-          ref,
-          role,
-          testid: undefined,
-          xstyle,
-          ...rest,
-        })
-      : jsx("div", {
-          "aria-label": label,
-          "aria-labelledby": labelledby,
-          className: stylex(styles.root, xstyle),
-          id,
-          ref,
-          role,
-          ...rest,
-        });
+    return ArrowImpl ? (
+      <ArrowImpl
+        arrowAlignment={arrowAlignment}
+        id={id}
+        label={label}
+        labelledby={labelledby}
+        ref={ref}
+        role={role}
+        testid={undefined}
+        xstyle={xstyle}
+        {...rest}
+      />
+    ) : (
+      <div
+        aria-label={label}
+        aria-labelledby={labelledby}
+        className={stylex(styles.root, xstyle)}
+        id={id}
+        ref={ref}
+        role={role}
+        {...testID(testid)}
+        {...rest}
+      />
+    );
+
+    // return arrowImpl
+    //   ? jsx(arrowImpl, {
+    //       arrowAlignment,
+    //       id,
+    //       label,
+    //       labelledby,
+    //       ref,
+    //       role,
+    //       testid: undefined,
+    //       xstyle,
+    //       ...rest,
+    //     })
+    //   : jsx("div", {
+    //       "aria-label": label,
+    //       "aria-labelledby": labelledby,
+    //       className: stylex(styles.root, xstyle),
+    //       id,
+    //       ref,
+    //       role,
+    //       ...rest,
+    //     });
   }
 );

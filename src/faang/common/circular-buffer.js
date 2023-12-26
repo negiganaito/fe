@@ -4,7 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { unrecoverableViolation } from "@negiganaito/error";
+
+import { unrecoverableViolation } from "@/faang/error";
 
 export class CircularBuffer {
   constructor(size) {

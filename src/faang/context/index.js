@@ -32,6 +32,6 @@ export { CometMenuItemBaseRoleContext } from "./comet-menu-item-base-role-contex
 export { CometTextContext } from "./comet-text-context";
 export { CometTextLangContext } from "./comet-text-lang-context";
 export { HiddenSubtreeContext } from "./hidden-subtree-context";
-export { HiddenSubtreePassiveContext } from "./hidden-subtree-context";
+export { HiddenSubtreePassiveContext } from "./hidden-subtree-passive-context";
 export { LayoutAnimationBoundaryContext } from "./layout-animation-boundary-context";
 export { RelayProfilerContext } from "./relay-profiler-context";

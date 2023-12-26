@@ -13,6 +13,8 @@ export { useCurrentDisplayMode } from "./use-current-display-mode";
 export { useDelayedState } from "./use-delayed-state";
 export { useDynamicCallbackDANGEROUS } from "./use-dynamic-callback-DANGEROUS";
 export { useFadeEffect } from "./use-fade-effect";
+export { useGetComposingState } from "./use-get-composing-state";
+export { useGlobalEventListener } from "./use-global-event-listener";
 export { useIsPristineValue } from "./use-is-pristine-value";
 export { useLayoutAnimationEvents } from "./use-layout-animation-events";
 export { useMergeRefs } from "./use-merge-refs";

@@ -18,6 +18,7 @@ import {
 } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
+import Locale from "fbjs/lib/Locale";
 import UserAgent from "fbjs/lib/UserAgent";
 
 import { BaseScrollableAreaContext } from "@/faang/context";
@@ -248,7 +249,7 @@ const dummyStyles = stylex.create({
 });
 
 // d("Locale").isRTL()
-const q = false;
+const q = Locale.isRTL();
 const r = false;
 
 export const BaseScrollableArea = forwardRef(
@@ -538,7 +539,7 @@ export const BaseScrollableArea = forwardRef(
           children: jsxs("div", {
             ...rest,
             className: stylex(
-              oStyles["default"],
+              oStyles.default,
               oStyles.hideScrollbar,
               expanding && (r ? oStyles.expandingIE11 : oStyles.expanding),
               oStyles.perspective,

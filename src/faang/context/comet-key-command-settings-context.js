@@ -25,7 +25,7 @@ export const CometKeyCommandSettingsContext = React.createContext({
   getModifiedKeyboardShortcutsPreference: function (a) {
     return 4;
   },
-  isViewerShowing: !1,
+  isViewerShowing: false,
   resetAllCustomCommands: function (a) {},
   resetCustomCommand: function (a) {},
   setAreSingleKeysDisabled: function (a) {},

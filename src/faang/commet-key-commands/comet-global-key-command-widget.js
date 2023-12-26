@@ -4,6 +4,6 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import React from "react";
+import { createKeyCommandWidget } from "./create-key-command-widget";
 
-export const CometMenuContext = React.createContext();
+export const CometGlobalKeyCommandWidget = createKeyCommandWidget(false);

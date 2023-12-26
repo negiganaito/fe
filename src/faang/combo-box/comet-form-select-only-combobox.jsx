@@ -7,8 +7,7 @@
 
 /* eslint-disable camelcase */
 
-import { useCallback, useId, useMemo, useRef, useState } from "react";
-import { jsx, jsxs } from "react/jsx-runtime";
+import React, { useCallback, useId, useMemo, useRef, useState } from "react";
 import stylex from "@stylexjs/stylex";
 import emptyFunction from "fbjs/lib/emptyFunction";
 
@@ -18,14 +17,12 @@ import {
   useCometFormSelectMenuTriggerKeyDownHandler,
 } from "@/faang/commet-key-commands";
 import { FocusWithinHandler } from "@/faang/focus";
+import { FocusInertRegion, focusScopeQueries } from "@/faang/focus-region";
 import { CometFormInputWrapper } from "@/faang/form";
 import { useCometFormSelectOnlyComboboxKeyConfigs } from "@/faang/hooks";
 import { CometIcon, fbicon } from "@/faang/icon";
+import { CometFormComboboxMenuItem, CometMenu } from "@/faang/popover";
 import { ix } from "@/faang/utils";
-
-import { FocusInertRegion, focusScopeQueries } from "../focus-region";
-import { CometFormComboboxMenuItem } from "../popover/comet-form-combobox-menu-item";
-import { CometMenuBaseWithPopover } from "../popover/comet-menu-base-with-popover";
 
 // import BaseContextualLayer from '@fb/components/base-contextual-layer'
 
@@ -237,31 +234,31 @@ export function CometFormSelectOnlyCombobox({
     [onHideCb]
   );
 
-  const mergeIds = (a, b) => {
-    return a + "__" + (b ?? "0");
+  const mergeIds = (i1, i2) => {
+    return i1 + "__" + (i2 ?? "0");
   };
 
   const onPressCb = useCallback(() => {
-    if (isMenuVisible)
+    if (isMenuVisible) {
       activeValue
         ? onValueChange(activeValue)
         : // eslint-disable-next-line no-sequences
           !activeValue && onNullValue && onNullValue(null),
         onHideCb();
-    else {
+    } else {
       setActiveValue(value ?? null);
       onShowCb();
     }
   }, [activeValue, isMenuVisible, onValueChange, onHideCb, onShowCb, value]);
 
   const commandConfigs = useCometFormSelectOnlyComboboxKeyConfigs({
-    activeValue: activeValue,
-    filteredOptions: filteredOptions,
-    isMenuVisible: isMenuVisible,
+    activeValue,
+    filteredOptions,
+    isMenuVisible,
     onHide: onHideCb,
     onPress: onPressCb,
     onShow: onShowCb,
-    setActiveValue: setActiveValue,
+    setActiveValue,
     value,
   });
 
@@ -273,156 +270,345 @@ export function CometFormSelectOnlyCombobox({
     onShowCb
   );
 
-  return jsx(FocusWithinHandler, {
-    onFocusChange,
-    children: jsxs(CometComponentWithKeyCommands, {
-      commandConfigs: disabled ? [] : commandConfigs,
-      children: [
-        jsx(CometFormInputWrapper, {
-          addOnStart:
+  return (
+    <FocusWithinHandler onFocusChange={onFocusChange}>
+      <CometComponentWithKeyCommands
+        commandConfigs={disabled ? [] : commandConfigs}
+      >
+        <CometFormInputWrapper
+          addOnStart={
             normalizeIcon &&
-            (normalizeIcon.type === "icon"
-              ? jsx("div", {
-                  className: stylex(dummyStyles.dummy1), // 'x1swvt13 x109j2v6',
-                  children: jsx(CometIcon, {
-                    color: "secondary",
-                    icon: normalizeIcon.iconProps,
-                  }),
-                })
-              : normalizeIcon.type === "profile-picture"
-              ? jsx("div", {
-                  className: stylex(dummyStyles.dummy2), // 'x1swvt13 xz9dl7a',
-                  children: jsx("CometProfilePhoto.react", {
-                    ...normalizeIcon.iconProps,
-                    size: 32,
-                  }),
-                })
-              : null),
-          "aria-activedescendant":
+            (normalizeIcon.type === "icon" ? (
+              <div className={stylex(dummyStyles.dummy1)}>
+                <CometIcon color="secondary" icon={normalizeIcon.iconProps} />
+              </div>
+            ) : normalizeIcon.type === "profile-picture" ? (
+              <div className={stylex(dummyStyles.dummy2)}>
+                {/* children: jsx("CometProfilePhoto.react", {
+                  ...normalizeIcon.iconProps,
+                  size: 32,
+                }), */}
+              </div>
+            ) : null)
+          }
+          aria-activedescendant={
             isMenuVisible && activeValue && activeValueIndex !== -1
               ? mergeIds(id1, activeValueIndex)
-              : undefined,
-          "aria-controls": isMenuVisible ? visibleId : undefined,
-          "aria-expanded": isMenuVisible,
-          "aria-haspopup": "listbox",
-          ariaLabel,
-          auxContent: jsx("div", {
-            className: stylex(dummyStyles.dummy3), //  'xamitd3 x1pi30zi',
-            children: jsx(CometIcon, {
-              color: "primary",
-              icon: fbicon._(
-                ix(481882),
-                // {
-                //   sprited: 2,
-                //   spi: "/assets/fb/yTUMQJovBsj.png",
-                //   _spi: "/assets/fb/yTUMQJovBsj.png",
-                //   w: 16,
-                //   h: 16,
-                //   p: "-119px -147px",
-                //   sz: "auto",
-                //   loggingID: "481882",
-                // },
-                16
-              ),
-            }),
-          }),
-          comboboxKeyDown,
-          cursor: "pointer",
-          disabled,
-          helperText,
-          helperTextIsHidden,
-          label,
-          // eslint-disable-next-line camelcase
-          labelLocation_INTERNAL,
-          labelRef,
-          onPress: function (a) {
+              : undefined
+          }
+          aria-controls={isMenuVisible ? visibleId : undefined}
+          aria-expanded={isMenuVisible}
+          aria-haspopup="listbox"
+          ariaLabel={ariaLabel}
+          auxContent={
+            <div className={stylex(dummyStyles.dummy3)}>
+              <CometIcon
+                color="primary"
+                icon={fbicon._(
+                  ix(481882),
+                  // {
+                  //   sprited: 2,
+                  //   spi: "/assets/fb/yTUMQJovBsj.png",
+                  //   _spi: "/assets/fb/yTUMQJovBsj.png",
+                  //   w: 16,
+                  //   h: 16,
+                  //   p: "-119px -147px",
+                  //   sz: "auto",
+                  //   loggingID: "481882",
+                  // },
+                  16
+                )}
+              />
+            </div>
+          }
+          comboboxKeyDown={comboboxKeyDown}
+          cursor="pointer"
+          disabled={disabled}
+          helperText={helperText}
+          helperTextIsHidden={helperTextIsHidden}
+          label={label}
+          labelLocation_INTERNAL={labelLocation_INTERNAL}
+          labelRef={labelRef}
+          onPress={(a) => {
             if (a.target === contextRef.current) {
               return;
             }
             onShowCb();
-          },
-          role: "combobox",
-          shrinkLabelOnFocus: false,
-          validationState,
-          value,
-          children: ({ id }) => {
-            return jsx("div", {
-              className: stylex(
-                normalizeIcon !== null ? styles.wrapperWithIcon : styles.wrapper
-              ),
-              id,
-              ref: (a) => {
-                contextRef.current = a;
-              },
-              suppressHydrationWarning: true,
-              children: jsx("div", {
-                className: stylex(
-                  styles.button,
-                  // eslint-disable-next-line camelcase
-                  labelLocation_INTERNAL === "outside" &&
-                    styles.labelOutsideButton,
-                  disabled && styles.disabled,
-                  normalizeIcon !== null && styles.buttonWithIcon
-                ),
-                "data-testid": undefined,
-                children: jsx("span", {
-                  className: stylex(truncate && styles.truncated),
-                  children: selectedOptionLabel ?? "\xa0",
-                }),
-              }),
-            });
-          },
-        }),
-        isMenuVisible &&
-          jsx(BaseContextualLayer, {
-            align: size === "full" ? "stretch" : align,
-            ...rest,
-            contextRef,
-            children: jsx(FocusInertRegion, {
-              focusQuery: focusScopeQueries.tabbableScopeQuery,
-              children: jsx(CometMenuBaseWithPopover, {
-                footer: footer_deprecated
-                  ? {
-                      text: footer_deprecated,
-                    }
-                  : undefined,
-                header,
-                id: visibleId,
-                role: "listbox",
-                size,
-                truncate,
-                children: options.map((option, key) => {
+          }}
+          role="combobox"
+          shrinkLabelOnFocus={false}
+          validationState={validationState}
+          value={value}
+          children={({ id }) => {
+            return (
+              <div
+                className={stylex(
+                  normalizeIcon ? styles.wrapperWithIcon : styles.wrapper
+                )}
+                id={id}
+                ref={(node) => {
+                  contextRef.current = node;
+                }}
+                suppressHydrationWarning
+              >
+                <div
+                  className={stylex(
+                    styles.button,
+                    // eslint-disable-next-line camelcase
+                    labelLocation_INTERNAL === "outside" &&
+                      styles.labelOutsideButton,
+                    disabled && styles.disabled,
+                    normalizeIcon && styles.buttonWithIcon
+                  )}
+                  data-testid={undefined}
+                >
+                  <span className={stylex(truncate && styles.truncated)}>
+                    {selectedOptionLabel ?? "\xa0"}
+                  </span>
+                </div>
+              </div>
+            );
+          }}
+        />
+
+        {isMenuVisible && (
+          <BaseContextualLayer
+            from="comet-form-select-only-combobox"
+            align={size === "full" ? "stretch" : align}
+            {...rest}
+            contextRef={contextRef}
+          >
+            <FocusInertRegion
+              from="comet-form-select-only-combobox"
+              focusQuery={focusScopeQueries.tabbableScopeQuery}
+            >
+              <CometMenu
+                footer={
+                  footer_deprecated
+                    ? {
+                        text: footer_deprecated,
+                      }
+                    : undefined
+                }
+                header={header}
+                id={visibleId}
+                role="listbox"
+                size={size}
+                truncate={truncate}
+              >
+                {options.map((option, key) => {
                   const isSelected = option.value === value;
-                  return jsx(
-                    CometFormComboboxMenuItem,
-                    {
-                      "aria-disabled": option.disabled,
-                      "aria-setsize": options.length,
-                      auxItemType,
-                      bodyColor: option.bodyColor,
-                      bodyText: option.bodyText,
-                      disabled: option.disabled,
-                      icon: option.icon,
-                      iconType,
-                      id: mergeIds(id1, key),
-                      isSelected,
-                      onClick: () => {
+
+                  return (
+                    <CometFormComboboxMenuItem
+                      key={option.value}
+                      aria-disabled={option.disabled}
+                      aria-setsize={options.length}
+                      auxItemType={auxItemType}
+                      bodyColor={option.bodyColor}
+                      bodyText={option.bodyText}
+                      disabled={option.disabled}
+                      icon={option.icon}
+                      iconType={iconType}
+                      id={mergeIds(id1, key)}
+                      isSelected={isSelected}
+                      onClick={() => {
                         onValueChange(option.value);
                         onHideCb();
-                      },
-                      primaryText: option.label,
-                      secondaryColor: option.secondaryColor,
-                      secondaryText: option.secondaryText,
-                      testid: undefined,
-                      visuallyFocused: option.value === activeValue,
-                    },
-                    option.value
+                      }}
+                      primaryText={option.label}
+                      secondaryColor={option.secondaryColor}
+                      secondaryText={option.secondaryText}
+                      testid={undefined}
+                      visuallyFocused={option.value === activeValue}
+                    />
                   );
-                }),
-              }),
-            }),
-          }),
-      ],
-    }),
-  });
+
+                  // return jsx(
+                  //   CometFormComboboxMenuItem,
+                  //   {
+                  //     "aria-disabled": option.disabled,
+                  //     "aria-setsize": options.length,
+                  //     auxItemType,
+                  //     bodyColor: option.bodyColor,
+                  //     bodyText: option.bodyText,
+                  //     disabled: option.disabled,
+                  //     icon: option.icon,
+                  //     iconType,
+                  //     id: mergeIds(id1, key),
+                  //     isSelected,
+                  //     onClick: () => {
+                  //       onValueChange(option.value);
+                  //       onHideCb();
+                  //     },
+                  //     primaryText: option.label,
+                  //     secondaryColor: option.secondaryColor,
+                  //     secondaryText: option.secondaryText,
+                  //     testid: undefined,
+                  //     visuallyFocused: option.value === activeValue,
+                  //   },
+                  //   option.value
+                  // );
+                })}
+              </CometMenu>
+            </FocusInertRegion>
+          </BaseContextualLayer>
+        )}
+      </CometComponentWithKeyCommands>
+    </FocusWithinHandler>
+  );
+
+  // return jsx(FocusWithinHandler, {
+  //   onFocusChange,
+  //   children: jsxs(CometComponentWithKeyCommands, {
+  //     commandConfigs: disabled ? [] : commandConfigs,
+  //     children: [
+  //       jsx(CometFormInputWrapper, {
+  //         addOnStart:
+  //           normalizeIcon &&
+  //           (normalizeIcon.type === "icon"
+  //             ? jsx("div", {
+  //                 className: stylex(dummyStyles.dummy1), // 'x1swvt13 x109j2v6',
+  //                 children: jsx(CometIcon, {
+  //                   color: "secondary",
+  //                   icon: normalizeIcon.iconProps,
+  //                 }),
+  //               })
+  //             : normalizeIcon.type === "profile-picture"
+  //             ? jsx("div", {
+  //                 className: stylex(dummyStyles.dummy2), // 'x1swvt13 xz9dl7a',
+  //                 children: jsx("CometProfilePhoto.react", {
+  //                   ...normalizeIcon.iconProps,
+  //                   size: 32,
+  //                 }),
+  //               })
+  //             : null),
+  //         "aria-activedescendant":
+  //           isMenuVisible && activeValue && activeValueIndex !== -1
+  //             ? mergeIds(id1, activeValueIndex)
+  //             : undefined,
+  //         "aria-controls": isMenuVisible ? visibleId : undefined,
+  //         "aria-expanded": isMenuVisible,
+  //         "aria-haspopup": "listbox",
+  //         ariaLabel,
+  //         auxContent: jsx("div", {
+  //           className: stylex(dummyStyles.dummy3), //  'xamitd3 x1pi30zi',
+  //           children: jsx(CometIcon, {
+  //             color: "primary",
+  //             icon: fbicon._(
+  //               ix(481882),
+  //               // {
+  //               //   sprited: 2,
+  //               //   spi: "/assets/fb/yTUMQJovBsj.png",
+  //               //   _spi: "/assets/fb/yTUMQJovBsj.png",
+  //               //   w: 16,
+  //               //   h: 16,
+  //               //   p: "-119px -147px",
+  //               //   sz: "auto",
+  //               //   loggingID: "481882",
+  //               // },
+  //               16
+  //             ),
+  //           }),
+  //         }),
+  //         comboboxKeyDown,
+  //         cursor: "pointer",
+  //         disabled,
+  //         helperText,
+  //         helperTextIsHidden,
+  //         label,
+  //         // eslint-disable-next-line camelcase
+  //         labelLocation_INTERNAL,
+  //         labelRef,
+  //         onPress: function (a) {
+  //           if (a.target === contextRef.current) {
+  //             return;
+  //           }
+  //           onShowCb();
+  //         },
+  //         role: "combobox",
+  //         shrinkLabelOnFocus: false,
+  //         validationState,
+  //         value,
+  //         children: ({ id }) => {
+  //           return jsx("div", {
+  //             className: stylex(
+  //               normalizeIcon ? styles.wrapperWithIcon : styles.wrapper
+  //             ),
+  //             id,
+  //             ref: (node) => {
+  //               contextRef.current = node;
+  //             },
+  //             suppressHydrationWarning: true,
+  //             children: jsx("div", {
+  //               className: stylex(
+  //                 styles.button,
+  //                 // eslint-disable-next-line camelcase
+  //                 labelLocation_INTERNAL === "outside" &&
+  //                   styles.labelOutsideButton,
+  //                 disabled && styles.disabled,
+  //                 normalizeIcon && styles.buttonWithIcon
+  //               ),
+  //               "data-testid": undefined,
+  //               children: jsx("span", {
+  //                 className: stylex(truncate && styles.truncated),
+  //                 children: selectedOptionLabel ?? "\xa0",
+  //               }),
+  //             }),
+  //           });
+  //         },
+  //       }),
+  //       isMenuVisible &&
+  //         jsx(BaseContextualLayer, {
+  //           align: size === "full" ? "stretch" : align,
+  //           ...rest,
+  //           contextRef,
+  //           children: jsx(FocusInertRegion, {
+  //             focusQuery: focusScopeQueries.tabbableScopeQuery,
+  //             children: jsx(CometMenu, {
+  //               footer: footer_deprecated
+  //                 ? {
+  //                     text: footer_deprecated,
+  //                   }
+  //                 : undefined,
+  //               header,
+  //               id: visibleId,
+  //               role: "listbox",
+  //               size,
+  //               truncate,
+
+  //               children: options.map((option, key) => {
+  //                 const isSelected = option.value === value;
+  //                 return jsx(
+  //                   CometFormComboboxMenuItem,
+  //                   {
+  //                     "aria-disabled": option.disabled,
+  //                     "aria-setsize": options.length,
+  //                     auxItemType,
+  //                     bodyColor: option.bodyColor,
+  //                     bodyText: option.bodyText,
+  //                     disabled: option.disabled,
+  //                     icon: option.icon,
+  //                     iconType,
+  //                     id: mergeIds(id1, key),
+  //                     isSelected,
+  //                     onClick: () => {
+  //                       onValueChange(option.value);
+  //                       onHideCb();
+  //                     },
+  //                     primaryText: option.label,
+  //                     secondaryColor: option.secondaryColor,
+  //                     secondaryText: option.secondaryText,
+  //                     testid: undefined,
+  //                     visuallyFocused: option.value === activeValue,
+  //                   },
+  //                   option.value
+  //                 );
+  //               }),
+  //             }),
+  //           }),
+  //         }),
+  //     ],
+  //   }),
+  // });
 }

@@ -8,6 +8,7 @@
 /* eslint-disable no-redeclare */
 /* eslint-disable no-sequences */
 
+import emptyFunction from "fbjs/lib/emptyFunction";
 import ExecutionEnvironment from "fbjs/lib/ExecutionEnvironment";
 
 import {
@@ -15,9 +16,7 @@ import {
   recoverableViolation,
   unexpectedUseInComet,
 } from "@/faang/error";
-
-import { createCancelableFunction } from "./create-cancelable-function";
-import { emptyFunction } from "./empty-function";
+import { createCancelableFunction } from "@/faang/utils";
 
 //
 

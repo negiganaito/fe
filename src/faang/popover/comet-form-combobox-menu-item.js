@@ -47,6 +47,8 @@ export const CometFormComboboxMenuItem = (props) => {
     return Comp;
   }, [auxItemType, isSelected]);
 
+  console.log("CometFormComboboxMenuItem");
+
   return (
     <CometMenuItemBase
       {...rest}

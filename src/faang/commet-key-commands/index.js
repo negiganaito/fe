@@ -5,9 +5,11 @@
  * See the LICENSE file in the root directory for details.
  */
 export { areKeyCombinationsEqual } from "./are-key-combinations-equal";
+export { BaseKeyCommandListener } from "./base-key-command-listener";
 export { CometComponentWithKeyCommands } from "./comet-component-with-key-commands";
 export { CometKeyCommandWidget } from "./comet-key-command-widget";
 export { CometKeyCommandWrapper } from "./comet-key-command-wrapper";
+export { CometKeyboardSettingsStateProvider } from "./comet-keyboard-settings-state-provider";
 export { CometKeys } from "./comet-keys";
 export { createKeyCommand } from "./create-key-command";
 export { createKeyCommandWidget } from "./create-key-command-widget";
