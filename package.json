@@ -13,9 +13,11 @@
     "manifest": "fbt-manifest --src src/ --enum-manifest i18n/fbt/.enum_manifest.json --src-manifest i18n/fbt/.src_manifest.json",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss}'",
     "relay": "relay-compiler",
-    "translate-fbts": "fbt-translate --jenkins --source-strings i18n/fbt/source_strings.json --translations i18n/fbt/translationScriptInput/*.json > i18n/fbt/translatedFbts.json",
+    "translate-fbts:win": "for %i in (i18n\\fbt\\translationScriptInput\\*.json) do fbt-translate --jenkins --source-strings i18n\\fbt\\source_strings.json --translations %i >> i18n\\fbt\\translatedFbts.json",
+    "translate-fbts": "fbt-translate --jenkins --source-strings ./i18n/fbt/source_strings.json --translations i18n/fbt/translationScriptInput/*.json > ./i18n/fbt/translatedFbts.json",
     "upgrade": "npx npm-check-updates &&  npx npm-check-updates -u",
-    "i18n:build": "pnpm manifest && pnpm collect-fbts && pnpm generate-fbt && pnpm translate-fbts"
+    "i18n:build:win": "pnpm manifest && pnpm collect-fbts && pnpm translate-fbts:win && pnpm generate-fbt",
+    "i18n:build": "pnpm manifest && pnpm collect-fbts && pnpm translate-fbts:win && pnpm generate-fbt"
   },
   "dependencies": {
     "@stylexjs/stylex": "0.3.0",
