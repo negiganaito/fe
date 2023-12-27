@@ -37,6 +37,7 @@ yarn-error.log*
 .vercel
 
 # common_strings.json
-.source_strings.json
 .enum_manifest.json
 .src_manifest.json
+source_strings.json
+translatedFbts.json
