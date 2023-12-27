@@ -92,50 +92,52 @@ export const HomePage = () => {
         value=""
       /> */}
 
-        <CometFormSelectOnlyCombobox
-          disabled={false}
-          label="Name type"
-          value={comboboxValue}
-          onValueChange={setComboboxValue}
-          options={[
-            {
-              label: "Nickname",
-              value: "NICKNAME",
-            },
-            {
-              label: "Maiden Name",
-              value: "MAIDEN_NAME",
-            },
-            {
-              label: "Alternate Spelling",
-              value: "ALTERNATE_SPELLING",
-            },
-            {
-              label: "Married Name",
-              value: "MARRIED_NAME",
-            },
-            {
-              label: "Father's Name",
-              value: "FATHERS_NAME",
-            },
-            {
-              label: "Birth Name",
-              value: "BIRTH_NAME",
-            },
-            {
-              label: "Former Name",
-              value: "FORMER_NAME",
-            },
-            {
-              label: "Name with Title",
-              value: "NAME_WITH_TITLE",
-            },
-            {
-              label: "Other",
-              value: "OTHER",
-            },
-          ]}
-        />
+        <div style={{ width: "400px" }}>
+          <CometFormSelectOnlyCombobox
+            disabled={false}
+            label="Name type"
+            value={comboboxValue}
+            onValueChange={setComboboxValue}
+            options={[
+              {
+                label: "Nickname",
+                value: "NICKNAME",
+              },
+              {
+                label: "Maiden Name",
+                value: "MAIDEN_NAME",
+              },
+              {
+                label: "Alternate Spelling",
+                value: "ALTERNATE_SPELLING",
+              },
+              {
+                label: "Married Name",
+                value: "MARRIED_NAME",
+              },
+              {
+                label: "Father's Name",
+                value: "FATHERS_NAME",
+              },
+              {
+                label: "Birth Name",
+                value: "BIRTH_NAME",
+              },
+              {
+                label: "Former Name",
+                value: "FORMER_NAME",
+              },
+              {
+                label: "Name with Title",
+                value: "NAME_WITH_TITLE",
+              },
+              {
+                label: "Other",
+                value: "OTHER",
+              },
+            ]}
+          />
+        </div>
       </div>
     </div>
   );

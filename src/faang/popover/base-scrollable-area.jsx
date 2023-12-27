@@ -7,7 +7,7 @@
 
 /* eslint-disable no-sequences */
 
-import {
+import React, {
   forwardRef,
   useContext,
   useEffect,
@@ -16,17 +16,16 @@ import {
   useRef,
   useState,
 } from "react";
-import { jsx, jsxs } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 import Locale from "fbjs/lib/Locale";
-import UserAgent from "fbjs/lib/UserAgent";
 import ResizeObserver from "resize-observer-polyfill";
 
 import { BaseScrollableAreaContext } from "@/faang/context";
 import { useUnsafeRef_DEPRECATED, useVisibilityObserver } from "@/faang/hooks";
+import UserAgent from "@/faang/user-agent";
 import { CometDebounce } from "@/faang/utils";
 
-const oStyles = stylex.create({
+const containerStyles = stylex.create({
   baseScroller: {
     display: "flex",
     flexDirection: "column",
@@ -101,7 +100,7 @@ const oStyles = stylex.create({
   },
 });
 
-const pStyles = stylex.create({
+const scrollThumbStyles = stylex.create({
   base: {
     boxSizing: "border-box",
     display: "none",
@@ -135,7 +134,7 @@ const pStyles = stylex.create({
   },
 });
 
-const tStyles = stylex.create({
+const positionStyles = stylex.create({
   bottom: {
     bottom: "0",
   },
@@ -250,8 +249,8 @@ const dummyStyles = stylex.create({
 });
 
 // d("Locale").isRTL()
-const q = Locale.isRTL();
-const r = false;
+const isRTL = Locale.isRTL();
+const isIE11 = false;
 
 export const BaseScrollableArea = forwardRef(
   // eslint-disable-next-line complexity
@@ -284,39 +283,41 @@ export const BaseScrollableArea = forwardRef(
 
     // const dummyClasses = useDummyStyles();
 
-    const J = useMemo(() => {
+    const shouldUseDefaultScrolling = useMemo(() => {
       return (
-        forceBrowserDefault || !vertical || hideScrollbar || horizontal || x()
+        forceBrowserDefault ||
+        !vertical ||
+        hideScrollbar ||
+        horizontal ||
+        shouldUseCustomScrolling()
       );
     }, [forceBrowserDefault, vertical, hideScrollbar, horizontal]);
 
     const [mouseEnter, setMouseEnter] = useState(false);
-    const [N, O] = useState(false);
-    const [aa, P] = useState(false);
+    const [isScrolling, setIsScrolling] = useState(false);
+    const [hasScrollTimeout, setHasScrollTimeout] = useState(false);
 
-    const Q = useContext(BaseScrollableAreaContext);
+    const scrollableAreaContext = useContext(BaseScrollableAreaContext);
 
     const R = useRef(null);
-    const S = useUnsafeRef_DEPRECATED(null);
-    const T = useRef(null);
-    const U = useRef(null);
-    const V = useRef(null);
-    const W = useRef(0);
+    const scrollerRef = useUnsafeRef_DEPRECATED(null);
+    const topShadowRef = useRef(null);
+    const bottomShadowRef = useRef(null);
+    const thumbRef = useRef(null);
+    const thumbPositionRef = useRef(0);
 
     useEffect(() => {
       let a;
-      if (J) {
+      if (shouldUseDefaultScrolling) {
         return;
       }
-      let b = S.current;
+      let b = scrollerRef.current;
       let d = R.current;
-      let f =
-        (a = contentRef === null ? void 0 : contentRef.current) !== null
-          ? a
-          : d;
-      let g = U.current;
-      let h = T.current;
-      if (d === null || f === null || b === null || h === null || g === null) {
+      // eslint-disable-next-line no-cond-assign
+      let f = (a = !contentRef ? undefined : contentRef.current) ? a : d;
+      let g = bottomShadowRef.current;
+      let h = topShadowRef.current;
+      if (!d || !f || !b || !h || !g) {
         return;
       }
       let i = 0;
@@ -333,12 +334,12 @@ export const BaseScrollableArea = forwardRef(
         let m = k !== 0;
         k = Math.ceil(a.height - k);
         j = a.top;
-        W.current = m ? l : e;
-        l = W.current;
+        thumbPositionRef.current = m ? l : e;
+        l = thumbPositionRef.current;
         i = Math.pow(k, 2) / l;
         h.style.height = l <= k ? "0px" : i + "px";
         g.style.height = l + "px";
-        q
+        isRTL
           ? ((h.style.left = "0px"), (g.style.left = "0px"))
           : ((h.style.right = "0px"), (g.style.right = "0px"));
         e = b.scrollTop;
@@ -358,12 +359,12 @@ export const BaseScrollableArea = forwardRef(
         g.style.display = l <= k ? "none" : "block";
       };
       const k = function (a) {
-        s(a);
+        preventDefaultAndStopPropagation(a);
         let c = a.clientY;
         a = b.clientHeight;
         let d = b.scrollTop;
-        P(true);
-        let e = W.current / a;
+        setHasScrollTimeout(true);
+        let e = thumbPositionRef.current / a;
         a = d / e;
         if (c < j + a || c > j + a + i) {
           let f = c < j + a ? -20 : 20;
@@ -375,17 +376,17 @@ export const BaseScrollableArea = forwardRef(
               });
           }, 16);
           a = function a(b) {
-            s(b),
+            preventDefaultAndStopPropagation(b),
               k && window.clearInterval(k),
               window.removeEventListener("mouseup", a, true),
               g.removeEventListener("mouseenter", l),
               g.removeEventListener("mouseleave", m);
           };
           let l = function (a) {
-            s(a), (h = true);
+            preventDefaultAndStopPropagation(a), (h = true);
           };
           let m = function (a) {
-            s(a), (h = false);
+            preventDefaultAndStopPropagation(a), (h = false);
           };
           window.addEventListener("mouseup", a, true);
           g.addEventListener("mouseenter", l);
@@ -393,15 +394,15 @@ export const BaseScrollableArea = forwardRef(
           return;
         }
         let n = function (a) {
-          s(a);
+          preventDefaultAndStopPropagation(a);
           a = a.clientY - c;
           b.scrollTo({
             top: d + a * e,
           });
         };
         a = function a(b) {
-          s(b),
-            P(false),
+          preventDefaultAndStopPropagation(b),
+            setHasScrollTimeout(false),
             window.removeEventListener("mousemove", n, true),
             window.removeEventListener("mouseup", a, true);
         };
@@ -422,7 +423,7 @@ export const BaseScrollableArea = forwardRef(
           m.disconnect(),
           l.reset();
       };
-    }, [contentRef, S, J]);
+    }, [contentRef, scrollerRef, shouldUseDefaultScrolling]);
 
     const onMouseEnter = function () {
       setMouseEnter(true);
@@ -432,25 +433,25 @@ export const BaseScrollableArea = forwardRef(
       return setMouseEnter(false);
     };
 
-    const onScrollFunc = function (a) {
+    const onScrollHandler = function (a) {
       onScroll && onScroll(a),
-        O(true),
-        V.current && window.clearTimeout(V.current),
-        (V.current = window.setTimeout(() => {
-          O(false);
+        setIsScrolling(true),
+        thumbRef.current && window.clearTimeout(thumbRef.current),
+        (thumbRef.current = window.setTimeout(() => {
+          setIsScrolling(false);
         }, 1e3));
     };
 
     useEffect(() => {
       return function () {
-        window.clearTimeout(V.current);
+        window.clearTimeout(thumbRef.current);
       };
     }, []);
 
-    const Y = useMemo(() => {
+    const positionMarkerProps = useMemo(() => {
       return {
         getDOMNode: function () {
-          return S.current;
+          return scrollerRef.current;
         },
       };
     }, []);
@@ -459,161 +460,161 @@ export const BaseScrollableArea = forwardRef(
       ref,
       // @ts-ignore
       () => {
-        return Y;
+        return positionMarkerProps;
       },
-      [Y]
+      [positionMarkerProps]
     );
 
-    const b = useMemo(() => {
+    const contextProviders = useMemo(() => {
       // @ts-ignore
-      return [].concat(Q, [Y]);
-    }, [Y, Q]);
+      return [].concat(scrollableAreaContext, [positionMarkerProps]);
+    }, [positionMarkerProps, scrollableAreaContext]);
 
-    const TopShadowComppnent = jsx("div", {
-      className: stylex(dummyStyles.dummy1),
-      // 'x78zum5 xdt5ytf x2lah0s x10wjd1d xds687c x17qophe x47corl x7wzq59 x1vjfegm x19bjbvb x1nhvcw1 xepu288',
-      children: jsx("div", {
-        className: stylex(dummyStyles.dummy2),
-        // 'x2lah0s xlup9mm x7wzq59 x7r5tp8 x1s928wv x1a5uphr x1j6awrg x1s71c9q x4eaejv x13vifvy',
-      }),
-    });
+    const TopShadowComp = (
+      <div className={stylex(dummyStyles.dummy1)}>
+        <div className={stylex(dummyStyles.dummy2)} />
+      </div>
+    );
 
-    const BottomShadowComppnent = jsx("div", {
-      className: stylex(dummyStyles.dummy3),
-      // 'x78zum5 xdt5ytf x2lah0s x10wjd1d xds687c x17qophe x47corl x7wzq59 x1vjfegm x1l3hj4d x1vjtdzu x13a6bvl x1yztbdb',
-      children: jsx("div", {
-        className: stylex(dummyStyles.dummy4),
-        // 'x2lah0s xlup9mm x7wzq59 x7r5tp8 x1s928wv x1a5uphr x1j6awrg x1s71c9q x4eaejv x1ey2m1c xtjevij',
-      }),
-    });
+    const BottomShadowComp = (
+      <div className={stylex(dummyStyles.dummy3)}>
+        <div className={stylex(dummyStyles.dummy4)} />
+      </div>
+    );
 
-    return J
-      ? jsx(BaseScrollableAreaContext.Provider, {
-          value: b,
-          children: jsxs("div", {
-            ...rest,
-            className: stylex(
-              oStyles["default"],
-              expanding && (r ? oStyles.expandingIE11 : oStyles.expanding),
-              hideScrollbar && oStyles.hideScrollbar,
-              horizontal && oStyles.horizontalAuto,
-              vertical && oStyles.verticalAuto,
+    if (shouldUseDefaultScrolling) {
+      return (
+        <BaseScrollableAreaContext.Provider value={contextProviders}>
+          <div
+            {...rest}
+            className={stylex(
+              containerStyles.default,
+              expanding &&
+                (isIE11
+                  ? containerStyles.expandingIE11
+                  : containerStyles.expanding),
+              hideScrollbar && containerStyles.hideScrollbar,
+              horizontal && containerStyles.horizontalAuto,
+              vertical && containerStyles.verticalAuto,
               xstyle
-            ),
-            "data-testid": void 0,
-            id: id,
-            onScroll: onScrollFunc,
-            ref: S,
-            style,
-            tabIndex,
-            children: [
-              withTopShadow && TopShadowComppnent,
-              jsxs("div", {
-                className: stylex(
-                  oStyles.baseScroller,
-                  horizontal && !vertical && oStyles.baseScrollerHorizontal,
-                  withTopShadow && oStyles.baseScrollerWithTopShadow,
-                  withBottomShadow && oStyles.baseScrollerWithBottomShadow
-                ),
-                children: [
-                  onScrollTop
-                    ? jsx(onScrollTopComp, {
-                        onVisible: onScrollTop,
-                        scrollerRef: S,
-                      })
-                    : null,
-                  children,
-                  onScrollBottom
-                    ? jsx(v, {
-                        onVisible: onScrollBottom,
-                        scrollerRef: S,
-                      })
-                    : null,
-                ],
-              }),
-              withBottomShadow && BottomShadowComppnent,
-            ],
-          }),
-        })
-      : jsx(BaseScrollableAreaContext.Provider, {
-          value: b,
-          children: jsxs("div", {
-            ...rest,
-            className: stylex(
-              oStyles.default,
-              oStyles.hideScrollbar,
-              expanding && (r ? oStyles.expandingIE11 : oStyles.expanding),
-              oStyles.perspective,
-              q && oStyles.perspectiveRTL,
-              horizontal && oStyles.horizontalAuto,
-              vertical && oStyles.verticalAuto,
+            )}
+            data-testid={undefined}
+            id={id}
+            onScroll={onScrollHandler}
+            ref={scrollerRef}
+            style={style}
+            tabIndex={tabIndex}
+          >
+            {withTopShadow && TopShadowComp}
+            <div
+              className={stylex(
+                containerStyles.baseScroller,
+                horizontal &&
+                  !vertical &&
+                  containerStyles.baseScrollerHorizontal,
+                withTopShadow && containerStyles.baseScrollerWithTopShadow,
+                withBottomShadow && containerStyles.baseScrollerWithBottomShadow
+              )}
+            >
+              {onScrollTop && (
+                <OnScrollTopComp
+                  onVisible={onScrollTop}
+                  scrollerRef={scrollerRef}
+                />
+              )}
+              {children}
+              {onScrollBottom && (
+                <OnScrollBottomComp
+                  onVisible={onScrollBottom}
+                  scrollerRef={scrollerRef}
+                />
+              )}
+            </div>
+            {withBottomShadow && BottomShadowComp}
+          </div>
+        </BaseScrollableAreaContext.Provider>
+      );
+    } else {
+      return (
+        <BaseScrollableAreaContext.Provider value={contextProviders}>
+          <div
+            {...rest}
+            className={stylex(
+              containerStyles.default,
+              containerStyles.hideScrollbar,
+              expanding &&
+                (isIE11
+                  ? containerStyles.expandingIE11
+                  : containerStyles.expanding),
+              containerStyles.perspective,
+              isRTL && containerStyles.perspectiveRTL,
+              horizontal && containerStyles.horizontalAuto,
+              vertical && containerStyles.verticalAuto,
               xstyle
-            ),
-            "data-scrolltracepolicy": scrollTracePolicy,
-            "data-testid": void 0,
-            id,
-            onMouseEnter: onMouseEnter,
-            onMouseLeave: onMouseLeave,
-            onScroll: onScrollFunc,
-            ref: S,
-            style,
-            tabIndex,
-            children: [
-              withTopShadow && TopShadowComppnent,
-              jsxs("div", {
-                className: stylex(
-                  oStyles.baseScroller,
-                  horizontal && !vertical && oStyles.baseScrollerHorizontal,
-                  withTopShadow && oStyles.baseScrollerWithTopShadow,
-                  withBottomShadow && oStyles.baseScrollerWithBottomShadow
-                ),
-                ref: R,
-                children: [
-                  onScrollTop
-                    ? jsx(onScrollTopComp, {
-                        onVisible: onScrollTop,
-                        scrollerRef: S,
-                      })
-                    : null,
-                  children,
-                  onScrollBottom
-                    ? jsx(v, {
-                        onVisible: onScrollBottom,
-                        scrollerRef: S,
-                      })
-                    : null,
-                ],
-              }),
-              withBottomShadow && BottomShadowComppnent,
-              jsx("div", {
-                className: stylex(dummyStyles.dummy5),
-                // 'x14nfmen x1s85apg x5yr21d xds687c xg01cxk x10l6tqk x13vifvy x1wsgiic x19991ni xwji4o3 x1kky2od x1sd63oq',
-
-                // c('CometVisualCompletionAttributes').IGNORE,
-                "data-thumb": 1,
-                ref: U,
-              }),
-              jsx("div", {
-                className: stylex(
-                  pStyles.base,
-                  q && pStyles.rtl,
-                  (mouseEnter || N || aa) && pStyles.hovered
-                ),
-                // c('CometVisualCompletionAttributes').IGNORE,
-                "data-thumb": 1,
-                ref: T,
-                children: jsx("div", {
-                  className: stylex(pStyles.dummy6),
-                  // 'x1hwfnsy x1lcm9me x1yr5g0i xrt01vj x10y3i5r x5yr21d xh8yej3',
-                }),
-              }),
-            ],
-          }),
-        });
+            )}
+            data-scrolltracepolicy={scrollTracePolicy}
+            data-testid={undefined}
+            id={id}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            onScroll={onScrollHandler}
+            ref={scrollerRef}
+            style={style}
+            tabIndex={tabIndex}
+          >
+            {withTopShadow && TopShadowComp}
+            <div
+              className={stylex(
+                containerStyles.baseScroller,
+                horizontal &&
+                  !vertical &&
+                  containerStyles.baseScrollerHorizontal,
+                withTopShadow && containerStyles.baseScrollerWithTopShadow,
+                withBottomShadow && containerStyles.baseScrollerWithBottomShadow
+              )}
+              ref={R}
+            >
+              {onScrollTop && (
+                <OnScrollTopComp
+                  onVisible={onScrollTop}
+                  scrollerRef={scrollerRef}
+                />
+              )}
+              {children}
+              {onScrollBottom && (
+                <OnScrollBottomComp
+                  onVisible={onScrollBottom}
+                  scrollerRef={scrollerRef}
+                />
+              )}
+            </div>
+            {withBottomShadow && BottomShadowComp}
+            <div
+              className={stylex(dummyStyles.dummy5)}
+              data-thumb={1}
+              ref={bottomShadowRef}
+            />
+            <div
+              className={stylex(
+                scrollThumbStyles.base,
+                isRTL && scrollThumbStyles.rtl,
+                (mouseEnter || isScrolling || hasScrollTimeout) &&
+                  scrollThumbStyles.hovered
+              )}
+              data-thumb={1}
+              ref={topShadowRef}
+            >
+              <div className={stylex(scrollThumbStyles.dummy6)} />
+            </div>
+          </div>
+        </BaseScrollableAreaContext.Provider>
+      );
+    }
   }
 );
 
-function x() {
+// TODO: bug
+function shouldUseCustomScrolling() {
   return (
     UserAgent.isPlatform("iOS") ||
     UserAgent.isPlatform("Android") ||
@@ -621,15 +622,17 @@ function x() {
     UserAgent.isBrowser("IE") ||
     UserAgent.isBrowser("Firefox < 64")
   );
+
+  // return false;
 }
 
-const s = function (a) {
+const preventDefaultAndStopPropagation = function (a) {
   a.preventDefault();
   a.stopPropagation();
   a.stopImmediatePropagation();
 };
 
-function u(a) {
+function CreatePositionMarkerComp(a) {
   let b = a.onVisible;
   let d = a.scrollerRef;
   a = a.xstyle;
@@ -645,28 +648,29 @@ function u(a) {
       rootMargin: 0,
     },
   });
-  return jsx("div", {
-    className: stylex(tStyles.main, a),
-    ref: b,
-  });
+  return <div className={stylex(positionStyles.main, a)} ref={b} />;
 }
 
-function onScrollTopComp(a) {
+function OnScrollTopComp(a) {
   let b = a.onVisible;
   a = a.scrollerRef;
-  return jsx(u, {
-    onVisible: b,
-    scrollerRef: a,
-    className: tStyles.top,
-  });
+  return (
+    <CreatePositionMarkerComp
+      onVisible={b}
+      scrollerRef={a}
+      xstyle={stylex(positionStyles.top)}
+    />
+  );
 }
 
-function v(a) {
+function OnScrollBottomComp(a) {
   let b = a.onVisible;
   a = a.scrollerRef;
-  return jsx(u, {
-    onVisible: b,
-    scrollerRef: a,
-    xstyle: tStyles.bottom,
-  });
+  return (
+    <CreatePositionMarkerComp
+      onVisible={b}
+      scrollerRef={a}
+      xstyle={stylex(positionStyles.bottom)}
+    />
+  );
 }

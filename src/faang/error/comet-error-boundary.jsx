@@ -14,6 +14,7 @@ const cometErrorBoundary = (props, ref) => {
 
   return (
     <ErrorBoundary
+      {...props}
       augmentError={metadata}
       fallback={props.fallback}
       ref={ref}

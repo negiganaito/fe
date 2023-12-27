@@ -32,7 +32,8 @@
     "react-dom": "git://github.com/tienlx97/react-dom-experimental.git#www",
     "react-loadable": "^5.5.0",
     "react-relay": "^16.0.0",
-    "resize-observer-polyfill": "1.5.1"
+    "resize-observer-polyfill": "1.5.1",
+    "ua-parser-js": "1.0.37"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",

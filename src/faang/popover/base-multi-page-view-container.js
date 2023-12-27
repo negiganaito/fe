@@ -285,7 +285,7 @@ export const BaseMultiPageViewContainer = forwardRef(
     return jsx("div", {
       className: stylex(styles.root, xstyle),
       ref: a,
-      // c('testID')('BaseMultiStepContainer'),
+      ...testID("BaseMultiStepContainer"),
       children: pageHistory.map((a, b) => {
         return jsx(
           "div",

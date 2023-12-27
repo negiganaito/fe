@@ -163,7 +163,6 @@ function w(a) {
 }
 
 function createFocusGroup(a) {
-  let b = unstable_Scope;
   let c = createContext(null);
   let e = createContext(null);
   function g(e) {
@@ -400,7 +399,7 @@ function createFocusGroup(a) {
     };
     return jsx(e.Provider, {
       value: m,
-      children: jsx(b, {
+      children: jsx(unstable_Scope, {
         ref: y,
         children: g,
       }),
