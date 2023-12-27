@@ -1,3 +1,11 @@
+# JSDOC
+
+```jsx
+/**
+ * @type React.ForwardRefRenderFunction<React.FunctionComponent, import("./types").BaseImage_DEPRECATEDProps>
+ */
+```
+
 # WorkSigninPasswordTextBox
 
 - CometFormTextInput
@@ -37,6 +45,15 @@
         - BaseButton
           - BaseButtonPopoverContext
           - Pressable
+            - WebPressable
+              - UserAgent
+              - WebPressability
+                - ReactContextMenuEvent
+                - ReactFocusEvent
+                - ReactHoverEvent
+                - ReactPressEvent
+              - WebPressableGroupContext
+              - passiveEventListenerUtil
           - PressableText
           - useFeedPressEventHandler
         - BaseFocusRing

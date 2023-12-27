@@ -14,7 +14,7 @@ coverage
 out/
 
 # production
-build
+build/
 production
 public/uploads/**/
 
@@ -35,3 +35,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# common_strings.json
+.enum_manifest.json
+.src_manifest.json
+source_strings.json
+translatedFbts.json
