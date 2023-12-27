@@ -6,8 +6,7 @@
  */
 
 import React from "react";
-import { jsx, jsxs } from "react/jsx-runtime";
-import executionEnvironment from "fbjs/lib/ExecutionEnvironment";
+import ExecutionEnvironment from "fbjs/lib/ExecutionEnvironment";
 
 import { BaseContextualLayerAnchorRootContext } from "@/faang/context";
 import { BaseDOMContainer } from "@/faang/dialog";
@@ -15,20 +14,31 @@ import { useStable, useUnsafeRef_DEPRECATED } from "@/faang/hooks";
 
 export const BaseContextualLayerAnchorRoot = ({ children }) => {
   const el = useStable(() =>
-    executionEnvironment.canUseDOM ? document.createElement("div") : null
+    ExecutionEnvironment.canUseDOM ? document.createElement("div") : null
   );
 
   const baseContextualLayerAnchorRootValue = useUnsafeRef_DEPRECATED(el);
 
-  return jsxs(React.Fragment, {
-    children: [
-      jsx(BaseContextualLayerAnchorRootContext.Provider, {
-        children,
-        value: baseContextualLayerAnchorRootValue,
-      }),
-      jsx(BaseDOMContainer, {
-        node: el,
-      }),
-    ],
-  });
+  return (
+    <>
+      <BaseContextualLayerAnchorRootContext.Provider
+        value={baseContextualLayerAnchorRootValue}
+      >
+        {children}
+      </BaseContextualLayerAnchorRootContext.Provider>
+      <BaseDOMContainer node={el} />
+    </>
+  );
+
+  // return jsxs(React.Fragment, {
+  //   children: [
+  //     jsx(BaseContextualLayerAnchorRootContext.Provider, {
+  //       children,
+  //       value: baseContextualLayerAnchorRootValue,
+  //     }),
+  //     jsx(BaseDOMContainer, {
+  //       node: el,
+  //     }),
+  //   ],
+  // });
 };

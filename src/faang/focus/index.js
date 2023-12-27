@@ -5,4 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 export { BaseFocusRing } from "./base-focus-ring";
+export { CometFocusGroupFirstLetterNavigation } from "./comet-focus-group-first-letter-navigation";
+export { CometMenuFocusGroup } from "./comet-menu-focus-group";
+export { FocusGroup } from "./focus-group";
 export { FocusWithinHandler } from "./focus-within-handler";

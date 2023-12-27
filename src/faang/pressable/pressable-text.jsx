@@ -168,9 +168,16 @@ export function PressableText(props) {
 
   const onClickCbFunc = useCallback(
     (event) => {
-      onPress && onPress(event)(onPress || link) && event.stopPropagation();
-      handleClickEventAndPreventDefault(event, preventDefault) &&
+      if (onPress) {
+        onPress(event);
+      }
+      if (onPress || link) {
+        event.stopPropagation();
+      }
+
+      if (handleClickEventAndPreventDefault(event, preventDefault)) {
         event.nativeEvent.preventDefault();
+      }
     },
     [link, onPress, preventDefault]
   );

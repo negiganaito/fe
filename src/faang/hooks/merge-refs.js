@@ -21,8 +21,10 @@ export function mergeRefs(...refs) {
 
       if (typeof ref === "function") {
         ref(node);
+        return;
       } else if (typeof ref === "object") {
         ref.current = node;
+        return;
       }
 
       recoverableViolation(

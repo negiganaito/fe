@@ -8,6 +8,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "@tanstack/react-router";
 
+import { CometKeyboardSettingsStateProvider } from "@/faang/commet-key-commands";
 import { WorkGalahadDarkModeStateProvider } from "@/galahad/provider";
 
 import "../i18n/fbtInit";
@@ -21,8 +22,10 @@ const rootElement = document.getElementById("root");
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <WorkGalahadDarkModeStateProvider>
-      <RouterProvider router={router} />
-    </WorkGalahadDarkModeStateProvider>
+    <CometKeyboardSettingsStateProvider>
+      <WorkGalahadDarkModeStateProvider>
+        <RouterProvider router={router} />
+      </WorkGalahadDarkModeStateProvider>
+    </CometKeyboardSettingsStateProvider>
   );
 }

@@ -1,5 +1,10 @@
 {
   "Hide password": "Hide password",
   "Show password": "Show password",
-  "Loading...": "Loading..."
+  "Loading...": "Loading...",
+  "Previous item": "Previous item",
+  "Next item": "Next item",
+  "Disabled": "Disabled",
+  "Enabled": "Enabled",
+  "Back": "Back"
 }

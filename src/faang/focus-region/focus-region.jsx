@@ -4,8 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import {
-  unstable_Scope,
+import React, {
+  unstable_Scope as Unstable_Scope,
   useCallback,
   useContext,
   useEffect,
@@ -13,7 +13,6 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { jsx } from "react/jsx-runtime";
 
 import { ActiveFocusRegionUtilsContext } from "@/faang/context";
 import { useUnsafeRef_DEPRECATED } from "@/faang/hooks";
@@ -54,21 +53,17 @@ export function _FocusRegion({
   stopOnFocusWithinPropagation,
   recoverFocusQuery,
 }) {
-  const w =
-    recoverFocusStrategy === undefined
-      ? FocusRegionType.Nearest
-      : recoverFocusStrategy;
+  const w = !recoverFocusStrategy
+    ? FocusRegionType.RecoverFocusStrategy.Nearest
+    : recoverFocusStrategy;
 
-  let y =
-    stopOnFocusWithinPropagation === undefined
-      ? true
-      : stopOnFocusWithinPropagation;
+  let y = !stopOnFocusWithinPropagation ? true : stopOnFocusWithinPropagation;
   const z = useRef(null);
   const A = useRef(null);
   const B = useContext(ActiveFocusRegionUtilsContext);
 
   const a =
-    !B && (autoRestoreFocus || onEscapeFocusRegion)
+    !B && (autoRestoreFocus === true || onEscapeFocusRegion)
       ? document.activeElement
       : null;
   let C = useUnsafeRef_DEPRECATED(a);
@@ -98,7 +93,7 @@ export function _FocusRegion({
           } else if (!E.restorationFocusRegionItem) {
             b = !a ? undefined : a.restorationFocusRegionItem;
             E.restorationFocusRegionItem = b;
-            a && (!b ? undefined : b.triggeredFocusRegionItems.delete(a));
+            a && (!b ? undefined : b.triggeredFocusRegionItems["delete"](a));
             !b ? undefined : b.triggeredFocusRegionItems.add(E);
             B.setActiveFocusRegion(E);
             return;
@@ -118,11 +113,11 @@ export function _FocusRegion({
       E.scope = a;
       let b = G.current;
       forwardRef && (forwardRef.current = a);
-      b && b !== id && !_map.get(b) && _map.delete(b);
+      b && b !== id && !_map.get(b) && _map["delete"](b);
       id &&
         (a
           ? ((G.current = id), _map.set(id, a))
-          : !_map.get(id) && _map.delete(id));
+          : !_map.get(id) && _map["delete"](id));
     },
     [forwardRef, id, E]
   );
@@ -178,7 +173,7 @@ export function _FocusRegion({
                   return;
                 }
               }
-              if (w === FocusRegionType.Nearest)
+              if (w === FocusRegionType.RecoverFocusStrategy.Nearest)
                 for (m = g + 1; m < f.length; m++) {
                   l = f[m];
                   if (i.has(l)) {
@@ -356,11 +351,12 @@ export function _FocusRegion({
     };
   }, [B, autoRestoreFocus, H, E, D]);
 
-  return jsx(unstable_Scope, {
-    children: children,
-    id: id,
-    ref,
-  });
+  return (
+    // eslint-disable-next-line react/jsx-pascal-case
+    <Unstable_Scope id={id} ref={ref}>
+      {children}
+    </Unstable_Scope>
+  );
 }
 
 // function o(a, preventScroll, focusWithoutUserIntent) {
