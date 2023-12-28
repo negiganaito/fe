@@ -6,6 +6,7 @@
  */
 export { addAnnotations } from "./add-annotations";
 export { calculateBaseContextualLayerPosition } from "./calculate-base-contextual-layer-position";
+export { clearTimeout } from "./clear-timeout";
 export { CometDebounce } from "./comet-debounce";
 export { createCancelableFunction } from "./create-cancelable-function";
 export { cssUserAgentSupports } from "./css-useragent-supports";
@@ -23,6 +24,7 @@ export { ix } from "./ix";
 export { memoizeWithArgs } from "./memoize-with-args";
 export { processBaseInputValidators } from "./process-base-input-validators";
 export { PromiseAnnotate } from "./promise-annotate";
+export { setTimeout } from "./set-timeout";
 export { sprintf } from "./sprintf";
 export { stylexCompat } from "./stylex-compat";
 export { stylexCompose } from "./stylex-compose";

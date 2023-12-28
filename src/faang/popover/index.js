@@ -23,6 +23,7 @@ export { CometMenuItemBase } from "./comet-menu-item-base";
 export { CometMenuItemIcon } from "./comet-menu-item-icon";
 export { CometPopover } from "./comet-popover";
 export { CometPopoverLoadingStateContent } from "./comet-popover-loading-state-content";
+export { CometSelectMenuTrigger } from "./comet-select-menu-trigger";
 export { getItemRoleFromCompositeRole } from "./get-item-role-from-composite-role";
 export { getListCellAddOn } from "./get-list-cell-add-on";
 export { HiddenSubtreeContextProvider } from "./hidden-subtree-context-provider";
