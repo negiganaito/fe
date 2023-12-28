@@ -11,6 +11,7 @@ import { fbicon } from "@/faang/icon";
 import { CometSelect } from "@/faang/select";
 import { TetraButton, TetraCircleButton } from "@/faang/tetra-button";
 import { TetraText, TetraTextPairing } from "@/faang/tetra-text";
+import { CometFormTextArea } from "@/faang/text-area";
 // eslint-disable-next-line no-unused-vars
 import { WorkSigninPasswordTextBox } from "@/faang/text-box";
 import { ix } from "@/faang/utils";
@@ -19,6 +20,10 @@ import { ix } from "@/faang/utils";
 export const HomePage = () => {
   const [comboboxValue, setComboboxValue] = React.useState("MARRIED_NAME");
   const [selectValue, setSelectValue] = React.useState("SINGLE");
+
+  const [state, setState] = React.useState(
+    "だれでもない。だれ　でもいたくないです。"
+  );
 
   return (
     <div style={{ height: "100vh" }}>
@@ -227,6 +232,18 @@ export const HomePage = () => {
             url: "/login",
           }}
         />
+
+        <div style={{ width: "400px" }}>
+          <CometFormTextArea
+            label="Favorite quotes"
+            disabled={false}
+            value={state}
+            onValueChange={(val, e) => {
+              setState(val);
+            }}
+            minRows={3}
+          />
+        </div>
 
         <div style={{ height: "1rem" }} />
       </div>
