@@ -414,7 +414,7 @@ hr {
   overscroll-behavior-y: none;
 }
 
-.focused {
+/* .focused {
   outline: 2px solid Highlight;
 }
 
@@ -429,15 +429,15 @@ hr {
     0 0 0 2px var(--always-white),
     0 0 0 4px var(--base-blue);
   outline: none;
-}
+} */
 
-@media (forced-colors: active) {
+/* @media (forced-colors: active) {
   .newFocused {
     outline: transparent auto 2px !important;
   }
-}
+} */
 
-.newFocusedInset {
+/* .newFocusedInset {
   box-shadow:
     inset 0 0 0 2px var(--base-blue),
     inset 0 0 0 4px var(--always-white);
@@ -450,10 +450,10 @@ hr {
 
 .unfocused {
   outline: none;
-}
+} */
 
 
-.xcza8v6 {
+/* .xcza8v6 {
   color: var(--secondary-icon);
 }
 
@@ -471,4 +471,20 @@ hr {
 
 .x1k90msu {
   transition-duration: var(--fds-fast);
+} */
+
+/*  */
+
+._9dls {
+  overflow-y: scroll !important
+}
+
+._9dls ._6s5d {
+  overflow-y: visible !important
+}
+
+._6s5d {
+  background-color: var(--web-wash);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none
 }
