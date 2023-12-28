@@ -7,6 +7,7 @@
 import React from "react";
 
 import { CometFormSelectOnlyCombobox } from "@/faang/combo-box";
+import { CometSelect } from "@/faang/select";
 import { TetraButton } from "@/faang/tetra-button";
 import { TetraText, TetraTextPairing } from "@/faang/tetra-text";
 // eslint-disable-next-line no-unused-vars
@@ -15,6 +16,7 @@ import { WorkSigninPasswordTextBox } from "@/faang/text-box";
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {
   const [comboboxValue, setComboboxValue] = React.useState("MARRIED_NAME");
+  const [selectValue, setSelectValue] = React.useState("SINGLE");
 
   return (
     <div style={{ height: "100vh" }}>
@@ -137,6 +139,81 @@ export const HomePage = () => {
                 value: "OTHER",
               },
             ]}
+          />
+        </div>
+
+        <div style={{ width: "400px" }}>
+          <CometSelect
+            testid={undefined}
+            selectedValue={selectValue}
+            options={[
+              {
+                label: "Status",
+                testid: "ProfileCometRelationshipStatusOption-Status",
+                value: "UNSPECIFIED",
+              },
+              {
+                label: "Single",
+                testid: "ProfileCometRelationshipStatusOption-Single",
+                value: "SINGLE",
+              },
+              {
+                label: "In a relationship",
+                testid:
+                  "ProfileCometRelationshipStatusOption-In a relationship",
+                value: "IN_A_RELATIONSHIP",
+              },
+              {
+                label: "Engaged",
+                testid: "ProfileCometRelationshipStatusOption-Engaged",
+                value: "ENGAGED",
+              },
+              {
+                label: "Married",
+                testid: "ProfileCometRelationshipStatusOption-Married",
+                value: "MARRIED",
+              },
+              {
+                label: "In a civil union",
+                testid: "ProfileCometRelationshipStatusOption-In a civil union",
+                value: "CIVIL_UNION",
+              },
+              {
+                label: "In a domestic partnership",
+                testid:
+                  "ProfileCometRelationshipStatusOption-In a domestic partnership",
+                value: "DOMESTIC_PARTNERSHIP",
+              },
+              {
+                label: "In an open relationship",
+                testid:
+                  "ProfileCometRelationshipStatusOption-In an open relationship",
+                value: "OPEN_RELATIONSHIP",
+              },
+              {
+                label: "It's complicated",
+                testid: "ProfileCometRelationshipStatusOption-It's complicated",
+                value: "COMPLICATED",
+              },
+              {
+                label: "Separated",
+                testid: "ProfileCometRelationshipStatusOption-Separated",
+                value: "SEPARATED",
+              },
+              {
+                label: "Divorced",
+                testid: "ProfileCometRelationshipStatusOption-Divorced",
+                value: "DIVORCED",
+              },
+              {
+                label: "Widowed",
+                testid: "ProfileCometRelationshipStatusOption-Widowed",
+                value: "WIDOWED",
+              },
+            ]}
+            onChange={(val) => {
+              setSelectValue(val);
+            }}
           />
         </div>
       </div>

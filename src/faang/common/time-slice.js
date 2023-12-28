@@ -6,13 +6,13 @@
  */
 
 import { ErrorGuard } from "@/faang/error";
-import { env } from "@/faang/utils";
 
+// import { env } from "@/faang/utils";
 import { IntervalTrackingBoundedBuffer } from "./interval-tracking-bounded-buffer";
 
 // __d("TimeSliceSham", ["Env", "ErrorGuard", "IntervalTrackingBoundedBuffer"], (function(a, b, c, d, e, f) {
 
-let c = env.timesliceBufferSize ?? 5e3;
+let c = 5e3; // env.timesliceBufferSize ?? 5e3;
 
 const intervalTrackingBoundedBuffer = new IntervalTrackingBoundedBuffer(c);
 export const TimeSlice = {
