@@ -6,4 +6,6 @@
  */
 export { BaseButton } from "./base-button";
 export { BaseStyledButton } from "./base-styled-button";
+export { CometCircleButton } from "./comet-circle-button";
 export { TetraButton } from "./tetra-button";
+export { TetraCircleButton } from "./tetra-circle-button";
