@@ -22,6 +22,7 @@ export {
   mergeRefs as mergeRefs_Legacy,
   useMergeRefs as useMergeRefs_Legacy,
 } from "./use-merge-refs.legacy";
+export { usePrevious } from "./use-previous";
 export { useResizeObserver } from "./use-resize-observer";
 export { useStable } from "./use-stable";
 export { useTooltipDelayedContent } from "./use-tooltip-delayed-content";
