@@ -4,8 +4,9 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import React from "react";
+import React, { useCallback, useState } from "react";
 
+import { CometCheckbox } from "@/faang/checkbox";
 import { CometFormSelectOnlyCombobox } from "@/faang/combo-box";
 import { fbicon } from "@/faang/icon";
 import { CometSelect } from "@/faang/select";
@@ -24,6 +25,12 @@ export const HomePage = () => {
   const [state, setState] = React.useState(
     "だれでもない。だれ　でもいたくないです。"
   );
+
+  const [timeline, showTimeline] = useState(true);
+
+  const onTimelineChange = useCallback(() => {
+    showTimeline(!timeline);
+  }, [timeline, showTimeline]);
 
   return (
     <div style={{ height: "100vh" }}>
@@ -244,6 +251,15 @@ export const HomePage = () => {
             minRows={3}
           />
         </div>
+
+        <CometCheckbox
+          checked={timeline}
+          label="Show on my timeline"
+          name="is_visible"
+          onChange={onTimelineChange}
+          testid={undefined}
+          value={timeline}
+        />
 
         <div style={{ height: "1rem" }} />
       </div>

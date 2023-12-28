@@ -6,6 +6,7 @@
  */
 import { invariant } from "./invariant";
 
+// BUG: missing loggingID
 const entriesMap = {
   491223: {
     loggingID: "491223",
@@ -246,6 +247,50 @@ const entriesMap = {
     sprited: 2,
     sz: "auto",
     w: 8,
+  },
+  // comet-checkbox
+  492790: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/fb.com/obqapSu-Iri.png",
+    _spi: "/faang/assets/icon-list/fb.com/obqapSu-Iri.png",
+    w: 16,
+    h: 16,
+    p: "0 -121px",
+    sz: "auto",
+    loggingID: "492790",
+  },
+
+  531032: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/fb.com/obqapSu-Iri.png",
+    _spi: "/faang/assets/icon-list/fb.com/obqapSu-Iri.png",
+    w: 24,
+    h: 24,
+    p: "0 0",
+    sz: "auto",
+    loggingID: "531032",
+  },
+
+  659287: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/fb.com/obqapSu-Iri.png",
+    _spi: "/faang/assets/icon-list/fb.com/obqapSu-Iri.png",
+    w: 16,
+    h: 16,
+    p: "0 -189px",
+    sz: "auto",
+    loggingID: "659287",
+  },
+
+  659289: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/fb.com/obqapSu-Iri.png",
+    _spi: "/faang/assets/icon-list/fb.com/obqapSu-Iri.png",
+    w: 24,
+    h: 24,
+    p: "0 -75px",
+    sz: "auto",
+    loggingID: "659289",
   },
 };
 const usedPathsSet = new Set();

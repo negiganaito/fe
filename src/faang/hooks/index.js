@@ -8,6 +8,7 @@ export { isBlueprintStylesEnabled } from "./is-blueprint-styles-enabled";
 export { mergeRefs } from "./merge-refs";
 export { useBaseInputValidators } from "./use-base-input-validators";
 export { useCometFormSelectOnlyComboboxKeyConfigs } from "./use-comet-form-select-only-combobox-key-configs";
+export { useCometPressableEventHandlers } from "./use-comet-pressable-event-handlers";
 export { useCometTheme } from "./use-comet-theme";
 export { useCurrentDisplayMode } from "./use-current-display-mode";
 export { useDelayedState } from "./use-delayed-state";
