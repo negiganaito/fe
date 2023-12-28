@@ -6,19 +6,20 @@
  */
 import { jsx } from "react/jsx-runtime";
 
-import { ICONS } from "@/faang/_/icon";
 import { CometIcon, fbicon } from "@/faang/icon";
 import { CometProgressRingIndeterminate } from "@/faang/progress-ring";
+
+import { ix } from "../utils";
 
 export const CometFormInputValidationStateIcon = {
   CORRECT: jsx(CometIcon, {
     color: "positive",
-    icon: fbicon._(ICONS[498146], 20),
+    icon: fbicon._(ix(498146), 20),
     testid: undefined,
   }),
   ERROR: jsx(CometIcon, {
     color: "negative",
-    icon: fbicon._(ICONS[502062], 20),
+    icon: fbicon._(ix(502062), 20),
     testid: undefined,
   }),
   LOADING: jsx(CometProgressRingIndeterminate, {
@@ -27,7 +28,7 @@ export const CometFormInputValidationStateIcon = {
   }),
   WARN: jsx(CometIcon, {
     color: "warning",
-    icon: fbicon._(ICONS[502062], 20),
+    icon: fbicon._(ix(502062), 20),
     testid: undefined,
   }),
 };

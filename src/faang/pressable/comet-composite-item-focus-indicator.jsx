@@ -8,9 +8,9 @@ import React, { useContext } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 
-import { ICONS } from "@/faang/_/icon";
 import { CometCompositeStructureContext } from "@/faang/context/comet-composite-structure-context";
 import { CometIcon, fbicon } from "@/faang/icon";
+import { ix } from "@/faang/utils";
 
 const styles = stylex.create({
   i1: {
@@ -89,14 +89,14 @@ export const CometCompositeItemFocusIndicator = () => {
                     className: styles.i1,
                     children: jsx(CometIcon, {
                       color: "primary",
-                      icon: fbicon._(ICONS(1739808), 8),
+                      icon: fbicon._(ix(1739808), 8),
                     }),
                   }),
                   jsx("div", {
                     className: styles.i2,
                     children: jsx(CometIcon, {
                       color: "primary",
-                      icon: fbicon._(ICONS(897949), 8),
+                      icon: fbicon._(ix(897949), 8),
                     }),
                   }),
                 ],
@@ -109,14 +109,14 @@ export const CometCompositeItemFocusIndicator = () => {
                     className: styles.i3,
                     children: React.jsx(CometIcon, {
                       color: "primary",
-                      icon: fbicon._(ICONS(702721), 8),
+                      icon: fbicon._(ix(702721), 8),
                     }),
                   }),
                   jsx("div", {
                     className: styles.i4,
                     children: jsx(CometIcon, {
                       color: "primary",
-                      icon: fbicon._(ICONS(701592), 8),
+                      icon: fbicon._(ix(701592), 8),
                     }),
                   }),
                 ],

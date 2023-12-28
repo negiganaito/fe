@@ -7,11 +7,13 @@
 import React from "react";
 
 import { CometFormSelectOnlyCombobox } from "@/faang/combo-box";
+import { fbicon } from "@/faang/icon";
 import { CometSelect } from "@/faang/select";
-import { TetraButton } from "@/faang/tetra-button";
+import { TetraButton, TetraCircleButton } from "@/faang/tetra-button";
 import { TetraText, TetraTextPairing } from "@/faang/tetra-text";
 // eslint-disable-next-line no-unused-vars
 import { WorkSigninPasswordTextBox } from "@/faang/text-box";
+import { ix } from "@/faang/utils";
 
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {
@@ -216,6 +218,17 @@ export const HomePage = () => {
             }}
           />
         </div>
+
+        <TetraCircleButton
+          icon={fbicon._(ix(477831), 20)}
+          label="Edit"
+          size={36}
+          linkProps={{
+            url: "/login",
+          }}
+        />
+
+        <div style={{ height: "1rem" }} />
       </div>
     </div>
   );
