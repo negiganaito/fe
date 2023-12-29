@@ -21,6 +21,8 @@ import { CometFormTextArea } from "@/faang/text-area";
 import { WorkSigninPasswordTextBox } from "@/faang/text-box";
 import { ix } from "@/faang/utils";
 
+import { CometSwitch } from "../switch";
+
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {
   const [comboboxValue, setComboboxValue] = React.useState("MARRIED_NAME");
@@ -29,7 +31,7 @@ export const HomePage = () => {
   const [state, setState] = React.useState(
     "だれでもない。だれ　でもいたくないです。"
   );
-
+  const [switchVal, setSwitchVal] = React.useState(true);
   const [date, setDate] = useState(null);
 
   const [timeline, showTimeline] = useState(true);
@@ -277,6 +279,13 @@ export const HomePage = () => {
             }}
           />
         </div>
+
+        <CometSwitch
+          disabled={false}
+          size="medium"
+          value={switchVal}
+          onClick={() => setSwitchVal(!switchVal)}
+        />
 
         <div style={{ height: "1rem" }} />
       </div>
