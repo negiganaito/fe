@@ -5,3 +5,4 @@
  * See the LICENSE file in the root directory for details.
  */
 export { CometPressable } from "./comet-pressable";
+export { CometPressableOverlay } from "./comet-pressable-overlay";

@@ -4,5 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-export { BaseContextualLayer } from "./base-contextual-layer";
-export { BaseContextualLayer_Legacy } from "./base-contextual-layer.legacy";
+
+export const RegionDatetimePatterns = Object.freeze({
+  DATE_SHORT: "date_short",
+  DATETIME_SHORT_SHORT: "dateTime_short_short",
+  TIME_SHORT: "time_short",
+  TIME_MEDIUM: "time_medium",
+  J: "j",
+});

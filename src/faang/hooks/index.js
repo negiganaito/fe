@@ -7,6 +7,7 @@
 export { isBlueprintStylesEnabled } from "./is-blueprint-styles-enabled";
 export { mergeRefs } from "./merge-refs";
 export { useBaseInputValidators } from "./use-base-input-validators";
+export { useComboboxKeyConfig } from "./use-combobox-key-config";
 export { useCometFormSelectOnlyComboboxKeyConfigs } from "./use-comet-form-select-only-combobox-key-configs";
 export { useCometPressableEventHandlers } from "./use-comet-pressable-event-handlers";
 export { useCometTheme } from "./use-comet-theme";
@@ -23,6 +24,7 @@ export {
   mergeRefs as mergeRefs_Legacy,
   useMergeRefs as useMergeRefs_Legacy,
 } from "./use-merge-refs.legacy";
+export { useOnOutsideClick } from "./use-on-outside-click";
 export { usePrevious } from "./use-previous";
 export { useResizeObserver } from "./use-resize-observer";
 export { useStable } from "./use-stable";

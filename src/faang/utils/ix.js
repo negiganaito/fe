@@ -292,6 +292,39 @@ const entriesMap = {
     sz: "auto",
     loggingID: "659289",
   },
+  // date
+  477912: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/q8oTSVjn9-V.png",
+    _spi: "/faang/assets/icon-list/q8oTSVjn9-V.png",
+    w: 16,
+    h: 16,
+    p: "0 -1090px",
+    sz: "auto",
+    loggingID: "477912",
+  },
+
+  477899: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/q8oTSVjn9-V.png",
+    _spi: "/faang/assets/icon-list/q8oTSVjn9-V.png",
+    w: 16,
+    h: 16,
+    p: "0 -1073px",
+    sz: "auto",
+    loggingID: "477899",
+  },
+
+  481127: {
+    sprited: 2,
+    spi: "/faang/assets/icon-list/2PROy0nfR3V.png",
+    _spi: "/faang/assets/icon-list/2PROy0nfR3V.png",
+    w: 20,
+    h: 20,
+    p: "0 -83px",
+    sz: "auto",
+    loggingID: "481127",
+  },
 };
 const usedPathsSet = new Set();
 

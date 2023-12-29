@@ -14,9 +14,7 @@ import React, {
 import { setElementCanTab } from "./set-element-can-tab";
 
 export function FocusInertRegion(props) {
-  const { children, disabled = false, from, focusQuery } = props;
-
-  console.log({ des: "FocusInertRegion", from });
+  const { children, disabled = false, focusQuery } = props;
 
   const scopeRef = useRef(null);
 

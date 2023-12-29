@@ -22,6 +22,7 @@ export { isElementFixedOrSticky } from "./is-element-fixed-or-sticky";
 export { isStringNullOrEmpty } from "./is-string-null-or-empty";
 export { ix } from "./ix";
 export { memoizeWithArgs } from "./memoize-with-args";
+export { pointerEventDistance } from "./pointer-event-distance";
 export { processBaseInputValidators } from "./process-base-input-validators";
 export { PromiseAnnotate } from "./promise-annotate";
 export { setTimeout } from "./set-timeout";

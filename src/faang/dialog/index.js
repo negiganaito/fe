@@ -6,3 +6,4 @@
  */
 export { BaseDOMContainer } from "./base-dom-container";
 export { BasePortal } from "./base-portal";
+export { CometHideLayerOnEscape } from "./comet-hide-layer-on-escape";

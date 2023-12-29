@@ -4,5 +4,5 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-export { BaseContextualLayer } from "./base-contextual-layer";
-export { BaseContextualLayer_Legacy } from "./base-contextual-layer.legacy";
+export { DateFormatConfig } from "./date-format-config";
+export { datePickerUtils } from "./date-picker-utils";
