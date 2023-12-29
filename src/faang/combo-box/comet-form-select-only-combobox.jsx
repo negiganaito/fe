@@ -357,15 +357,11 @@ export function CometFormSelectOnlyCombobox({
 
         {isMenuVisible && (
           <BaseContextualLayer
-            from="comet-form-select-only-combobox"
             align={size === "full" ? "stretch" : align}
             {...rest}
             contextRef={contextRef}
           >
-            <FocusInertRegion
-              from="comet-form-select-only-combobox"
-              focusQuery={focusScopeQueries.tabbableScopeQuery}
-            >
+            <FocusInertRegion focusQuery={focusScopeQueries.tabbableScopeQuery}>
               <CometMenu
                 footer={
                   footer_deprecated

@@ -12,11 +12,10 @@ import fbt from "fbt";
 import {
   CometComponentWithKeyCommands,
   CometKeys,
-} from "../commet-key-commands";
-import { CometScreenReaderText } from "../common";
-import { CometPressable } from "../pressable";
-import { CometPressableOverlay } from "../pressable/comet-pressable-overlay";
-import { TetraText } from "../tetra-text";
+} from "@/faang/commet-key-commands";
+import { CometScreenReaderText } from "@/faang/common";
+import { CometPressable, CometPressableOverlay } from "@/faang/pressable";
+import { TetraText } from "@/faang/tetra-text";
 
 const styles = stylex.create({
   cell: {
@@ -86,16 +85,16 @@ const styles = stylex.create({
 });
 
 const dateFormatter = "l F d, Y";
-const n = fbt.c("Select Date");
-const o = fbt.c("Previous Day");
-const p = fbt.c("Next Day");
-const q = fbt.c("One week earlier");
-const r = fbt.c("One week later");
-const s = fbt.c("End of the previous month");
-const t = fbt.c("End of the month");
-const u = fbt.c("One month previous");
-const v = fbt.c("One month ahead");
-const w = fbt.c("highlighted");
+const selectDate = fbt.c("Select Date");
+const previousDay = fbt.c("Previous Day");
+const nextDay = fbt.c("Next Day");
+const owe = fbt.c("One week earlier");
+const owl = fbt.c("One week later");
+const enterPreviousMonth = fbt.c("End of the previous month");
+const endMonth = fbt.c("End of the month");
+const omp = fbt.c("One month previous");
+const oma = fbt.c("One month ahead");
+const highlightedText = fbt.c("highlighted");
 
 export const CometFormCalendarDay = memo(
   forwardRef((props, ref) => {
@@ -133,8 +132,8 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.ENTER,
               },
-              description: n,
-              handler: function () {
+              description: selectDate,
+              handler: () => {
                 return onClick && onClick();
               },
             },
@@ -142,8 +141,8 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.SPACE,
               },
-              description: n,
-              handler: function () {
+              description: selectDate,
+              handler: () => {
                 return onClick && onClick();
               },
             },
@@ -151,8 +150,8 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.LEFT,
               },
-              description: o,
-              handler: function () {
+              description: previousDay,
+              handler: () => {
                 return moveDayCursorBy(-1);
               },
             },
@@ -160,8 +159,8 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.RIGHT,
               },
-              description: p,
-              handler: function () {
+              description: nextDay,
+              handler: () => {
                 return moveDayCursorBy(1);
               },
             },
@@ -169,8 +168,8 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.UP,
               },
-              description: q,
-              handler: function () {
+              description: owe,
+              handler: () => {
                 return moveDayCursorBy(-7);
               },
             },
@@ -178,8 +177,8 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.DOWN,
               },
-              description: r,
-              handler: function () {
+              description: owl,
+              handler: () => {
                 return moveDayCursorBy(7);
               },
             },
@@ -187,8 +186,8 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.HOME,
               },
-              description: s,
-              handler: function () {
+              description: enterPreviousMonth,
+              handler: () => {
                 return moveDayCursorBy(
                   -((date.getDayOfWeekFromMonday() + 1) % 7)
                 );
@@ -198,8 +197,8 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.END,
               },
-              description: t,
-              handler: function () {
+              description: endMonth,
+              handler: () => {
                 return moveDayCursorBy(
                   6 - ((date.getDayOfWeekFromMonday() + 1) % 7)
                 );
@@ -209,28 +208,28 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.PAGE_UP,
               },
-              description: u,
-              handler: function () {
+              description: omp,
+              handler: () => {
                 return moveDayCursorBy(-date.getNumDaysInPrevMonth());
               },
             },
             {
               command: {
                 key: CometKeys.PAGE_UP,
-                shift: !0,
+                shift: true,
               },
-              description: u,
-              handler: function () {
+              description: omp,
+              handler: () => {
                 return moveDayCursorBy(-date.getNumDaysInThisYear());
               },
             },
             {
               command: {
-                alt: !0,
+                alt: true,
                 key: CometKeys.PAGE_UP,
               },
-              description: u,
-              handler: function () {
+              description: omp,
+              handler: () => {
                 return moveDayCursorBy(-date.getNumDaysInThisYear());
               },
             },
@@ -238,28 +237,28 @@ export const CometFormCalendarDay = memo(
               command: {
                 key: CometKeys.PAGE_DOWN,
               },
-              description: v,
-              handler: function () {
+              description: oma,
+              handler: () => {
                 return moveDayCursorBy(date.getNumDaysInThisMonth());
               },
             },
             {
               command: {
                 key: CometKeys.PAGE_DOWN,
-                shift: !0,
+                shift: true,
               },
-              description: v,
-              handler: function () {
+              description: oma,
+              handler: () => {
                 return moveDayCursorBy(date.getNumDaysInThisYear());
               },
             },
             {
               command: {
-                alt: !0,
+                alt: true,
                 key: CometKeys.PAGE_DOWN,
               },
-              description: v,
-              handler: function () {
+              description: oma,
+              handler: () => {
                 return moveDayCursorBy(date.getNumDaysInThisYear());
               },
             },
@@ -267,7 +266,7 @@ export const CometFormCalendarDay = memo(
           xstyle={styles.dayWrapper}
         >
           <CometPressable
-            aria-current={isToday ? "date" : void 0}
+            aria-current={isToday ? "date" : undefined}
             aria-selected={selected}
             disabled={disabled}
             focusable={focusable}
@@ -277,7 +276,7 @@ export const CometFormCalendarDay = memo(
             overlayDisabled
             ref={ref}
             role="gridcell"
-            testid={void 0}
+            testid={undefined}
             xstyle={[
               styles.day,
               selected
@@ -296,7 +295,9 @@ export const CometFormCalendarDay = memo(
               return (
                 <>
                   <CometScreenReaderText text={formattedDate} />
-                  {highlighted && <CometScreenReaderText text={w} />}
+                  {highlighted && (
+                    <CometScreenReaderText text={highlightedText} />
+                  )}
                   <span aria-hidden={true}>
                     <TetraText
                       color={

@@ -6,6 +6,7 @@
  */
 
 import React, {
+  memo,
   useCallback,
   useEffect,
   useId,
@@ -17,25 +18,30 @@ import React, {
 import stylex from "@stylexjs/stylex";
 import fbt from "fbt";
 
-import { datePickerUtils } from "../abstract-calendar";
-import { BaseContextualLayer } from "../base-contextual-layer";
+import { datePickerUtils } from "@/faang/abstract-calendar";
+import { BaseContextualLayer } from "@/faang/base-contextual-layer";
 import {
   CometComponentWithKeyCommands,
   CometKeys,
-} from "../commet-key-commands";
-import { JSScheduler } from "../common";
-import { CometHideLayerOnEscape } from "../dialog";
-import { FocusWithinHandler } from "../focus";
-import { FocusManager, FocusRegion, focusScopeQueries } from "../focus-region";
-import { BaseTextInput, CometFormInputWrapper } from "../form";
-import { useComboboxKeyConfig, useOnOutsideClick } from "../hooks";
-import { CometIcon, fbicon } from "../icon";
-import { CometPopover } from "../popover";
-import { ix } from "../utils";
+} from "@/faang/commet-key-commands";
+import { JSScheduler } from "@/faang/common";
+import { CometHideLayerOnEscape } from "@/faang/dialog";
+import { FocusWithinHandler } from "@/faang/focus";
+import {
+  FocusManager,
+  FocusRegion,
+  focusScopeQueries,
+} from "@/faang/focus-region";
+import { BaseTextInput, CometFormInputWrapper } from "@/faang/form";
+import { useComboboxKeyConfig, useOnOutsideClick } from "@/faang/hooks";
+import { CometIcon, fbicon } from "@/faang/icon";
+import { CometPopover } from "@/faang/popover";
+import { ix } from "@/faang/utils";
 
+import { CometFormCalendarPager } from "./comet-form-calendar-pager";
 import { CometFormDateInputUtils } from "./comet-form-date-input-utils";
 
-const e = stylex.create({
+const styles1 = stylex.create({
   calendar: {
     padding: "16px",
     width: "268px",
@@ -73,7 +79,7 @@ const e = stylex.create({
   },
 });
 
-const b = stylex.create({
+const styles2 = stylex.create({
   input: {
     backgroundColor: "transparent",
     borderTopWidth: null,
@@ -103,15 +109,20 @@ const b = stylex.create({
 
 const _4855 = false;
 
-const styles = _4855 ? { ...e, ...b } : e;
+const styles = _4855 ? { ...styles1, ...styles2 } : styles1;
 
-const v = [];
+const defaultConstraints = [];
 
-export const CometFormDateInput = (props) => {
+/**
+ *
+ * @param {*} props
+ * @returns
+ */
+export const CometFormDateInput = memo((props) => {
   const {
     alwaysShrinkLabel,
     ariaLabel,
-    constraints = v,
+    constraints = defaultConstraints,
     date,
     dateFormatter,
     disabled = false,
@@ -153,7 +164,7 @@ export const CometFormDateInput = (props) => {
 
   const S = useCallback((a) => {
     aa(a);
-    Q.current = !1;
+    Q.current = false;
   }, []);
 
   const T = useCallback(
@@ -167,7 +178,7 @@ export const CometFormDateInput = (props) => {
             })))
       ) {
         S(datePickerUtils.maybeFormatDate(date, dateFormatter));
-        Q.current = !0;
+        Q.current = true;
         return;
       }
       onDateChange(a);
@@ -176,7 +187,7 @@ export const CometFormDateInput = (props) => {
   );
 
   const U = useCallback(() => {
-    if (Q.current === !1) {
+    if (Q.current === false) {
       if (J === "") {
         T(null);
         return;
@@ -217,7 +228,7 @@ export const CometFormDateInput = (props) => {
   useEffect(() => {
     if (date !== Y.current || dateFormatter !== Z.current) {
       S(datePickerUtils.maybeFormatDate(date, dateFormatter));
-      Q.current = !0;
+      Q.current = true;
     }
 
     Y.current = date;
@@ -225,7 +236,7 @@ export const CometFormDateInput = (props) => {
 
     // (date !== Y.current || dateFormatter !== Z.current) &&
     //   (S(datePickerUtils.maybeFormatDate(date, dateFormatter)),
-    //   (Q.current = !0)),
+    //   (Q.current = true)),
     //   (Y.current = k),
     //   (Z.current = w);
   }, [date, dateFormatter, S]);
@@ -280,21 +291,21 @@ export const CometFormDateInput = (props) => {
       },
       {
         command: {
-          alt: !0,
+          alt: true,
           key: CometKeys.DOWN,
         },
         description: fbt.c("Show calendar"),
         handler: V,
-        isHiddenCommand: !0,
+        isHiddenCommand: true,
       },
       {
         command: {
-          alt: !0,
+          alt: true,
           key: CometKeys.UP,
         },
         description: fbt.c("Close calendar"),
         handler: W,
-        isHiddenCommand: !0,
+        isHiddenCommand: true,
       },
     ];
   }, [X, W, V]);
@@ -309,7 +320,7 @@ export const CometFormDateInput = (props) => {
     () => {
       return {
         hideCalendar: function () {
-          $(!1);
+          $(false);
         },
         showCalendar: function () {
           JSScheduler.defer(() => {
@@ -337,15 +348,16 @@ export const CometFormDateInput = (props) => {
               aria-controls={L ? R : undefined}
               aria-expanded={L}
               aria-label={
-                date
-                  ? fbt.c("{label}, Selected: {date}", [
-                      fbt.param("label", e),
-                      fbt.param(
-                        "date",
-                        datePickerUtils.maybeFormatDate(date, dateFormatter)
-                      ),
-                    ])
-                  : e
+                // date
+                //   ? fbt.c("{label}, Selected: {date}", [
+                //       fbt.param("label", e),
+                //       fbt.param(
+                //         "date",
+                //         datePickerUtils.maybeFormatDate(date, dateFormatter)
+                //       ),
+                //     ])
+                //   : e
+                "Hello"
               }
               color="secondary"
               icon={icon}
@@ -372,7 +384,7 @@ export const CometFormDateInput = (props) => {
             <CometComponentWithKeyCommands commandConfigs={ea}>
               <BaseTextInput
                 aria-autocomplete="none"
-                aria-controls={L ? R : void 0}
+                aria-controls={L ? R : undefined}
                 aria-describedby={helperTextID}
                 aria-expanded={L}
                 aria-invalid={validationState === "ERROR"}
@@ -382,11 +394,11 @@ export const CometFormDateInput = (props) => {
                 onClick={V}
                 onFocus={onFocus}
                 onValueChange={S}
-                placeholder={focused || K ? placeholder : void 0}
+                placeholder={focused || K ? placeholder : undefined}
                 ref={N}
                 role="combobox"
                 suppressFocusRing
-                testid={void 0}
+                testid={undefined}
                 value={J}
                 xstyle={[
                   styles.input,
@@ -398,8 +410,8 @@ export const CometFormDateInput = (props) => {
             {L && (
               <BaseContextualLayer
                 align="start"
-                contextRef={a}
-                position="bellow"
+                contextRef={rootRef}
+                position="below"
                 ref={ga}
               >
                 <CometHideLayerOnEscape onHide={W}>
@@ -433,4 +445,4 @@ export const CometFormDateInput = (props) => {
       }}
     />
   );
-};
+});

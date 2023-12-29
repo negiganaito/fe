@@ -8,6 +8,10 @@ import React, { useCallback, useState } from "react";
 
 import { CometCheckbox } from "@/faang/checkbox";
 import { CometFormSelectOnlyCombobox } from "@/faang/combo-box";
+import {
+  CometFormDateInput,
+  CometFormDateTimeConstraints,
+} from "@/faang/date-range";
 import { fbicon } from "@/faang/icon";
 import { CometSelect } from "@/faang/select";
 import { TetraButton, TetraCircleButton } from "@/faang/tetra-button";
@@ -25,6 +29,8 @@ export const HomePage = () => {
   const [state, setState] = React.useState(
     "だれでもない。だれ　でもいたくないです。"
   );
+
+  const [date, setDate] = useState(null);
 
   const [timeline, showTimeline] = useState(true);
 
@@ -260,6 +266,17 @@ export const HomePage = () => {
           testid={undefined}
           value={timeline}
         />
+
+        <div style={{ width: "400px" }}>
+          <CometFormDateInput
+            constraints={[CometFormDateTimeConstraints.dateInThePast(true)]}
+            date={date}
+            label="Add start date"
+            onDateChange={(date) => {
+              setDate(date);
+            }}
+          />
+        </div>
 
         <div style={{ height: "1rem" }} />
       </div>
