@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@stylexjs/stylex':
-    specifier: 0.3.0
-    version: 0.3.0
+    specifier: 0.4.1
+    version: 0.4.1
   '@tanstack/react-router':
     specifier: 0.0.1-beta.284
     version: 0.0.1-beta.284(react-dom@0.0.0-experimental-aec521a96-20231114)(react@0.0.0-experimental-aec521a96-20231114)
@@ -1791,8 +1791,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /@stylexjs/stylex@0.3.0:
-    resolution: {integrity: sha512-iO9ayGjZ54IXIkXOLoNKf/GWS/3EGtJaxdLxvy7nUa30eUw6qMVvEgRi58S7MT+e/FJub5xaCM/j0oDHlDgcIg==}
+  /@stylexjs/stylex@0.4.1:
+    resolution: {integrity: sha512-xc3hjEtqpluoZ1RcJZ1c59bdMITMHPh0FmCNi/01amaPhEw040WqgR/KGFHIqxIer9wt5mOeED3iM9tSrljeaQ==}
     dependencies:
       css-mediaquery: 0.1.2
       invariant: 2.2.4

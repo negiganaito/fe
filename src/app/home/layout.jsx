@@ -6,7 +6,7 @@
  */
 import React, { useCallback, useState } from "react";
 
-import { CometMemoriesNotificationsCard } from "@/faang/@example";
+import { CometMemoriesNotificationsCardContainer } from "@/faang/@example";
 import { CometCheckbox } from "@/faang/checkbox";
 import { CometFormSelectOnlyCombobox } from "@/faang/combo-box";
 import {
@@ -288,7 +288,7 @@ export const HomePage = () => {
           onClick={() => setSwitchVal(!switchVal)}
         />
 
-        <CometMemoriesNotificationsCard />
+        <CometMemoriesNotificationsCardContainer />
 
         <div style={{ height: "1rem" }} />
       </div>

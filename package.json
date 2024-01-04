@@ -17,10 +17,10 @@
     "translate-fbts": "fbt-translate --jenkins --source-strings ./i18n/fbt/source_strings.json --translations i18n/fbt/translationScriptInput/*.json > ./i18n/fbt/translatedFbts.json",
     "upgrade": "npx npm-check-updates &&  npx npm-check-updates -u",
     "i18n:build:win": "pnpm manifest && pnpm collect-fbts && pnpm translate-fbts:win && pnpm generate-fbt",
-    "i18n:build": "pnpm manifest && pnpm collect-fbts && pnpm translate-fbts:win && pnpm generate-fbt"
+    "i18n:build": "pnpm manifest && pnpm collect-fbts && pnpm translate-fbts && pnpm generate-fbt"
   },
   "dependencies": {
-    "@stylexjs/stylex": "0.3.0",
+    "@stylexjs/stylex": "0.4.1",
     "@tanstack/react-router": "0.0.1-beta.284",
     "@tanstack/router-devtools": "0.0.1-alpha.0",
     "babel-plugin-fbt": "1.0.0",

@@ -99,26 +99,21 @@ const options = {
     }),
     // Ensure that the stylex plugin is used before Babel
     new StylexPlugin({
-      // optional. default: 'x'
-      classNamePrefix: "x",
-
+      filename: "styles.[contenthash].css",
       // get webpack mode and set value for dev
       dev: env.NODE_ENV === "development",
-
-      filename: "styles.css",
-
       // Use statically generated CSS files and not runtime injected CSS.
       // Even in development.
       runtimeInjection: false,
+      // optional. default: 'x'
+      classNamePrefix: "x",
       // Required for CSS variable support
       unstable_moduleResolution: {
-        // The absolute path to the root directory of your project
-        // eslint-disable-next-line no-undef
-        rootDir: __dirname,
-
         // type: 'commonJS' | 'haste'
         // default: 'commonJS'
         type: "commonJS",
+        // The absolute path to the root directory of your project
+        rootDir: __dirname,
       },
     }),
   ],

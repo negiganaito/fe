@@ -6,7 +6,7 @@
  */
 /* eslint-disable react/no-unescaped-entities */
 
-import React from "react";
+import React, { useState } from "react";
 import stylex from "@stylexjs/stylex";
 import fbt from "fbt";
 
@@ -25,6 +25,21 @@ const styles = stylex.create({
 });
 
 export const CometMemoriesNotificationsCard = () => {
+  const [subscriptionStatus, setSubscriptionStatus] =
+    useState("subscribed_all");
+
+  const onSubscribedAll = () => {
+    setSubscriptionStatus("subscribed_all");
+  };
+
+  const onSubscribedHighlights = () => {
+    setSubscriptionStatus("subscribed_highlights");
+  };
+
+  const onUnsubscribed = () => {
+    setSubscriptionStatus("unsubscribed");
+  };
+
   return (
     <>
       <CometUnitHeader
@@ -47,9 +62,9 @@ export const CometMemoriesNotificationsCard = () => {
           <TetraListCell
             addOnSecondary={{
               "aria-label": fbt("All Memories", "All Memories"),
-              on: false,
+              on: subscriptionStatus === "subscribed_all",
               type: "radio",
-              onPress: () => {},
+              onPress: onSubscribedAll,
             }}
             body={
               <TetraText color="secondary" type="body4">
@@ -64,14 +79,14 @@ export const CometMemoriesNotificationsCard = () => {
                 <fbt desc="All Memories">All Memories</fbt>
               </TetraText>
             }
-            onPress={() => {}}
+            onPress={onSubscribedAll}
           />
           <TetraListCell
             addOnSecondary={{
               "aria-label": fbt("Highlights", "Highlights"),
-              on: true,
+              on: subscriptionStatus === "subscribed_highlights",
               type: "radio",
-              onPress: () => {},
+              onPress: onSubscribedHighlights,
             }}
             body={
               <TetraText color="secondary" type="body4">
@@ -86,14 +101,14 @@ export const CometMemoriesNotificationsCard = () => {
                 <fbt desc="Highlights">Highlights</fbt>
               </TetraText>
             }
-            onPress={() => {}}
+            onPress={onSubscribedHighlights}
           />
           <TetraListCell
             addOnSecondary={{
               "aria-label": fbt("None", "None"),
-              on: false,
+              on: subscriptionStatus === "unsubscribed",
               type: "radio",
-              onPress: () => {},
+              onPress: onUnsubscribed,
             }}
             body={
               <TetraText color="secondary" type="body4">
@@ -108,7 +123,7 @@ export const CometMemoriesNotificationsCard = () => {
                 <fbt desc="None">None</fbt>
               </TetraText>
             }
-            onPress={() => {}}
+            onPress={onUnsubscribed}
           />
         </TetraList>
       </div>
