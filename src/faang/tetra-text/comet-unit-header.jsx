@@ -5,9 +5,10 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useState } from "react";
+import React, { useState } from "react";
 import stylex from "@stylexjs/stylex";
 
+import { CometBase } from "../base-row";
 import { CometColumn } from "../common/comet-column";
 import { CometColumnItem } from "../common/comet-column-item";
 import { isBlueprintStylesEnabled } from "../hooks";
@@ -15,7 +16,7 @@ import { CometIcon, IconSource, SVGICON } from "../icon";
 import { CometPressable } from "../pressable";
 
 import { TetraText } from "./tetra-text";
-import { TetraTextPairing } from ".";
+import { TetraTextPairing } from "./tetra-text-pairing";
 
 const k = 8;
 const l = stylex.create({
@@ -99,6 +100,7 @@ export const CometUnitHeader = (props) => {
     headlineColor = "primary",
     iconColor = "primary",
     iconSize = 16,
+    // eslint-disable-next-line no-unused-vars
     iconType,
     isSemanticHeading = true,
     level,
@@ -190,7 +192,12 @@ export const CometUnitHeader = (props) => {
   if (actionWrapper) {
     const { component: Component } = actionWrapper;
 
-    W = <Component {...actionWrapper.props}>{W}</Component>;
+    // eslint-disable-next-line react/jsx-pascal-case
+    W = (
+      <Component {...actionWrapper.props} children={W}>
+        {W}
+      </Component>
+    );
   }
 
   const J = (

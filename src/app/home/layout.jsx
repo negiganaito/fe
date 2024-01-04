@@ -6,6 +6,7 @@
  */
 import React, { useCallback, useState } from "react";
 
+import { CometMemoriesNotificationsCard } from "@/faang/@example";
 import { CometCheckbox } from "@/faang/checkbox";
 import { CometFormSelectOnlyCombobox } from "@/faang/combo-box";
 import {
@@ -21,7 +22,7 @@ import { CometFormTextArea } from "@/faang/text-area";
 import { WorkSigninPasswordTextBox } from "@/faang/text-box";
 import { ix } from "@/faang/utils";
 
-import { CometSwitch } from "../switch";
+import { CometSwitch } from "../../faang/switch";
 
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {
@@ -286,6 +287,8 @@ export const HomePage = () => {
           value={switchVal}
           onClick={() => setSwitchVal(!switchVal)}
         />
+
+        <CometMemoriesNotificationsCard />
 
         <div style={{ height: "1rem" }} />
       </div>

@@ -6,7 +6,7 @@
  */
 // ChiTh@nh2024
 
-import { forwardRef, useContext, useMemo } from "react";
+import React, { forwardRef, useContext, useMemo } from "react";
 import stylex from "@stylexjs/stylex";
 
 import { BaseView } from "@/faang/base-row";

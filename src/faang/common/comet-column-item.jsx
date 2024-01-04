@@ -221,7 +221,7 @@ const spacingStyles = stylex.create({
 const isIE11 = UserAgent.isBrowser("IE >= 11");
 
 // eslint-disable-next-line complexity
-const _CometColumnItem = forwardRef((props, ref) => {
+const _CometColumnItem = (props, ref) => {
   const contextValues = useContext(CometColumnContext) ?? {};
 
   const align = !props.align ? contextValues.align ?? "stretch" : props.align;
@@ -243,7 +243,7 @@ const _CometColumnItem = forwardRef((props, ref) => {
     ? contextValues.paddingHorizontal ?? 0
     : props.stretch;
 
-  const stylesObj = stylexCompose(props.xstyle);
+  const stylesObj = stylexCompose.compose(props.xstyle);
 
   let _children = (
     <>
@@ -326,6 +326,6 @@ const _CometColumnItem = forwardRef((props, ref) => {
   }
 
   return _children;
-});
+};
 
 export const CometColumnItem = forwardRef(_CometColumnItem);

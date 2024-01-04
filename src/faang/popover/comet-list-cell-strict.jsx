@@ -10,19 +10,18 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 
 import {
+  CometCompositeStructureContext,
   CometDensityAwarenessContext,
   CometFocusGroupContext,
   CometFocusTableContext,
 } from "@/faang/context";
+import { CometIcon } from "@/faang/icon";
+import { CometPressable } from "@/faang/pressable";
 import {
   CometDensityModeContext,
   TetraText,
   TetraTextPairing,
 } from "@/faang/tetra-text";
-
-import { CometCompositeStructureContext } from "../context/comet-composite-structure-context";
-import { CometIcon } from "../icon";
-import { CometPressable } from "../pressable";
 
 import { getItemRoleFromCompositeRole } from "./get-item-role-from-composite-role";
 import { getListCellAddOn } from "./get-list-cell-add-on";

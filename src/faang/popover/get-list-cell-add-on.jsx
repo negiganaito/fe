@@ -13,6 +13,7 @@ import fbt from "fbt";
 import { CometIcon, fbicon } from "@/faang/icon";
 import { TetraButton } from "@/faang/tetra-button";
 
+import { CometSwitch } from "../switch";
 import { ix } from "../utils";
 
 function getEndAddOn(addOn, disabled, level) {
@@ -162,7 +163,7 @@ const switchComp = function (props, disabled) {
   // eslint-disable-next-line no-unused-vars
   const { onChange, size, type, value, ...rest } = props;
 
-  return jsx("CometSwitch", {
+  return jsx(CometSwitch, {
     disabled,
     onClick: onChange ?? function () {},
     size,

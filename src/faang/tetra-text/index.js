@@ -7,6 +7,7 @@
 export { CometDensityModeContext } from "./comet-density-mode-context";
 export { CometHeadlineWithAddOn } from "./comet-headline-with-add-on";
 export { CometTextTypography } from "./comet-text-typography";
+export { CometUnitHeader } from "./comet-unit-header";
 export { getTetraTextHierarchyStyle } from "./get-tetra-text-hierarchy-style";
 export { TetraText } from "./tetra-text";
 export { TetraTextPairing } from "./tetra-text-pairing";
