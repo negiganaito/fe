@@ -348,16 +348,18 @@ export const CometFormDateInput = memo((props) => {
               aria-controls={L ? R : undefined}
               aria-expanded={L}
               aria-label={
-                // date
-                //   ? fbt.c("{label}, Selected: {date}", [
-                //       fbt.param("label", e),
-                //       fbt.param(
-                //         "date",
-                //         datePickerUtils.maybeFormatDate(date, dateFormatter)
-                //       ),
-                //     ])
-                //   : e
-                "Hello"
+                date
+                  ? fbt(
+                      fbt.param("label", e) +
+                        ", Selected: " +
+                        fbt.param(
+                          "date",
+                          datePickerUtils.maybeFormatDate(date, dateFormatter)
+                        ),
+                      "comet-form-date-time-aria-label"
+                    )
+                  : e
+                // "Hello"
               }
               color="secondary"
               icon={icon}

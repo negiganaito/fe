@@ -99,26 +99,21 @@ const options = {
     }),
     // Ensure that the stylex plugin is used before Babel
     new StylexPlugin({
-      // optional. default: 'x'
-      classNamePrefix: "x",
-
+      filename: "styles.[contenthash].css",
       // get webpack mode and set value for dev
       dev: env.NODE_ENV === "development",
-
-      filename: "styles.css",
-
       // Use statically generated CSS files and not runtime injected CSS.
       // Even in development.
       runtimeInjection: false,
+      // optional. default: 'x'
+      classNamePrefix: "x",
       // Required for CSS variable support
       unstable_moduleResolution: {
-        // The absolute path to the root directory of your project
-        // eslint-disable-next-line no-undef
-        rootDir: __dirname,
-
         // type: 'commonJS' | 'haste'
         // default: 'commonJS'
         type: "commonJS",
+        // The absolute path to the root directory of your project
+        rootDir: __dirname,
       },
     }),
   ],
@@ -127,6 +122,15 @@ const options = {
       // eslint-disable-next-line no-undef
       "@": path.resolve(__dirname, "./src"),
       "~": path.resolve(__dirname, "./public"),
+    },
+
+    fallback: {
+      path: require.resolve("path-browserify"),
+      fs: false,
+      os: require.resolve("os-browserify/browser"),
+      crypto: require.resolve("crypto-browserify"),
+      buffer: require.resolve("buffer/"),
+      stream: require.resolve("stream-browserify"),
     },
 
     extensions: fileExtensions

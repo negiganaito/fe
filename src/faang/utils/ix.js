@@ -59,6 +59,7 @@ const entriesMap = {
     h: 20,
     p: "0 -368px",
     sz: "auto",
+    loggingID: "484757",
   },
 
   659288: {
@@ -69,6 +70,7 @@ const entriesMap = {
     h: 20,
     p: "0 -767px",
     sz: "auto",
+    loggingID: "659288",
   },
 
   621399: {
@@ -79,6 +81,7 @@ const entriesMap = {
     h: 20,
     p: "0 -515px",
     sz: "auto",
+    loggingID: "621399",
   },
   545517: {
     sprited: 2,
@@ -88,6 +91,7 @@ const entriesMap = {
     h: 20,
     p: "0 -536px",
     sz: "auto",
+    loggingID: "545517",
   },
   492521: {
     sprited: 2,
@@ -97,6 +101,7 @@ const entriesMap = {
     h: 24,
     p: "0 -50px",
     sz: "auto",
+    loggingID: "492521",
   },
   492575: {
     sprited: 2,
@@ -106,6 +111,7 @@ const entriesMap = {
     h: 24,
     p: "0 -75px",
     sz: "auto",
+    loggingID: "492575",
   },
   492518: {
     sprited: 2,
@@ -115,6 +121,7 @@ const entriesMap = {
     h: 20,
     p: "0 -452px",
     sz: "auto",
+    loggingID: "492518",
   },
 
   492572: {
@@ -125,6 +132,7 @@ const entriesMap = {
     h: 20,
     p: "0 -473px",
     sz: "auto",
+    loggingID: "492572",
   },
 
   505565: {
@@ -135,6 +143,7 @@ const entriesMap = {
     h: 20,
     p: "0 -494px",
     sz: "auto",
+    loggingID: "505565",
   },
 
   492454: {
@@ -145,6 +154,7 @@ const entriesMap = {
     h: 20,
     p: "0 -431px",
     sz: "auto",
+    loggingID: "492454",
   },
 
   484391: {
@@ -155,6 +165,7 @@ const entriesMap = {
     h: 24,
     p: "0 -125px",
     sz: "auto",
+    loggingID: "484391",
   },
   478237: {
     sprited: 2,
@@ -164,6 +175,7 @@ const entriesMap = {
     h: 16,
     p: "0 -877px",
     sz: "auto",
+    loggingID: "478237",
   },
   512665: {
     sprited: 2,
@@ -173,6 +185,7 @@ const entriesMap = {
     h: 24,
     p: "0 0",
     sz: "auto",
+    loggingID: "512665",
   },
   481882: {
     sprited: 2,
@@ -182,6 +195,7 @@ const entriesMap = {
     h: 16,
     p: "0 -1081px",
     sz: "auto",
+    loggingID: "481882",
   },
   477831: {
     sprited: 2,
@@ -202,6 +216,7 @@ const entriesMap = {
     sprited: 2,
     sz: "auto",
     w: 20,
+    loggingID: "498146",
   },
   1739808: {
     _spi: "/faang/assets/icon-list/XvqMI3OqoSa.png",
@@ -211,6 +226,7 @@ const entriesMap = {
     sprited: 2,
     sz: "auto",
     w: 8,
+    loggingID: "1739808",
   },
   502062: {
     _spi: "/faang/assets/icon-list/XvqMI3OqoSa.png",
@@ -220,6 +236,7 @@ const entriesMap = {
     sprited: 2,
     sz: "auto",
     w: 20,
+    loggingID: "502062",
   },
   701592: {
     _spi: "/faang/assets/icon-list/XvqMI3OqoSa.png",
@@ -229,6 +246,7 @@ const entriesMap = {
     sprited: 2,
     sz: "auto",
     w: 8,
+    loggingID: "701592",
   },
   702721: {
     _spi: "/faang/assets/icon-list/XvqMI3OqoSa.png",
@@ -238,6 +256,7 @@ const entriesMap = {
     sprited: 2,
     sz: "auto",
     w: 8,
+    loggingID: "702721",
   },
   897949: {
     _spi: "/faang/assets/icon-list/XvqMI3OqoSa.png",
@@ -247,6 +266,7 @@ const entriesMap = {
     sprited: 2,
     sz: "auto",
     w: 8,
+    loggingID: "897949",
   },
   // comet-checkbox
   492790: {

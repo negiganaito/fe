@@ -19,6 +19,8 @@ export { BaseScrollableAreaContext } from "./base-scrollable-area-context";
 export { BaseThemeConfigContext } from "./base-theme-config-context";
 export { BaseThemeDisplayModeContext } from "./base-theme-display-mode-context";
 export { BaseViewportMarginsContext } from "./base-viewport-margins-context";
+export { CometColumnContext } from "./comet-column-context";
+export { CometCompositeStructureContext } from "./comet-composite-structure-context";
 export { CometDangerouslySuppressInteractiveElementsContext } from "./comet-dangerously-suppress-interactive-elements-context";
 export { CometDensityAwarenessContext } from "./comet-density-awareness-context";
 export { CometFocusGroupContext } from "./comet-focus-group-context";

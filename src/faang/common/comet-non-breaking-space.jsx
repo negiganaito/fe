@@ -9,19 +9,15 @@ import stylex from "@stylexjs/stylex";
 
 export const styles = stylex.create({
   1: {
-    marginLeft: null,
     marginRight: "1ch",
   },
   0.25: {
-    marginLeft: null,
     marginRight: ".25ch",
   },
   0.5: {
-    marginLeft: null,
     marginRight: ".5ch",
   },
   0.75: {
-    marginLeft: null,
     marginRight: ".75ch",
   },
 });
