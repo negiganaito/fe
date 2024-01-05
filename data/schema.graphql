@@ -1,0 +1,7 @@
+schema {
+  query: GreetingsQuery
+}
+
+type GreetingsQuery {
+  greetings: String
+}

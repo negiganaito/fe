@@ -5,6 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 import React, { useCallback, useState } from "react";
+import { useLazyLoadQuery } from "react-relay";
+import graphql from "babel-plugin-relay/macro";
 
 import { CometMemoriesNotificationsCardContainer } from "@/faang/@example";
 import { CometCheckbox } from "@/faang/checkbox";
@@ -24,8 +26,18 @@ import { ix } from "@/faang/utils";
 
 import { CometSwitch } from "../../faang/switch";
 
+const layoutAppQuery = graphql`
+  query layoutAppQuery {
+    greetings
+  }
+`;
+
 // eslint-disable-next-line react/prop-types
 export const HomePage = () => {
+  const data = useLazyLoadQuery(layoutAppQuery, {});
+
+  console.log({ data });
+
   const [comboboxValue, setComboboxValue] = React.useState("MARRIED_NAME");
   const [selectValue, setSelectValue] = React.useState("SINGLE");
 

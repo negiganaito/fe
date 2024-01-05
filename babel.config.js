@@ -12,9 +12,12 @@ const styleXPlugin = require("@stylexjs/babel-plugin");
 const path = require("path");
 
 const config = {
+  presets: ["@babel/preset-react"],
+
   plugins: [
-    ["react-hot-loader/babel"],
+    ["macros"],
     ["relay"],
+    ["react-hot-loader/babel"],
     [
       styleXPlugin,
       {
@@ -43,7 +46,6 @@ const config = {
     ],
     "babel-plugin-fbt-runtime",
   ],
-  presets: ["@babel/preset-react"],
 };
 
 // eslint-disable-next-line no-undef

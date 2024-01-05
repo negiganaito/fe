@@ -124,6 +124,15 @@ const options = {
       "~": path.resolve(__dirname, "./public"),
     },
 
+    fallback: {
+      path: require.resolve("path-browserify"),
+      fs: false,
+      os: require.resolve("os-browserify/browser"),
+      crypto: require.resolve("crypto-browserify"),
+      buffer: require.resolve("buffer/"),
+      stream: require.resolve("stream-browserify"),
+    },
+
     extensions: fileExtensions
       .map((extension) => "." + extension)
       .concat([".js", ".jsx", ".ts", ".tsx", ".css"]),
