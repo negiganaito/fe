@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<87321b93f4ef84731a877ecc58dd04e7>>
+ * @generated SignedSource<<9785e54f6bdfe71d59c4cb65edd74505>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -23,7 +23,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "layoutAppQuery",
+    "name": "layoutGreetingsQuery",
     "selections": (v0/*: any*/),
     "type": "GreetingsQuery",
     "abstractKey": null
@@ -32,20 +32,20 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "layoutAppQuery",
+    "name": "layoutGreetingsQuery",
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "16a79c8ac2883cf948ff3bcdde9858fe",
+    "cacheID": "8e098d9ef747479482e4bc1fde39ef21",
     "id": null,
     "metadata": {},
-    "name": "layoutAppQuery",
+    "name": "layoutGreetingsQuery",
     "operationKind": "query",
-    "text": "query layoutAppQuery {\n  greetings\n}\n"
+    "text": "query layoutGreetingsQuery {\n  greetings\n}\n"
   }
 };
 })();
 
-node.hash = "fb8efbe705c6530b9bbb048990561e45";
+node.hash = "74d23b731d78b3ce9ff6b167151f8e1e";
 
 module.exports = node;

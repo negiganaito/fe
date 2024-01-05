@@ -27,7 +27,7 @@ import { ix } from "@/faang/utils";
 import { CometSwitch } from "../../faang/switch";
 
 const layoutAppQuery = graphql`
-  query layoutAppQuery {
+  query layoutGreetingsQuery {
     greetings
   }
 `;
