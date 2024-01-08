@@ -4,6 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-export function isStringNullOrEmpty(val) {
-  return !val || val === "";
-}
+
+import React from "react";
+
+export const DocumentHomePage = () => <div>/document/home</div>;

@@ -4,6 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-export function isStringNullOrEmpty(val) {
-  return !val || val === "";
-}
+
+import { InternalEnum } from "@/faang/focus-region";
+
+export const HovercardInteractionPreference = InternalEnum({
+  DISABLED: 1,
+  ENABLED_ON_HOVER: 2,
+  ENABLED_ON_CLICK: 3,
+});

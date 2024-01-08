@@ -5,15 +5,19 @@
  * See the LICENSE file in the root directory for details.
  */
 import React from "react";
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, rootRouteWithContext } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
-export const IndexPage = () => {
+export const Route = rootRouteWithContext()({
+  component: RootComponent,
+});
+
+function RootComponent() {
   return (
     <>
-      <div>Tien</div>
+      <div>Sidebar comp</div>
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
     </>
   );
-};
+}

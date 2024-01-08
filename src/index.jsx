@@ -11,6 +11,8 @@ import { RouterProvider } from "@tanstack/react-router";
 import { RelayEnvironment } from "@/faang/@relay/environment";
 import { CometKeyboardSettingsStateProvider } from "@/faang/commet-key-commands";
 import { WorkGalahadDarkModeStateProvider } from "@/galahad/provider";
+import { AppTabIdHandler } from "@/galahad/provider/app-tab-id-handler";
+import { PipedriveRouteContext } from "@/galahad/provider/pipedrive-route-context";
 
 import "../i18n/fbtInit";
 
@@ -23,14 +25,18 @@ const rootElement = document.getElementById("root");
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <RelayEnvironment>
-      <React.Suspense fallback="Loading">
-        <CometKeyboardSettingsStateProvider>
-          <WorkGalahadDarkModeStateProvider>
-            <RouterProvider router={router} />
-          </WorkGalahadDarkModeStateProvider>
-        </CometKeyboardSettingsStateProvider>
-      </React.Suspense>
-    </RelayEnvironment>
+    <RouterProvider router={router}>
+      <AppTabIdHandler>
+        <PipedriveRouteContext>
+          <RelayEnvironment>
+            <React.Suspense fallback="Loading">
+              <CometKeyboardSettingsStateProvider>
+                <WorkGalahadDarkModeStateProvider />
+              </CometKeyboardSettingsStateProvider>
+            </React.Suspense>
+          </RelayEnvironment>
+        </PipedriveRouteContext>
+      </AppTabIdHandler>
+    </RouterProvider>
   );
 }

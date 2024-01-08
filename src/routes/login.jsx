@@ -5,14 +5,14 @@
  * See the LICENSE file in the root directory for details.
  */
 import React from "react";
-import { useMatches } from "@tanstack/react-router";
+import { FileRoute } from "@tanstack/react-router";
 
 import { LoginWrapper } from "@/feature/login";
 
-export const LoginPage = () => {
-  const a = useMatches();
+export const Route = new FileRoute("/login").createRoute({
+  component: LoginComponent,
+});
 
-  console.log({ a });
-
+function LoginComponent() {
   return <LoginWrapper />;
-};
+}

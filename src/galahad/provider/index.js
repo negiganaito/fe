@@ -5,4 +5,5 @@
  * See the LICENSE file in the root directory for details.
  */
 
+export { AppTabIdHandler } from "./app-tab-id-handler";
 export { WorkGalahadDarkModeStateProvider } from "./work-galahad-dark-mode-state-provider";

@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@stylexjs/stylex": "0.3.0",
-    "@tanstack/react-router": "0.0.1-beta.284",
-    "@tanstack/router-devtools": "0.0.1-alpha.0",
+    "@tanstack/react-router": "1.1.9",
+    "@tanstack/router-devtools": "1.1.9",
     "babel-plugin-fbt": "1.0.0",
     "babel-plugin-fbt-runtime": "1.0.0",
     "fb-tiger-hash": "1.0.0",
@@ -90,6 +90,7 @@
     "typescript": "^5.3.3",
     "webpack": "^5.75.0",
     "webpack-dev-server": "^4.11.1",
-    "yargs": "17.7.2"
+    "yargs": "17.7.2",
+    "@tanstack/router-cli": "1.1.9"
   }
 }
