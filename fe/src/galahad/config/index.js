@@ -4,3 +4,4 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
+export { CometLayerKeyCommandWrapper } from "./comet-layer-key-command-wrapper";

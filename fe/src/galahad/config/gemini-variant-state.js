@@ -5,10 +5,19 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { createContext, useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useRelayEnvironment } from "react-relay/hooks";
+import nullthrows from "fbjs/lib/nullthrows";
 
 import { usePrevious } from "@/faang/hooks";
+import { WorkGalahadVariantDisableMutation } from "@/galahad/@graphql/work-galahad-variant-disable-mutation";
+import { WorkGalahadVariantEnableMutation } from "@/galahad/@graphql/work-galahad-variant-enable-mutation";
 
 import { WorkGalahadVariantSetting } from "./work-galahad-variant-setting";
 
@@ -48,7 +57,7 @@ const o = new Map([
   ["rhcApprovalsCollapsed", "RHC_COLLAPSE_APPROVALS"],
 ]);
 
-const p = createContext({
+const GeminiVariantContext = createContext({
   hasNotifPriorityBadgeCount: !0,
   hasNotifDotOnTabs: !1,
   hasGdriveNotifications: !0,
@@ -84,7 +93,8 @@ const p = createContext({
   rhcApprovalsCollapsed: !1,
 });
 
-const q = createContext(() => {});
+const Q = createContext(() => {});
+
 const r = [
   "CHAT_BUBBLELESS",
   "CHAT_FIRST",
@@ -95,6 +105,7 @@ const r = [
   "SIMPLIFICATION",
   "SMB",
 ];
+
 const s = {
   rhcFeedCollapsed: WorkGalahadVariantSetting.rhc_collapse_feed === "ENABLED",
   rhcGroupCollapsed: WorkGalahadVariantSetting.rhc_collapse_group === "ENABLED",
@@ -121,7 +132,7 @@ const s = {
     WorkGalahadVariantSetting.rhc_collapse_approvals === "ENABLED",
 };
 
-export const GeminiVariantState = ({ children }) => {
+export const Provider = ({ children }) => {
   const [e, f] = useState({
     hasNotifPriorityBadgeCount:
       WorkGalahadVariantSetting.notif_priority_badge_count === "ENABLED" ||
@@ -173,16 +184,59 @@ export const GeminiVariantState = ({ children }) => {
     l && l !== e.hasRiverKnight && dispatchEvent(window.document, "resize");
   }, [e.hasRiverKnight, l]);
 
-  const b = useCallback((a, b) => {
-    if (o.has(a) && g[a] !== true) {
-      //
-      h((b) => {
-        b[a] = !0;
-        return b;
+  const b = useCallback(
+    (a, b) => {
+      if (o.has(a) && g[a] !== true) {
+        //
+        h((b) => {
+          b[a] = true;
+          return b;
+        });
+        let commitMutation = e[a]
+          ? WorkGalahadVariantDisableMutation
+          : WorkGalahadVariantEnableMutation;
+
+        commitMutation(j, {
+          input: {
+            variant: nullthrows(o.get(a)),
+            source: b,
+          },
+          onCompleted: function () {
+            h((b) => {
+              b[a] = false;
+              return b;
+            });
+            r.includes(o.get(a)) && window.location.reload();
+          },
+        });
+      }
+
+      f((b) => {
+        let c = { ...b };
+        c[a] = !b[a];
+        return c;
       });
-      let d = e[a]
-        ? c("WorkGalahadVariantDisableMutation")
-        : c("WorkGalahadVariantEnableMutation");
-    }
-  });
+    },
+    [e, j, g]
+  );
+
+  return (
+    <GeminiVariantContext.Provider value={e}>
+      <Q.Provider value={b}>{children}</Q.Provider>
+    </GeminiVariantContext.Provider>
+  );
+};
+
+function useGeminiVariant() {
+  return useContext(GeminiVariantContext);
+}
+function useGeminiVariantToggler() {
+  return useContext(Q);
+}
+
+export const GeminiVariantState = {
+  Provider,
+  useGeminiVariant,
+  useGeminiVariantToggler,
+  GeminiVariantContext,
 };
