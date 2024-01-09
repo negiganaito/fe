@@ -33,5 +33,6 @@ export { stylexCompat } from "./stylex-compat";
 export { stylexCompose } from "./stylex-compose";
 export { testID } from "./test-id";
 export { uniqueID } from "./unique-id";
+export { useIsMountedRef } from "./use-is-mounted-ref";
 export { validateBaseInput } from "./validate-base-input";
 export { xplatToDOMRef } from "./xplat-to-dom-ref";
