@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import performanceNow from "fbjs/lib/performanceNow";
 
 import { InteractionTracingMetrics } from "../trace/interaction-tracing-metrics";
@@ -13,7 +13,7 @@ import { InteractionTracingMetrics } from "../trace/interaction-tracing-metrics"
 export function useCometDisplayTimingTrackerForInteraction(a, d, e) {
   d === void 0 && (d = !1);
   let f = useRef(null);
-  return j(
+  return useCallback(
     (g) => {
       if (a && f.current !== g) {
         f.current = g;

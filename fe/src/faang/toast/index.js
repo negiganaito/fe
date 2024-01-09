@@ -5,6 +5,4 @@
  * See the LICENSE file in the root directory for details.
  */
 
-export { BaseCalloutManager } from "./base-callout-manager";
-export { CometCalloutContext } from "./comet-callout-context";
-export { CometCalloutManager } from "./comet-callout-manager";
+export { BaseToasterStateManagerProvider } from "./base-toaster-state-manager-provider";

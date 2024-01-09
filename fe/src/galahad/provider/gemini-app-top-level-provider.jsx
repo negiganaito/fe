@@ -5,6 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import { RelayEnvironment } from "@/faang/@relay/environment";
+import { CometCalloutManager } from "@/faang/callout/comet-callout-manager";
 import { BaseSuppressHovercards } from "@/faang/card";
 import { FocusAppWrapper } from "@/faang/common";
 import { CometTransientDialogProvider } from "@/faang/dialog/comet-transient-dialog-provider";
@@ -13,7 +15,7 @@ import { GeminiVariantState } from "@/galahad/config/gemini-variant-state";
 
 import { VoyageUserJourneyCometRouteProvider } from "./voyage-user-journey-comet-route-provider";
 
-export const GeminiAppTopLevelProvider = () => {
+export const GeminiAppTopLevelProvider = ({ children }) => {
   return (
     <VoyageUserJourneyCometRouteProvider>
       <GeminiVariantState.Provider>
@@ -23,7 +25,9 @@ export const GeminiAppTopLevelProvider = () => {
               <BaseSuppressHovercards.BaseSuppressHovercardsContext.Provider
                 value={false}
               >
-                <CometCalloutManager />
+                <CometCalloutManager>
+                  <RelayEnvironment>{children}</RelayEnvironment>
+                </CometCalloutManager>
               </BaseSuppressHovercards.BaseSuppressHovercardsContext.Provider>
             </CometTransientDialogProvider>
           </FocusAppWrapper>

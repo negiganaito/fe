@@ -9,6 +9,7 @@ import { executionEnvironment } from "../utils";
 
 import { BaseCalloutManager } from "./base-callout-manager";
 import { CometCalloutContext } from "./comet-callout-context";
+import { CometCalloutImpl } from "./comet-callout-impl";
 
 const _initialState = {
   anchorRootRefContext: {

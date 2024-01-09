@@ -18,6 +18,7 @@ export { BaseRowContext } from "./base-row-context";
 export { BaseScrollableAreaContext } from "./base-scrollable-area-context";
 export { BaseThemeConfigContext } from "./base-theme-config-context";
 export { BaseThemeDisplayModeContext } from "./base-theme-display-mode-context";
+export { BaseToasterStateManagerContext } from "./base-toaster-state-manager-context";
 export { BaseViewportMarginsContext } from "./base-viewport-margins-context";
 export { CometColumnContext } from "./comet-column-context";
 export { CometCompositeStructureContext } from "./comet-composite-structure-context";

@@ -4,6 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
+export { CometColumn } from "./comet-column";
+export { CometColumnItem } from "./comet-column-item";
 export { CometNonBreakingSpace } from "./comet-non-breaking-space";
 export { CometScreenReaderText } from "./comet-screen-reader-text";
 export { CometTextWithIcon } from "./comet-text-with-icon";
