@@ -10,11 +10,10 @@ import { jsx } from "react/jsx-runtime";
 
 const BaseSuppressHovercardsContext = React.createContext(!1);
 
-function BaseSuppressHovercardsProvider(a) {
-  a = a.children;
+function BaseSuppressHovercardsProvider({ children }) {
   return jsx(BaseSuppressHovercardsContext.Provider, {
-    value: !0,
-    children: a,
+    value: true,
+    children,
   });
 }
 

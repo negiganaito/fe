@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { BaseContextualLayer } from "@/faang/base-contextual-layer";
 import {

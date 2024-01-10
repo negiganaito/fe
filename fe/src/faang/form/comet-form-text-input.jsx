@@ -228,7 +228,7 @@ export const CometFormTextInput = forwardRef((props, ref) => {
         (icon && icon instanceof ImageIconSource && icon.height === 40 && (
           <div className={stylex(styles.icon, styles.largeImageIcon)}>
             <CometImage
-              className={stylex(styles.imageIcon)}
+              xstyle={stylex(styles.imageIcon)}
               height={parseInt(icon.height.toString(), 10)}
               src={icon.src}
               width={parseInt(icon.width.toString(), 10)}

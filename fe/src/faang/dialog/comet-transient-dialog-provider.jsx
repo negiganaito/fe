@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import fbt from "fbt";
 
 import { CometDialogContext } from "@/faang/context";
@@ -14,6 +14,7 @@ import { useIsCalledDuringRender } from "@/faang/hooks";
 import { useIsMountedRef } from "@/faang/utils";
 
 import { BaseModal } from "../modal";
+import { cometPushToast } from "../toast";
 
 const O = ({
   dialogConfig,

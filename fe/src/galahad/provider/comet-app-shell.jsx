@@ -5,6 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import React from "react";
+
 import { CometCalloutManager } from "@/faang/callout";
 import { BaseToasterStateManagerProvider } from "@/faang/toast";
 

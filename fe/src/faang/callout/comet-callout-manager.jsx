@@ -5,6 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import React from "react";
+
 import { executionEnvironment } from "../utils";
 
 import { BaseCalloutManager } from "./base-callout-manager";

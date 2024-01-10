@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { forwardRef, useMemo, useRef } from "react";
+import React, { forwardRef, useMemo, useRef } from "react";
 
 import { mergeRefs } from "@/faang/hooks";
 import { xplatToDOMRef } from "@/faang/utils";

@@ -5,6 +5,15 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import React from "react";
+import { jsx } from "react/jsx-runtime";
+
+import { CometToasterRoot } from "@/faang/toast/comet-toaster-root";
+
+import { GeminiNavAndChannelContext } from "../context";
+
+import { CometAppShell } from "./comet-app-shell";
+import { GeminiAppContent } from "./gemini-app-content";
 import { GeminiAppTopLevelProvider } from "./gemini-app-top-level-provider";
 
 // function onError(error) {
@@ -17,21 +26,19 @@ import { GeminiAppTopLevelProvider } from "./gemini-app-top-level-provider";
 //   );
 // }
 
-export const GeminiApp = () => {
+export const GeminiApp = ({ children }) => {
   return (
-    <CometAppShell toaster={<CometToasterRoot />}>
+    <CometAppShell toaster={jsx(CometToasterRoot, {})}>
       <GeminiAppTopLevelProvider>
         <GeminiNavAndChannelContext.Provider>
-          <GeminiNavAndChannelContext.Provider>
-            <GeminiAppContent />
-          </GeminiNavAndChannelContext.Provider>
-          {/* <CometErrorBoundary onError={onError}>
+          <GeminiAppContent>{children}</GeminiAppContent>
+        </GeminiNavAndChannelContext.Provider>
+        {/* <CometErrorBoundary onError={onError}>
             <CometPlaceholder fallback={null}>
               <CometWatchAndScroll />
             </CometPlaceholder>
           </CometErrorBoundary> */}
-          {/* <CometPlaceholder fallback={null} /> */}
-        </GeminiNavAndChannelContext.Provider>
+        {/* <CometPlaceholder fallback={null} /> */}
       </GeminiAppTopLevelProvider>
     </CometAppShell>
   );

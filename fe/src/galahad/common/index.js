@@ -6,3 +6,4 @@
  */
 
 export { FocusAppWrapper } from "./focus-app-wrapper";
+export { GeminiPageTransitioning } from "./gemini-page-transitioning";

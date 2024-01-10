@@ -4,17 +4,18 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { useContext } from "react";
+import React, { useContext } from "react";
 import stylex from "@stylexjs/stylex";
 import Locale from "fbjs/lib/Locale";
 
-import { BaseRow, BaseView } from "../base-row";
 import {
   BaseContextualLayerContextSizeContext,
   BaseContextualLayerLayerAdjustmentContext,
   BaseContextualLayerOrientationContext,
-} from "../context";
-import { useOnOutsideClick } from "../hooks";
+} from "@/faang/context";
+import { useOnOutsideClick } from "@/faang/hooks";
+
+import { BaseRow, BaseView } from "../base-row";
 
 import { CometCalloutEdgeArrow } from "./comet-callout-edge-arrow";
 
@@ -36,6 +37,7 @@ const stylesContainer = stylex.create({
     paddingBottom: "16px",
   },
 });
+
 const stylesType = stylex.create({
   accent: {
     backgroundColor: "var(--accent)",
@@ -44,6 +46,7 @@ const stylesType = stylex.create({
     backgroundColor: "var(--popover-background)",
   },
 });
+
 const stylesMarginBottom = stylex.create({
   end: {
     borderBottomRightRadius: "0",
@@ -57,6 +60,7 @@ const stylesMarginBottom = stylex.create({
     marginBottom: "20px",
   },
 });
+
 const stylesMarginTop = stylex.create({
   end: {
     borderTopRightRadius: "0",
@@ -70,6 +74,7 @@ const stylesMarginTop = stylex.create({
     marginTop: "20px",
   },
 });
+
 const o = stylex.create({
   end: {
     bottom: "9px",
@@ -85,11 +90,13 @@ const o = stylex.create({
     start: "0",
   },
 });
+
 const p = stylex.create({
   end: {},
   middle: {},
   start: {},
 });
+
 const q = stylex.create({
   end: {
     bottom: "9px",
@@ -105,11 +112,13 @@ const q = stylex.create({
     left: 0,
   },
 });
+
 const r = stylex.create({
   end: {},
   middle: {},
   start: {},
 });
+
 const s = stylex.create({
   end: {
     right: 0,
@@ -127,6 +136,7 @@ const s = stylex.create({
     transform: "rotate(180deg) scaleX(-1)",
   },
 });
+
 const t = stylex.create({
   end: {
     transform: "rotate(180deg)",
@@ -138,6 +148,7 @@ const t = stylex.create({
     transform: "rotate(180deg) scaleX(-1)",
   },
 });
+
 const u = stylex.create({
   end: {
     right: 0,
@@ -155,6 +166,7 @@ const u = stylex.create({
     transform: "rotate(180deg) scaleX(-1)",
   },
 });
+
 const v = stylex.create({
   end: {
     transform: "rotate(180deg)",
@@ -166,6 +178,7 @@ const v = stylex.create({
     transform: "rotate(180deg) scaleX(-1)",
   },
 });
+
 const arrowPositionMap = {
   end: "start",
   start: "end",

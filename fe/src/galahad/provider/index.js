@@ -6,4 +6,6 @@
  */
 
 export { AppTabIdHandler } from "./app-tab-id-handler";
+export { GeminiApp } from "./gemini-app";
+export { GeminiAppTopLevelProvider } from "./gemini-app-top-level-provider";
 export { WorkGalahadDarkModeStateProvider } from "./work-galahad-dark-mode-state-provider";

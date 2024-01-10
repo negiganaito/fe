@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useCallback, useMemo, useReducer, useRef } from "react";
+import React, { useCallback, useMemo, useReducer, useRef } from "react";
 
 import { BaseView } from "../base-row";
 import { CometPlaceholder } from "../comet-placeholder";

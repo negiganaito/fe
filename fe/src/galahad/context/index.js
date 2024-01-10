@@ -5,4 +5,5 @@
  * See the LICENSE file in the root directory for details.
  */
 
+export { GeminiNavAndChannelContext } from "./gemini-nav-and-channel-context";
 export { VoyageUserJourneyCometRouteContext } from "./voyage-user-journey-comet-route-context";

@@ -9,7 +9,7 @@ const path = require("path");
 const { schema } = require("./index");
 const { printSchema } = require("graphql");
 
-const schemaPath = path.resolve(__dirname, "../data/schema.graphql");
+const schemaPath = path.resolve(__dirname, "../fe/data/schema.graphql");
 
 fs.writeFileSync(schemaPath, printSchema(schema));
 

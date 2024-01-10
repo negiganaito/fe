@@ -8,8 +8,8 @@
 import { commitMutation, graphql } from "react-relay";
 
 const workGalahadVariantDisableMutation = graphql`
-  mutation WorkGalahadVariantEnableMutation($input: String!) {
-    enable_work_galahad_variant_v2(input: $input) {
+  mutation WorkGalahadVariantEnableMutation($input: WorkGalahadVariantInput) {
+    disable_work_galahad_variant_v2(input: $input) {
       __typename
     }
   }

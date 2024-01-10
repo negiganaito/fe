@@ -12,6 +12,7 @@ export { CometKeyCommandWrapper } from "./comet-key-command-wrapper";
 export { CometKeyboardSettingsStateProvider } from "./comet-keyboard-settings-state-provider";
 export { CometKeys } from "./comet-keys";
 export { CometLayerKeyCommandWidget } from "./comet-layer-key-command-widget";
+export { CometSearchKeyCommandWrapper } from "./comet-search-key-command-wrapper";
 export { createKeyCommand } from "./create-key-command";
 export { createKeyCommandWidget } from "./create-key-command-widget";
 export { createKeyCommandWrapper } from "./create-key-command-wrapper";

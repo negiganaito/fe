@@ -5,20 +5,25 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import React from "react";
+
 import { RelayEnvironment } from "@/faang/@relay/environment";
 import { CometCalloutManager } from "@/faang/callout/comet-callout-manager";
 import { BaseSuppressHovercards } from "@/faang/card";
-import { FocusAppWrapper } from "@/faang/common";
+import { CometKeyboardSettingsStateProvider } from "@/faang/commet-key-commands";
 import { CometTransientDialogProvider } from "@/faang/dialog/comet-transient-dialog-provider";
+import { FocusAppWrapper } from "@/galahad/common";
 import { CometLayerKeyCommandWrapper } from "@/galahad/config";
-import { GeminiVariantState } from "@/galahad/config/gemini-variant-state";
 
+// import { GeminiVariantState } from "@/galahad/config/gemini-variant-state";
 import { VoyageUserJourneyCometRouteProvider } from "./voyage-user-journey-comet-route-provider";
 
 export const GeminiAppTopLevelProvider = ({ children }) => {
   return (
     <VoyageUserJourneyCometRouteProvider>
-      <GeminiVariantState.Provider>
+      {/* <GeminiVariantState.Provider> */}
+      {/* TODO */}
+      <CometKeyboardSettingsStateProvider>
         <CometLayerKeyCommandWrapper>
           <FocusAppWrapper>
             <CometTransientDialogProvider>
@@ -32,7 +37,8 @@ export const GeminiAppTopLevelProvider = ({ children }) => {
             </CometTransientDialogProvider>
           </FocusAppWrapper>
         </CometLayerKeyCommandWrapper>
-      </GeminiVariantState.Provider>
+      </CometKeyboardSettingsStateProvider>
+      {/* </GeminiVariantState.Provider> */}
     </VoyageUserJourneyCometRouteProvider>
   );
 };

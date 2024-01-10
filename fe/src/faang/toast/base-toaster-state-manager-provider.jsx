@@ -9,6 +9,8 @@ import React from "react";
 
 import { BaseToasterStateManagerContext } from "../context";
 
+import { BaseToasterStateManager } from "./base-toaster-state-manager";
+
 const instance = BaseToasterStateManager.getInstance();
 
 export function BaseToasterStateManagerProvider({ children }) {

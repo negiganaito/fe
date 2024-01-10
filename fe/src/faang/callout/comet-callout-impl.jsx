@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import { BaseCalloutImpl } from "./base-callout-impl";
 import { CometCallout } from "./comet-callout";

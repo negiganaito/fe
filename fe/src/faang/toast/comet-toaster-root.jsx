@@ -7,16 +7,16 @@
 
 import React, { useMemo } from "react";
 
-import { CometErrorBoundary, recoverableViolation } from "../error";
+import { CometErrorBoundary, recoverableViolation } from "@/faang/error";
+
+import { CometLazyToasterView_DO_NOT_USE } from "./comet-lazy-toaster-view_DO_NOT_USE";
 
 /*
-
 __d("CometToasterRoot.react", 
   ["CometErrorBoundary.react", 
   "CometLazyToasterView_DO_NOT_USE.react", 
   "react", "recoverableViolation", 
   "useHideNotificationsToasts"]
-
 */
 
 const filters = new Set(["CometToastNotification"]);
@@ -30,16 +30,13 @@ function onError(error) {
   });
 }
 
-/**
- *
- * @param {*} props
- */
 export const CometToasterRoot = (props) => {
   const { align, maxWidth } = props;
 
   return useMemo(() => {
     return (
       <CometErrorBoundary onError={onError}>
+        {/* eslint-disable-next-line react/jsx-pascal-case */}
         <CometLazyToasterView_DO_NOT_USE
           align={align}
           filterToasts={useHideNotificationsToasts ? filters : null}

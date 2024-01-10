@@ -30,6 +30,7 @@ export { useOnOutsideClick } from "./use-on-outside-click";
 export { usePrevious } from "./use-previous";
 export { useResizeObserver } from "./use-resize-observer";
 export { useStable } from "./use-stable";
+export { useToasterStateManager } from "./use-toaster-state-manager";
 export { useTooltipDelayedContent } from "./use-tooltip-delayed-content";
 export { useUnsafeRef_DEPRECATED } from "./use-unsafe-ref_DEPRECATED";
 export { useVisibilityObserver } from "./use-visibility-observer";

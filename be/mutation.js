@@ -12,7 +12,7 @@ const WorkGalahadVariantInputType = new GraphQLObjectType({
   },
 })
 
-export const MutationType = new GraphQLObjectType({
+ const MutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     WorkGalahadVariantEnableMutation: {
@@ -42,3 +42,8 @@ export const MutationType = new GraphQLObjectType({
     },
   },
 })
+
+
+module.exports = {
+  MutationType
+}

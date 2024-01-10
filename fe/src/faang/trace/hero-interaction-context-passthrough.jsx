@@ -20,7 +20,7 @@ const heroCurrentInteractionForLoggingValue = {
 const relayProfilerValue = {
   consumeBootload: function () {},
   retainQuery: function () {},
-  wrapPrepareQueryResource: function (a) {
+  wrapPrepareQueryResource: (a) => {
     return a();
   },
 };

@@ -1,7 +1,18 @@
 schema {
   query: GreetingsQuery
+  mutation: Mutation
 }
 
 type GreetingsQuery {
   greetings: String
+}
+
+type Mutation {
+  WorkGalahadVariantEnableMutation(input: WorkGalahadVariantInput): undefined
+  WorkGalahadVariantDisableMutation(input: WorkGalahadVariantInput): undefined
+}
+
+type WorkGalahadVariantInput {
+  variant: String!
+  source: String!
 }

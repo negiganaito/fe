@@ -6,6 +6,8 @@
  */
 import React from "react";
 
+import { BaseToasterStateManager } from "../toast/base-toaster-state-manager";
+
 export const BaseToasterStateManagerContext = React.createContext(
   BaseToasterStateManager.getInstance()
 );

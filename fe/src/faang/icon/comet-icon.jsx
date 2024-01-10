@@ -4,7 +4,7 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { createElement, forwardRef } from "react";
+import React, { createElement, forwardRef } from "react";
 import { jsx } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 
@@ -116,6 +116,7 @@ export const CometIcon = forwardRef((props, ref) => {
             width: normalizeIcon.width,
           },
           testid: undefined,
+          ref: _ref,
         })
       : normalizeIcon instanceof IconSource
       ? jsx(BaseImage_DEPRECATED, {
@@ -140,6 +141,11 @@ export const CometIcon = forwardRef((props, ref) => {
           color: _color,
           component: normalizeIcon.component,
           "data-testid": undefined,
+          size,
+        })
+      : normalizeIcon instanceof SVGICON.EmojiIcon
+      ? React.createElement(normalizeIcon.component, {
+          emoji: normalizeIcon.codepoints,
           size,
         })
       : jsx(CometSvgIcon, {
@@ -175,8 +181,6 @@ export const CometIcon = forwardRef((props, ref) => {
       })
     : Img;
 });
-
-CometIcon.displayName = "CometIcon.react";
 
 function getColor(color) {
   switch (color) {

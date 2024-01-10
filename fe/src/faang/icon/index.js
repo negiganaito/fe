@@ -13,4 +13,5 @@ export { FlightSerializableIcon } from "./flight-serializable-icon";
 export { IconSource } from "./icon-source";
 export { ImageIconSource } from "./image-icon-source";
 export { SVGICON } from "./svg-icon";
+export { TetraIcon } from "./tetra-icon";
 export { TintableIconSource } from "./tintable-icon-source";

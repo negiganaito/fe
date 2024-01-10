@@ -5,21 +5,20 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import stylex from "@stylexjs/stylex";
 import fbt from "fbt";
 
 import { BaseContextualLayerOrientationContext } from "@/faang//context";
+import { BaseRow, BaseRowItem, BaseView } from "@/faang/base-row";
+import { CometColumnItem } from "@/faang/common";
+import { CometColumn } from "@/faang/common/comet-column";
+import { CometErrorBoundary, unrecoverableViolation } from "@/faang/error";
 import { useOnOutsideClick, useVisibilityObserver } from "@/faang/hooks";
-
-import { BaseRow, BaseRowItem, BaseView } from "../base-row";
-import { CometColumnItem } from "../common";
-import { CometColumn } from "../common/comet-column";
-import { CometErrorBoundary, unrecoverableViolation } from "../error";
-import { CometIcon, fbicon } from "../icon";
-import { CometPressable } from "../pressable";
-import { TetraTextPairing } from "../tetra-text";
-import { ix } from "../utils";
+import { CometIcon, fbicon } from "@/faang/icon";
+import { CometPressable } from "@/faang/pressable";
+import { TetraTextPairing } from "@/faang/tetra-text";
+import { ix } from "@/faang/utils";
 
 import { CometCalloutEdge } from "./comet-callout-edge";
 import { CometCalloutInset } from "./comet-callout-inset";
@@ -49,6 +48,7 @@ const styles = stylex.create({
     paddingBottom: "6px",
   },
 });
+
 const colorsStyles = stylex.create({
   accent: {
     backgroundColor: "var(--accent)",
@@ -57,6 +57,7 @@ const colorsStyles = stylex.create({
     backgroundColor: "var(--popover-background)",
   },
 });
+
 const arrowPositionsStyles = stylex.create({
   above: {
     marginBottom: "4px",
