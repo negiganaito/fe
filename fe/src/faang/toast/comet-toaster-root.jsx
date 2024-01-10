@@ -21,14 +21,13 @@ __d("CometToasterRoot.react",
 
 const filters = new Set(["CometToastNotification"]);
 
-// TODO
-const useHideNotificationsToasts = true;
-
 function onError(error) {
   recoverableViolation("The toaster is broken", "CometAppShell", {
     error,
   });
 }
+
+const useHideNotificationsToasts = false;
 
 export const CometToasterRoot = (props) => {
   const { align, maxWidth } = props;
@@ -44,5 +43,5 @@ export const CometToasterRoot = (props) => {
         />
       </CometErrorBoundary>
     );
-  });
+  }, [align, maxWidth, useHideNotificationsToasts]);
 };

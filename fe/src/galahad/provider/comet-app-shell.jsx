@@ -22,11 +22,11 @@ export const CometAppShell = ({ children, toaster }) => {
 /*
 
 children: i.jsx(c("CometNUXTourManager.react"), {
-                        children: i.jsx(c("CometNUXManager.react"), {
-                            children: i.jsx(c("VideoPlayerGlobalComponents.react"), {
-                                children: b
-                            })
-                        })
-                    })
+  children: i.jsx(c("CometNUXManager.react"), {
+      children: i.jsx(c("VideoPlayerGlobalComponents.react"), {
+          children: b
+      })
+  })
+})
 
 */

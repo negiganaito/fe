@@ -46,8 +46,31 @@ export function CometToast({
           target: target,
           url: href,
         }
-      : void 0;
+      : undefined;
   }, [href, target]);
+
+  // return (
+  //   <BaseToast
+  //     action={
+  //       action
+  //         ? {
+  //             label: action.label,
+  //             // eslint-disable-next-line react/no-unstable-nested-components
+  //             labelRenderer: (child) => {
+  //               return (
+  //                 <TetraText color="blueLink" numberOfLines={1} type="body3">
+  //                   {child}
+  //                 </TetraText>
+  //               );
+  //             },
+  //             onPress: action.onPress,
+  //             testid: action.testid,
+  //           }
+  //         : undefined
+  //     }
+  //   />
+  // );
+
   return jsx(BaseToast, {
     action: action
       ? {

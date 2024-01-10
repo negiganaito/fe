@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { jsx } from "react/jsx-runtime";
+import React from "react";
 
 import { CometIcon, fbicon } from "@/faang/icon";
 
@@ -19,33 +19,14 @@ let defaultInstance = BaseToasterStateManager.getInstance();
 function _cometPushToast(props, duration = 2750, externalInstance) {
   const store = externalInstance ?? defaultInstance;
   const toast = store.push(
-    // <CometToast
-    //   {...props}
-    //   loadImmediately
-    //   onDismiss={() => {
-    //     return store.expire(toast);
-    //   }}
-    // />,
-
-    jsx(CometToast, {
-      ...props,
-      loadImmediately: true,
-      onDismiss: () => {
+    <CometToast
+      {...props}
+      loadImmediately
+      onDismiss={() => {
         return store.expire(toast);
-      },
-    }),
+      }}
+    />,
     duration
-
-    // jsx(
-    //   CometToast,
-    //   Object.assign({}, props, {
-    //     loadImmediately: !0,
-    //     onDismiss: function () {
-    //       return store.expire(toast);
-    //     },
-    //   })
-    // )
-    // duration
   );
   return toast;
 }
@@ -64,10 +45,7 @@ function cometPushErrorToast(props, duration = 2750, externalInstance) {
     {
       ...props,
       color: "warning",
-      icon: jsx(CometIcon, {
-        color: "warning",
-        icon: fbicon._(ix(502062), 20),
-      }),
+      icon: <CometIcon color="warning" icon={fbicon._(ix(502062), 20)} />,
     },
     duration,
     externalInstance

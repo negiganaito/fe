@@ -5,111 +5,149 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import performanceNow from "fbjs/lib/performanceNow";
+
 import { NetworkHeartbeat } from "./network-heartbeat";
 
-const performanceNow = require("fbjs/lib/performanceNow");
-
-let h;
-let j = [];
+let isOnline;
+let changeListeners = [];
 // eslint-disable-next-line no-restricted-globals
-let k = typeof window !== "undefined" ? window : self;
-let l = !k ? void 0 : !(h = k.navigator) ? void 0 : h.onLine;
-let m = 2;
-let n = 5e3;
-let o = [];
-let p = [];
-let q = 0;
-let r = !0;
-let s = !1;
-let t = !1;
-let u = function () {
-  y(r, !0);
+let globalObject = typeof window !== "undefined" ? window : self;
+let navigatorObject = !globalObject
+  ? undefined
+  : !(isOnline = globalObject.navigator)
+  ? undefined
+  : isOnline.onLine;
+let errorThreshold = 2;
+let heartbeatInterval = 5e3;
+let offlineEvents = [];
+let onlineEvents = [];
+let lastReportedTime = 0;
+let wasInitiallyOnline = !0;
+let wasInitiallyOfflineValue = !1;
+let shouldStartHeartbeat = !1;
+
+let startHeartbeat = function () {
+  handleStatusChange(wasInitiallyOnline, true);
 };
-let v = function () {
-  y(s, !0);
+
+let stopHeartbeat = function () {
+  handleStatusChange(wasInitiallyOfflineValue, true);
 };
-function w() {
-  let a = j.slice();
-  a.forEach((a) => {
-    a({
-      online: l,
+function notifyChangeListeners() {
+  let listenersCopy = changeListeners.slice();
+  listenersCopy.forEach((listener) => {
+    listener({
+      online: navigatorObject,
     });
   });
 }
-function x(a) {
-  a = j.indexOf(a);
-  a > -1 && j.splice(a, 1);
+
+function removeChangeListener(listener) {
+  const index = changeListeners.indexOf(listener);
+  index > -1 && changeListeners.splice(index, 1);
 }
-function y(a, b) {
-  b === void 0 && (b = !1);
-  let c = l === a;
-  b = !b && a === r && NetworkHeartbeat.isHeartbeatPending();
-  if (c || b) return;
-  t = t || a === s;
-  l = a;
-  l || NetworkHeartbeat.maybeStartHeartbeat(u, v);
-  w();
+
+function handleStatusChange(isOnlineStatus, force = false) {
+  // force === void 0 && (force = !1);
+  let statusChanged = navigatorObject === isOnlineStatus;
+  force =
+    !force &&
+    isOnlineStatus === wasInitiallyOnline &&
+    NetworkHeartbeat.isHeartbeatPending();
+  if (statusChanged || force) {
+    return;
+  }
+  shouldStartHeartbeat =
+    shouldStartHeartbeat || isOnlineStatus === wasInitiallyOfflineValue;
+  navigatorObject = isOnlineStatus;
+  navigatorObject ||
+    NetworkHeartbeat.maybeStartHeartbeat(startHeartbeat, stopHeartbeat);
+  notifyChangeListeners();
 }
-function z() {
-  let a = performanceNow();
-  o = o.filter((b) => {
-    return A(b.startTime, a);
+
+function isThresholdNotReached() {
+  let currentTime = performanceNow();
+  offlineEvents = offlineEvents.filter((event) => {
+    return isThresholdExceeded(event.startTime, currentTime);
   });
-  p = p.filter((b) => {
-    return A(b.startTime, a);
+  onlineEvents = onlineEvents.filter((event) => {
+    return isThresholdExceeded(event.startTime, currentTime);
   });
-  return p.length / o.length < m;
+  return onlineEvents.length / offlineEvents.length < errorThreshold;
 }
 
 // eslint-disable-next-line no-var
-var A = function (a, b) {
-  return a > b - n;
+var isThresholdExceeded = function (startTime, currentTime) {
+  return startTime > currentTime - heartbeatInterval;
 };
 
-function a() {
-  return l;
+function checkOnlineStatus() {
+  return navigatorObject;
 }
-function b(a) {
-  j.push(a);
-  let b = !1;
+function addChangeListener(listener) {
+  changeListeners.push(listener);
+  let listenerRemoved = false;
   return {
-    remove: function () {
-      b || ((b = !0), x(a));
+    remove: () => {
+      if (!listenerRemoved) {
+        listenerRemoved = true;
+        removeChangeListener(listener);
+      }
+
+      // listenerRemoved || ((listenerRemoved = true), x(listener));
     },
   };
 }
-function e() {
-  let a = performanceNow();
-  o.push({
-    startTime: a,
+
+function reportError() {
+  let currentTime = performanceNow();
+  offlineEvents.push({
+    startTime: currentTime,
   });
-  NetworkHeartbeat.maybeStartHeartbeat(u, v, z);
+  NetworkHeartbeat.maybeStartHeartbeat(
+    startHeartbeat,
+    stopHeartbeat,
+    isThresholdNotReached
+  );
 }
-function f() {
-  let a = performanceNow();
-  p.push({
-    startTime: a,
+
+function reportSuccess() {
+  let currentTime = performanceNow();
+  onlineEvents.push({
+    startTime: currentTime,
   });
-  A(q, a) ||
-    ((p = p.filter((b) => {
-      return A(b.startTime, a);
-    })),
-    (q = a));
+
+  if (!isThresholdExceeded(lastReportedTime, currentTime)) {
+    onlineEvents = onlineEvents.filter((b) => {
+      return isThresholdExceeded(b.startTime, currentTime);
+    });
+    lastReportedTime = currentTime;
+  }
+
+  // isThresholdExceeded(lastReportedTime, currentTime) ||
+  //   ((onlineEvents = onlineEvents.filter((b) => {
+  //     return isThresholdExceeded(b.startTime, currentTime);
+  //   })),
+  //   (lastReportedTime = currentTime));
 }
-function B() {
-  return t;
+
+function wasInitiallyOffline() {
+  return shouldStartHeartbeat;
 }
-k.addEventListener("online", () => {
-  y(r);
+
+globalObject.addEventListener("online", () => {
+  handleStatusChange(wasInitiallyOnline);
 });
-k.addEventListener("offline", () => {
-  y(s);
+
+globalObject.addEventListener("offline", () => {
+  handleStatusChange(wasInitiallyOfflineValue);
 });
 
 export const NetworkStatusImpl = {
-  isOnline: a,
-  onChange: b,
-  reportError: e,
-  reportSuccess: f,
-  wasOffline: B,
+  isOnline: checkOnlineStatus,
+  onChange: addChangeListener,
+  reportError: reportError,
+  reportSuccess: reportSuccess,
+  wasOffline: wasInitiallyOffline,
 };

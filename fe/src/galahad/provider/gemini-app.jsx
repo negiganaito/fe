@@ -6,7 +6,6 @@
  */
 
 import React from "react";
-import { jsx } from "react/jsx-runtime";
 
 import { CometToasterRoot } from "@/faang/toast/comet-toaster-root";
 
@@ -28,7 +27,7 @@ import { GeminiAppTopLevelProvider } from "./gemini-app-top-level-provider";
 
 export const GeminiApp = ({ children }) => {
   return (
-    <CometAppShell toaster={jsx(CometToasterRoot, {})}>
+    <CometAppShell toaster={<CometToasterRoot />}>
       <GeminiAppTopLevelProvider>
         <GeminiNavAndChannelContext.Provider>
           <GeminiAppContent>{children}</GeminiAppContent>

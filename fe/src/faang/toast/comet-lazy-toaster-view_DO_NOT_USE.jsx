@@ -16,23 +16,31 @@ function hasToasts(toasterState) {
 }
 
 export function CometLazyToasterView_DO_NOT_USE(props) {
-  let toasterState = useToasterStateManager();
+  const toasterState = useToasterStateManager();
 
   let [hasToastsInitially, setHasToastsInitially] = useState(() => {
     return hasToasts(toasterState);
   });
 
   useEffect(() => {
-    if (hasToastsInitially) return;
+    if (hasToastsInitially) {
+      return;
+    }
     let findToast = hasToasts(toasterState);
+
+    console.log({
+      findToast,
+    });
+
     if (findToast) {
       setHasToastsInitially(true);
       return;
     }
 
-    let listener = toasterState.addListener(() => {
+    // eslint-disable-next-line no-var
+    var listener = toasterState.addListener(() => {
       listener.remove();
-      setHasToastsInitially(!0);
+      setHasToastsInitially(true);
     });
     return listener.remove;
   }, [toasterState, hasToastsInitially]);

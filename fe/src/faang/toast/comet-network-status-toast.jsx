@@ -16,59 +16,61 @@ import { BaseToasterStateManager } from "./base-toaster-state-manager";
 import { CometIconWirelessSlashFilled } from "./comet-icon-wireless-slash-filled";
 import { cometPushToast } from "./comet-push-toast";
 
-let Comp;
+let Component;
 
 const onNetworkChange = ({ online }) => {
   let instance = BaseToasterStateManager.getInstance();
 
-  if (Comp) {
-    instance.expire(Comp);
-    Comp = null;
+  if (Component) {
+    instance.expire(Component);
+    Component = null;
   }
 
-  Comp = online
-    ? cometPushToast.cometPushToast(
-        {
-          icon: <TetraIcon color="positive" icon={fbicon._(ix(485124), 24)} />,
-          message: fbt(
-            "Your internet connection was restored.",
-            "Your internet connection was restored."
-          ),
-        },
-        4e3,
-        instance
-      )
-    : cometPushToast.cometPushToast(
-        {
-          action: {
-            label: fbt("Refresh", "Refresh"),
-            onPress: () => {
-              // d(
-              //   'CometRelayEnvironmentFactory',
-              // ).commitLocalUpdateForEachEnvironment(function (a, b, c) {
-              //   c.invalidateStore()
-              // })
+  if (online) {
+    Component = cometPushToast.cometPushToast(
+      {
+        icon: <TetraIcon color="positive" icon={fbicon._(ix(485124), 24)} />,
+        message: fbt(
+          "Your internet connection was restored.",
+          "Your internet connection was restored."
+        ),
+      },
+      4e3,
+      instance
+    );
+  } else {
+    Component = cometPushToast.cometPushToast(
+      {
+        action: {
+          label: fbt("Refresh", "Refresh"),
+          onPress: () => {
+            // d(
+            //   'CometRelayEnvironmentFactory',
+            // ).commitLocalUpdateForEachEnvironment(function (a, b, c) {
+            //   c.invalidateStore()
+            // })
 
-              window.location.reload();
-            },
+            window.location.reload();
           },
-
-          icon: (
-            <TetraIcon
-              color="disabled"
-              icon={SVGICON.legacySVGIcon(CometIconWirelessSlashFilled)}
-              size={24}
-            />
-          ),
-
-          message: fbt(
-            "You are currently offline.",
-            "You are currently offline."
-          ),
         },
-        Infinity,
-        instance
-      );
+
+        icon: (
+          <TetraIcon
+            color="disabled"
+            icon={SVGICON.legacySVGIcon(CometIconWirelessSlashFilled)}
+            size={24}
+          />
+        ),
+
+        message: fbt(
+          "You are currently offline.",
+          "You are currently offline."
+        ),
+      },
+      Infinity,
+      instance
+    );
+  }
 };
 
 const subscribe = () => {
