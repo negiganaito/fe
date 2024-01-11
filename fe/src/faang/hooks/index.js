@@ -14,6 +14,7 @@ export { useCometPressableEventHandlers } from "./use-comet-pressable-event-hand
 export { useCometTheme } from "./use-comet-theme";
 export { useCurrentDisplayMode } from "./use-current-display-mode";
 export { useDelayedState } from "./use-delayed-state";
+export { useDoubleEffectHack_DO_NOT_USE_THIS_IS_TRACKED } from "./use-double-effect-hack_DO_NOT_USE_THIS_IS_TRACKED";
 export { useDynamicCallbackDANGEROUS } from "./use-dynamic-callback-DANGEROUS";
 export { useFadeEffect } from "./use-fade-effect";
 export { useGetComposingState } from "./use-get-composing-state";

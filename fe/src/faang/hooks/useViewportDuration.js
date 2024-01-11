@@ -27,6 +27,7 @@ import {
   intersectionObserverEntryIsIntersecting,
 } from "@/faang/utils";
 
+import { useDoubleEffectHack_DO_NOT_USE_THIS_IS_TRACKED } from "./use-double-effect-hack_DO_NOT_USE_THIS_IS_TRACKED";
 import useIntersectionObserver from "./use-intersection-observer";
 
 export function useViewportDuration(entry) {
@@ -122,13 +123,28 @@ export function useViewportDuration(entry) {
     K.current = J;
   }, [J]);
 
-  // eslint-disable-next-line no-undef
   useDoubleEffectHack_DO_NOT_USE_THIS_IS_TRACKED(() => {
-    return function () {
-      K.current("COMPONENT_UNMOUNTED", null, !1),
-        C.current !== null && (C.current(), (C.current = null)),
-        E.current !== null && (E.current.remove(), (E.current = null)),
-        D.current !== null && (D.current.remove(), (D.current = null));
+    return () => {
+      K.current("COMPONENT_UNMOUNTED", null, false);
+
+      if (C.current) {
+        C.current();
+        C.current = null;
+      }
+
+      if (E.current) {
+        E.current();
+        E.current = null;
+      }
+
+      if (D.current) {
+        D.current();
+        D.current = null;
+      }
+
+      // C.current && (C.current(), (C.current = null));
+      // E.current && (E.current.remove(), (E.current = null));
+      // D.current && (D.current.remove(), (D.current = null));
     };
     // @ts-ignore
   }, []);

@@ -28,10 +28,6 @@ export function CometLazyToasterView_DO_NOT_USE(props) {
     }
     let findToast = hasToasts(toasterState);
 
-    console.log({
-      findToast,
-    });
-
     if (findToast) {
       setHasToastsInitially(true);
       return;

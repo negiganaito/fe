@@ -45,11 +45,11 @@ const containerStyles = stylex.create({
     WebkitOverflowScrolling: "touch",
     //
     // eslint-disable-next-line @stylexjs/valid-styles
-    MsOverflowStyle: "x2atdfe",
+    // MsOverflowStyle: "x2atdfe",
     // eslint-disable-next-line @stylexjs/valid-styles
-    MsScrollChaining: "xb57i2i",
+    // MsScrollChaining: "xb57i2i",
     // eslint-disable-next-line @stylexjs/valid-styles
-    MsScrollRails: "x1q594ok",
+    // MsScrollRails: "x1q594ok",
     display: "flex",
     flexDirection: "column",
     overflowX: "hidden",
@@ -658,7 +658,7 @@ function OnScrollTopComp(a) {
     <CreatePositionMarkerComp
       onVisible={b}
       scrollerRef={a}
-      xstyle={stylex(positionStyles.top)}
+      xstyle={positionStyles.top}
     />
   );
 }
@@ -670,7 +670,7 @@ function OnScrollBottomComp(a) {
     <CreatePositionMarkerComp
       onVisible={b}
       scrollerRef={a}
-      xstyle={stylex(positionStyles.bottom)}
+      xstyle={positionStyles.bottom}
     />
   );
 }

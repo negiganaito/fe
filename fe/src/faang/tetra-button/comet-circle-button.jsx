@@ -105,10 +105,7 @@ const disableStyles = stylex.create({
   },
   overlay: {
     backgroundColor: "var(--progress-ring-on-media-background)",
-    borderTopWidth: "0",
-    borderRightWidth: "0",
-    borderBottomWidth: "0",
-    borderLeftWidth: "0",
+    borderWidth: 0,
     boxShadow: "0 2px 4px var(--shadow-1)",
     color: "var(--disabled-text)",
   },
@@ -195,9 +192,7 @@ export const CometCircleButton = forwardRef(
         ref={ref}
         testOnly_pressed={testOnly_pressed}
         testid={undefined}
-        xstyle={(classProps) => {
-          const { pressed } = classProps;
-
+        xstyle={({ pressed }) => {
           return [
             overlayStyles.root,
             sizeStyles[size],
@@ -213,7 +208,7 @@ export const CometCircleButton = forwardRef(
         }}
       >
         <CometIcon
-          color={disabled ? "disabled" : color ? color : getColorByType(type)}
+          color={disabled ? "disabled" : color ?? getColorByType(type)}
           size={
             iconRatio === "large" ? iconRatioLarge[size] : iconRatioNormal[size]
           }

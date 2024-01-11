@@ -6,7 +6,6 @@
  */
 
 import React, { useId, useMemo } from "react";
-import { jsx, jsxs } from "react/jsx-runtime";
 import stylex from "@stylexjs/stylex";
 
 import { BaseView } from "../base-row";
@@ -81,62 +80,108 @@ export function BaseToast({
         role: "alert",
       };
   }, [action]);
-  const Wrapper = jsxs(React.Fragment, {
-    children: [
-      addOnStart &&
-        jsx(BaseView, {
-          xstyle: styles.item,
-          children: addOnStart,
-        }),
-      jsx(BaseView, {
-        xstyle: [styles.item, styles.itemText],
-        ...ariaProps,
-        children: message({
+
+  const Wrapper = (
+    <>
+      {addOnStart && <BaseView xstyle={styles.item}>{addOnStart}</BaseView>}
+      <BaseView xstyle={[styles.item, styles.itemText]} {...ariaProps}>
+        {message({
           toastMessageId: toastMessageId,
-        }),
-      }),
-      action &&
-        jsx(FocusRegion.FocusRegion, {
-          autoFocusQuery: focusScopeQueries.tabbableScopeQuery,
-          children: jsx(BaseView, {
-            "aria-labelledby": toastMessageId,
-            role: "group",
-            xstyle: styles.item,
-            children: action.element
+        })}
+      </BaseView>
+
+      {action && (
+        <FocusRegion.FocusRegion
+          autoFocusQuery={focusScopeQueries.tabbableScopeQuery}
+        >
+          <BaseView
+            aria-labelledby={toastMessageId}
+            role="group"
+            xstyle={styles.item}
+          >
+            {action.element
               ? action.element
-              : action.labelRenderer &&
-                jsx(BaseInlinePressable, {
-                  onPress: function (a) {
-                    onDismiss();
-                    action.onPress(a);
-                  },
-                  testid: void 0,
-                  xstyle: styles.link,
-                  children: action.labelRenderer(action.label),
-                }),
-          }),
-        }),
-      closeButton &&
-        jsx(BaseView, {
-          xstyle: styles.item,
-          children: closeButton,
-        }),
-    ],
-  });
+              : action.labelRenderer && (
+                  <BaseInlinePressable
+                    onPress={(e) => {
+                      onDismiss();
+                      action.onPress(e);
+                    }}
+                    testid={undefined}
+                    xstyle={styles.link}
+                  >
+                    {action.labelRenderer(action.label)}
+                  </BaseInlinePressable>
+                )}
+          </BaseView>
+        </FocusRegion.FocusRegion>
+      )}
+
+      {closeButton && <BaseView xstyle={styles.item}>{closeButton}</BaseView>}
+    </>
+  );
+
   const linkWrapperComp = linkWrapper ? linkWrapper(Wrapper) : Wrapper;
-  return useInvertedDisplayMode
-    ? jsx(BaseTheme, {
-        config: config,
-        displayMode: displayMode,
-        ref: toastRef,
-        testid: void 0,
-        xstyle: [styles.root, size === "full-width" && styles.rootFullWidth],
-        children: linkWrapperComp,
-      })
-    : jsx(BaseView, {
-        ref: toastRef,
-        testid: void 0,
-        xstyle: [styles.root, size === "full-width" && styles.rootFullWidth],
-        children: linkWrapperComp,
-      });
+  return useInvertedDisplayMode ? (
+    <BaseTheme
+      config={config}
+      displayMode={displayMode}
+      ref={toastRef}
+      testid={undefined}
+      xstyle={[styles.root, size === "full-width" && styles.rootFullWidth]}
+    >
+      {linkWrapperComp}
+    </BaseTheme>
+  ) : (
+    <BaseView
+      ref={toastRef}
+      testid={undefined}
+      xstyle={[styles.root, size === "full-width" && styles.rootFullWidth]}
+    >
+      {linkWrapperComp}
+    </BaseView>
+  );
 }
+
+// const Wrapper = jsxs(React.Fragment, {
+//   children: [
+//     addOnStart &&
+//       jsx(BaseView, {
+//         xstyle: styles.item,
+//         children: addOnStart,
+//       }),
+//     jsx(BaseView, {
+//       xstyle: [styles.item, styles.itemText],
+//       ...ariaProps,
+//       children: message({
+//         toastMessageId: toastMessageId,
+//       }),
+//     }),
+//     action &&
+//       jsx(FocusRegion.FocusRegion, {
+//         autoFocusQuery: focusScopeQueries.tabbableScopeQuery,
+//         children: jsx(BaseView, {
+//           "aria-labelledby": toastMessageId,
+//           role: "group",
+//           xstyle: styles.item,
+//           children: action.element
+//             ? action.element
+//             : action.labelRenderer &&
+//               jsx(BaseInlinePressable, {
+//                 onPress: function (a) {
+//                   onDismiss();
+//                   action.onPress(a);
+//                 },
+//                 testid: void 0,
+//                 xstyle: styles.link,
+//                 children: action.labelRenderer(action.label),
+//               }),
+//         }),
+//       }),
+//     closeButton &&
+//       jsx(BaseView, {
+//         xstyle: styles.item,
+//         children: closeButton,
+//       }),
+//   ],
+// });

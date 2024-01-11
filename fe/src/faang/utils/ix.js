@@ -349,13 +349,13 @@ const entriesMap = {
   // toaster
   478231: {
     sprited: 2,
-    spi: "/faang/assets/icon-list/XvqMI3OqoSa.png",
-    _spi: "/faang/assets/icon-list/XvqMI3OqoSa.png",
+    spi: "/faang/assets/icon-list/ivr3-db6FDb.png",
+    _spi: "/faang/assets/icon-list/ivr3-db6FDb.png",
     w: 12,
     h: 12,
-    p: "0 -1147px",
+    p: "0 -1324px",
     sz: "auto",
-    loggingID: "478231",
+    // loggingID: "478231",
   },
 
   // network
@@ -368,6 +368,7 @@ const entriesMap = {
     h: 24,
     p: "-25px -106px",
     sz: "auto",
+    loggingID: "485124",
   },
 };
 const usedPathsSet = new Set();

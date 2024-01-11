@@ -182,7 +182,7 @@ devDependencies:
     specifier: 1.0.0
     version: 1.0.0(prettier@2.8.8)
   react-hot-loader:
-    specifier: ^4.13.1
+    specifier: 4.13.1
     version: 4.13.1(react-dom@0.0.0-experimental-aec521a96-20231114)(react@0.0.0-experimental-aec521a96-20231114)
   relay-compiler:
     specifier: 16.1.0

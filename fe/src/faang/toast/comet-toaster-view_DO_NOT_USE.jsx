@@ -121,8 +121,6 @@ export const CometToasterView_DO_NOT_USE = ({
           toasterState={toastState}
           // eslint-disable-next-line max-params
           children={(children, id, expired, position) => {
-            console.log({ children, id });
-
             return (
               <BaseToastAnimationInternal
                 key={position}

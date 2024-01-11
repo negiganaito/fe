@@ -5,8 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useMemo } from "react";
-import { jsx } from "react/jsx-runtime";
+import React, { useMemo } from "react";
 import stylex from "@stylexjs/stylex";
 import fbt from "fbt";
 
@@ -49,29 +48,73 @@ export function CometToast({
       : undefined;
   }, [href, target]);
 
-  // return (
-  //   <BaseToast
-  //     action={
-  //       action
-  //         ? {
-  //             label: action.label,
-  //             // eslint-disable-next-line react/no-unstable-nested-components
-  //             labelRenderer: (child) => {
-  //               return (
-  //                 <TetraText color="blueLink" numberOfLines={1} type="body3">
-  //                   {child}
-  //                 </TetraText>
-  //               );
-  //             },
-  //             onPress: action.onPress,
-  //             testid: action.testid,
-  //           }
-  //         : undefined
-  //     }
-  //   />
-  // );
+  return (
+    <BaseToast
+      action={
+        action
+          ? {
+              label: action.label,
+              // eslint-disable-next-line react/no-unstable-nested-components
+              labelRenderer: (child) => {
+                return (
+                  <TetraText color="blueLink" numberOfLines={1} type="body3">
+                    {child}
+                  </TetraText>
+                );
+              },
+              onPress: action.onPress,
+              testid: action.testid,
+            }
+          : undefined
+      }
+      addOnStart={icon}
+      closeButton={
+        !supressCloseButton && (
+          <CometCircleButton
+            icon={fbicon._(ix(478231), 12)}
+            label={fbt.c("Close")}
+            onPress={onDismiss}
+            size={24}
+          />
+        )
+      }
+      linkWrapper={
+        rest.onPress || linkProps
+          ? (child) => {
+              <CometPressable
+                {...rest}
+                expanding
+                linkProps={linkProps}
+                xstyle={styles.pressable}
+              >
+                {child}
+              </CometPressable>;
+            }
+          : undefined
+      }
+      // eslint-disable-next-line react/no-unstable-nested-components
+      message={({ toastMessageId }) => {
+        return (
+          <TetraText
+            color="primary"
+            id={toastMessageId}
+            numberOfLines={truncateText ? 4 : void 0}
+            type="body3"
+          >
+            {message}
+          </TetraText>
+        );
+      }}
+      onDismiss={onDismiss}
+      testid={undefined}
+      toastRef={impressionLoggingRef}
+    />
+  );
+}
 
-  return jsx(BaseToast, {
+/*
+
+return jsx(BaseToast, {
     action: action
       ? {
           label: action.label,
@@ -121,4 +164,5 @@ export function CometToast({
     testid: void 0,
     toastRef: impressionLoggingRef,
   });
-}
+
+*/
