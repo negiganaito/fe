@@ -40,7 +40,9 @@ export const GeminiAppViewStack = () => {
   return (
     <BasePortalTargetContext.Provider value={dom}>
       <CometContextualLayerAnchorRoot>
-        <GeminiLayoutTopLevelProvider />
+        <GeminiLayoutTopLevelProvider>
+          <GeminiLayoutPage.GeminiLayoutPage />
+        </GeminiLayoutTopLevelProvider>
       </CometContextualLayerAnchorRoot>
     </BasePortalTargetContext.Provider>
   );
