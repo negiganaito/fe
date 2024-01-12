@@ -37,7 +37,8 @@
     "react-relay": "16.1.0",
     "resize-observer-polyfill": "1.5.1",
     "ua-parser-js": "1.0.37",
-    "flux": "4.0.4"
+    "flux": "4.0.4",
+    "flux-hooks": "1.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",

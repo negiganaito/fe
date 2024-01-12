@@ -16,6 +16,7 @@ export { env } from "./Env";
 export { executionEnvironment } from "./executionEnvironment";
 export { getDocumentScrollElement } from "./get-document-scroll-element";
 export { getIntersectionMarginFromViewportMargin } from "./get-intersection-margin-from-viewport-margin";
+export { getJSEnumSafe } from "./get-js-enum-safe";
 export { getLoadingStateAriaProps } from "./get-loading-state-aria-props";
 export { getPrefersReducedMotion } from "./get-prefers-reduced-motion";
 export { InternalEnumUtils } from "./internal-enum-utils";

@@ -4,8 +4,10 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-
+import { Dispatcher } from "flux";
 import { ReduceStore } from "flux/utils";
+
+import { WorkGalahadAppTabIDUtil } from "../config";
 
 const defaultVariable = () => {
   return {
@@ -14,8 +16,8 @@ const defaultVariable = () => {
 };
 
 export class WorkGalahadNavStore extends ReduceStore {
-  constructor(props) {
-    super(props);
+  constructor(dispatcher) {
+    super(dispatcher);
     this.reduce = (state, action) => {
       switch (action.type) {
         case "nav/markPendingTransition": {
@@ -103,8 +105,65 @@ export class WorkGalahadNavStore extends ReduceStore {
 
           return { ...newState, pendingTransitionState: undefined };
         }
+
+        case "nav/stopLoading": {
+          return { ...state, loading: false };
+        }
+
+        case "nav/showPublicContentBanner": {
+          return { ...state, publicContentBanner: action.html };
+        }
+
+        case "nav/hidePublicContentBanner": {
+          return { ...state, publicContentBanner: undefined };
+        }
+
+        default:
+          return state;
       }
     };
+  }
+
+  getInitialState() {
+    return {
+      activeEntityKey: null,
+      loading: false,
+      selectedAppTabID: WorkGalahadAppTabIDUtil.getProductSpecificHomeTabID(),
+      allowChannelAutoFocus: false,
+      lastNavigationIntentTimestamp: 0,
+      publicContentBanner: undefined,
+      stackedChannelData: [],
+      pendingTransitionState: undefined,
+    };
+  }
+
+  getActiveEntityKey() {
+    return this.getState().activeEntityKey;
+  }
+
+  getSelectedAppTabID() {
+    return this.getState().selectedAppTabID;
+  }
+
+  getNavigationKey() {
+    return "navigation-key-" + this.getState().lastNavigationIntentTimestamp;
+  }
+
+  isChannelAutoFocusAllowed() {
+    return this.getState().allowChannelAutoFocus;
+  }
+
+  getStackedChannelData() {
+    const stackedChannelData = this.getState().stackedChannelData;
+    return stackedChannelData[stackedChannelData.length - 1];
+  }
+
+  isLoading() {
+    return this.getState().loading;
+  }
+
+  getPublicContentBanner() {
+    return this.getState().publicContentBanner;
   }
 
   $WorkGalahadNavStore$p_1 = (state, entityKey) => {
@@ -124,3 +183,5 @@ export class WorkGalahadNavStore extends ReduceStore {
       : { ...state, ...defaultVariable() };
   };
 }
+
+export const workGalahadNavStore = new WorkGalahadNavStore(Dispatcher);

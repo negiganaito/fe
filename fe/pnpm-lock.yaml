@@ -35,6 +35,9 @@ dependencies:
   flux:
     specifier: 4.0.4
     version: 4.0.4(react@0.0.0-experimental-aec521a96-20231114)
+  flux-hooks:
+    specifier: 1.1.4
+    version: 1.1.4(flux@4.0.4)(react@0.0.0-experimental-aec521a96-20231114)
   invariant:
     specifier: 2.2.4
     version: 2.2.4
@@ -4504,6 +4507,17 @@ packages:
     resolution: {integrity: sha512-kkJ/ABZb4rhyFw05yCWdcA1K2uW7ddYzz9zVNJp5kRX3BzsIynB4f0E4oLlf+zgDLErj9FwGda1qEAmhnRNXPQ==}
     dev: false
 
+  /flux-hooks@1.1.4(flux@4.0.4)(react@0.0.0-experimental-aec521a96-20231114):
+    resolution: {integrity: sha512-XSxLVM8lqFil7wZXcWMT9Xx0DMKvmsXSwKF4ApZaCymos+SiU3jQL4xtHOgal8OAbZp98AksP/1nLkM39LlKRA==}
+    peerDependencies:
+      flux: ^3.1.2
+      react: ^16.8.0
+    dependencies:
+      flux: 4.0.4(react@0.0.0-experimental-aec521a96-20231114)
+      lodash.isequal: 4.5.0
+      react: github.com/tienlx97/react-experimental/acfc5aa360d39a1c90fc78dd65951b503360d397
+    dev: false
+
   /flux@4.0.4(react@0.0.0-experimental-aec521a96-20231114):
     resolution: {integrity: sha512-NCj3XlayA2UsapRpM7va6wU1+9rE5FIL7qoMcmxWHRzbp0yujihMBm9BBHZ1MDIk5h5o2Bl6eGiCe8rYELAmYw==}
     peerDependencies:
@@ -5536,6 +5550,10 @@ packages:
   /lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
+
+  /lodash.isequal@4.5.0:
+    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    dev: false
 
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
