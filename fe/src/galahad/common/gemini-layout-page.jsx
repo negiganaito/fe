@@ -5,14 +5,57 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import React, { createContext, forwardRef, memo } from "react";
+import React, {
+  forwardRef,
+  memo,
+  useContext,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import stylex from "@stylexjs/stylex";
+import { thatReturnsArgument } from "fbjs/lib/emptyFunction";
+import Locale from "fbjs/lib/Locale";
+
+import { CometBase } from "@/faang/base-row";
+import { CometPagelet } from "@/faang/comet-placeholder";
+import { CometSSRMultipassBoundary } from "@/faang/common";
+import { BaseViewportMarginsContext } from "@/faang/context";
+import { CometErrorBoundary } from "@/faang/error";
+import { VoyageUserJourneyUILayerProvider } from "@/faang/modal/voyage-user-journey-ui-layer-provider";
+import { executionEnvironment, supportsCSSSticky } from "@/faang/utils";
 
 import {
   GeminiLayoutFullWidthModeContext,
+  GeminiLayoutHasFixedBannerContext,
   GeminiLayoutHeaderContext,
+  GeminiLayoutHeaderHeightContext,
+  GeminiNavAndChannelContext,
 } from "../context";
-import { useGeminiLayoutIsFullWidth } from "../hooks/use-gemini-layout-is-full-width";
+import {
+  useGeminiLayoutChannelMeasureListenerForNonSticky,
+  useGeminiLayoutHorizontalScrolling,
+  useGeminiLayoutIntersectionObserverForSticky,
+  useGeminiLayoutIsFullWidth,
+} from "../hooks";
+
+// import { useGeminiLayoutHorizontalScrolling } from "../hooks/use-gemini-layout-horizontal-scrolling";
+// import { useGeminiLayoutIsFullWidth } from "../hooks/use-gemini-layout-is-full-width";
+import { GeminiLayoutNonResponsivenessWrappers } from "./gemini-layout-non-responsiveness-wrappers";
+
+const s = 96;
+const t = 56;
+const v = 300;
+const w = 870;
+
+// eslint-disable-next-line no-unused-vars
+const x = 300;
+
+const y = 85;
+const z = 35;
+
+// eslint-disable-next-line no-unused-vars
+const A = 16;
 
 const styles = stylex.create({
   navigationSticky: {
@@ -275,126 +318,419 @@ const styles = stylex.create({
   },
 });
 
-function a(a) {
-  let b = a.children;
-  let e = a.coverPhoto;
-  let f = a.footer;
-  let g = a.hasContrastBackgroundColor;
-  g = g === void 0 ? !1 : g;
-  let h = a.testid;
-  h = a.topBanner;
-  a = d("GeminiLayoutHeaderContext.react").useGeminiLayoutHeader();
-  let i = a.hasCoverPhoto;
-  let k = a.hasHeaderTabs;
-  a = a.intersectionObserverRef;
-  let m = c("useGeminiLayoutIsFullWidth")();
-  let o = d(
-    "GeminiLayoutFullWidthModeContext.react"
-  ).useGeminiLayoutUserSettingsFullWidthMode();
-  let q = d(
-    "useGeminiLayoutHorizontalScrolling"
-  ).useGeminiLayoutHorizontalScrolling();
-  let r = d(
-    "useGeminiLayoutIntersectionObserverForSticky"
-  ).useGeminiLayoutIsSticky();
-  let s = n(P);
-  let t = s.entity;
-  let v = d(
-    "GeminiLayoutHasFixedBannerContext.react"
-  ).useGeminiLayoutHasFixedBanner();
-  s =
-    i && e != null
-      ? l.jsx("div", {
-          className: "x1vd4hg5 xh8yej3 x1n2onr6",
-          children: e,
-        })
-      : null;
-  i = p(() => {
-    let a;
-    let b = I({
-      hasHeaderTabs: k,
+// const u = c("GalileoNavFeatureGating").isGalileoNavMode(
+//   "employee_appbar_on_workplace"
+// );
+const isGalileoNavMode = false;
+
+const _2401 = true;
+
+const B = 22;
+
+const D = Locale.isRTL() ? "right" : "left";
+const E = Locale.isRTL() ? "marginRight" : "marginLeft";
+const F = executionEnvironment.canUseDOM ? supportsCSSSticky : true;
+
+const P = isGalileoNavMode
+  ? React.createContext({
+      entity: w,
+      leftNav: v + t,
+    })
+  : React.createContext({
+      entity: w,
+      leftNav: v + s,
     });
-    return F
-      ? {
+
+const GeminiLayoutPageHeader = memo(
+  // eslint-disable-next-line complexity
+  ({
+    children,
+    coverPhoto,
+    footer,
+    hasContrastBackgroundColor = false,
+    testid,
+    topBanner,
+  }) => {
+    const { hasCoverPhoto, hasHeaderTabs, intersectionObserverRef } =
+      GeminiLayoutHeaderContext.useGeminiLayoutHeader();
+
+    const isFullWidth = useGeminiLayoutIsFullWidth();
+
+    let hasRiverKnight =
+      GeminiLayoutFullWidthModeContext.useGeminiLayoutUserSettingsFullWidthMode();
+
+    const q = useGeminiLayoutHorizontalScrolling();
+
+    const r =
+      useGeminiLayoutIntersectionObserverForSticky.useGeminiLayoutIsSticky();
+
+    let { entity } = useContext(P);
+
+    let v = GeminiLayoutHasFixedBannerContext.useGeminiLayoutHasFixedBanner();
+
+    const s =
+      hasCoverPhoto && coverPhoto ? (
+        <div className="x1vd4hg5 xh8yej3 x1n2onr6">{coverPhoto}</div>
+      ) : null;
+
+    const i = useMemo(() => {
+      let b = I({
+        hasHeaderTabs,
+      });
+
+      if (F) {
+        return {
           height: b,
-        }
-      : ((a = {}),
-        (a[E] = r !== !0 ? "auto" : -q),
-        (a.maxWidth = r && !m ? 1600 : void 0),
-        (a.minWidth = r && !m ? "auto" : "0"),
-        (a.width = t),
-        (a.height = b),
-        (a.top = v ? B : 0),
-        a);
-  }, [k, r, q, m, t, v]);
-  e = l.jsxs(l.Fragment, {
-    children: [
-      l.jsx(c("CometBase.react"), {
-        ref: a,
-      }),
-      !r && h,
-      s,
-      r && h,
-      !F && r
-        ? l.jsx("div", {
-            className: "xcbkimw xh8yej3",
-          })
-        : null,
-      !F && r
-        ? l.jsx("div", {
-            className: "x1s1d1n7 xh8yej3",
-          })
-        : null,
-      l.jsxs("div", {
-        className: (j || (j = c("stylex")))(
-          G.headerContents,
-          g && G.headerContentsConstrastBackground,
-          !F && r && G.headerFixed,
-          u && !F && r && G.headerFixedWP4MAppBar,
-          !F && o && r && G.headerFixedFluid,
-          u && !F && o && r && G.headerFixedFluidWP4MAppBar
-        ),
-        "data-testid": void 0,
-        style: i,
-        children: [
-          l.jsx("div", {
-            className: "",
-            children: b,
-          }),
-          f != null
-            ? l.jsx("div", {
-                className: "x1s1d1n7",
-                children: f,
-              })
-            : null,
-        ],
-      }),
-    ],
-  });
-  a = Q();
-  return c("gkx")("2401")
-    ? l.jsx("div", {
-        ref: a,
-        children: e,
-      })
-    : e;
+        };
+      } else {
+        let a = {};
+        a[E] = r !== true ? "auto" : -q;
+        a.maxWidth = r && !isFullWidth ? 1600 : undefined;
+        a.minWidth = r && !isFullWidth ? "auto" : "0";
+        a.width = entity;
+        a.height = b;
+        a.top = v ? B : 0;
+
+        return a;
+      }
+    }, [hasHeaderTabs, r, q, isFullWidth, entity, v]);
+
+    const e = (
+      <>
+        <CometBase ref={intersectionObserverRef} />
+        {!r && topBanner}
+        {s}
+        {r && topBanner}
+        {!F && r ? <div className="xcbkimw xh8yej3" /> : null}
+        {!F && r ? <div className="x1s1d1n7 xh8yej3" /> : null}
+        <div
+          className={stylex(
+            styles.headerContents,
+            hasContrastBackgroundColor &&
+              styles.headerContentsConstrastBackground,
+            !F && r && styles.headerFixed,
+            isGalileoNavMode && !F && r && styles.headerFixedWP4MAppBar,
+            !F && hasRiverKnight && r && styles.headerFixedFluid,
+            isGalileoNavMode &&
+              !F &&
+              hasRiverKnight &&
+              r &&
+              styles.headerFixedFluidWP4MAppBar
+          )}
+          data-testid={undefined}
+          style={i}
+        >
+          <div className="">
+            {children}
+            {footer && <div className="x1s1d1n7">{footer}</div>}
+          </div>
+        </div>
+      </>
+    );
+
+    const a = Q();
+
+    return _2401 ? <div ref={a}>{e}</div> : e;
+  }
+);
+
+const I = ({ hasHeaderTabs }) => {
+  return hasHeaderTabs ? y + z : y;
+};
+
+const Q = () => {
+  let [b, a] = useState(null);
+
+  const { setHeight } =
+    GeminiLayoutHeaderHeightContext.useGeminiLayoutHeaderHeight();
+
+  useLayoutEffect(() => {
+    let a = !b ? undefined : b.getBoundingClientRect();
+    // eslint-disable-next-line no-cond-assign
+    setHeight((a = !a ? undefined : a.height) ? a : 0);
+  }, [b, setHeight]);
+
+  return a;
+};
+
+const _GeminiLayoutPage = memo(
+  ({
+    channelContent,
+    children,
+    fixedBannerContent,
+    mainNavContent,
+    navContentAndChannelContainer,
+  }) => {
+    const { isAutoHideEnabled } = GeminiNavAndChannelContext.useNavUIState();
+    const k = useGeminiLayoutIsFullWidth();
+    const m =
+      useGeminiLayoutHorizontalScrolling.useGeminiLayoutHorizontalScrollingListener();
+    const [n, o, q, x] = useGeminiLayoutChannelMeasureListenerForNonSticky(
+      isGalileoNavMode ? v + t : v + s,
+      w,
+      isAutoHideEnabled
+    );
+
+    let y = useMemo(() => {
+      return {
+        leftNav: q,
+        entity: x - q,
+      };
+    }, [x, q]);
+
+    let z = !!fixedBannerContent;
+
+    let A = U({
+      hasFixedBanner: z,
+    });
+
+    let B = useMemo(() => {
+      return {
+        bottom: 0,
+        left: 0,
+        right: 0,
+        top: A,
+      };
+    }, [A]);
+
+    let C = T(z, styles.contentWithTopBannerNarrowBuffer);
+
+    return (
+      <GeminiLayoutNonResponsivenessWrappers.GeminiLayoutPageWrapper
+        children={() => {
+          // GeminiAccessibilitySkipToContent
+          // b('cr:2287') && jsx(b('cr:2287'), {}),
+          return (
+            // eslint-disable-next-line no-undef
+            <div className={stylex.apply(undefined, arguments)} ref={o}>
+              <BaseViewportMarginsContext.Provider value={B}>
+                <P.Provider value={y}>
+                  <GeminiLayoutHasFixedBannerContext.Provider
+                    hasFixedBanner={z}
+                  >
+                    <useGeminiLayoutHorizontalScrolling.GeminiLayoutHorizontalScrollingContextProvider
+                      value={m}
+                    >
+                      {fixedBannerContent && <O>{fixedBannerContent}</O>}
+                      <GeminiLayoutHeaderHeightContext.Provider>
+                        <CometSSRMultipassBoundary id="top_nav">
+                          <VoyageUserJourneyUILayerProvider name="navigation">
+                            <H
+                              channelContent={channelContent}
+                              hasFixedBanner={z}
+                              isLayoutFullWidth={k}
+                              navContent={mainNavContent}
+                              navContentAndChannelContainer={
+                                navContentAndChannelContainer ?? React.Fragment
+                              }
+                              ref={n}
+                            />
+                          </VoyageUserJourneyUILayerProvider>
+                        </CometSSRMultipassBoundary>
+                        <div
+                          className={thatReturnsArgument(
+                            stylex(styles.content, C)
+                          )}
+                        >
+                          {/* // b('cr:6171') && jsx(b('cr:6171'), {}), */}
+                          {children}
+                        </div>
+                      </GeminiLayoutHeaderHeightContext.Provider>
+                    </useGeminiLayoutHorizontalScrolling.GeminiLayoutHorizontalScrollingContextProvider>
+                  </GeminiLayoutHasFixedBannerContext.Provider>
+                </P.Provider>
+              </BaseViewportMarginsContext.Provider>
+            </div>
+          );
+        }}
+      />
+    );
+  }
+);
+
+function U({
+  hasFixedBanner,
+  hasHeaderContent = false,
+  hasHeaderTabs = false,
+}) {
+  let d = 0;
+
+  if (hasFixedBanner) {
+    d += B;
+  }
+
+  if (!hasHeaderContent) {
+    return d;
+  }
+
+  d = y;
+
+  if (hasHeaderTabs) {
+    d += z;
+  }
+
+  return d;
 }
 
-export const GeminiLayoutPageHeader = ({
-  children,
-  coverPhoto,
-  footer,
-  hasContrastBackgroundColor = false,
-  testid,
-  topBanner,
-}) => {
-  const { hasCoverPhoto, hasHeaderTabs, intersectionObserverRef } =
-    GeminiLayoutHeaderContext.useGeminiLayoutHeader();
+function T(a, b) {
+  return !a ? null : b;
+}
 
-  const isFullWidth = useGeminiLayoutIsFullWidth();
+function O({ children }) {
+  let b =
+    useGeminiLayoutHorizontalScrolling.useGeminiLayoutHorizontalScrolling();
+  let { entity, leftNav } = useContext(P);
+  // let f = e.entity;
+  // let g = e.leftNav;
+  const layoutFixed =
+    GeminiLayoutHasFixedBannerContext.useGeminiLayoutHasFixedBanner();
+  const xstyle = T(layoutFixed, styles.fixedBannerContainerNarrow);
 
-  let hasRiverKnight =
-    GeminiLayoutFullWidthModeContext.useGeminiLayoutUserSettingsFullWidthMode();
+  let style = useMemo(() => {
+    if (F) {
+      return {};
+    } else {
+      let obj = {};
 
-  const q = useGeminiLayoutHorizontalScrolling();
+      obj[D] = b * -1;
+      obj.minWidth = leftNav + entity;
+
+      return obj;
+    }
+  }, [b, leftNav, entity]);
+
+  return (
+    <div className={stylex(styles.fixedBannerContainer, xstyle)} style={style}>
+      {children}
+    </div>
+  );
+}
+
+const H = memo(
+  forwardRef((props, ref) => {
+    const {
+      channelContent,
+      hasFixedBanner,
+      isLayoutFullWidth,
+      navContent,
+      navContentAndChannelContainer,
+    } = props;
+
+    const { isAutoHideEnabled, isChannelVisible } =
+      GeminiNavAndChannelContext.useNavUIState();
+
+    const horizontalScroll =
+      useGeminiLayoutHorizontalScrolling.useGeminiLayoutHorizontalScrolling();
+
+    let style = useMemo(() => {
+      if (F) {
+        return {};
+      } else {
+        let obj = {};
+        obj[E] = isLayoutFullWidth ? -horizontalScroll : "auto";
+        obj.width = "inherit";
+
+        return obj;
+      }
+    }, [horizontalScroll, isLayoutFullWidth]);
+
+    let xstyle = T(
+      hasFixedBanner,
+      styles.navigationInnerWithBannerNarrowBuffer
+    );
+
+    const Comp = useMemo(() => {
+      let NavContentAndChannelContainer = navContentAndChannelContainer;
+
+      return (
+        <GeminiLayoutNonResponsivenessWrappers.GeminiLayoutLeftHandColumnWrapper
+          ref={ref}
+          children={() => {
+            let args;
+            // eslint-disable-next-line no-undef
+            for (let e = arguments.length, g = new Array(e), h = 0; h < e; h++)
+              // eslint-disable-next-line no-undef
+              g[h] = arguments[h];
+            return (
+              <>
+                {!F && (
+                  <div
+                    className={stylex(styles.dummy1)} /* "xh8yej3 x5yr21d" */
+                  />
+                )}
+                <NavContentAndChannelContainer>
+                  <div
+                    className={stylex(
+                      F ? styles.navigationSticky : styles.navigationFixed,
+                      isGalileoNavMode && styles.navigationFixedWP4MAppBar
+                    )}
+                    style={style}
+                  >
+                    <div className={stylex(styles.navigationInner, xstyle)}>
+                      <CometErrorBoundary>
+                        <CometPagelet.Placeholder
+                          className={stylex(
+                            styles.navigationAppNavList,
+                            isGalileoNavMode &&
+                              styles.navigationAppNavListWP4MAppBar
+                          )}
+                          fallback={null}
+                          name="GeminiLayoutNavigationAppList"
+                        >
+                          {navContent}
+                        </CometPagelet.Placeholder>
+                      </CometErrorBoundary>
+                      <div
+                        className={stylex.apply(
+                          undefined,
+                          args.concat([
+                            styles.channelWrapper,
+                            isAutoHideEnabled &&
+                              (isChannelVisible
+                                ? styles.channelWrapperAutoHideButVisible
+                                : styles.channelWrapperHidden),
+                            isGalileoNavMode &&
+                              isAutoHideEnabled &&
+                              isChannelVisible &&
+                              styles.channelWrapperAutoHideButVisibleWP4MAppBar,
+                          ])
+                        )}
+                      >
+                        <CometErrorBoundary>
+                          <CometPagelet.Placeholder
+                            fallback={null}
+                            name="GeminiLayoutNavigationChannel"
+                          >
+                            <VoyageUserJourneyUILayerProvider name="channel">
+                              {channelContent}
+                            </VoyageUserJourneyUILayerProvider>
+                          </CometPagelet.Placeholder>
+                        </CometErrorBoundary>
+                      </div>
+                    </div>
+                  </div>
+                </NavContentAndChannelContainer>
+              </>
+            );
+          }}
+        />
+      );
+    }, [
+      navContentAndChannelContainer,
+      ref,
+      style,
+      xstyle,
+      navContent,
+      isAutoHideEnabled,
+      isChannelVisible,
+      channelContent,
+    ]);
+
+    return Comp;
+  })
+);
+
+export const GeminiLayoutPage = {
+  GeminiLayoutPageHeader,
+  GeminiLayoutPage: _GeminiLayoutPage,
 };

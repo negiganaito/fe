@@ -8,6 +8,7 @@ export { CometColumn } from "./comet-column";
 export { CometColumnItem } from "./comet-column-item";
 export { CometNonBreakingSpace } from "./comet-non-breaking-space";
 export { CometScreenReaderText } from "./comet-screen-reader-text";
+export { CometSSRMultipassBoundary } from "./comet-ssr-multipass-boundary";
 export { CometTextWithIcon } from "./comet-text-with-icon";
 export { CometVisualCompletionAttributes } from "./comet-visual-completion-attributes";
 export { DangerouslyAccessReactElementInternals_DO_NOT_USE_IN_NEW_CODE } from "./dangerously-access-react-element-internals_DO_NOT_USE_IN_NEW_CODE";

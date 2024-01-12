@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   executionEnvironment,
@@ -18,31 +18,37 @@ const isCSSStickySupported = executionEnvironment.canUseDOM
   ? supportsCSSSticky
   : true;
 
-const n = React.createContext(0);
+const Context = React.createContext(0);
 
 const useGeminiLayoutHorizontalScrollingListener = () => {
-  const [b, e] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     if (isCSSStickySupported) {
       return;
     }
     let scrollFn = function () {
-      let a = getDocumentScrollElement();
-      a = Scroll.getLeft(a);
-      e(a);
+      let element = getDocumentScrollElement();
+      element = Scroll.getLeft(element);
+      setScrollPosition(element);
     };
     let scrollOption = {
-      passive: !0,
+      passive: true,
     };
     window.addEventListener("scroll", scrollFn, scrollOption);
     return function () {
       window.removeEventListener("scroll", scrollFn, scrollOption);
     };
-  }, [e]);
-  return b;
+  }, [setScrollPosition]);
+  return scrollPosition;
+};
+
+const _useGeminiLayoutHorizontalScrolling = () => {
+  return useContext(Context);
 };
 
 export const useGeminiLayoutHorizontalScrolling = {
   useGeminiLayoutHorizontalScrollingListener,
+  useGeminiLayoutHorizontalScrolling: _useGeminiLayoutHorizontalScrolling,
+  GeminiLayoutHorizontalScrollingContextProvider: Context.Provider,
 };

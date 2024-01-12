@@ -6,6 +6,8 @@
  */
 
 export { GeminiLayoutFullWidthModeContext } from "./gemini-layout-full-width-mode-context";
+export { GeminiLayoutHasFixedBannerContext } from "./gemini-layout-has-fixed-banner-context";
 export { GeminiLayoutHeaderContext } from "./gemini-layout-header-context";
+export { GeminiLayoutHeaderHeightContext } from "./gemini-layout-header-height-context";
 export { GeminiNavAndChannelContext } from "./gemini-nav-and-channel-context";
 export { VoyageUserJourneyCometRouteContext } from "./voyage-user-journey-comet-route-context";

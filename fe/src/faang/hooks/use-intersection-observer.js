@@ -179,3 +179,5 @@ function b(a, b, c) {
 }
 
 export default ExecutionEnvironment.canUseDOM ? a : b;
+
+export const useIntersectionObserver = ExecutionEnvironment.canUseDOM ? a : b;

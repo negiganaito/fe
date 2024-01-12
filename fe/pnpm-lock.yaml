@@ -32,6 +32,9 @@ dependencies:
   fbt-generate-translations:
     specifier: 0.0.4
     version: 0.0.4
+  flux:
+    specifier: 4.0.4
+    version: 4.0.4(react@0.0.0-experimental-aec521a96-20231114)
   invariant:
     specifier: 2.2.4
     version: 2.2.4
@@ -4358,6 +4361,14 @@ packages:
       babel-plugin-fbt: 1.0.0(@fbtjs/default-collection-transform@1.0.0)
     dev: false
 
+  /fbemitter@3.0.0:
+    resolution: {integrity: sha512-KWKaceCwKQU0+HPoop6gn4eOHk50bBv/VxjJtGMfwmJt3D29JpN4H4eisCtIPA+a8GVBam+ldMMpMjJUvpDyHw==}
+    dependencies:
+      fbjs: 3.0.5
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /fbjs-css-vars@1.0.2:
     resolution: {integrity: sha512-b2XGFAFdWZWg0phtAWLHCk836A1Xann+I+Dgd3Gk64MHKZO44FfoD1KxyvbSh0qZsIoXQGGlVztIY+oitJPpRQ==}
 
@@ -4491,6 +4502,18 @@ packages:
 
   /flow-enums-runtime@0.0.4:
     resolution: {integrity: sha512-kkJ/ABZb4rhyFw05yCWdcA1K2uW7ddYzz9zVNJp5kRX3BzsIynB4f0E4oLlf+zgDLErj9FwGda1qEAmhnRNXPQ==}
+    dev: false
+
+  /flux@4.0.4(react@0.0.0-experimental-aec521a96-20231114):
+    resolution: {integrity: sha512-NCj3XlayA2UsapRpM7va6wU1+9rE5FIL7qoMcmxWHRzbp0yujihMBm9BBHZ1MDIk5h5o2Bl6eGiCe8rYELAmYw==}
+    peerDependencies:
+      react: ^15.0.2 || ^16.0.0 || ^17.0.0
+    dependencies:
+      fbemitter: 3.0.0
+      fbjs: 3.0.5
+      react: github.com/tienlx97/react-experimental/acfc5aa360d39a1c90fc78dd65951b503360d397
+    transitivePeerDependencies:
+      - encoding
     dev: false
 
   /follow-redirects@1.15.4:
