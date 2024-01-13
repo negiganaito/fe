@@ -5,6 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import { useFluxStore } from "flux-hooks";
+
 import { workGalahadNavStore } from "../store/work-galahad-nav-store";
 
 function o() {
@@ -28,3 +30,10 @@ function s() {
 //   else if (a === "chats" || a === "gardens" || a === "meetings") return !1;
 //   return !0;
 // }
+
+export const ChannelGemini = () => {
+  const f = useFluxStore(workGalahadNavStore, r);
+  const g = useFluxStore(workGalahadNavStore, o);
+  const j = useFluxStore(workGalahadNavStore, p);
+  const { isSearchOverlayShown } = useFluxStore(workGalahadNavStore, s);
+};
