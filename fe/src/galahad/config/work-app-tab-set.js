@@ -8,6 +8,7 @@
 import fbt from "fbt";
 
 import { WorkGalahadAppTabKeyUpdatesBadgeRenderer } from "../badge/work-galahad-app-tab-key-updates-badge-renderer";
+import { WorkGalahadHomeTabContainer_entrypoint } from "../entrypoint/work-galahad-home-tab-container.entrypoint";
 
 export const WorkAppTabSet = [
   {
@@ -18,7 +19,7 @@ export const WorkAppTabSet = [
     title: fbt("Home", "Home"),
     trackingNodeType: 401,
     badgeRenderer: WorkGalahadAppTabKeyUpdatesBadgeRenderer,
-    // channelEntryPoint:
+    channelEntryPoint: WorkGalahadHomeTabContainer_entrypoint,
   },
   {},
   {},

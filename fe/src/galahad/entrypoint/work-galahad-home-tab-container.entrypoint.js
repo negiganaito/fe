@@ -12,17 +12,38 @@ export const WorkGalahadHomeTabContainer_entrypoint = {
   root: JSResource("WorkGalahadHomeTabContainer", () =>
     import(/* webpackPrefetch: true */ "./work-galahad-home-tab-container.jsx")
   ),
-  getPreloadProps: (params) => {
+  getPreloadProps: () => {
     const _1031519 = false;
 
-    const initialProps = {
+    const initialVariables = {
       groupCount: 6,
       peopleCount: 15,
-      user: c("CurrentUser").getID(),
+      user: `c("CurrentUser").getID()`,
       scale: WebPixelRatio.get(),
       isHybridLeftNav: _1031519,
       hasMessengerThread: undefined,
       id: "HOME",
+    };
+
+    return {
+      queries: {
+        queryReference: {
+          variables: initialVariables,
+          environmentProviderOptions: {
+            ssrBoundary: "top_nav",
+          },
+          parameters: {
+            kind: "PreloadableConcreteRequest",
+            params: {
+              id: "7032907766805855",
+              metadata: {},
+              name: "WorkGalahadHomeTabContainerQuery",
+              operationKind: "query",
+              text: null,
+            },
+          },
+        },
+      },
     };
   },
 };
