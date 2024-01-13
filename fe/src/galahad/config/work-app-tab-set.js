@@ -7,6 +7,8 @@
 
 import fbt from "fbt";
 
+import { WorkGalahadAppTabKeyUpdatesBadgeRenderer } from "../badge/work-galahad-app-tab-key-updates-badge-renderer";
+
 export const WorkAppTabSet = [
   {
     id: "home",
@@ -15,6 +17,8 @@ export const WorkAppTabSet = [
     defaultEntityKey: "feed/newsfeed",
     title: fbt("Home", "Home"),
     trackingNodeType: 401,
+    badgeRenderer: WorkGalahadAppTabKeyUpdatesBadgeRenderer,
+    // channelEntryPoint:
   },
   {},
   {},

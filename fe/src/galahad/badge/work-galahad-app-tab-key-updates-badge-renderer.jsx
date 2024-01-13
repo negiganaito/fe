@@ -7,6 +7,8 @@
 
 import React from "react";
 
+import { WorkGalahadUIBaseAppTabBadge } from "./work-galahad-ui-base-app-tab-badge";
+
 export const WorkGalahadAppTabKeyUpdatesBadgeRenderer = (props) => {
   const count = 0;
 

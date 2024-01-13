@@ -59,7 +59,11 @@ const styles = stylex.create({
     fontSize: ".625rem",
   },
 
-  dummy: {},
+  dummy: {
+    lineHeight: 1.3,
+    minHeight: "13px",
+    fontSize: ".625rem",
+  },
 });
 
 export const WorkGalahadUIBaseAppTabBadge = ({
@@ -87,7 +91,7 @@ export const WorkGalahadUIBaseAppTabBadge = ({
       role="status"
     >
       {!showDot && (
-        <span className=" xdf7u50 x190qgfh" aria-hidden="true">
+        <span className={stylex(styles.dummy)} aria-hidden="true">
           {count > maxCount ? maxCount + "+" : count}
         </span>
       )}
