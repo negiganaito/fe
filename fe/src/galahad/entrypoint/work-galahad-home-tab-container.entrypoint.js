@@ -8,6 +8,8 @@
 import { WebPixelRatio } from "../config/web-pixel-ratio";
 import { JSResource } from "../utils/js-resource";
 
+import { WorkGalahadHomeTabContainerQuery$Parameters } from "./work-galahad-home-tab-container-query-$-parameters";
+
 export const WorkGalahadHomeTabContainer_entrypoint = {
   root: JSResource("WorkGalahadHomeTabContainer", () =>
     import(/* webpackPrefetch: true */ "./work-galahad-home-tab-container.jsx")
@@ -34,13 +36,7 @@ export const WorkGalahadHomeTabContainer_entrypoint = {
           },
           parameters: {
             kind: "PreloadableConcreteRequest",
-            params: {
-              id: "7032907766805855",
-              metadata: {},
-              name: "WorkGalahadHomeTabContainerQuery",
-              operationKind: "query",
-              text: null,
-            },
+            params: WorkGalahadHomeTabContainerQuery$Parameters,
           },
         },
       },

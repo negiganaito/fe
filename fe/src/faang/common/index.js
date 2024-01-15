@@ -18,3 +18,4 @@ export { LegacyHidden, LegacyHiddenOffscreen } from "./legacy-hidden";
 export { observeIntersection } from "./observe-intersection";
 export * from "./resize-observer-polyfill-deprecated";
 export { RunComet } from "./run-comet";
+export { setTimeoutCometInternals } from "./set-timeout-comet-internals";
