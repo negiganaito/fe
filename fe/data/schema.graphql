@@ -8,11 +8,23 @@ type GreetingsQuery {
 }
 
 type Mutation {
-  WorkGalahadVariantEnableMutation(input: WorkGalahadVariantInput): undefined
-  WorkGalahadVariantDisableMutation(input: WorkGalahadVariantInput): undefined
+  enable_work_galahad_variant_v2(
+    input: WorkGalahadVariantInput
+  ): EnableWorkGalahadVariantV2ResponsePayload
+  disable_work_galahad_variant_v2(
+    input: WorkGalahadVariantInput
+  ): DisableWorkGalahadVariantV2ResponsePayload
 }
 
-type WorkGalahadVariantInput {
+type EnableWorkGalahadVariantV2ResponsePayload {
+  __typename: String!
+}
+
+input WorkGalahadVariantInput {
   variant: String!
   source: String!
+}
+
+type DisableWorkGalahadVariantV2ResponsePayload {
+  __typename: String!
 }

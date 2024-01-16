@@ -7,7 +7,7 @@
 
 import React from "react";
 
-import HiddenSubtreeContextProvider from "./hidden-subtree-context-provider";
+import { HiddenSubtreeContextProvider } from "./hidden-subtree-context-provider";
 
 // type CometPrerendererProps = {
 //   children?: any

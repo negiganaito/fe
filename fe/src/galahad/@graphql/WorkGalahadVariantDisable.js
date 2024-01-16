@@ -7,20 +7,21 @@
 
 import { commitMutation, graphql } from "react-relay";
 
-const workGalahadVariantEnableMutation = graphql`
-  mutation WorkGalahadVariantEnableMutation($input: WorkGalahadVariantInput) {
-    enable_work_galahad_variant_v2(input: $input) {
+// WorkGalahadVariantInput
+const workGalahadVariantDisableMutation = graphql`
+  mutation WorkGalahadVariantDisableMutation($input: WorkGalahadVariantInput) {
+    disable_work_galahad_variant_v2(input: $input) {
       __typename
     }
   }
 `;
 
-export const WorkGalahadVariantEnableMutation = (
+export const WorkGalahadVariantDisableMutation = (
   environment,
   { onCompleted, onError, optimisticUpdater, input }
 ) => {
   return commitMutation(environment, {
-    mutation: workGalahadVariantEnableMutation,
+    mutation: workGalahadVariantDisableMutation,
     optimisticUpdater,
     onError,
     onCompleted,

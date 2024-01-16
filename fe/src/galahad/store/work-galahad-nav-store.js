@@ -4,10 +4,11 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { Dispatcher } from "flux";
 import { ReduceStore } from "flux/utils";
 
 import { WorkGalahadAppTabIDUtil } from "../config";
+
+import { WorkGalahadDispatcher } from "./work-galahad-dispatcher";
 
 const defaultVariable = () => {
   return {
@@ -184,4 +185,6 @@ export class WorkGalahadNavStore extends ReduceStore {
   };
 }
 
-export const workGalahadNavStore = new WorkGalahadNavStore(Dispatcher);
+export const workGalahadNavStore = new WorkGalahadNavStore(
+  WorkGalahadDispatcher
+);

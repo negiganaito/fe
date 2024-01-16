@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 import stylex from "@stylexjs/stylex";
 
 import {

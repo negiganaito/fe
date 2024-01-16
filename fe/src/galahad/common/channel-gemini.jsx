@@ -7,6 +7,7 @@
 
 import { useFluxStore } from "flux-hooks";
 
+import { WorkAppTabSet } from "../config/work-app-tab-set";
 import { workGalahadNavStore } from "../store/work-galahad-nav-store";
 
 function o() {
@@ -36,4 +37,10 @@ export const ChannelGemini = () => {
   const g = useFluxStore(workGalahadNavStore, o);
   const j = useFluxStore(workGalahadNavStore, p);
   const { isSearchOverlayShown } = useFluxStore(workGalahadNavStore, s);
+
+  const val = WorkAppTabSet.find((tab) => {
+    return tab.id === g;
+  });
+
+  !val ? undefined : val.trackingNodeType;
 };

@@ -15,7 +15,7 @@ export const WorkNavigationAppBarContainerExternal = () => {
     <WorkGalahadUIAppsRoot>
       <CometPlaceholder fallback={<GeminiAppsGlimmer />}>
         {/* Load company */}
-        {/* <WorkNavigation /> */}
+        <WorkNavigation />
       </CometPlaceholder>
     </WorkGalahadUIAppsRoot>
   );

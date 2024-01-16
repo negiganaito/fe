@@ -16,12 +16,12 @@ import { useRelayEnvironment } from "react-relay/hooks";
 import nullthrows from "fbjs/lib/nullthrows";
 
 import { usePrevious } from "@/faang/hooks";
-import { WorkGalahadVariantDisableMutation } from "@/galahad/@graphql/work-galahad-variant-disable-mutation";
-import { WorkGalahadVariantEnableMutation } from "@/galahad/@graphql/work-galahad-variant-enable-mutation";
+import { WorkGalahadVariantDisableMutation } from "@/galahad/@graphql/WorkGalahadVariantDisable";
+import { WorkGalahadVariantEnableMutation } from "@/galahad/@graphql/WorkGalahadVariantEnable";
 
 import { WorkGalahadVariantSetting } from "./work-galahad-variant-setting";
 
-const o = new Map([
+const featureNameToVariantMap = new Map([
   ["hasNotifPriorityBadgeCount", "NOTIF_PRIORITY_BADGE_COUNT"],
   ["hasGdriveNotifications", "NOTIF_GDRIVE_SETTING"],
   ["hasNotifDotOnTabs", "NOTIF_DOT_ON_TABS"],
@@ -93,7 +93,7 @@ const GeminiVariantContext = createContext({
   rhcApprovalsCollapsed: !1,
 });
 
-const Q = createContext(() => {});
+const ToggleContext = createContext(() => {});
 
 const r = [
   "CHAT_BUBBLELESS",
@@ -133,7 +133,7 @@ const s = {
 };
 
 export const Provider = ({ children }) => {
-  const [e, f] = useState({
+  const [featureState, setFeatureState] = useState({
     hasNotifPriorityBadgeCount:
       WorkGalahadVariantSetting.notif_priority_badge_count === "ENABLED" ||
       WorkGalahadVariantSetting.notif_priority_badge_count === "DEFAULT",
@@ -174,55 +174,63 @@ export const Provider = ({ children }) => {
     ...s,
   });
 
-  const [g, h] = useState({});
+  const [loadingStates, setLoadingStates] = useState({});
 
-  const j = useRelayEnvironment();
+  const relayEnvironment = useRelayEnvironment();
 
-  const l = usePrevious(e.hasRiverKnight);
+  const prevRiverKnightState = usePrevious(featureState.hasRiverKnight);
 
   useEffect(() => {
-    l && l !== e.hasRiverKnight && dispatchEvent(window.document, "resize");
-  }, [e.hasRiverKnight, l]);
+    prevRiverKnightState &&
+      prevRiverKnightState !== featureState.hasRiverKnight &&
+      dispatchEvent(window.document, "resize");
+  }, [featureState.hasRiverKnight, prevRiverKnightState]);
 
-  const b = useCallback(
-    (a, b) => {
-      if (o.has(a) && g[a] !== true) {
+  const toggleFeature = useCallback(
+    (featureName, source) => {
+      if (
+        featureNameToVariantMap.has(featureName) &&
+        loadingStates[featureName] !== true
+      ) {
         //
-        h((b) => {
-          b[a] = true;
-          return b;
+        setLoadingStates((loadingStates) => {
+          loadingStates[featureName] = true;
+          return loadingStates;
         });
-        let commitMutation = e[a]
+        let commitMutation = featureState[featureName]
           ? WorkGalahadVariantDisableMutation
           : WorkGalahadVariantEnableMutation;
 
-        commitMutation(j, {
+        commitMutation(relayEnvironment, {
           input: {
-            variant: nullthrows(o.get(a)),
-            source: b,
+            variant: nullthrows(featureNameToVariantMap.get(featureName)),
+            source: source,
           },
-          onCompleted: function () {
-            h((b) => {
-              b[a] = false;
-              return b;
+          onCompleted: () => {
+            setLoadingStates((loadingStates) => {
+              loadingStates[featureName] = false;
+              return loadingStates;
             });
-            r.includes(o.get(a)) && window.location.reload();
+            r.includes(featureNameToVariantMap.get(featureName)) &&
+              window.location.reload();
           },
         });
       }
 
-      f((b) => {
-        let c = { ...b };
-        c[a] = !b[a];
-        return c;
+      setFeatureState((featureState) => {
+        let updatedState = { ...featureState };
+        updatedState[featureName] = !featureState[featureName];
+        return updatedState;
       });
     },
-    [e, j, g]
+    [featureState, relayEnvironment, loadingStates]
   );
 
   return (
-    <GeminiVariantContext.Provider value={e}>
-      <Q.Provider value={b}>{children}</Q.Provider>
+    <GeminiVariantContext.Provider value={featureState}>
+      <ToggleContext.Provider value={toggleFeature}>
+        {children}
+      </ToggleContext.Provider>
     </GeminiVariantContext.Provider>
   );
 };
@@ -231,7 +239,7 @@ function useGeminiVariant() {
   return useContext(GeminiVariantContext);
 }
 function useGeminiVariantToggler() {
-  return useContext(Q);
+  return useContext(ToggleContext);
 }
 
 export const GeminiVariantState = {

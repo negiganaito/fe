@@ -12,6 +12,8 @@ import { ErrorGuard } from "@/faang/error";
 import { CometNetworkStatusToast } from "@/faang/toast";
 import { GeminiPageTransitioning } from "@/galahad/common";
 
+import { GeminiAppViewStack } from "../common/gemini-app-view-stack";
+
 export const GeminiAppContent = ({ children }) => {
   ErrorGuard.applyWithGuard(
     () => CometNetworkStatusToast.subscribe(),
@@ -50,8 +52,8 @@ export const GeminiAppContent = ({ children }) => {
           })
         })
         */}
-        {children}
-        {/* <GeminiAppViewStack>{children}</GeminiAppViewStack>; */}
+        {/* {children} */}
+        <GeminiAppViewStack>{children}</GeminiAppViewStack>;
       </CometSearchKeyCommandWrapper>
     </>
   );

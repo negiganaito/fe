@@ -15,7 +15,7 @@ import { executionEnvironment } from "@/faang/utils";
 
 import { GeminiLayoutTopLevelProvider } from "../provider/gemini-layout-top-level-provider";
 
-import { ChannelGeminiContainer } from "./channel-gemini-container";
+// import { ChannelGeminiContainer } from "./channel-gemini-container";
 import { CometContextualLayerAnchorRoot } from "./comet-contextual-layer-anchor-root";
 import { GeminiLayoutPage } from "./gemini-layout-page";
 import { WorkNavigationAppBarContainerExternal } from "./work-navigation-app-bar-container-external";
@@ -47,7 +47,9 @@ export const GeminiAppViewStack = ({ children }) => {
   });
 
   const ChannelContent = useMemo(() => {
-    return <ChannelGeminiContainer />;
+    // return <ChannelGeminiContainer />;
+
+    return <div>1</div>;
   });
 
   return (

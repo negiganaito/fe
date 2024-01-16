@@ -497,12 +497,12 @@ const _GeminiLayoutPage = memo(
 
     return (
       <GeminiLayoutNonResponsivenessWrappers.GeminiLayoutPageWrapper
-        children={() => {
+        children={(...args) => {
           // GeminiAccessibilitySkipToContent
           // b('cr:2287') && jsx(b('cr:2287'), {}),
           return (
             // eslint-disable-next-line no-undef
-            <div className={stylex.apply(undefined, arguments)} ref={o}>
+            <div className={stylex.apply(undefined, args)} ref={o}>
               <BaseViewportMarginsContext.Provider value={B}>
                 <P.Provider value={y}>
                   <GeminiLayoutHasFixedBannerContext.Provider
@@ -645,12 +645,12 @@ const H = memo(
       return (
         <GeminiLayoutNonResponsivenessWrappers.GeminiLayoutLeftHandColumnWrapper
           ref={ref}
-          children={() => {
-            let args;
-            // eslint-disable-next-line no-undef
-            for (let e = arguments.length, g = new Array(e), h = 0; h < e; h++)
-              // eslint-disable-next-line no-undef
-              g[h] = arguments[h];
+          children={(...args) => {
+            // let args;
+            // // eslint-disable-next-line no-undef
+            // for (let e = arguments.length, g = new Array(e), h = 0; h < e; h++)
+            //   // eslint-disable-next-line no-undef
+            //   g[h] = arguments[h];
             return (
               <>
                 {!F && (

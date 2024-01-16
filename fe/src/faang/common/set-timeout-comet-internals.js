@@ -5,7 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 /* eslint-disable camelcase */
-import JSScheduler from "./jss-scheduler";
+
+import { JSScheduler } from "./jss-scheduler";
 
 const h = new Map();
 let i = 0;
