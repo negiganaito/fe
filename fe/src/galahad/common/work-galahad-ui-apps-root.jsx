@@ -5,6 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import React from "react";
+
 import { GeminiLayoutNonResponsivenessNavigationExternal } from "./gemini-layout-non-responsiveness-navigation-external";
 
 export const WorkGalahadUIAppsRoot = ({ children, onMouseEnter }) => {

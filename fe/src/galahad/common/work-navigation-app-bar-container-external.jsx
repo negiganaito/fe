@@ -5,10 +5,13 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import React from "react";
+
 import { CometPlaceholder } from "@/faang/comet-placeholder";
 
 import { GeminiAppsGlimmer } from "./gemini-apps-glimmer";
 import { WorkGalahadUIAppsRoot } from "./work-galahad-ui-apps-root";
+import { WorkNavigation } from "./work-navigation";
 
 export const WorkNavigationAppBarContainerExternal = () => {
   return (

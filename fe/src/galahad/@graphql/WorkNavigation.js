@@ -7,11 +7,17 @@
 
 import { graphql } from "react-relay";
 
+// eslint-disable-next-line no-unused-vars
+const WorkNavigationClassicRendererFragment = graphql`
+  fragment WorkNavigationClassicRenderer_renderer on NavigationRenderer {
+    years
+  }
+`;
+
 export const workNavigationQuery = graphql`
   query WorkNavigationQuery {
     company {
-      navigation_renderer(supported: "3ik7wA") {
-        __typename
+      navigation_renderer {
         # ...WorkNavigationGalileoNavExternalRenderer_renderer
         #   @module(import: "WorkNavigationGalileoNavExternalRenderer_renderer")
         # ...WorkNavigationAppBarForInternalEmployeesRenderer_renderer
@@ -19,7 +25,7 @@ export const workNavigationQuery = graphql`
         #     import: "WorkNavigationAppBarForInternalEmployeesRenderer_renderer"
         #   )
         ...WorkNavigationClassicRenderer_renderer
-          @module(name: "WorkNavigationClassicRenderer.jsx")
+          @module(name: "work-navigation-classic-renderer.jsx")
       }
     }
   }

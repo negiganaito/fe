@@ -11,25 +11,27 @@ import { registerLoader } from "@/galahad/utils/module-loader";
 
 const ONE_MINUTE_IN_MS = 60 * 1000;
 
-export const createNetwork = (baseUrl) => {
+export const createNetwork = () => {
   const responseCache = new QueryResponseCache({
     size: 100,
     ttl: ONE_MINUTE_IN_MS,
   });
 
   const fetchResponse = async (operation, variables, cacheConfig) => {
-    const { id } = operation;
+    const { id, cacheID, text } = operation;
 
     const isQuery = operation.operationKind === "query";
     const forceFetch = cacheConfig && cacheConfig.force;
-    if (isQuery && !forceFetch && id) {
-      const fromCache = responseCache.get(id, variables);
+    const moduleId = cacheID ?? id;
+
+    if (isQuery && !forceFetch && moduleId) {
+      const fromCache = responseCache.get(moduleId, variables);
       if (fromCache) {
         return Promise.resolve(fromCache);
       }
     }
 
-    return networkFetch(id, variables, baseUrl);
+    return networkFetch(moduleId, variables, text);
   };
 
   const fetchFn = async (...args) => {
@@ -58,8 +60,8 @@ export const createNetwork = (baseUrl) => {
   return network;
 };
 
-export async function networkFetch(id, variables, baseUrl) {
-  const response = await fetch(`${baseUrl}/graphql`, {
+export async function networkFetch(id, variables, text) {
+  const response = await fetch("http://127.0.0.1:5000/graphql", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -68,8 +70,10 @@ export async function networkFetch(id, variables, baseUrl) {
     body: JSON.stringify({
       id,
       variables,
+      query: text,
     }),
   });
+
   return response.json();
 }
 
@@ -77,12 +81,10 @@ function registerModuleLoaders(modules) {
   modules.forEach((module) => {
     if (module.endsWith("$normalization.graphql")) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      registerLoader(module, () =>
-        import(`../../galahad/__generated__/${module}`)
-      );
+      registerLoader(module, () => import(`@/galahad/__generated__/${module}`));
     } else {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      registerLoader(module, () => import(`../../galahad/3d/${module}`));
+      registerLoader(module, () => import(`@/galahad/3d/${module}`));
     }
   });
 }

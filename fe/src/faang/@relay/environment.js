@@ -29,7 +29,7 @@ const IS_SERVER = typeof window === typeof undefined;
 const CLIENT_DEBUG = false;
 const SERVER_DEBUG = false;
 
-function createEnvironment(baseUrl = "http://localhost:5000") {
+function createEnvironment() {
   // Operation loader is reponsible for loading JS modules/components
   // for data-processing and rendering
   const operationLoader = {
@@ -37,7 +37,7 @@ function createEnvironment(baseUrl = "http://localhost:5000") {
     load: (name) => moduleLoader(name).load(),
   };
 
-  const network = createNetwork(baseUrl);
+  const network = createNetwork();
   const environment = new Environment({
     network,
     store: new Store(new RecordSource(), { operationLoader }),

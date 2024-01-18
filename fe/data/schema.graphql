@@ -1,23 +1,25 @@
-schema {
-  query: GreetingsQuery
-  mutation: Mutation
+type Query {
+  company: Company
 }
 
-type GreetingsQuery {
-  greetings: String
+type Company {
+  navigation_renderer: NavigationRenderer
 }
+
+type NavigationRenderer {
+  js(module: String!, id: String): JSDependency!
+  years: String
+}
+
+scalar JSDependency
 
 type Mutation {
-  enable_work_galahad_variant_v2(
-    input: WorkGalahadVariantInput
-  ): EnableWorkGalahadVariantV2ResponsePayload
-  disable_work_galahad_variant_v2(
-    input: WorkGalahadVariantInput
-  ): DisableWorkGalahadVariantV2ResponsePayload
+  enable_work_galahad_variant_v2(input: WorkGalahadVariantInput): EnableWorkGalahadVariantV2ResponsePayload
+  disable_work_galahad_variant_v2(input: WorkGalahadVariantInput): DisableWorkGalahadVariantV2ResponsePayload
 }
 
 type EnableWorkGalahadVariantV2ResponsePayload {
-  __typename: String!
+  temp: String!
 }
 
 input WorkGalahadVariantInput {
@@ -26,5 +28,5 @@ input WorkGalahadVariantInput {
 }
 
 type DisableWorkGalahadVariantV2ResponsePayload {
-  __typename: String!
+  temp: String!
 }

@@ -118,6 +118,7 @@ const options = {
     }),
   ],
   resolve: {
+    preferRelative: true,
     alias: {
       // eslint-disable-next-line no-undef
       "@": path.resolve(__dirname, "./src"),

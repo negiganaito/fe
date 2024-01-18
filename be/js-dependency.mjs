@@ -1,10 +1,11 @@
-const { GraphQLScalarType } = require('graphql')
-
+import { GraphQLScalarType, GraphQLNonNull, GraphQLString } from "graphql";
 
 const JSDependencyType = new GraphQLScalarType({
-  name: 'JSDependency',
+  name: "JSDependency",
   serialize: (value) => value,
 });
+
+const seenDataDrivenDependencies = new Set();
 
 const JSDependencyField = {
   args: {
@@ -12,15 +13,12 @@ const JSDependencyField = {
     id: { type: GraphQLString },
   },
   type: new GraphQLNonNull(JSDependencyType),
+  // eslint-disable-next-line require-await
   resolve: async (_, { module }) => {
     seenDataDrivenDependencies.add(module);
     return module;
   },
 };
-
-
-
-const seenDataDrivenDependencies = new Set();
 
 const dataDrivenDependencies = {
   reset() {
@@ -31,11 +29,4 @@ const dataDrivenDependencies = {
   },
 };
 
-
-
-
-module.exports = {
-  dataDrivenDependencies,
-  JSDependencyField,
-  JSDependencyType
-}
+export { dataDrivenDependencies, JSDependencyField, JSDependencyType };

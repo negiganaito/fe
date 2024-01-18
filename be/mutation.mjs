@@ -1,7 +1,12 @@
-const { GraphQLObjectType,GraphQLInputObjectType, GraphQLNonNull, GraphQLString } = require('graphql')
+import {
+  GraphQLObjectType,
+  GraphQLInputObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+} from "graphql";
 
 const WorkGalahadVariantInput = new GraphQLInputObjectType({
-  name: 'WorkGalahadVariantInput',
+  name: "WorkGalahadVariantInput",
   fields: {
     variant: {
       type: new GraphQLNonNull(GraphQLString),
@@ -10,29 +15,28 @@ const WorkGalahadVariantInput = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-})
+});
 
 const DisableWorkGalahadVariantV2ResponsePayload = new GraphQLObjectType({
-  name:"DisableWorkGalahadVariantV2ResponsePayload",
+  name: "DisableWorkGalahadVariantV2ResponsePayload",
   fields: {
-    __typename: {
+    temp: {
       type: new GraphQLNonNull(GraphQLString),
-    }
+    },
   },
-})
+});
 
 const EnableWorkGalahadVariantV2ResponsePayload = new GraphQLObjectType({
-  name:"EnableWorkGalahadVariantV2ResponsePayload",
+  name: "EnableWorkGalahadVariantV2ResponsePayload",
   fields: {
-    __typename: {
+    temp: {
       type: new GraphQLNonNull(GraphQLString),
-    }
+    },
   },
-})
-
+});
 
 const MutationType = new GraphQLObjectType({
-  name: 'Mutation',
+  name: "Mutation",
   fields: {
     enable_work_galahad_variant_v2: {
       args: {
@@ -43,8 +47,8 @@ const MutationType = new GraphQLObjectType({
       type: EnableWorkGalahadVariantV2ResponsePayload,
       resolve: () => {
         return {
-          __typeName: 'EnableWorkGalahadVariantV2ResponsePayload',
-        }
+          temp: "1",
+        };
       },
     },
 
@@ -57,14 +61,11 @@ const MutationType = new GraphQLObjectType({
       type: DisableWorkGalahadVariantV2ResponsePayload,
       resolve: () => {
         return {
-          __typeName: 'DisableWorkGalahadVariantV2ResponsePayload',
-        }
+          temp: "1",
+        };
       },
     },
   },
-})
+});
 
-
-module.exports = {
-  MutationType
-}
+export { MutationType };

@@ -8,13 +8,15 @@
 import React from "react";
 import { useLazyLoadQuery } from "react-relay";
 
+import { workNavigationQuery } from "../@graphql/WorkNavigation";
+
 import { RelayMatchContainer } from "./relay-match-container";
 
 let query;
 
 export const WorkNavigation = () => {
   const { company } = useLazyLoadQuery(
-    query ? query : (query = WorkNavigationQuery),
+    query ? query : (query = workNavigationQuery),
     {}
   );
 
