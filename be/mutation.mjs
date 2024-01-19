@@ -3,10 +3,10 @@ import {
   GraphQLInputObjectType,
   GraphQLNonNull,
   GraphQLString,
-} from "graphql";
+} from 'graphql';
 
 const WorkGalahadVariantInput = new GraphQLInputObjectType({
-  name: "WorkGalahadVariantInput",
+  name: 'WorkGalahadVariantInput',
   fields: {
     variant: {
       type: new GraphQLNonNull(GraphQLString),
@@ -18,7 +18,7 @@ const WorkGalahadVariantInput = new GraphQLInputObjectType({
 });
 
 const DisableWorkGalahadVariantV2ResponsePayload = new GraphQLObjectType({
-  name: "DisableWorkGalahadVariantV2ResponsePayload",
+  name: 'DisableWorkGalahadVariantV2ResponsePayload',
   fields: {
     temp: {
       type: new GraphQLNonNull(GraphQLString),
@@ -27,7 +27,7 @@ const DisableWorkGalahadVariantV2ResponsePayload = new GraphQLObjectType({
 });
 
 const EnableWorkGalahadVariantV2ResponsePayload = new GraphQLObjectType({
-  name: "EnableWorkGalahadVariantV2ResponsePayload",
+  name: 'EnableWorkGalahadVariantV2ResponsePayload',
   fields: {
     temp: {
       type: new GraphQLNonNull(GraphQLString),
@@ -36,7 +36,7 @@ const EnableWorkGalahadVariantV2ResponsePayload = new GraphQLObjectType({
 });
 
 const MutationType = new GraphQLObjectType({
-  name: "Mutation",
+  name: 'Mutation',
   fields: {
     enable_work_galahad_variant_v2: {
       args: {
@@ -47,7 +47,7 @@ const MutationType = new GraphQLObjectType({
       type: EnableWorkGalahadVariantV2ResponsePayload,
       resolve: () => {
         return {
-          temp: "1",
+          temp: '1',
         };
       },
     },
@@ -61,11 +61,11 @@ const MutationType = new GraphQLObjectType({
       type: DisableWorkGalahadVariantV2ResponsePayload,
       resolve: () => {
         return {
-          temp: "1",
+          temp: '1',
         };
       },
     },
   },
 });
 
-export { MutationType };
+export {MutationType};

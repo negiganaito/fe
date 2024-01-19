@@ -4,18 +4,18 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { writeFileSync } from "fs";
-import path, { resolve } from "path";
-import { fileURLToPath } from "url";
+import {writeFileSync} from 'fs';
+import path, {resolve} from 'path';
+import {fileURLToPath} from 'url';
 
-import { printSchema } from "graphql";
+import {printSchema} from 'graphql';
 
-import { schema } from "./app.mjs";
+import {schema} from './app.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const schemaPath = resolve(__dirname, "../fe/data/schema.graphql");
+const schemaPath = resolve(__dirname, '../fe/data/schema.graphql');
 
 writeFileSync(schemaPath, printSchema(schema));
 

@@ -1,5 +1,6 @@
 /**
- * @generated SignedSource<<33adb235081a4ce5903ff6ff142d8676>>
+ * @generated SignedSource<<c4eaf0f6ca183341cf95f87a6a799afc>>
+ * @relayHash a54ed9bfa94c0d22086239d2fe60531f
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -7,6 +8,8 @@
 /* eslint-disable */
 
 'use strict';
+
+// @relayRequestID a54ed9bfa94c0d22086239d2fe60531f
 
 var node = (function(){
 var v0 = [
@@ -60,12 +63,11 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "a54ed9bfa94c0d22086239d2fe60531f",
-    "id": null,
+    "id": "a54ed9bfa94c0d22086239d2fe60531f",
     "metadata": {},
     "name": "WorkGalahadVariantDisableMutation",
     "operationKind": "mutation",
-    "text": "mutation WorkGalahadVariantDisableMutation(\n  $input: WorkGalahadVariantInput\n) {\n  disable_work_galahad_variant_v2(input: $input) {\n    __typename\n  }\n}\n"
+    "text": null
   }
 };
 })();

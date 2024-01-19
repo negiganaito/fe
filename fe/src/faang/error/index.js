@@ -6,6 +6,7 @@
  */
 export { CometErrorBoundary } from "./comet-error-boundary";
 export { err } from "./err";
+export { ErrorBoundary } from "./error-boundary";
 export { ErrorGuard } from "./error-guard";
 export { ErrorPubSub } from "./error-pub-sub";
 export { FBLogger } from "./fb-logger";

@@ -5,6 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import React from "react";
 import MatchContainer from "react-relay/lib/relay-hooks/MatchContainer";
 
 import moduleLoader from "../utils/module-loader";

@@ -7,13 +7,6 @@
 
 import { graphql } from "react-relay";
 
-// eslint-disable-next-line no-unused-vars
-const WorkNavigationClassicRendererFragment = graphql`
-  fragment WorkNavigationClassicRenderer_renderer on NavigationRenderer {
-    years
-  }
-`;
-
 export const workNavigationQuery = graphql`
   query WorkNavigationQuery {
     company {

@@ -1,9 +1,11 @@
-import express, { json } from "express";
-import { GraphQLSchema, graphql } from "graphql";
+import express, {json} from 'express';
+import {GraphQLSchema, graphql} from 'graphql';
 
-import queryMap from "./queryMap.json" with { type: "json" };
-import { QueryType, rootValue } from "./query.mjs";
-import { MutationType } from "./mutation.mjs";
+import queryMap from '../fe/queryMap.json' assert {type: 'json'};
+
+import {QueryType, rootValue} from './query.mjs';
+import {MutationType} from './mutation.mjs';
+import {dataDrivenDependencies} from './js-dependency.mjs';
 
 export const schema = new GraphQLSchema({
   query: QueryType,
@@ -15,11 +17,11 @@ const app = express();
 app.use(json());
 
 const handleCors = (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Request-Method", "*");
-  res.setHeader("Access-Control-Allow-Methods", "OPTIONS, POST");
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  if (req.method === "OPTIONS") {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Request-Method', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  if (req.method === 'OPTIONS') {
     res.sendStatus(200);
     return;
   }
@@ -31,8 +33,8 @@ app.use(handleCors);
 const graphqlHandler = async (req, res) => {
   const requestParams = req.body;
 
-  let response = { data: null };
-  if (req.method === "POST" && requestParams) {
+  let response = {data: null};
+  if (req.method === 'POST' && requestParams) {
     const mappedQueries = queryMap;
 
     dataDrivenDependencies.reset();
@@ -48,7 +50,7 @@ const graphqlHandler = async (req, res) => {
   }
 
   if (response.errors) {
-    console.error("GraphQL Server Errors", response.errors);
+    console.error('GraphQL Server Errors', response.errors);
   }
 
   response.extensions = {
@@ -58,7 +60,7 @@ const graphqlHandler = async (req, res) => {
   res.status(200).json(response);
 };
 
-app.post("/graphql", graphqlHandler);
+app.post('/graphql', graphqlHandler);
 
 const port = 5000;
 

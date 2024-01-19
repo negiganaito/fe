@@ -1,5 +1,6 @@
 /**
- * @generated SignedSource<<3370fb396e35cd90f7bed6e517dae448>>
+ * @generated SignedSource<<1e697ec0e69ad9a7b6838ea3a7842751>>
+ * @relayHash e7f67bd4edb53efa0409355d9e554e71
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -8,7 +9,8 @@
 
 'use strict';
 
-// @dataDrivenDependency WorkNavigationQuery.company.navigation_renderer {"branches":{"NavigationRenderer":{"component":"work-navigation-classic-renderer.jsx","fragment":"WorkNavigationClassicRenderer_renderer$normalization.graphql"}},"plural":false}
+// @relayRequestID e7f67bd4edb53efa0409355d9e554e71
+// @dataDrivenDependency WorkNavigationQuery.company.navigation_renderer {"branches":{"XFBWorkNavigationClassicRenderer":{"component":"work-navigation-classic-renderer.jsx","fragment":"WorkNavigationClassicRenderer_renderer$normalization.graphql"}},"plural":false}
 
 var node = (function(){
 var v0 = [
@@ -23,7 +25,7 @@ var v0 = [
       {
         "alias": null,
         "args": null,
-        "concreteType": "NavigationRenderer",
+        "concreteType": "XFBWorkNavigationClassicRenderer",
         "kind": "LinkedField",
         "name": "navigation_renderer",
         "plural": false,
@@ -60,12 +62,11 @@ return {
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "92552cd4eb43e4573bfa9a42ae860c2d",
-    "id": null,
+    "id": "e7f67bd4edb53efa0409355d9e554e71",
     "metadata": {},
     "name": "WorkNavigationQuery",
     "operationKind": "query",
-    "text": "query WorkNavigationQuery {\n  company {\n    navigation_renderer {\n      ...WorkNavigationClassicRenderer_renderer\n      __module_operation_WorkNavigationQuery: js(module: \"WorkNavigationClassicRenderer_renderer$normalization.graphql\", id: \"WorkNavigationQuery.company.navigation_renderer\")\n      __module_component_WorkNavigationQuery: js(module: \"work-navigation-classic-renderer.jsx\", id: \"WorkNavigationQuery.company.navigation_renderer\")\n    }\n  }\n}\n\nfragment WorkNavigationClassicRenderer_renderer on NavigationRenderer {\n  years\n}\n"
+    "text": null
   }
 };
 })();

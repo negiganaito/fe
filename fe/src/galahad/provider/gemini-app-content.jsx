@@ -53,7 +53,7 @@ export const GeminiAppContent = ({ children }) => {
         })
         */}
         {/* {children} */}
-        <GeminiAppViewStack>{children}</GeminiAppViewStack>;
+        <GeminiAppViewStack>{children}</GeminiAppViewStack>
       </CometSearchKeyCommandWrapper>
     </>
   );

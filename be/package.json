@@ -16,10 +16,10 @@
     "graphql-http": "1.22.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-import-attributes-to-assertions": "^7.23.3",
+    "@babel/plugin-syntax-import-attributes": "^7.23.3",
+    "@babel/preset-env": "^7.23.8",
     "@shopify/eslint-plugin": "^44.0.0",
     "@shopify/prettier-config": "^1.1.2",
     "eslint": "^8.56.0"
-  },
-  "prettier": "@shopify/prettier-config"
+  }
 }

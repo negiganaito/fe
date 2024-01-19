@@ -5,8 +5,27 @@
  * See the LICENSE file in the root directory for details.
  */
 
-const WorkNavigationClassicRenderer = () => {
-  return <div>111</div>;
+import React from "react";
+import { useFragment } from "react-relay";
+
+import { workNavigationClassicRendererFragment } from "../@graphql/WorkNavigationClassicRenderer";
+import { WorkGalahadAppTabTopApps } from "../common/work-galahad-app-tab-top-apps";
+import { WorkNavigationList } from "../common/work-navigation-list";
+
+let query;
+
+const WorkNavigationClassicRenderer = ({ renderer }) => {
+  useFragment(
+    query ? query : (query = workNavigationClassicRendererFragment),
+    renderer
+  );
+
+  return (
+    <WorkNavigationList>
+      <WorkGalahadAppTabTopApps />
+      {/* <WorkNavigationCollapseButtonAndNubs /> */}
+    </WorkNavigationList>
+  );
 };
 
 export default WorkNavigationClassicRenderer;

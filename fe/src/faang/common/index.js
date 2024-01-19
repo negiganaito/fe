@@ -19,3 +19,4 @@ export { observeIntersection } from "./observe-intersection";
 export * from "./resize-observer-polyfill-deprecated";
 export { RunComet } from "./run-comet";
 export { setTimeoutCometInternals } from "./set-timeout-comet-internals";
+export { TimeSlice } from "./time-slice";

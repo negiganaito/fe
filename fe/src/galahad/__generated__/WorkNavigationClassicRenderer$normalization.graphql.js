@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6f2ed7a48fb09e36ff8f7d47356f8ac8>>
+ * @generated SignedSource<<b31530c85d04422b49b11af2a75a7369>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,7 @@
 var node = {
   "kind": "SplitOperation",
   "metadata": {},
-  "name": "WorkNavigationClassicRenderer_renderer$normalization",
+  "name": "WorkNavigationClassicRenderer$normalization",
   "selections": [
     {
       "alias": null,
@@ -25,6 +25,6 @@ var node = {
   ]
 };
 
-node.hash = "a7a97067b5868705edff2e0319d3a340";
+node.hash = "c776595eb7adc3c0e089093c488cb58d";
 
 module.exports = node;

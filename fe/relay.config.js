@@ -12,4 +12,7 @@ module.exports = {
   schema: "./data/schema.graphql",
   excludes: ["**/node_modules/**", "**/__mocks__/**", "**/__generated__/**"],
   artifactDirectory: "src/galahad/__generated__",
+  persistConfig: {
+    file: "./queryMap.json"
+  }
 };

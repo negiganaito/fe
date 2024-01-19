@@ -1,5 +1,6 @@
 /**
- * @generated SignedSource<<1dda9082e59ba86b1f3171bdb9542112>>
+ * @generated SignedSource<<3793f4d2b65f599019ace23d1e46f404>>
+ * @relayHash 56ca1bc9d602091cd66822e44f9e2b5d
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -7,6 +8,8 @@
 /* eslint-disable */
 
 'use strict';
+
+// @relayRequestID 56ca1bc9d602091cd66822e44f9e2b5d
 
 var node = (function(){
 var v0 = [
@@ -60,12 +63,11 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "56ca1bc9d602091cd66822e44f9e2b5d",
-    "id": null,
+    "id": "56ca1bc9d602091cd66822e44f9e2b5d",
     "metadata": {},
     "name": "WorkGalahadVariantEnableMutation",
     "operationKind": "mutation",
-    "text": "mutation WorkGalahadVariantEnableMutation(\n  $input: WorkGalahadVariantInput\n) {\n  enable_work_galahad_variant_v2(input: $input) {\n    __typename\n  }\n}\n"
+    "text": null
   }
 };
 })();

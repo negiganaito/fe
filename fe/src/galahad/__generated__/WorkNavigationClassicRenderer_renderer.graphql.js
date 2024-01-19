@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<cc68c8c4aa7e1daac0d40adda21dae57>>
+ * @generated SignedSource<<362a3fd7c0b53a62bf09a7d03e0680be>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -18,14 +18,14 @@ var node = {
       "alias": null,
       "args": null,
       "kind": "ScalarField",
-      "name": "years",
+      "name": "__typename",
       "storageKey": null
     }
   ],
-  "type": "NavigationRenderer",
+  "type": "XFBWorkNavigationClassicRenderer",
   "abstractKey": null
 };
 
-node.hash = "12ffb0f4a8da3329fdccb19f05fb0a28";
+node.hash = "a7a97067b5868705edff2e0319d3a340";
 
 module.exports = node;

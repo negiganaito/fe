@@ -81,10 +81,14 @@ function registerModuleLoaders(modules) {
   modules.forEach((module) => {
     if (module.endsWith("$normalization.graphql")) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      registerLoader(module, () => import(`@/galahad/__generated__/${module}`));
+      registerLoader(module, () =>
+        import(/* webpackPrefetch: true */ `@/galahad/__generated__/${module}`)
+      );
     } else {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      registerLoader(module, () => import(`@/galahad/3d/${module}`));
+      registerLoader(module, () =>
+        import(/* webpackPrefetch: true */ `@/galahad/3d/${module}`)
+      );
     }
   });
 }

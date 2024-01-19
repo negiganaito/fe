@@ -13,6 +13,7 @@ import { BasePortalTargetContext } from "@/faang/context";
 import { useStable } from "@/faang/hooks";
 import { executionEnvironment } from "@/faang/utils";
 
+import { ChannelGeminiContentContext } from "../context/channel-gemini-content-context";
 import { GeminiLayoutTopLevelProvider } from "../provider/gemini-layout-top-level-provider";
 
 // import { ChannelGeminiContainer } from "./channel-gemini-container";
@@ -54,21 +55,23 @@ export const GeminiAppViewStack = ({ children }) => {
 
   return (
     <BasePortalTargetContext.Provider value={dom}>
-      <CometContextualLayerAnchorRoot>
-        <GeminiLayoutTopLevelProvider>
-          <GeminiLayoutPage.GeminiLayoutPage
-            // 2
-            channelContent={ChannelContent}
-            // 1
-            mainNavContent={MainNavContentComp}
-            navContentAndChannelContainer={NavContentAndChannelContainer}
-          >
-            <CometSearchKeyCommandWrapper xstyle={styles.contentContainer}>
-              {children}
-            </CometSearchKeyCommandWrapper>
-          </GeminiLayoutPage.GeminiLayoutPage>
-        </GeminiLayoutTopLevelProvider>
-      </CometContextualLayerAnchorRoot>
+      <ChannelGeminiContentContext.WorkGalahadChannelContentContextProvider>
+        <CometContextualLayerAnchorRoot>
+          <GeminiLayoutTopLevelProvider>
+            <GeminiLayoutPage.GeminiLayoutPage
+              // 2
+              channelContent={ChannelContent}
+              // 1
+              mainNavContent={MainNavContentComp}
+              navContentAndChannelContainer={NavContentAndChannelContainer}
+            >
+              <CometSearchKeyCommandWrapper xstyle={styles.contentContainer}>
+                {children}
+              </CometSearchKeyCommandWrapper>
+            </GeminiLayoutPage.GeminiLayoutPage>
+          </GeminiLayoutTopLevelProvider>
+        </CometContextualLayerAnchorRoot>
+      </ChannelGeminiContentContext.WorkGalahadChannelContentContextProvider>
     </BasePortalTargetContext.Provider>
   );
 };

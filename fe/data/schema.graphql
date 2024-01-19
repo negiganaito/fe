@@ -3,10 +3,10 @@ type Query {
 }
 
 type Company {
-  navigation_renderer: NavigationRenderer
+  navigation_renderer: XFBWorkNavigationClassicRenderer
 }
 
-type NavigationRenderer {
+type XFBWorkNavigationClassicRenderer {
   js(module: String!, id: String): JSDependency!
   years: String
 }

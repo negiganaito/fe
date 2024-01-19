@@ -1,28 +1,28 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
+import {GraphQLObjectType, GraphQLString} from 'graphql';
 
-import { JSDependencyField } from "./js-dependency.mjs";
+import {JSDependencyField} from './js-dependency.mjs';
 
 // Define the NavigationRenderer type
-const NavigationRendererType = new GraphQLObjectType({
-  name: "NavigationRenderer",
+const XFBWorkNavigationClassicRendererType = new GraphQLObjectType({
+  name: 'XFBWorkNavigationClassicRenderer',
   fields: () => ({
     js: JSDependencyField,
-    years: { type: GraphQLString },
+    years: {type: GraphQLString},
   }),
 });
 
 const CompanyType = new GraphQLObjectType({
-  name: "Company",
+  name: 'Company',
   fields: {
     navigation_renderer: {
-      type: NavigationRendererType,
+      type: XFBWorkNavigationClassicRendererType,
       // Resolve function for navigation_renderer field
     },
   },
 });
 
 const QueryType = new GraphQLObjectType({
-  name: "Query",
+  name: 'Query',
   fields: {
     company: {
       type: CompanyType,
@@ -33,11 +33,9 @@ const QueryType = new GraphQLObjectType({
 const rootValue = {
   company: () => {
     return {
-      navigation_renderer: {
-        years: "2024",
-      },
+      navigation_renderer: {},
     };
   },
 };
 
-export { QueryType, rootValue };
+export {QueryType, rootValue};
