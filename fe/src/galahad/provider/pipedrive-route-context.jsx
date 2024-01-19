@@ -14,12 +14,13 @@ import {
 } from "@/galahad/config/ui-configuration";
 
 const useMatchesHandler = () => {
-  const pathName = useMatch();
+  const match = useMatch();
 
   // todo: potential bug here
   const view = useMemo(() => {
     // eslint-disable-next-line no-unused-vars
-    const [empty, tabkey, channelGeminiKey, ...rest] = pathName.split("/");
+    const [empty, tabkey, channelGeminiKey, ...rest] =
+      match.pathname.split("/");
 
     if (!channelGeminiKey) {
       // @ts-ignore
@@ -27,11 +28,11 @@ const useMatchesHandler = () => {
     }
 
     return channelGeminiKey;
-  }, [pathName]);
+  }, [match]);
 
   return {
     view,
-    path: pathName,
+    path: match,
   };
 };
 

@@ -5,3 +5,4 @@
  * See the LICENSE file in the root directory for details.
  */
 export { BaseContextualLayerAnchorRoot } from "./base-contextual-layer-anchor-root";
+export { BaseModal } from "./base-modal";

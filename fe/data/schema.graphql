@@ -1,7 +1,32 @@
-schema {
-  query: GreetingsQuery
+type Query {
+  company: Company
 }
 
-type GreetingsQuery {
-  greetings: String
+type Company {
+  navigation_renderer: XFBWorkNavigationClassicRenderer
+}
+
+type XFBWorkNavigationClassicRenderer {
+  js(module: String!, id: String): JSDependency!
+  years: String
+}
+
+scalar JSDependency
+
+type Mutation {
+  enable_work_galahad_variant_v2(input: WorkGalahadVariantInput): EnableWorkGalahadVariantV2ResponsePayload
+  disable_work_galahad_variant_v2(input: WorkGalahadVariantInput): DisableWorkGalahadVariantV2ResponsePayload
+}
+
+type EnableWorkGalahadVariantV2ResponsePayload {
+  temp: String!
+}
+
+input WorkGalahadVariantInput {
+  variant: String!
+  source: String!
+}
+
+type DisableWorkGalahadVariantV2ResponsePayload {
+  temp: String!
 }

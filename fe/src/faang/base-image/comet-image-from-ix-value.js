@@ -7,7 +7,7 @@
 import React, { forwardRef } from "react";
 // @ts-ignore
 import { jsx } from "react/jsx-runtime";
-import { stylex } from "@stylexjs/stylex";
+import stylex from "@stylexjs/stylex";
 
 import { CometVisualCompletionAttributes } from "@/faang/common";
 import { RecoverableViolationWithComponentStack } from "@/faang/error";

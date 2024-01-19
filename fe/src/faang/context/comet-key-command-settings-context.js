@@ -6,6 +6,12 @@
  */
 import React from "react";
 
+const CometCustomKeyCommands = {
+  customCommands: {},
+  areSingleKeysDisabled: null,
+  modifiedKeyboardShortcutsPreference: 4,
+};
+
 // TODO
 export const CometKeyCommandSettingsContext = React.createContext({
   addCustomCommand: function (a) {},
@@ -14,9 +20,7 @@ export const CometKeyCommandSettingsContext = React.createContext({
   },
   disableCustomCommand: function (a) {},
   getAreSingleKeysDisabled: function () {
-    return false;
-    // TODO
-    // return CometCustomKeyCommands.areSingleKeysDisabled;
+    return CometCustomKeyCommands.areSingleKeysDisabled;
   },
   getCustomCommandsMap: function () {
     return new Map();

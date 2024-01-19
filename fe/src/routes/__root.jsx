@@ -8,6 +8,12 @@ import React from "react";
 import { Outlet, rootRouteWithContext } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
+import { WorkGalahadDarkModeStateProvider } from "@/galahad/provider";
+import { AppTabIdHandler } from "@/galahad/provider/app-tab-id-handler";
+import { GeminiApp } from "@/galahad/provider/gemini-app";
+import { PipedriveRouteContext } from "@/galahad/provider/pipedrive-route-context";
+import { WorkGalahadNavStoreProvider } from "@/galahad/provider/work-galahad-nav-store";
+
 export const Route = rootRouteWithContext()({
   component: RootComponent,
 });
@@ -15,8 +21,20 @@ export const Route = rootRouteWithContext()({
 function RootComponent() {
   return (
     <>
-      <div>Sidebar comp</div>
-      <Outlet />
+      <WorkGalahadNavStoreProvider>
+        <AppTabIdHandler>
+          <PipedriveRouteContext>
+            <GeminiApp>
+              <React.Suspense fallback="Loading">
+                <WorkGalahadDarkModeStateProvider>
+                  <Outlet />
+                </WorkGalahadDarkModeStateProvider>
+              </React.Suspense>
+            </GeminiApp>
+          </PipedriveRouteContext>
+        </AppTabIdHandler>
+      </WorkGalahadNavStoreProvider>
+
       <TanStackRouterDevtools position="bottom-right" />
     </>
   );

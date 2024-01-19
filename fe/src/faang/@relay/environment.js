@@ -6,31 +6,55 @@
  */
 import React from "react";
 import { RelayEnvironmentProvider } from "react-relay";
-import {
-  Environment,
-  Network,
-  Observable,
-  RecordSource,
-  Store,
-} from "relay-runtime";
+import { Environment, RecordSource, Store } from "relay-runtime";
 
-const fetchGraphQL = (params, variables) => {
-  const response = fetch("http://localhost:5000/graphql", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: params.text,
-      variables,
-    }),
-  });
+import moduleLoader from "@/galahad/utils/module-loader";
 
-  return Observable.from(response.then((data) => data.json()));
-};
+import { createNetwork } from "./network";
+
+// const fetchGraphQL = (params, variables) => {
+//   const response = fetch("http://localhost:5000/graphql", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({
+//       query: params.text,
+//       variables,
+//     }),
+//   });
+
+//   return Observable.from(response.then((data) => data.json()));
+// };
+
+const IS_SERVER = typeof window === typeof undefined;
+const CLIENT_DEBUG = false;
+const SERVER_DEBUG = false;
 
 function createEnvironment() {
-  const network = Network.create(fetchGraphQL);
-  const store = new Store(new RecordSource());
-  return new Environment({ store, network });
+  // Operation loader is reponsible for loading JS modules/components
+  // for data-processing and rendering
+  const operationLoader = {
+    get: (name) => moduleLoader(name).get(),
+    load: (name) => moduleLoader(name).load(),
+  };
+
+  const network = createNetwork();
+  const environment = new Environment({
+    network,
+    store: new Store(new RecordSource(), { operationLoader }),
+    operationLoader,
+    isServer: IS_SERVER,
+    log(event) {
+      if ((IS_SERVER && SERVER_DEBUG) || (!IS_SERVER && CLIENT_DEBUG)) {
+        // eslint-disable-next-line no-console
+        console.debug("[relay environment event]", event);
+      }
+    },
+  });
+
+  const environmentNetwork = environment.getNetwork();
+  environmentNetwork.responseCache = network.responseCache;
+
+  return environment;
 }
 
 export function RelayEnvironment({ children }) {

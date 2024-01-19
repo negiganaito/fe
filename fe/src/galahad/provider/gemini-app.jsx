@@ -5,8 +5,42 @@
  * See the LICENSE file in the root directory for details.
  */
 
-export const GeminiApp = () => {
-  return <CometAppShell toaster={<CometToasterRoot />} />;
+import React from "react";
+
+import { CometToasterRoot } from "@/faang/toast/comet-toaster-root";
+
+import { GeminiNavAndChannelContext } from "../context";
+
+import { CometAppShell } from "./comet-app-shell";
+import { GeminiAppContent } from "./gemini-app-content";
+import { GeminiAppTopLevelProvider } from "./gemini-app-top-level-provider";
+
+// function onError(error) {
+//   recoverableViolation(
+//     "GeminiApp level component did not catch own error",
+//     "work_comet_core",
+//     {
+//       error,
+//     }
+//   );
+// }
+
+export const GeminiApp = ({ children }) => {
+  return (
+    <CometAppShell toaster={<CometToasterRoot />}>
+      <GeminiAppTopLevelProvider>
+        <GeminiNavAndChannelContext.Provider>
+          <GeminiAppContent>{children}</GeminiAppContent>
+        </GeminiNavAndChannelContext.Provider>
+        {/* <CometErrorBoundary onError={onError}>
+            <CometPlaceholder fallback={null}>
+              <CometWatchAndScroll />
+            </CometPlaceholder>
+          </CometErrorBoundary> */}
+        {/* <CometPlaceholder fallback={null} /> */}
+      </GeminiAppTopLevelProvider>
+    </CometAppShell>
+  );
 };
 
 /*

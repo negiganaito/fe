@@ -5,9 +5,12 @@
  * See the LICENSE file in the root directory for details.
  */
 export { CometErrorBoundary } from "./comet-error-boundary";
+export { err } from "./err";
+export { ErrorBoundary } from "./error-boundary";
 export { ErrorGuard } from "./error-guard";
 export { ErrorPubSub } from "./error-pub-sub";
 export { FBLogger } from "./fb-logger";
+export { FlowMigrationUtilsForLegacyFiles } from "./flow-migration-utils-for-legacy-files";
 export { recoverableViolation } from "./recoverable-violation";
 export { RecoverableViolationWithComponentStack } from "./recoverable-violation-with-component-stack";
 export { unexpectedUseInComet } from "./unexpected-use-in-comet";

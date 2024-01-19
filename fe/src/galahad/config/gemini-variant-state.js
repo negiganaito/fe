@@ -5,14 +5,23 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { createContext, useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useRelayEnvironment } from "react-relay/hooks";
+import nullthrows from "fbjs/lib/nullthrows";
 
 import { usePrevious } from "@/faang/hooks";
+import { WorkGalahadVariantDisableMutation } from "@/galahad/@graphql/WorkGalahadVariantDisable";
+import { WorkGalahadVariantEnableMutation } from "@/galahad/@graphql/WorkGalahadVariantEnable";
 
 import { WorkGalahadVariantSetting } from "./work-galahad-variant-setting";
 
-const o = new Map([
+const featureNameToVariantMap = new Map([
   ["hasNotifPriorityBadgeCount", "NOTIF_PRIORITY_BADGE_COUNT"],
   ["hasGdriveNotifications", "NOTIF_GDRIVE_SETTING"],
   ["hasNotifDotOnTabs", "NOTIF_DOT_ON_TABS"],
@@ -48,7 +57,7 @@ const o = new Map([
   ["rhcApprovalsCollapsed", "RHC_COLLAPSE_APPROVALS"],
 ]);
 
-const p = createContext({
+const GeminiVariantContext = createContext({
   hasNotifPriorityBadgeCount: !0,
   hasNotifDotOnTabs: !1,
   hasGdriveNotifications: !0,
@@ -84,7 +93,8 @@ const p = createContext({
   rhcApprovalsCollapsed: !1,
 });
 
-const q = createContext(() => {});
+const ToggleContext = createContext(() => {});
+
 const r = [
   "CHAT_BUBBLELESS",
   "CHAT_FIRST",
@@ -95,6 +105,7 @@ const r = [
   "SIMPLIFICATION",
   "SMB",
 ];
+
 const s = {
   rhcFeedCollapsed: WorkGalahadVariantSetting.rhc_collapse_feed === "ENABLED",
   rhcGroupCollapsed: WorkGalahadVariantSetting.rhc_collapse_group === "ENABLED",
@@ -121,8 +132,8 @@ const s = {
     WorkGalahadVariantSetting.rhc_collapse_approvals === "ENABLED",
 };
 
-export const GeminiVariantState = ({ children }) => {
-  const [e, f] = useState({
+export const Provider = ({ children }) => {
+  const [featureState, setFeatureState] = useState({
     hasNotifPriorityBadgeCount:
       WorkGalahadVariantSetting.notif_priority_badge_count === "ENABLED" ||
       WorkGalahadVariantSetting.notif_priority_badge_count === "DEFAULT",
@@ -163,26 +174,77 @@ export const GeminiVariantState = ({ children }) => {
     ...s,
   });
 
-  const [g, h] = useState({});
+  const [loadingStates, setLoadingStates] = useState({});
 
-  const j = useRelayEnvironment();
+  const relayEnvironment = useRelayEnvironment();
 
-  const l = usePrevious(e.hasRiverKnight);
+  const prevRiverKnightState = usePrevious(featureState.hasRiverKnight);
 
   useEffect(() => {
-    l && l !== e.hasRiverKnight && dispatchEvent(window.document, "resize");
-  }, [e.hasRiverKnight, l]);
+    prevRiverKnightState &&
+      prevRiverKnightState !== featureState.hasRiverKnight &&
+      dispatchEvent(window.document, "resize");
+  }, [featureState.hasRiverKnight, prevRiverKnightState]);
 
-  const b = useCallback((a, b) => {
-    if (o.has(a) && g[a] !== true) {
-      //
-      h((b) => {
-        b[a] = !0;
-        return b;
+  const toggleFeature = useCallback(
+    (featureName, source) => {
+      if (
+        featureNameToVariantMap.has(featureName) &&
+        loadingStates[featureName] !== true
+      ) {
+        //
+        setLoadingStates((loadingStates) => {
+          loadingStates[featureName] = true;
+          return loadingStates;
+        });
+        let commitMutation = featureState[featureName]
+          ? WorkGalahadVariantDisableMutation
+          : WorkGalahadVariantEnableMutation;
+
+        commitMutation(relayEnvironment, {
+          input: {
+            variant: nullthrows(featureNameToVariantMap.get(featureName)),
+            source: source,
+          },
+          onCompleted: () => {
+            setLoadingStates((loadingStates) => {
+              loadingStates[featureName] = false;
+              return loadingStates;
+            });
+            r.includes(featureNameToVariantMap.get(featureName)) &&
+              window.location.reload();
+          },
+        });
+      }
+
+      setFeatureState((featureState) => {
+        let updatedState = { ...featureState };
+        updatedState[featureName] = !featureState[featureName];
+        return updatedState;
       });
-      let d = e[a]
-        ? c("WorkGalahadVariantDisableMutation")
-        : c("WorkGalahadVariantEnableMutation");
-    }
-  });
+    },
+    [featureState, relayEnvironment, loadingStates]
+  );
+
+  return (
+    <GeminiVariantContext.Provider value={featureState}>
+      <ToggleContext.Provider value={toggleFeature}>
+        {children}
+      </ToggleContext.Provider>
+    </GeminiVariantContext.Provider>
+  );
+};
+
+function useGeminiVariant() {
+  return useContext(GeminiVariantContext);
+}
+function useGeminiVariantToggler() {
+  return useContext(ToggleContext);
+}
+
+export const GeminiVariantState = {
+  Provider,
+  useGeminiVariant,
+  useGeminiVariantToggler,
+  GeminiVariantContext,
 };

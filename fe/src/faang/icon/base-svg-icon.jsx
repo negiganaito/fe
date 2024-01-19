@@ -9,8 +9,7 @@ import stylex from "@stylexjs/stylex";
 
 const styles = stylex.create({
   color: (color) => ({
-    // eslint-disable-next-line @stylexjs/valid-styles
-    color: color ?? "initial",
+    color: color,
   }),
 });
 

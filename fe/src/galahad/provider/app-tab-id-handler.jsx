@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useMatch } from "@tanstack/react-router";
 
 import { WorkGalahadNavStore } from "@/galahad/provider/work-galahad-nav-store";
@@ -16,8 +16,11 @@ export function AppTabIdHandler({ children }) {
   const { dispatch } = WorkGalahadNavStore.useWorkGalahadNavStore();
 
   useEffect(() => {
-    dispatch(WorkGalahadNavStore.selectAppTabID(pathname.split("/")[1]));
+    dispatch(
+      WorkGalahadNavStore.selectAppTabID(pathname.pathname.split("/")[1])
+    );
   }, [pathname]);
 
-  return children;
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
 }

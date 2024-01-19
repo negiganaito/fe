@@ -13,8 +13,7 @@ import { useCometIconColors } from "./hooks";
 
 const styles = stylex.create({
   color: (color) => ({
-    // eslint-disable-next-line @stylexjs/valid-styles
-    color: color ?? "initial",
+    color,
   }),
 
   icon: {
@@ -92,7 +91,7 @@ export const CometSvgIcon = (props) => {
           styles.icon,
           inline && styles.inline,
           shadow && styles.shadow,
-          typeof color === "string" && styles.color[color],
+          typeof color === "string" && styles.color(colors[color]),
         ])}
         fill={fillValue ?? "currentColor"}
         height={size}
