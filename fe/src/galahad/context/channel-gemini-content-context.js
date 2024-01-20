@@ -9,7 +9,8 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { loadEntryPoint, useRelayEnvironment } from "react-relay/hooks";
 import useFluxStore from "flux-hooks";
 
-import { createCometRelayBaseEntryPointEnvironmentProvider } from "@/faang/@relay/create-comet-relay-base-entry-point-environment-provider";
+// import { createCometRelayBaseEntryPointEnvironmentProvider } from "@/faang/@relay/create-comet-relay-base-entry-point-environment-provider";
+import { relayEnvironment } from "@/faang/@relay/environment";
 import { JSScheduler, RunComet } from "@/faang/common";
 import { unrecoverableViolation } from "@/faang/error";
 
@@ -139,17 +140,19 @@ const init = (id, entry) => {
 
   if (!tab ? undefined : tab.channelEntryPoint) {
     preloadedEntryPointsMap = loadEntryPoint(
-      createCometRelayBaseEntryPointEnvironmentProvider(
-        CometRelayEnvironmentFactory.CometRelayEnvironmentFactory
-      ),
+      // createCometRelayBaseEntryPointEnvironmentProvider(
+      //   CometRelayEnvironmentFactory.CometRelayEnvironmentFactory
+      // ),
+      relayEnvironment,
       tab.channelEntryPoint,
       {}
     );
   } else if (entry) {
     preloadedEntryPointsMap = loadEntryPoint(
-      createCometRelayBaseEntryPointEnvironmentProvider(
-        CometRelayEnvironmentFactory.CometRelayEnvironmentFactory
-      ),
+      // createCometRelayBaseEntryPointEnvironmentProvider(
+      //   CometRelayEnvironmentFactory.CometRelayEnvironmentFactory
+      // ),
+      relayEnvironment,
       entry,
       {}
     );

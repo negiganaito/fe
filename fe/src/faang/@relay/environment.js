@@ -57,13 +57,15 @@ function createEnvironment() {
   return environment;
 }
 
+export const relayEnvironment = createEnvironment();
+
 export function RelayEnvironment({ children }) {
-  const environment = React.useMemo(() => {
-    return createEnvironment();
-  }, []);
+  // const environment = React.useMemo(() => {
+  //   return createEnvironment();
+  // }, []);
 
   return (
-    <RelayEnvironmentProvider environment={environment}>
+    <RelayEnvironmentProvider environment={relayEnvironment}>
       {children}
     </RelayEnvironmentProvider>
   );

@@ -13,3 +13,5 @@ import { routeTree } from "./routeTree.gen";
 
 // Create the router using your route tree
 export const router = new Router({ routeTree });
+
+router.load().then((r) => console.log({ r }));
