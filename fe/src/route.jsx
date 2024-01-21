@@ -9,9 +9,21 @@ import {
   Router,
 } from "@tanstack/react-router";
 
+import { WorkGalahadNavStore } from "./galahad/provider/work-galahad-nav-store";
+import { workGalahadDispatcher } from "./galahad/store/work-galahad-dispatcher";
 import { routeTree } from "./routeTree.gen";
 
 // Create the router using your route tree
 export const router = new Router({ routeTree });
 
-router.load().then((r) => console.log({ r }));
+router.load().then(() => {
+  const stores = [
+    // WorkGalahadChatChannelStore
+    WorkGalahadNavStore,
+    // WorkGalahadQuickChatStore
+  ].filter(Boolean);
+
+  workGalahadDispatcher.explicitlyRegisterStores();
+  // WorkGalahadBeeperDispatcher.explicitlyRegisterStores([WorkGalahadBeeperStore]);
+  // WorkGalahadLocalUISettingsDispatcher.explicitlyRegisterStores([WorkGalahadLocalUISettingsStore]);
+});

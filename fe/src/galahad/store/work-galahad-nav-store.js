@@ -8,7 +8,7 @@ import { ReduceStore } from "flux/utils";
 
 import { WorkGalahadAppTabIDUtil } from "../config";
 
-import { WorkGalahadDispatcher } from "./work-galahad-dispatcher";
+import { workGalahadDispatcher } from "./work-galahad-dispatcher";
 
 const defaultVariable = () => {
   return {
@@ -186,5 +186,5 @@ export class WorkGalahadNavStore extends ReduceStore {
 }
 
 export const workGalahadNavStore = new WorkGalahadNavStore(
-  WorkGalahadDispatcher
+  workGalahadDispatcher
 );

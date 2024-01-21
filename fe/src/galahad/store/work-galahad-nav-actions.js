@@ -7,11 +7,11 @@
 
 import { setImmediateAcrossTransitions } from "@/faang/utils/set-immediate-across-transitions";
 
-import { WorkGalahadDispatcher } from "./work-galahad-dispatcher";
+import { workGalahadDispatcher } from "./work-galahad-dispatcher";
 
 const markPendingTransition = ({ appTabID, entityKey, uri }) => {
   //  typeof a === "string" && a.endsWith("?tab=security") && c("QPLUserFlow").start(c("qpl")._(54263819, "5173"));
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/markPendingTransition",
     appTabID,
     entityKey,
@@ -20,7 +20,7 @@ const markPendingTransition = ({ appTabID, entityKey, uri }) => {
 };
 
 const setActiveEntityKey = (entityKey) => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/setActiveEntityKey",
     entityKey,
   });
@@ -41,7 +41,7 @@ const selectAppTabID = (id) => {
   //     },
   //   });
 
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/selectAppTabID",
     appTabID: id,
   });
@@ -50,7 +50,7 @@ const selectAppTabID = (id) => {
 };
 
 const pushStackedChannel = (stackedChannelData) => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/pushStackedChannel",
     stackedChannelData,
   });
@@ -58,7 +58,7 @@ const pushStackedChannel = (stackedChannelData) => {
 
 const replaceStackedChannel = (stackedChannelData) => {
   setImmediateAcrossTransitions(() => {
-    WorkGalahadDispatcher.dispatch({
+    workGalahadDispatcher.dispatch({
       type: "nav/replaceStackedChannel",
       stackedChannelData,
     });
@@ -66,45 +66,45 @@ const replaceStackedChannel = (stackedChannelData) => {
 };
 
 const dismissStackedChannel = () => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/dismissStackedChannel",
   });
 };
 
 const allowChannelAutoFocus = () => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/allowChannelAutoFocus",
   });
 };
 
 const dismissAllStackedChannels = () => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/dismissAllStackedChannels",
   });
 };
 
 const startLoading = (uri) => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/startLoading",
     uri,
   });
 };
 
 const stopLoading = () => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/stopLoading",
   });
 };
 
 const showPublicContentBanner = (html) => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/showPublicContentBanner",
     html,
   });
 };
 
 const hidePublicContentBanner = () => {
-  WorkGalahadDispatcher.dispatch({
+  workGalahadDispatcher.dispatch({
     type: "nav/hidePublicContentBanner",
   });
 };
