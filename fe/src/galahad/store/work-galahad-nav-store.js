@@ -16,7 +16,7 @@ const defaultVariable = () => {
   };
 };
 
-export class WorkGalahadNavStore extends ReduceStore {
+class WorkGalahadNavStore extends ReduceStore {
   constructor(dispatcher) {
     super(dispatcher);
     this.reduce = (state, action) => {

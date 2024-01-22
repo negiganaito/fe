@@ -34,7 +34,7 @@ dependencies:
     version: 0.0.4
   flux:
     specifier: git://github.com/negiganaito/flux-experimental.git
-    version: github.com/negiganaito/flux-experimental/96a874e4fb48fe050682b77391df9a22f59971d5(react@0.0.0-experimental-aec521a96-20231114)
+    version: github.com/negiganaito/flux-experimental/323759cac00d620d41547f823a5bccab6b3fd983(react@0.0.0-experimental-aec521a96-20231114)
   flux-hooks:
     specifier: 1.1.4
     version: 1.1.4(flux@4.0.4)(react@0.0.0-experimental-aec521a96-20231114)
@@ -4513,7 +4513,7 @@ packages:
       flux: ^3.1.2
       react: ^16.8.0
     dependencies:
-      flux: github.com/negiganaito/flux-experimental/96a874e4fb48fe050682b77391df9a22f59971d5(react@0.0.0-experimental-aec521a96-20231114)
+      flux: github.com/negiganaito/flux-experimental/323759cac00d620d41547f823a5bccab6b3fd983(react@0.0.0-experimental-aec521a96-20231114)
       lodash.isequal: 4.5.0
       react: github.com/tienlx97/react-experimental/acfc5aa360d39a1c90fc78dd65951b503360d397
     dev: false
@@ -7847,9 +7847,9 @@ packages:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: true
 
-  github.com/negiganaito/flux-experimental/96a874e4fb48fe050682b77391df9a22f59971d5(react@0.0.0-experimental-aec521a96-20231114):
-    resolution: {tarball: https://codeload.github.com/negiganaito/flux-experimental/tar.gz/96a874e4fb48fe050682b77391df9a22f59971d5}
-    id: github.com/negiganaito/flux-experimental/96a874e4fb48fe050682b77391df9a22f59971d5
+  github.com/negiganaito/flux-experimental/323759cac00d620d41547f823a5bccab6b3fd983(react@0.0.0-experimental-aec521a96-20231114):
+    resolution: {tarball: https://codeload.github.com/negiganaito/flux-experimental/tar.gz/323759cac00d620d41547f823a5bccab6b3fd983}
+    id: github.com/negiganaito/flux-experimental/323759cac00d620d41547f823a5bccab6b3fd983
     name: flux
     version: 4.0.4
     peerDependencies:

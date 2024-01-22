@@ -9,141 +9,125 @@
 /* eslint-disable no-sequences */
 
 import emptyFunction from "fbjs/lib/emptyFunction";
-import ExecutionEnvironment from "fbjs/lib/ExecutionEnvironment";
 
 import {
   FBLogger,
   recoverableViolation,
   unexpectedUseInComet,
 } from "@/faang/error";
-import { createCancelableFunction } from "@/faang/utils";
+import { createCancelableFunction, executionEnvironment } from "@/faang/utils";
 
-//
-
-function l(a, b) {
-  h.unload === null &&
-    ((h.unload = []),
-    (h.afterunload = []),
-    ExecutionEnvironment.canUseEventListeners &&
+let i = {};
+let j = !1;
+let k = !1;
+let l = {
+  remove: emptyFunction,
+};
+function m(a, b) {
+  !i.unload &&
+    ((i.unload = []),
+    (i.afterunload = []),
+    executionEnvironment.canUseEventListeners &&
       window.addEventListener("unload", () => {
-        // eslint-disable-next-line no-sequences
-        o("unload"), o("afterunload");
-        // eslint-disable-next-line no-sequences
+        p("unload"), p("afterunload");
       })),
-    h[a] === null
+    !i[a]
       ? (recoverableViolation(
           "EVENT_LISTENERS." + a + " wasn't initialized but should have been!",
           "comet_infra"
         ),
-        (h[a] = [b]))
-      : h[a].push(b);
+        (i[a] = [b]))
+      : i[a].push(b);
 }
-
-function m(a) {
+function n(a) {
   a ||
     recoverableViolation(
       "Undefined event listener handler is not allowed",
       "comet_infra"
     );
-
-  // eslint-disable-next-line no-self-assign, no-return-assign
-  return createCancelableFunction((a = a) !== null ? a : emptyFunction);
+  // eslint-disable-next-line no-return-assign, no-cond-assign
+  return createCancelableFunction(a ?? emptyFunction);
 }
-
-function n(a) {
+function o(a) {
   return {
     remove: function () {
       a.cancel();
     },
   };
 }
-
-// eslint-disable-next-line no-var
-var h = {};
-let i = !1;
-let j = !1;
-let k = {
-  remove: emptyFunction,
-};
-
-function o(a) {
-  let b = h[a] || [];
+function p(a) {
+  let b = i[a] || [];
   for (let d = 0; d < b.length; d++) {
     let e = b[d];
     try {
       e();
     } catch (b) {
-      // c('FBLogger')('comet_infra')
-      //   .catching(b)
-      //   .mustfix("Hit an error while executing '" + a + "' event listeners.")
+      FBLogger("comet_infra")
+        .catching(b)
+        .mustfix("Hit an error while executing '" + a + "' event listeners.");
     }
   }
-  h[a] = [];
+  i[a] = [];
 }
-
-function onLoad(a) {
-  if (i) {
+function q(a) {
+  if (j) {
     a();
-    return n(m(emptyFunction));
+    return o(n(emptyFunction));
   }
-  a = m(a);
-  h.domcontentloaded === null
-    ? ((h.domcontentloaded = [a]),
-      ExecutionEnvironment.canUseEventListeners &&
+  a = n(a);
+  !i.domcontentloaded
+    ? ((i.domcontentloaded = [a]),
+      executionEnvironment.canUseEventListeners &&
         window.addEventListener(
           "DOMContentLoaded",
           () => {
-            o("domcontentloaded");
+            p("domcontentloaded");
           },
           !0
         ))
-    : h.domcontentloaded.push(a);
-  return n(a);
+    : i.domcontentloaded.push(a);
+  return o(a);
 }
-
-function onAfterLoad(a) {
-  a = m(a);
-  h.load === null
-    ? ((h.load = [a]),
-      ExecutionEnvironment.canUseEventListeners &&
+function a(a) {
+  a = n(a);
+  m("afterunload", a);
+  return o(a);
+}
+function b(a) {
+  a = n(a);
+  !i.load
+    ? ((i.load = [a]),
+      executionEnvironment.canUseEventListeners &&
         window.addEventListener("load", () => {
-          o("domcontentloaded"), o("load");
+          p("domcontentloaded"), p("load");
         }))
-    : h.load.push(a);
-  j &&
+    : i.load.push(a);
+  k &&
     setTimeout(() => {
-      o("domcontentloaded"), o("load");
+      p("domcontentloaded"), p("load");
     }, 0);
-  return n(a);
+  return o(a);
 }
-
-function onAfterUnload(a) {
-  a = m(a);
-  l("afterunload", a);
-  return n(a);
+function d(a) {
+  a = n(a);
+  m("unload", a);
+  return o(a);
 }
-
-function onUnload(a) {
-  a = m(a);
-  l("unload", a);
-  return n(a);
-}
-
-function onBeforeUnload(a, b) {
+function e(a, b) {
   if (b !== !1) {
     b =
       "Run.onBeforeUnload was called with include_quickling_events as true or undefined, but this is not valid in Comet.";
     FBLogger("comet_infra").blameToPreviousFrame().mustfix(b);
   }
-  b = m(a);
-  h.beforeunload === null &&
-    ((h.beforeunload = []),
-    ExecutionEnvironment.canUseEventListeners &&
+  b = n(a);
+  !i.beforeunload &&
+    ((i.beforeunload = []),
+    executionEnvironment.canUseEventListeners &&
       window.addEventListener("beforeunload", (a) => {
         // eslint-disable-next-line no-var
-        var b = h.beforeunload || [];
+        var b = i.beforeunload || [];
         for (
-          // eslint-disable-next-line no-inner-declarations, no-var
+          // eslint-disable-next-line no-var, no-inner-declarations
           var b = b,
             d = Array.isArray(b),
             e = 0,
@@ -171,68 +155,69 @@ function onBeforeUnload(a, b) {
           try {
             g = f();
           } catch (a) {
-            // c('FBLogger')('comet_infra')
-            //   .catching(a)
-            //   .mustfix(
-            //     'Hit an error while executing onBeforeUnload event listeners.',
-            //   )
+            FBLogger("comet_infra")
+              .catching(a)
+              .mustfix(
+                "Hit an error while executing onBeforeUnload event listeners."
+              );
           }
           if (g !== void 0) {
-            g !== null && g.body !== null && (g = g.body);
+            g && g.body && (g = g.body);
             a.preventDefault();
             a.returnValue = g;
             return g;
           }
         }
       }));
-  h.beforeunload.push(b);
-  return n(b);
+  i.beforeunload.push(b);
+  return o(b);
 }
+let r = e;
 
-function onLeave(a) {
+function f(a) {
   unexpectedUseInComet("Run.onLeave");
-  return k;
+  return l;
 }
 
-function onCleanupOrLeave(a, b) {
+function s(a, b) {
   unexpectedUseInComet("Run.onCleanupOrLeave");
-  return k;
+  return l;
 }
 
-const maybeOnBeforeUnload = onBeforeUnload;
-
-function __removeHook(a) {
+function t(a) {
   unexpectedUseInComet("Run.removeHook");
 }
 
-// function __domContentCallback() {
-//   document.readyState === 'loading'
-//     ? onLoad(function () {
-//         i = !0
-//       })
-//     : (i = !0)
-//   if (document.readyState === 'complete') j = !0
-//   else {
-//     var a = window.onload
-//     window.onload = function () {
-//       a && a(), (j = !0)
-//     }
-//   }
-// }
+function u() {
+  document.readyState === "loading"
+    ? q(() => {
+        j = !0;
+      })
+    : (j = !0);
+  if (document.readyState === "complete") k = !0;
+  else {
+    let a = window.onload;
+    window.onload = function () {
+      a && a(), (k = !0);
+    };
+  }
+}
+executionEnvironment.canUseDOM && u();
 
-const __domContentCallback = null;
-const __onloadCallback = null;
+// eslint-disable-next-line no-func-assign
+u = null;
+let v = null;
 
 export const RunComet = {
-  onLoad,
-  onAfterUnload,
-  onAfterLoad,
-  onUnload,
-  onBeforeUnload,
-  maybeOnBeforeUnload,
-  onLeave,
-  onCleanupOrLeave,
-  __removeHook,
-  __domContentCallback,
-  __onloadCallback,
+  onLoad: q,
+  onAfterUnload: a,
+  onAfterLoad: b,
+  onUnload: d,
+  onBeforeUnload: e,
+  maybeOnBeforeUnload: r,
+  onLeave: f,
+  onCleanupOrLeave: s,
+  __removeHook: t,
+  __domContentCallback: u,
+  __onloadCallback: v,
 };
