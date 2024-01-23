@@ -5,7 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
-import { useFluxStore } from "flux-hooks";
+import { FluxHooks } from "@/faang/flux/flux-hooks";
 
 import { WorkAppTabSet } from "../config/work-app-tab-set";
 import { workGalahadNavStore } from "../store/work-galahad-nav-store";
@@ -33,10 +33,13 @@ function s() {
 // }
 
 export const ChannelGemini = () => {
-  const f = useFluxStore(workGalahadNavStore, r);
-  const g = useFluxStore(workGalahadNavStore, o);
-  const j = useFluxStore(workGalahadNavStore, p);
-  const { isSearchOverlayShown } = useFluxStore(workGalahadNavStore, s);
+  const f = FluxHooks.useFluxStore(workGalahadNavStore, r);
+  const g = FluxHooks.useFluxStore(workGalahadNavStore, o);
+  const j = FluxHooks.useFluxStore(workGalahadNavStore, p);
+  const { isSearchOverlayShown } = FluxHooks.useFluxStore(
+    workGalahadNavStore,
+    s
+  );
 
   const val = WorkAppTabSet.find((tab) => {
     return tab.id === g;

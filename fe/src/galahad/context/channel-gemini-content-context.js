@@ -7,12 +7,12 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { loadEntryPoint, useRelayEnvironment } from "react-relay/hooks";
-import useFluxStore from "flux-hooks";
 
 // import { createCometRelayBaseEntryPointEnvironmentProvider } from "@/faang/@relay/create-comet-relay-base-entry-point-environment-provider";
 import { relayEnvironment } from "@/faang/@relay/environment";
 import { JSScheduler, RunComet } from "@/faang/common";
 import { unrecoverableViolation } from "@/faang/error";
+import { FluxHooks } from "@/faang/flux/flux-hooks";
 
 import { WorkAppTabSet } from "../config/work-app-tab-set";
 import { workGalahadNavStore } from "../store/work-galahad-nav-store";
@@ -34,10 +34,15 @@ let preloadedEntryPointsMap = null;
 const _1756551 = true;
 
 const WorkGalahadChannelContentContextProvider = ({ children }) => {
-  const selectedAppTabID = useFluxStore(
+  console.log("WorkGalahadChannelContentContextProvider - 1");
+
+  const selectedAppTabID = FluxHooks.useFluxStore(
     workGalahadNavStore,
     getSelectedAppTabID
   );
+
+  console.log("WorkGalahadChannelContentContextProvider - 2");
+
   const environment = useRelayEnvironment();
 
   const relayOptions = useMemo(() => {

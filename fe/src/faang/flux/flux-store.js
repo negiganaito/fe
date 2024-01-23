@@ -14,22 +14,22 @@ import { FluxStoreInstrumentation } from "./flux-store-instrumentation";
 import { FluxStoreOnDispatchInstrumentation } from "./flux-store-on-dispatch-instrumentation";
 
 export class FluxStore {
-  constructor(a) {
+  constructor(dispatcher) {
     this.__className = this.constructor.name;
-    this.__moduleID = this.constructor.__moduleID;
-    this.__changed = !1;
+    this.__moduleID = this.constructor.name; // this.constructor.__moduleID;
+    this.__changed = false;
     this.__changeEvent = "change";
-    this.__dispatcher = a;
+    this.__dispatcher = dispatcher;
     this.__emitter = new EventEmitter();
-    this.$3 = !1;
-    this.__registerDispatcherCallback(a);
+    this.$3 = false;
+    this.__registerDispatcherCallback(dispatcher);
   }
 
-  __registerDispatcherCallback(a) {
+  __registerDispatcherCallback(dispatcher) {
     let b = this;
-    this.$2 = a.register(
-      (a) => {
-        return b.__invokeOnDispatch(a);
+    this.$2 = dispatcher.register(
+      (payload) => {
+        return b.__invokeOnDispatch(payload);
       },
       this.__getIDForDispatcher(),
       this,
@@ -109,16 +109,16 @@ export class FluxStore {
     this.__changed = !0;
   }
 
-  __invokeOnDispatch(a) {
-    this.__changed = !1;
+  __invokeOnDispatch(payload) {
+    this.__changed = false;
     let b = FluxStoreOnDispatchInstrumentation.hasCallback()
       ? performanceAbsoluteNow()
       : null;
-    this.__onDispatch(a);
+    this.__onDispatch(payload);
     if (b) {
       FluxStoreOnDispatchInstrumentation.call(
         // eslint-disable-next-line no-cond-assign
-        (a = this.__moduleID) ? a : "unknown",
+        (payload = this.__moduleID) ? payload : "unknown",
         performanceAbsoluteNow() - b
       );
     }

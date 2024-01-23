@@ -7,6 +7,6 @@
 
 import { invariant } from "../utils";
 
-export function abstractMethod(a, b) {
-  invariant(0, 1537, a, b);
+export function abstractMethod(className, methodName) {
+  invariant(0, 1537, className, methodName);
 }

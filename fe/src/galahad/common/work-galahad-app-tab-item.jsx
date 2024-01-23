@@ -6,8 +6,8 @@
  */
 
 import React, { forwardRef, memo, useCallback, useMemo } from "react";
-import { useFluxStore } from "flux-hooks";
 
+import { FluxHooks } from "@/faang/flux/flux-hooks";
 import { isClickWithModifierKey } from "@/faang/utils";
 
 import { GeminiNavAndChannelContext } from "../context";
@@ -53,7 +53,10 @@ export const WorkGalahadAppTabItem = memo(
     const { isAutoHideEnabled } =
       GeminiNavAndChannelContext.useNavUIState(workGalahadNavStore);
 
-    let selectedTabID = useFluxStore(workGalahadNavStore, getSelectedAppTabID);
+    let selectedTabID = FluxHooks.useFluxStore(
+      workGalahadNavStore,
+      getSelectedAppTabID
+    );
 
     const isSelectedTab = selectedTabID === id;
 

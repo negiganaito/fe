@@ -6,14 +6,15 @@
  */
 
 import emptyFunction from "fbjs/lib/emptyFunction";
-import { Dispatcher } from "flux";
+
+import { Dispatcher_DEPRECATED } from "./dispatcher_DEPRECATED";
 
 export const ExplicitRegistrationDispatcherUtils = {
   warn: emptyFunction,
   inlineRequiresEnabled: false,
 };
 
-export class ExplicitRegistrationDispatcher extends Dispatcher {
+export class ExplicitRegistrationDispatcher extends Dispatcher_DEPRECATED {
   constructor(props) {
     const { strict } = props;
     super();

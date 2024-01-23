@@ -8,22 +8,21 @@ import { invariant } from "@/faang/utils";
 
 export class EventSubscriptionVendor {
   constructor() {
+    // _currentSubscription
     this.$1 = {};
   }
 
-  addSubscription(eventType, subscriber) {
-    if (subscriber !== this) {
-      invariant(0, 2828);
-    }
+  addSubscription(eventType, subscription) {
+    subscription.subscriber === this || invariant(0, 2828);
 
     this.$1[eventType] || (this.$1[eventType] = []);
 
     const key = this.$1[eventType].length;
-    this.$1[eventType].push(subscriber);
-    subscriber.eventType = eventType;
-    subscriber.key = key;
+    this.$1[eventType].push(subscription);
+    subscription.eventType = eventType;
+    subscription.key = key;
 
-    return subscriber;
+    return subscription;
   }
 
   removeAllSubscriptions(eventType) {
@@ -34,13 +33,14 @@ export class EventSubscriptionVendor {
     }
   }
 
-  removeSubscription(subscriber) {
-    const eventType = subscriber.eventType;
-    const key = subscriber.key;
-    const subscriptions = this.$1[eventType];
+  removeSubscription(subscription) {
+    const eventType = subscription.eventType;
+    const key = subscription.key;
 
-    if (subscriptions) {
-      delete subscriptions[key];
+    const subscriptionsForType = this.$1[eventType];
+
+    if (subscriptionsForType) {
+      delete subscriptionsForType[key];
     }
   }
 

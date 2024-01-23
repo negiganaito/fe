@@ -28,7 +28,11 @@ export function invariant(condition, message, ...params) {
       params.unshift(decoderLink);
     } else if (errorMessage === undefined) {
       // If message is undefined, create a default message with placeholders for parameters
-      errorMessage = "Invariant: " + params.map(() => "%s").join(",");
+      errorMessage = "Invariant: "; // + params.map(() => "%s").join(",");
+
+      for (let i = 0; i < params.length; i++) {
+        errorMessage += "%s,";
+      }
     }
 
     const error = new Error(errorMessage);

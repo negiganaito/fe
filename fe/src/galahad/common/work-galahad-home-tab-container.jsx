@@ -19,36 +19,33 @@
 
 // const _7130 = true;
 
-// export default (function WorkGalahadHomeTabContainer({ queries }) {
-//   const { queryReference } = queries;
+export default (function WorkGalahadHomeTabContainer({ queries }) {
+  //   const { queryReference } = queries;
+  //   const data = usePreloadedQuery(
+  //     query ? query : (query = WorkGalahadHomeTabContainerQuery)
+  //   );
+  //   const f = !m ? undefined : m();
+  //   if (
+  //     !data ||
+  //     !data.viewer ||
+  //     (!data.viewer ? undefined : data.viewer.work_app_tab)
+  //   ) {
+  //     return null;
+  //   }
+  //   // eslint-disable-next-line no-unused-vars
+  //   const can_create_group =
+  //     _7130 && (!data.viewer ? void 0 : data.viewer.can_create_group) === true;
+  //   return (
+  //     <VoyageUserJourneyUILayerProvider name="channel.home">
+  //       <ChannelGeminiUIChannelRoot
+  //         primaryAction={undefined}
+  //         title={fbt("Home", "Home")}
+  //         testid={undefined}
+  //       >
+  //         {/* TODO */}
+  //       </ChannelGeminiUIChannelRoot>
+  //     </VoyageUserJourneyUILayerProvider>
+  //   );
 
-//   const data = usePreloadedQuery(
-//     query ? query : (query = WorkGalahadHomeTabContainerQuery)
-//   );
-
-//   const f = !m ? undefined : m();
-
-//   if (
-//     !data ||
-//     !data.viewer ||
-//     (!data.viewer ? undefined : data.viewer.work_app_tab)
-//   ) {
-//     return null;
-//   }
-
-//   // eslint-disable-next-line no-unused-vars
-//   const can_create_group =
-//     _7130 && (!data.viewer ? void 0 : data.viewer.can_create_group) === true;
-
-//   return (
-//     <VoyageUserJourneyUILayerProvider name="channel.home">
-//       <ChannelGeminiUIChannelRoot
-//         primaryAction={undefined}
-//         title={fbt("Home", "Home")}
-//         testid={undefined}
-//       >
-//         {/* TODO */}
-//       </ChannelGeminiUIChannelRoot>
-//     </VoyageUserJourneyUILayerProvider>
-//   );
-// });
+  return <div>WorkGalahadHomeTabContainer</div>;
+});

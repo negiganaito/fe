@@ -8,14 +8,14 @@
 import { invariant } from "../utils";
 
 import { abstractMethod } from "./abstract-method";
-import { TypedFluxStore } from "./typed-flux-store";
+import { FluxStore } from "./flux-store";
 
-export class FluxReduceStore extends TypedFluxStore {
+export class FluxReduceStore extends FluxStore {
   // eslint-disable-next-line no-useless-constructor
-  constructor(props) {
-    super(props);
+  constructor(dispatcher) {
+    super(dispatcher);
 
-    this.$FluxReduceStore1 = props.getInitialState();
+    this.$FluxReduceStore1 = this.getInitialState();
   }
 
   getState() {
@@ -26,13 +26,24 @@ export class FluxReduceStore extends TypedFluxStore {
     return abstractMethod("FluxReduceStore", "getInitialState");
   }
 
-  reduce(a, b) {
+  reduce(state, action) {
     return abstractMethod("FluxReduceStore", "reduce");
   }
 
-  areEqual(a, b) {
-    return a === b;
+  areEqual(one, two) {
+    return one === two;
   }
+
+  // __invokeOnDispatch(action, b = true) {
+  //   // b === void 0 && (b = !0);
+  //   this.__changed = false;
+  //   let state = this.$FluxReduceStore1;
+  //   const endingState = this.reduce(state, action);
+  //   endingState !== undefined || invariant(0, 2189, this.constructor.name);
+  //   this.areEqual(state, endingState) ||
+  //     ((this.$FluxReduceStore1 = endingState), this.__emitChange());
+  //   b && this.__inform();
+  // }
 
   __invokeOnDispatch(a, b) {
     b === void 0 && (b = !0);
@@ -44,7 +55,7 @@ export class FluxReduceStore extends TypedFluxStore {
     b && this.__inform();
   }
 
-  __setState(a) {
-    this.$FluxReduceStore1 = a;
+  __setState(state) {
+    this.$FluxReduceStore1 = state;
   }
 }

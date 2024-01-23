@@ -11,6 +11,7 @@ import {
 
 import { WorkGalahadAppTabIDUtil } from "./galahad/config";
 import { ChannelGeminiContentContext } from "./galahad/context/channel-gemini-content-context";
+import { WorkGalahadHomeTabContainer_entrypoint } from "./galahad/entrypoint/work-galahad-home-tab-container.entrypoint";
 import { workGalahadDispatcher } from "./galahad/store/work-galahad-dispatcher";
 import { WorkGalahadNavActions } from "./galahad/store/work-galahad-nav-actions";
 import { workGalahadNavStore } from "./galahad/store/work-galahad-nav-store";
@@ -36,7 +37,7 @@ const urlMapper = {
     url: "/",
     secondaryRootView: {
       allResources: [],
-      entryPoint: "WorkGalahadHomeTabContainer.entrypoint",
+      entryPoint: WorkGalahadHomeTabContainer_entrypoint,
       props: {},
       resource: "WorkGalahadHomeTabContainer.react",
     },
@@ -103,7 +104,12 @@ router.load().then(() => {
   const key =
     entity.tabKey ?? WorkGalahadAppTabIDUtil.getProductSpecificHomeTabID();
 
+  console.log("router - 1");
+
   WorkGalahadNavActions.selectAppTabID(key);
+
+  console.log("router - 2");
+
   // d("LSPlatformClientStartLoadingEarly").start(
   //     d("LSPlatformWorkchatConfig").config
   //   );
@@ -118,9 +124,9 @@ router.load().then(() => {
 
   // c("gkx")("1861546") || d("WorkGalahadStylexTheme").rootStyleSheet.inject();
 
-  // const entryPoint = !entity.secondaryRootView
-  //   ? undefined
-  //   : entity.secondaryRootView.entryPoint;
+  const entryPoint = !entity.secondaryRootView
+    ? undefined
+    : entity.secondaryRootView.entryPoint;
 
   // a != null
   //   ? a.onReadyImmediately(function (a) {
@@ -128,11 +134,11 @@ router.load().then(() => {
   //     })
   //   : d("ChannelGeminiContentContext.react").init(e);
 
-  // if (entryPoint) {
-  //   ChannelGeminiContentContext.init(key, entryPoint);
-  // } else {
-  //   ChannelGeminiContentContext.init(key);
-  // }
+  if (entryPoint) {
+    ChannelGeminiContentContext.init(key, entryPoint);
+  } else {
+    ChannelGeminiContentContext.init(key);
+  }
 
   // ChannelGeminiContentContext.init(key);
 });

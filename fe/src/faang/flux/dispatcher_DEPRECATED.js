@@ -13,24 +13,24 @@ let i = "ID_";
 export class Dispatcher_DEPRECATED {
   constructor() {
     this.$1 = new Map();
-    this.$2 = !1;
+    this.$2 = false;
     this.$3 = new Map();
     this.$4 = new Map();
     this.$5 = 1;
   }
 
-  register(a, b) {
+  register = function (a, b) {
     b = this.__genID(b);
     this.$1.set(b, a);
     return b;
-  }
+  };
 
-  unregister(a) {
+  unregister = function (a) {
     this.$1.get(a) || invariant(0, 1331, a);
     this.$1["delete"](a);
-  }
+  };
 
-  waitFor(a) {
+  waitFor = function (a) {
     this.$2 || invariant(0, 1332);
     for (let b = 0; b < a.length; b++) {
       let c = a[b];
@@ -41,9 +41,9 @@ export class Dispatcher_DEPRECATED {
       this.$1.get(c) || invariant(0, 2381, c);
       this.$7(c);
     }
-  }
+  };
 
-  dispatch(a) {
+  dispatch = function (a) {
     let b = this;
     k(this.$2, this.$6, a);
     this.$8(a);
@@ -55,24 +55,24 @@ export class Dispatcher_DEPRECATED {
     } finally {
       this.$9();
     }
-  }
+  };
 
-  isDispatching() {
+  isDispatching = function () {
     return this.$2;
-  }
+  };
 
-  $7(a) {
+  $7 = function (a) {
     this.$4.set(a, !0);
     let b = this.$1.get(a);
     b && this.__invokeCallback(a, b, this.$6);
     this.$3.set(a, !0);
-  }
+  };
 
-  __invokeCallback(a, b, c) {
+  __invokeCallback = function (a, b, c) {
     b(c);
-  }
+  };
 
-  $8(a) {
+  $8 = function (a) {
     for (
       // eslint-disable-next-line no-inner-declarations, no-var
       var b = this.$1.keys(),
@@ -101,12 +101,12 @@ export class Dispatcher_DEPRECATED {
     }
     this.$6 = a;
     this.$2 = !0;
-  }
+  };
 
-  $9() {
+  $9 = function () {
     delete this.$6;
     this.$2 = !1;
-  }
+  };
 
   __genID = function (a) {
     let b = a ? a + "_" : i;

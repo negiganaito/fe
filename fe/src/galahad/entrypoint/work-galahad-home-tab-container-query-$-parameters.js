@@ -5,13 +5,13 @@
  * See the LICENSE file in the root directory for details.
  */
 
-// export const WorkGalahadHomeTabContainerQuery$Parameters = {
-//   kind: "PreloadableConcreteRequest",
-//   params: {
-//     id: "7032907766805855",
-//     metadata: {},
-//     name: "WorkGalahadHomeTabContainerQuery",
-//     operationKind: "query",
-//     text: null,
-//   },
-// };
+export const WorkGalahadHomeTabContainerQuery$Parameters = {
+  kind: "PreloadableConcreteRequest",
+  params: {
+    id: "7032907766805855",
+    metadata: {},
+    name: "WorkGalahadHomeTabContainerQuery",
+    operationKind: "query",
+    text: null,
+  },
+};

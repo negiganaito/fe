@@ -17,29 +17,29 @@ export class BaseEventEmitter {
     this.$1 = null;
   }
 
-  addListener(a, c, d) {
+  addListener = function (a, c, d) {
     // return this.$2.addSubscription(a, new EmitterSubscription(this.$2, c, d))
     return this.$2.addSubscription(a, new EmitterSubscription(this.$2, c, d));
-  }
+  };
 
-  removeListener(a) {
+  removeListener = function (a) {
     this.$2.removeSubscription(a);
-  }
+  };
 
-  once(a, b, c) {
-    let d = this;
-    return this.addListener(a, function () {
-      d.removeCurrentListener();
-      b.apply(c, arguments);
+  once = function (eventType, listener, context) {
+    let emitter = this;
+    return this.addListener(eventType, function () {
+      emitter.removeCurrentListener();
+      listener.apply(context, arguments);
     });
-  }
+  };
 
-  removeAllListeners(a) {
-    this.$2.removeAllSubscriptions(a);
-  }
+  removeAllListeners = function (eventType) {
+    this.$2.removeAllSubscriptions(eventType);
+  };
 
-  removeCurrentListener() {
-    if (!this.$1)
+  removeCurrentListener = function () {
+    if (!this.$1) {
       // throw b('unrecoverableViolation')(
       //   'Not in an emitting cycle; there is no current subscription',
       //   'emitter',
@@ -48,20 +48,23 @@ export class BaseEventEmitter {
         "Not in an emitting cycle; there is no current subscription",
         "emitter"
       );
+    }
     this.$2.removeSubscription(this.$1);
-  }
+  };
 
-  listeners(a) {
-    a = this.$2.getSubscriptionsForType(a);
-    return a
-      ? a.filter(emptyFunction.thatReturnsTrue).map((a) => {
-          return a.listener;
-        })
+  listeners = function (eventType) {
+    const subscriptions = this.$2.getSubscriptionsForType(eventType);
+    return subscriptions
+      ? subscriptions
+          .filter(emptyFunction.thatReturnsTrue)
+          .map((subscription) => {
+            return subscription.listener;
+          })
       : [];
-  }
+  };
 
-  emit(a) {
-    let b = this.$2.getSubscriptionsForType(a);
+  emit = function (eventType) {
+    let b = this.$2.getSubscriptionsForType(eventType);
     if (b) {
       let c = Object.keys(b);
       let d;
@@ -71,7 +74,7 @@ export class BaseEventEmitter {
         if (g) {
           this.$1 = g;
           if (d === null) {
-            d = [g, a];
+            d = [g, eventType];
             for (
               let h = 0, i = arguments.length <= 1 ? 0 : arguments.length - 1;
               h < i;
@@ -87,18 +90,37 @@ export class BaseEventEmitter {
       }
       this.$1 = null;
     }
-  }
 
-  __emitToSubscription(a, c) {
+    // let subscriptions = this.$2.getSubscriptionsForType(eventType);
+    // if (subscriptions) {
+    //   let keys = Object.keys(subscriptions);
+    //   for (let ii = 0; ii < keys.length; ii++) {
+    //     let key = keys[ii];
+    //     let subscription = subscriptions[key];
+    //     // The subscription may have been removed during this event loop.
+    //     if (subscription) {
+    //       this._currentSubscription = subscription;
+    //       this.__emitToSubscription.apply(
+    //         this,
+    //         [subscription].concat(Array.prototype.slice.call(arguments))
+    //       );
+    //     }
+    //   }
+    //   this.$1 = null;
+    // }
+  };
+
+  __emitToSubscription = function (a, c) {
     for (
       // eslint-disable-next-line no-inner-declarations, no-var
       var d = arguments.length, e = new Array(d > 2 ? d - 2 : 0), f = 2;
       f < d;
       f++
-    )
+    ) {
       e[f - 2] = arguments[f];
+    }
     ErrorGuard.applyWithGuard(a.listener, a.context, e, {
       name: "EventEmitter " + c + " event",
     });
-  }
+  };
 }

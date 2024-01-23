@@ -4,7 +4,8 @@
  * All rights reserved. This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory for details.
  */
-import { ReduceStore } from "flux/utils";
+
+import { FluxReduceStore } from "@/faang/flux/flux-reduce-store";
 
 import { WorkGalahadAppTabIDUtil } from "../config";
 
@@ -16,7 +17,7 @@ const defaultVariable = () => {
   };
 };
 
-class WorkGalahadNavStore extends ReduceStore {
+class WorkGalahadNavStore extends FluxReduceStore {
   constructor(dispatcher) {
     super(dispatcher);
     this.reduce = (state, action) => {
