@@ -5,25 +5,25 @@
  * See the LICENSE file in the root directory for details.
  */
 
-// import React from "react";
-// import { usePreloadedQuery } from "react-relay";
+import React from "react";
+import { usePreloadedQuery } from "react-relay";
 // import fbt from "fbt";
 
 // import { VoyageUserJourneyUILayerProvider } from "@/faang/modal/voyage-user-journey-ui-layer-provider";
 
 // import { WorkGalahadHomeTabContainerQuery } from "../entrypoint/work-galahad-home-tab-container-query";
 
-// let query;
+let query;
 
 // const m = null;
 
 // const _7130 = true;
 
 export default (function WorkGalahadHomeTabContainer({ queries }) {
-  //   const { queryReference } = queries;
-  //   const data = usePreloadedQuery(
-  //     query ? query : (query = WorkGalahadHomeTabContainerQuery)
-  //   );
+  const { queryReference } = queries;
+  const data = usePreloadedQuery(
+    query ? query : (query = WorkGalahadHomeTabContainerQuery)
+  );
   //   const f = !m ? undefined : m();
   //   if (
   //     !data ||

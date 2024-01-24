@@ -5,6 +5,8 @@
  * See the LICENSE file in the root directory for details.
  */
 const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
+
 const path = require("path");
 const env = require("./scripts/env");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -30,7 +32,8 @@ const fileExtensions = [
 
 const options = {
   cache: true,
-  entry: path.join(__dirname, "src", "index.jsx"),
+  // entry: path.join(__dirname, "src", "index.jsx"),
+  entry: path.join(__dirname, "src", "server", "index.js"),
   infrastructureLogging: {
     level: "info",
   },
@@ -46,12 +49,6 @@ const options = {
           {
             loader: "css-loader",
           },
-          // {
-          //   loader: 'sass-loader',
-          //   options: {
-          //     sourceMap: true,
-          //   },
-          // },
           {
             loader: "postcss-loader",
           },
@@ -75,6 +72,7 @@ const options = {
       },
     ],
   },
+  externals: [nodeExternals()],
   output: {
     clean: true,
     filename: "app.bundle.js",

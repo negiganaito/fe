@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 
 import { WorkGalahadAppTabIDUtil } from "./galahad/config";
+import { CurrentUser } from "./galahad/config/current-user";
 import { ChannelGeminiContentContext } from "./galahad/context/channel-gemini-content-context";
 import { WorkGalahadHomeTabContainer_entrypoint } from "./galahad/entrypoint/work-galahad-home-tab-container.entrypoint";
 import { workGalahadDispatcher } from "./galahad/store/work-galahad-dispatcher";
@@ -87,6 +88,26 @@ const urlMapper = {
 };
 
 router.load().then(() => {
+  CurrentUser.data = {
+    ACCOUNT_ID: "61555931902534",
+    USER_ID: "61555931902534",
+    NAME: "asasd sa",
+    SHORT_NAME: "asasd",
+    ORIGINAL_USER_ID: "61555931902534",
+    IS_TEST_USER: 0,
+    IS_WORK_USER: 1,
+    IS_BUSINESS_PERSON_ACCOUNT: false,
+    HAS_SECONDARY_BUSINESS_PERSON: false,
+    IS_FACEBOOK_WORK_ACCOUNT: false,
+    IS_MESSENGER_ONLY_USER: false,
+    IS_DEACTIVATED_ALLOWED_ON_MESSENGER: false,
+    IS_MESSENGER_CALL_GUEST_USER: false,
+    IS_WORK_MESSENGER_CALL_GUEST_USER: false,
+    IS_WORKROOMS_USER: false,
+    APP_ID: "1586666294789976",
+    IS_BUSINESS_DOMAIN: false,
+  };
+
   const stores = [
     // WorkGalahadChatChannelStore
     workGalahadNavStore,
@@ -104,11 +125,7 @@ router.load().then(() => {
   const key =
     entity.tabKey ?? WorkGalahadAppTabIDUtil.getProductSpecificHomeTabID();
 
-  console.log("router - 1");
-
   WorkGalahadNavActions.selectAppTabID(key);
-
-  console.log("router - 2");
 
   // d("LSPlatformClientStartLoadingEarly").start(
   //     d("LSPlatformWorkchatConfig").config

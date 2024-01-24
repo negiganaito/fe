@@ -5,6 +5,7 @@
  * See the LICENSE file in the root directory for details.
  */
 
+import { CurrentUser } from "../config/current-user";
 import { WebPixelRatio } from "../config/web-pixel-ratio";
 import { JSResource } from "../utils/js-resource";
 
@@ -21,7 +22,7 @@ export const WorkGalahadHomeTabContainer_entrypoint = {
     const initialVariables = {
       groupCount: 6,
       peopleCount: 15,
-      user: `c("CurrentUser").getID()`,
+      user: CurrentUser.getID(),
       scale: WebPixelRatio.get(),
       isHybridLeftNav: _1031519,
       hasMessengerThread: undefined,
@@ -34,10 +35,7 @@ export const WorkGalahadHomeTabContainer_entrypoint = {
           environmentProviderOptions: {
             ssrBoundary: "top_nav",
           },
-          parameters: {
-            kind: "PreloadableConcreteRequest",
-            params: WorkGalahadHomeTabContainerQuery$Parameters,
-          },
+          parameters: WorkGalahadHomeTabContainerQuery$Parameters,
         },
       },
     };

@@ -46,6 +46,7 @@
     "@stylexjs/babel-plugin": "0.3.0",
     "@stylexjs/eslint-plugin": "^0.3.0",
     "@stylexjs/webpack-plugin": "^0.3.0",
+    "@tanstack/router-cli": "1.1.9",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "babel-loader": "^9.1.2",
@@ -90,8 +91,7 @@
     "typescript": "^5.3.3",
     "webpack": "^5.75.0",
     "webpack-dev-server": "^4.11.1",
-    "yargs": "17.7.2",
-    "@tanstack/router-cli": "1.1.9"
+    "yargs": "17.7.2"
   },
   "main": "index.js"
 }
